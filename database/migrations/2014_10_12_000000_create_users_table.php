@@ -23,7 +23,14 @@ class CreateUsersTable extends Migration
             $table->string('profession');
             $table->string('industry');
 
-            $table->string('')
+            $table->char('phone_no',11)->nullable();
+            $table->string('gender')->nullable();
+            $table->string('nid')->nullable();
+            $table->string('bank_ac')->nullable();
+            $table->string('location')->nullable();
+            $table->date('dob')->nullable();
+            $table->integer('user_type')->unsigned()->default(3);
+            $table->string('interest')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
