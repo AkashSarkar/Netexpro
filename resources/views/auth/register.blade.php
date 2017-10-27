@@ -79,7 +79,7 @@
                             <label for="education" class="col-md-4 control-label">Education</label>
 
                             <div class="col-md-6">
-                                <input id="education" type="text" class="form-control" name="education" value="{{ old('education') }}" required autofocus>
+                                <input placeholder="Institution Name" id="education" type="text" class="form-control" name="education" value="{{ old('education') }}" required autofocus>
 
                                 @if ($errors->has('education'))
                                     <span class="help-block">
@@ -88,35 +88,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('profession') ? ' has-error' : '' }}">
-                            <label for="profession" class="col-md-4 control-label">Profession</label>
-
-                            <div class="col-md-6">
-                                <input id="profession" type="text" class="form-control" name="profession" value="{{ old('profession') }}" required autofocus>
-
-                                @if ($errors->has('profession'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('profession') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('industry') ? ' has-error' : '' }}">
-                            <label for="industry" class="col-md-4 control-label">Industry</label>
-
-                            <div class="col-md-6">
-                                <input id="industry" type="text" class="form-control" name="industry" value="{{ old('industry') }}" required autofocus>
-
-                                @if ($errors->has('industry'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('industry') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

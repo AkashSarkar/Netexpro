@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Interest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/users';
+    protected $redirectTo = '/interests';
 
     /**
      * Create a new controller instance.
@@ -53,8 +54,6 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'education' => 'required|string|max:255',
-            'profession' => 'required|string|max:255',
-            'industry' => 'required|string|max:255', 
             
         ]);
     }
@@ -68,10 +67,9 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'education' => $data['education'],
-            'profession' => $data['profession'],
-            'industry' => $data['industry'],
+            
         ]);
-
-        
     }
+
+    
 }

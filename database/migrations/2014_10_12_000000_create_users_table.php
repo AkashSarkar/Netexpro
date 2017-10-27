@@ -20,17 +20,19 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('education');
-            $table->string('profession');
-            $table->string('industry');
-
+            
             $table->char('phone_no',11)->nullable();
             $table->string('gender')->nullable();
             $table->string('nid')->nullable();
             $table->string('bank_ac')->nullable();
             $table->string('location')->nullable();
             $table->date('dob')->nullable();
-            $table->integer('user_type')->unsigned()->default(3);
-            $table->string('interest')->nullable();
+            $table->integer('available_for_job')->unsigned()->default(0)->nullable();
+            $table->integer('hiring')->unsigned()->default(0)->nullable();
+            $table->integer('post_viewed')->unsigned()->nullable();
+            $table->integer('post_rated')->unsigned()->nullable();
+            $table->integer('total_tagged_in')->unsigned()->nullable();
+            
             $table->rememberToken();
             $table->timestamps();
         });
