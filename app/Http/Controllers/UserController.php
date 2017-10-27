@@ -109,7 +109,7 @@ class UserController extends Controller
         if($userUpdate)
         {
             //redirect if successfull
-            return redirect()->route('home.home_index');
+            return redirect()->route('home.index');
         }
         //redirect to page that brought us here if anything fails
         return back()->withInput();

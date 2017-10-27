@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/home', 'HomeController@home_index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home');
     //Route::get('/users', 'UserController@index')->name('users');
     Route::post('/interests', 'InterestController@index')->name('interests');
     
