@@ -20,16 +20,18 @@ class User extends Authenticatable
         'email',
         'password',
         'education',
-        'profession',
-        'industry',
+    
         'phone_no',
         'gender',
         'nid',
         'bank_ac',
         'location',
         'dob',
-        'user_type',
-        'interest',
+        'available_for_job',
+        'hiring',
+        'post_viewed',
+        'post_rated',
+        'total_tagged_in',
     ];
 
     /**
@@ -40,4 +42,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function interests()
+    {
+        return $this->hasMany('App\Interest');
+    }
 }

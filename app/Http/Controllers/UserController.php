@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'phone_no' => 'char|max:11',
+            
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +26,7 @@ class UserController extends Controller
     {
         //
         $user=User::find(Auth::user()->id);
-       return view('users.edit',['user'=>$user] );
+       return view('users.edit',['user'=>$user]);
     }
 
     /**
@@ -84,7 +93,12 @@ class UserController extends Controller
                 'bank_ac'=>$request->input('bank_ac'),
                 'location'=>$request->input('location'),
                 'dob'=>$request->input('dob'),
-                'interest'=>$request->input('interest'),
+                'available_for_job'=>$request->input('available_for_job'),
+                'hiring'=>$request->input('hiring'),
+                'post_viewed'=>$request->input('post_viewed'),
+                'post_rated'=>$request->input('post_rated'),
+                'total_tagged_in'=>$request->input('total_tagged_in'),
+                
                 
             ]);
         }
