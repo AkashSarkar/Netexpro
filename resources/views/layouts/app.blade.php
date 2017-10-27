@@ -11,7 +11,8 @@
     <title>Netexpro</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
     <div id="app">
@@ -40,13 +41,38 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                   
                         <!-- Authentication Links -->
                         @guest
+                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
+                        </ul>
                         @else
+                            <form class="navbar-form navbar-left">
+                                    <div class="input-group">
+                                      <input type="text" class="form-control" placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">
+                                             <i class="glyphicon glyphicon-search"></i>
+                                            </button>
+                                        </div>
+                                   </div>
+                            </form>
+                         <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="#">Home</a></li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
+                                         <ul class="dropdown-menu">                                        
+                                             <li><a href="#">Profile</a></li>
+                                             <li><a href="#">Update</a></li>
+                                             <li><a href="#">Delete</a></li>
+                                         </ul>
+                                      </li>
+                                    <li><a href="#">Jobs</a></li>
+                                    <li>
                             <li class="dropdown">
+                                
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ Auth::user()->firstname }} <span class="caret"></span>
                                 </a>
