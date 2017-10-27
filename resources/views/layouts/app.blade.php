@@ -29,7 +29,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('home.home_index') }}">
+                    <a class="navbar-brand" href="{{ url('home') }}">
                        Netexpro
                     </a>
                 </div>
@@ -60,9 +60,9 @@
                                    </div>
                             </form>
                          <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="{{ url('home') }}">Home</a></li>
                                         <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->firstname }}<span class="caret"></span></a>
                                          <ul class="dropdown-menu">                                        
                                              <li><a href="#">Profile</a></li>
                                              <li><a href="#">Update</a></li>
@@ -74,7 +74,7 @@
                             <li class="dropdown">
                                 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->firstname }} <span class="caret"></span>
+                                   <i class="fa fa-sign-out" aria-hidden="true"></i><span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
