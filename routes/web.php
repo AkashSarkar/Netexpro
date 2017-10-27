@@ -21,11 +21,13 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/home', 'HomeController@index')->name('home');
     //Route::get('/users', 'UserController@index')->name('users');
     Route::post('/interests', 'InterestController@index')->name('interests');
+    Route::get('/profile', 'ProfileController@index');
     
     
     Route::resource('interests', 'InterestController');
     Route::resource('users', 'UserController'); 
     Route::resource('home', 'HomeController');
+    Route::resource('profile', 'ProfileController');
 });
 
 

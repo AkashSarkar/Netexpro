@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/profilestyle.css') }}" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -64,7 +65,7 @@
                                         <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->firstname }}<span class="caret"></span></a>
                                          <ul class="dropdown-menu">                                        
-                                             <li><a href="#">Profile</a></li>
+                                             <li><a href="{{ url('profile') }}">Profile</a></li>
                                              <li><a href="#">Update</a></li>
                                              <li><a href="#">Delete</a></li>
                                          </ul>
