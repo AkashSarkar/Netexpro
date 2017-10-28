@@ -21,7 +21,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/home', 'HomeController@index')->name('home');
     //Route::get('/users', 'UserController@index')->name('users');
     Route::post('/interests', 'InterestController@index')->name('interests');
-    Route::get('/profile/{ user_id? }', 'ProfileController@index');
+   // Route::get('/profile/{ user_id? }', 'ProfileController@index');
 
     //Route::any('/profile/{{}}', 'ProfileController@index');
     

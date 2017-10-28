@@ -34,7 +34,7 @@
      <div class="container">
           <div class="row" style="padding-top: 30px;">
            
-               <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #f2f2f2;"><i class="fa fa-pencil pull-right" aria-hidden="true"></i>
+               <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #f2f2f2;"><a href="/profile/{{$user->id}}/edit"><i class="fa fa-pencil pull-right" style="margin-top: 10px;" aria-hidden="true" ></i></a>
                   
                   </br>
                   <p>Education: {{ $user->education }} </p>
@@ -86,7 +86,7 @@
           </div>
 
           <div class="row" style="margin-top:-10px;">
-           <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #f2f2f2;"><i class="fa fa-pencil pull-right" aria-hidden="true"></i>
+           <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #f2f2f2;"><i class="fa fa-pencil pull-right" style="margin-top: 10px;" aria-hidden="true"></i>
                  </br>
                   <p>Profession: {{ $interest->profession }}</p>
                    

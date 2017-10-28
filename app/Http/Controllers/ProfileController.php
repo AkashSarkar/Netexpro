@@ -21,8 +21,10 @@ class ProfileController extends Controller
        // dd($user);
 
         $user= User::find(Auth::user()->id);
-         $interest= Interest::find(Auth::user()->id);
-        return view('profile.profile_index',['user'=>$user, 'interest'=>$interest]);
+
+      
+       $interest= Interest::find(Auth::user()->id);
+       return view('profile.profile_index',['user'=>$user, 'interest'=>$interest]);
           
       
     }
@@ -70,6 +72,15 @@ class ProfileController extends Controller
     public function edit(User $user)
     {
         //
+        //
+
+         // $company = Company::where('id', $company->id)->first();
+        $user = User::where('id', $user->id)->first();
+       
+
+       return view('profile.profile_edit', ['user'=> $user]);
+
+
     }
 
     /**
