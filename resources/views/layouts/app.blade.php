@@ -81,20 +81,11 @@
                             <li class="active"><a href="{{ url('home') }}">Home</a></li>
 
 
-                                     <li><a href="" data-toggle="modal" data-target="#jobModal">Jobs</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#jobModal">Jobs</a></li>
 
-                                     
-                                        <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->firstname }}<span class="caret"></span></a>
-                                         <ul class="dropdown-menu">                                        
-                                             <li><a href="{{ url('profile') }}">Profile</a></li>
-                                             <li><a href="#">Update</a></li>
-                                             <li><a href="#">Delete</a></li>
-                                         </ul>
-                                      </li>
-                                  
-                                    
-                            <li class="dropdown">
+                                <li><a href="{{ url('profile') }}">{{ Auth::user()->firstname }}</a></li>
+                                            
+                                <li class="dropdown">
                                 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                    <i class="fa fa-cogs" aria-hidden="true"></i><span class="caret"></span>
@@ -120,7 +111,7 @@
             </div>
         </nav>
         
-         <div class="container">
+         <div class="container" >
 
             @include('partials.errors')
             @include('partials.success')
