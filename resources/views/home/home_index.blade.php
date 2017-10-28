@@ -9,6 +9,7 @@
 <!--Main content-->
   <div class="container">
       <div class="row">
+          <!--side bar content-->
         <nav class="col-md-2  bg-light sidebar">
         <div class="collapse navbar-collapse" id="side-navbar-collapse">
              <ul class="nav navbar-nav">
@@ -54,8 +55,9 @@
           </ul>
          </div>
         </nav>
+        <!--end side bar-->
         
-  
+                             <!--post body-->
   <div class="col-md-7 col-sm-7 col-lg-7"data-toggle="modal" data-target="#myModal">
         <div class="panel panel-default">
              <div class="panel-heading">
@@ -77,6 +79,8 @@
             </div>
            
         </div>
+                              <!--post body end-->
+        <!--Modal-->
         <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
           
