@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Interest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -13,8 +15,14 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-                  return view("profile.profile_index");
+     {
+        
+       // $user = User::where('id', $user->id)->first();
+       // dd($user);
+
+        $user= User::find(Auth::user()->id);
+         $interest= Interest::find(Auth::user()->id);
+        return view('profile.profile_index',['user'=>$user, 'interest'=>$interest]);
           
       
     }
@@ -49,10 +57,7 @@ class ProfileController extends Controller
     public function show(User $user)
     {
         //
-        $user = User::where('id', $user->id)->first();
-        //$company = Company::find($company->id);
-
-       return view('profile.profile_show', ['user'=> $user]);
+      
    
     }
 

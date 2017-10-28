@@ -9,8 +9,8 @@
         <img align="left" class="fb-image-lg" src="http://lorempixel.com/850/280/nightlife/5/" alt="Profile image example"/>
         <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example"/>
         <div class="fb-profile-text">
-            <h1>Eli Macy</h1>
-            <p>Girls just wanna go fun.</p>
+            <h1>{{ $user->firstname }} </h1>
+            <p>{{ $interest->profession }}</p>
         </div>
 
            <div class="row" style="padding-top: 10px;">
@@ -33,18 +33,22 @@
 
      <div class="container">
           <div class="row" style="padding-top: 30px;">
-            
-               <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #ffffff"><i class="fa fa-pencil pull-right" aria-hidden="true"></i>
-                 </br>
-                  <p>Education:</p>
+           
+               <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #ffffff;"><i class="fa fa-pencil pull-right" aria-hidden="true"></i>
                   
-                  <p>Hello world 1</p>
-                   
-                  <p>Hello world 2</p>
+                  </br>
+                  <p>Education: {{ $user->education }} </p>
+                  <p>Edmail: {{ $user->email }} </p>
+                  <p>Phone: {{ $user->phone_no }} </p>
+                  <p>Sex: {{ $user->gender}} </p>
+                  <p>Birth date: {{ $user->dob }} </p>
+                  <p>Location: {{ $user->location }} </p>
+                  <p>Availability: {{ $user->available_for_job }} </p>
+                
                </div>
-
-
-    
+               
+                 
+             
 
 
              <div class="col-md-8 col-sm-12 col-lg-8 " >
@@ -80,6 +84,15 @@
                 </div>
 
           </div>
+
+          <div class="row" style="margin-top:-10px;">
+           <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #ffffff"><i class="fa fa-pencil pull-right" aria-hidden="true"></i>
+                 </br>
+                  <p>Profession: {{ $interest->profession }}</p>
+                   
+                  <p>Industry: {{ $interest->industry }} </p>
+           </div>
+            </div>
       </div>
 
 
