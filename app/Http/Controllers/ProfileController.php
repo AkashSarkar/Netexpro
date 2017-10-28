@@ -14,12 +14,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        if( Auth::check() )
-            {
-                  $users = User::all();
-                  return view("profile.profile_index",['users'=>$users]);
-            }
-        return view('auth.login');
+                  return view("profile.profile_index");
+          
       
     }
 
