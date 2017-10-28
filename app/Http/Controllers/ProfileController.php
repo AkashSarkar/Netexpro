@@ -14,9 +14,13 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
-
-        return view("profile.profile_index");
+        if( Auth::check() )
+            {
+                  $users = User::all();
+                  return view("profile.profile_index",['users'=>$users]);
+            }
+        return view('auth.login');
+      
     }
 
     /**
@@ -49,6 +53,11 @@ class ProfileController extends Controller
     public function show(User $user)
     {
         //
+        $user = User::where('id', $user->id)->first();
+        //$company = Company::find($company->id);
+
+       return view('profile.profile_show', ['user'=> $user]);
+   
     }
 
     /**
