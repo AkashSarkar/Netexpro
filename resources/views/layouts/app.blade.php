@@ -22,6 +22,13 @@
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#side-navbar-collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
                         <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
@@ -62,6 +69,7 @@
                             </form>
                          <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a href="{{ url('home') }}">Home</a></li>
+                            <li><a href="#">Jobs</a></li>
                                         <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->firstname }}<span class="caret"></span></a>
                                          <ul class="dropdown-menu">                                        
@@ -70,8 +78,8 @@
                                              <li><a href="#">Delete</a></li>
                                          </ul>
                                       </li>
-                                    <li><a href="#">Jobs</a></li>
-                                    <li>
+                                  
+                                    
                             <li class="dropdown">
                                 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">

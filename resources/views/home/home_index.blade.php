@@ -7,48 +7,54 @@
 
 <!--End Style-->
 <!--Main content-->
-<div class="container">
-<div class="row">
-<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar" id="side">
-<ul class="nav nav-pills flex-column">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Reports</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Analytics</a>
-  </li>
-</ul>
-<br>
-<ul class="nav nav-pills flex-column">
-  <li class="nav-item">
-    <a class="nav-link" href="#">Nav item</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Nav item again</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">One more nav</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Another nav item</a>
-  </li>
-</ul>
-<br>
-<ul class="nav nav-pills flex-column">
-  <li class="nav-item">
-    <a class="nav-link" href="#">Nav item again</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">One more nav</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Another nav item</a>
-  </li>
-</ul>
-</nav>
+  <div class="container">
+      <div class="row">
+        <nav class="col-md-2  bg-light sidebar">
+        <div class="collapse navbar-collapse" id="side-navbar-collapse">
+             <ul class="nav navbar-nav">
+                 <li >
+                    <a  href="#">Overview <span class="sr-only">(current)</span></a>
+                 </li>
+                 <li >
+                    <a  href="#">Reports</a>
+                 </li>
+                 <li >
+                   <a  href="#">Analytics</a>
+                </li>
+            </ul>
+       
+             
+
+           <ul class="nav navbar-nav">
+              <li >
+                  <a  href="#">Nav item</a>
+             </li>
+             <li >
+                 <a  href="#">Nav item again</a>
+             </li>
+             <li c>
+                <a  href="#">One more nav</a>
+             </li>
+             <li >
+               <a  href="#">Another nav item</a>
+             </li>
+           </ul>
+         
+
+          <ul class="nav navbar-nav">
+             <li >
+                <a  href="#">Nav item again</a>
+             </li>
+             <li >
+               <a  href="#">One more nav</a>
+            </li>
+            <li >
+                <a  href="#">Another nav item</a>
+            </li>
+          </ul>
+         </div>
+        </nav>
+        
   
   <div class="col-md-7 col-sm-7 col-lg-7"data-toggle="modal" data-target="#myModal">
         <div class="panel panel-default">
@@ -56,9 +62,7 @@
                  <div class="btn-group btn-group-md">
                      <button type="button" class="btn btn-link">Make post</button>
                      <button type="button" class="btn btn-link">|</button>
-                     <button type="button" class="btn btn-link">Job post</button>
-                     <button type="button" class="btn btn-link">|</button>
-                     <button type="button" class="btn btn-link">Activity </button>
+                     <button type="button" class="btn btn-link">Job post</button>                    
                  </div>
             </div>
             <div class="panel-body">
@@ -66,11 +70,7 @@
             </div>
             <div class="panel-heading">
                  <div class="btn-group btn-group-md">
-                     <button type="button" class="btn btn-link">Make post</button>
-                     <button type="button" class="btn btn-link">|</button>
-                     <button type="button" class="btn btn-link">Job post</button>
-                     <button type="button" class="btn btn-link">|</button>
-                     <button type="button" class="btn btn-link">Activity </button>
+                     <button type="button" class="btn btn-primary">Photo/File</button>
                  </div>
             </div>
           </div>
@@ -88,16 +88,14 @@
                      <button type="button" class="btn btn-link">Make post</button>
                      <button type="button" class="btn btn-link">|</button>
                      <button type="button" class="btn btn-link">Job post</button>
-                     <button type="button" class="btn btn-link">|</button>
-                     <button type="button" class="btn btn-link">Activity </button>
                  </div>
                   </div>
                   <div class="modal-body">
                     <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something"></textarea>
                   </div>
                   <div class="modal-footer">
-                   
-                      <button type="button" class="btn btn-azure pull-right">Post</button>
+                      <button type="button" class="btn btn-azure">Visibility </button>
+                      <button type="button" class="btn btn-azure pull-right"> Post</button>
                       <ul class="nav nav-pills pull-left">
                           <li><a href="#"><i class="fa fa-map-marker"></i></a></li>
                           <li><a href="#"><i class="fa fa-camera"></i></a></li>
