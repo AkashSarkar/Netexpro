@@ -40,7 +40,7 @@
                   <p>Education: {{ $user->education }} </p>
                   <p>Edmail: {{ $user->email }} </p>
                   <p>Phone: {{ $user->phone_no }} </p>
-                  <p>Sex: {{ $user->gender}} </p>
+                  <p>Sex: {{ $user->gender }} </p>
                   <p>Birth date: {{ $user->dob }} </p>
                   <p>Location: {{ $user->location }} </p>
                   <p>Availability: {{ $user->available_for_job }} </p>

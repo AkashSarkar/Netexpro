@@ -23,7 +23,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/interests', 'InterestController@index')->name('interests');
    // Route::get('/profile/{ user_id? }', 'ProfileController@index');
 
-    //Route::any('/profile/{{}}', 'ProfileController@index');
+   Route::get('/profile', 'ProfileController@index')->name('profile');
     
     
     Route::resource('interests', 'InterestController');

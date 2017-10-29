@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,68 +25,74 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <!-- End of Styles -->
+
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
-                <div class="navbar-header">
+                  <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#side-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                      <!-- Collapsed Hamburger -->
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#side-navbar-collapse" aria-expanded="false">
+                          <span class="sr-only">Toggle Navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('home') }}">
-                       Netexpro
-                    </a>
-                </div>
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+                          <span class="sr-only">Toggle Navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
+
+                      <!-- Branding Image -->
+                      <a class="navbar-brand" href="{{ url('home') }}">
+                         Netexpro
+                      </a>
+
+                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                  <!-- Left Side Of Navbar -->
+                  <ul class="nav navbar-nav">
+                      &nbsp;
+                  </ul>
 
-                    <!-- Right Side Of Navbar -->
+                  <!-- Right Side Of Navbar -->
                    
-                        <!-- Authentication Links -->
-                        @guest
-                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        </ul>
-                        @else
-                            <form class="navbar-form navbar-left">
-                                    <div class="input-group">
-                                      <input type="text" class="form-control" placeholder="Search">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-default" type="submit">
-                                             <i class="glyphicon glyphicon-search"></i>
-                                            </button>
-                                        </div>
-                                   </div>
-                            </form>
-                         <ul class="nav navbar-nav navbar-right">
+                  <!-- Authentication Links -->
+                  @guest
+                   <ul class="nav navbar-nav navbar-right">
+                      <li><a href="{{ route('login') }}">Login</a></li>
+                      <li><a href="{{ route('register') }}">Register</a></li>
+                  </ul>
+                  
+                  @else
+
+                  <!-- Search bar on nav bar -->
+                  <form class="navbar-form navbar-left">
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                              <div class="input-group-btn">
+                                  <button class="btn btn-default" type="submit">
+                                   <i class="glyphicon glyphicon-search"></i>
+                                  </button>
+                              </div>
+                         </div>
+                  </form>
+
+                      <!--Start navbar right list elements -->
+                      <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a href="{{ url('home') }}">Home</a></li>
-
-
-                                <li><a href="" data-toggle="modal" data-target="#jobModal">Jobs</a></li>
-
-                                <li><a href="{{ url('profile') }}">{{ Auth::user()->firstname }}</a></li>
+                            <li><a href="" data-toggle="modal" data-target="#jobModal">Jobs</a></li>
+                            <li><a href="{{ url('profile') }}">{{ Auth::user()->firstname }}</a></li>
                                             
-                                <li class="dropdown">
+                            <li class="dropdown">
                                 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                    <i class="fa fa-cogs" aria-hidden="true"></i><span class="caret"></span>
@@ -106,6 +113,7 @@
                                 </ul>
                             </li>
                         @endguest
+
                     </ul>
                 </div>
             </div>
@@ -115,6 +123,7 @@
 
             @include('partials.errors')
             @include('partials.success')
+
             <div class="row">
                 @yield('content')
             </div>
@@ -122,33 +131,37 @@
     </div>
 
 
-            <!-- Modal -->
-<div id="jobModal" class="modal fade" role="dialog" style="margin-top:10%;">
-  <div class="modal-dialog">
+  <!--First Job Modal -->
+  <div id="jobModal" class="modal fade" role="dialog" style="margin-top:10%;">
+    <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+      <!--Job Modal content-->
+      <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+
+          <div class="modal-body">
+            <p> 
+              <label><input type="radio" name="job_post_option" value="1">Available for job</label> 
+              <br>
+              <label><input type="radio" name="job_post_option" value="2">Want to hire</label>
+            </p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+          </div>
+
       </div>
-      <div class="modal-body">
-      <p> 
-      <label><input type="radio" name="job_post_option" value="1">Available for job</label> 
-      <br>
-      <label><input type="radio" name="job_post_option" value="2">Want to hire</label>
-     </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-      </div>
+
     </div>
-
   </div>
-</div>
 
 
-
+<!-- If available for job is selected -->
 <div id="available_job_modal" class="modal fade" role="dialog" style="margin-top:10%;">
   <div class="modal-dialog">
 
@@ -223,6 +236,8 @@
   </div><!--End of modal-dialog-->
 </div><!--End of modal fade-->
 
+
+<!-- If want to hire is selected -->
 <div id="want_to_hire_modal" class="modal fade" role="dialog" style="margin-top:10%;">
   <div class="modal-dialog">
 

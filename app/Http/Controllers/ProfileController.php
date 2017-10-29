@@ -20,14 +20,17 @@ class ProfileController extends Controller
        // $user = User::where('id', $user->id)->first();
        // dd($user);
 
-        $user= User::find(Auth::user()->id);
+       // $user = User::where('id', Auth::user()->id)->first();
 
-      
+      $user= User::find(Auth::user()->id);
+
+      // $interest = I::where('id', Auth::user()->id)->first();
        $interest= Interest::find(Auth::user()->id);
        return view('profile.profile_index',['user'=>$user, 'interest'=>$interest]);
           
       
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -73,12 +76,17 @@ class ProfileController extends Controller
     {
         //
         //
+       //  $user= User::find(Auth::user()->id);
+
+      // $interest = I::where('id', Auth::user()->id)->first();
+       
+     //  return view('profile.profile_index',['user'=>$user, 'interest'=>$interest]);
 
          // $company = Company::where('id', $company->id)->first();
-        $user = User::where('id', $user->id)->first();
-       
+        $user = User::where('id',Auth::user()->id)->first();
+        $interest= Interest::find(Auth::user()->id);
 
-       return view('profile.profile_edit', ['user'=> $user]);
+       return view('profile.profile_edit', ['user'=> $user, 'interest'=>$interest]);
 
 
     }
@@ -92,7 +100,24 @@ class ProfileController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        //save data
+
+        $userUpdate = User::where('id',Auth::user()->id)->update([
+            'education' => $request->input('education'),
+             'email' => $request->input('email'),
+             'phone_no' => $request->input('phone_no'),
+             'gender' => $request->input('gender'),
+             'dob' => $request->input('dob'),
+             'location' => $request->input('location'),
+             
+            ]);
+
+        if($userUpdate){ 
+            
+            return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
+        }
+
+        return back()->withInput();
     }
 
     /**
