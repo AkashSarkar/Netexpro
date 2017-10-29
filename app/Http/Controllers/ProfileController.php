@@ -74,22 +74,16 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-        //
-        //
-       //  $user= User::find(Auth::user()->id);
-
-      // $interest = I::where('id', Auth::user()->id)->first();
-       
-     //  return view('profile.profile_index',['user'=>$user, 'interest'=>$interest]);
-
-         // $company = Company::where('id', $company->id)->first();
+        
         $user = User::where('id',Auth::user()->id)->first();
-        $interest= Interest::find(Auth::user()->id);
+      //  $interest= Interest::find(Auth::user()->id);
 
-       return view('profile.profile_edit', ['user'=> $user, 'interest'=>$interest]);
-
+       return view('profile.profile_edit', ['user'=> $user]);
+      // return view('profile.profile_edit1', ['interest'=>$interest]);
 
     }
+
+    
 
     /**
      * Update the specified resource in storage.

@@ -24,8 +24,8 @@ Route::middleware(['auth'])->group(function(){
    // Route::get('/profile/{ user_id? }', 'ProfileController@index');
 
    Route::get('/profile', 'ProfileController@index')->name('profile');
-    
-    
+   //Route::get('/interests/{Auth::user()->id?}', 'InterestController'); 
+
     Route::resource('interests', 'InterestController');
     Route::resource('users', 'UserController'); 
     Route::resource('home', 'HomeController');
