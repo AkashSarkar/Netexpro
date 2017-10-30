@@ -8,11 +8,11 @@
 <!--End Style-->
 <!--Main content-->
   <div class="container">
-      <div class="row">
+      <div class="row" >
           <!--side bar content-->
         <nav class="col-md-2 col-sm-3 bg-light sidebar">
-        <div class="collapse navbar-collapse" id="side-navbar-collapse">
-             <ul class="nav navbar-nav">
+        <div class="collapse navbar-collapse " id="side-navbar-collapse" >
+             <ul class="nav navbar-nav" >
                     &nbsp;
                  <li >
                     <a  href="#">Overview <span class="sr-only">(current)</span></a>
