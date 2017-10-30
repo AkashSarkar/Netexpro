@@ -127,19 +127,11 @@
                             </div>
                         </div>
 
-                        
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" href="{{ url('profile/index') }}" class="btn btn-primary">
-                                  Back
-                                </button>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                   Done
+                                Update
                                 </button>
                             </div>
                         </div>

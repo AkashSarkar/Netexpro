@@ -10,6 +10,7 @@
                 <div class="panel-body">
                    <form class="form-horizontal"  method="POST" action="{{ route('interests.update',[Auth::user()->id]) }}">
                         {{ csrf_field() }}
+                          <input type="hidden" name="_method" value="put">
 
                         <div class="form-group{{ $errors->has('profession') ? ' has-error' : '' }}">
                             <label for="profession" class="col-md-4 control-label">Profession<span class="required">*</span></label>
@@ -39,19 +40,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                            
-                                <button type="button" href="{{ url('profile/index') }}" class="btn btn-primary">
-                                  Back
-                                </button>
-                            </div>
-                        </div>
-
+                       
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                   Done
+                                   Update
                                 </button>
                             </div>
                         </div>
