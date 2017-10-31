@@ -4,7 +4,7 @@
 
 <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+         <div class="panel panel-primary">
                 <div class="panel-heading">Update Personal Information</div>
 
                 <div class="panel-body">
@@ -67,8 +67,23 @@
                             <div class="col-md-6">
                                 <select placeholder="Gender" id="gender" type="text" class="form-control" 
                                 name="gender" value="{{ $user->gender }}" autofocus>
-                                    <option>Male</option>
-                                    <option>Female</option>
+                                @if ($user->gender=="Female")
+                                <option>Female</option>
+                                <option>Male</option>
+                                
+                                @elseif ($user->gender=="Male")
+                                <option>Male</option>
+                                <option>Female</option>
+                               
+                                @else
+                                <option>Select-Gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                @endif
+                               
+
+                                
+                                   
                                 </select>
 
                                 @if ($errors->has('gender'))
@@ -116,12 +131,26 @@
                             <label for="location" class="col-md-4 control-label">Availability<span class="required">*</span> </label>
 
                             <div class="col-md-6">
-                                <input placeholder="available for a job??" id="availability" type="text" class="form-control" 
-                                name="availability" value="{{ $user->available_for_job }}" autofocus>
+                                <select placeholder="available for a job??" id="available_for_job" type="text" class="form-control" 
+                                name="available_for_job" value="{{ $user->available_for_job }}" autofocus>
+                                @if ($user->available_for_job=="yes")
+                                <option>Yes</option>
+                                <option>No</option>
+                                
+                                @elseif ($user->available_for_job=="No")
+                                <option>No</option>
+                                <option>Yes</option>
+                               
+                                @else
+                                <option>Select-Availability</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                                @endif
+                                </select>
 
-                                @if ($errors->has('availability'))
+                                @if ($errors->has('available_for_job'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('availability') }}</strong>
+                                        <strong>{{ $errors->first('available_for_job') }}</strong>
                                     </span>
                                 @endif
                             </div>
