@@ -63,7 +63,7 @@
                     <li><a href="javascript:;">Products</a></li>
                     <li><a href="javascript:;">FAQ</a></li>
                     <li class="nav-divider"></li>
-                    <li><a href="javascript:;"><i class="glyphicon glyphicon-off"></i> Sign in</a></li>
+                    <li><a href="javascript:;"><i class="glyphicon glyphicon-off"></i> Sign out</a></li>
                 </ul>
                 </div>
             </nav>
@@ -82,45 +82,11 @@
                  <li >
                    <a  href="#">Analytics</a>
                 </li>
-            </ul>
-       
-             
-
-           <ul class="nav navbar-nav">
-                    &nbsp;
-              <li >
-                  <a  href="#">Nav item</a>
-             </li>
-             <li >
-                 <a  href="#">Nav item again</a>
-             </li>
-             <li c>
-                <a  href="#">One more nav</a>
-             </li>
-             <li >
-               <a  href="#">Another nav item</a>
-             </li>
-           </ul>
-         
-
-          <ul class="nav navbar-nav">
-                    &nbsp;
-             <li >
-                <a  href="#">Nav item again</a>
-             </li>
-             <li >
-               <a  href="#">One more nav</a>
-            </li>
-            <li >
-                <a  href="#">Another nav item</a>
-            </li>
-          </ul>
-         </div>
-        </nav> --}}
+          --}}
 
         <!--end side bar-->
         
-                             <!--post body-->
+  <!--post body-->
   <div class="col-md-7 col-sm-7 col-lg-7" data-toggle="modal" data-target="#myModal">
         <div class="panel panel-default">
              <div class="panel-heading">
