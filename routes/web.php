@@ -19,13 +19,11 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/home', 'HomeController@index')->name('home');
-    //Route::get('/users', 'UserController@index')->name('users');
+    Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::get('/interests', 'InterestController@update'); 
+
     Route::post('/interests', 'InterestController@index')->name('interests');
-   // Route::get('/profile/{ user_id? }', 'ProfileController@index');
-
-   Route::get('/profile', 'ProfileController@index')->name('profile');
-   //Route::get('/interests/{Auth::user()->id?}', 'InterestController'); 
-
+ 
     Route::resource('interests', 'InterestController');
     Route::resource('users', 'UserController'); 
     Route::resource('home', 'HomeController');

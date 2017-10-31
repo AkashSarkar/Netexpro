@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('bank_ac')->nullable();
             $table->string('location')->nullable();
             $table->date('dob')->nullable();
-            $table->integer('available_for_job')->unsigned()->default(0)->nullable();
+            $table->string('available_for_job')->nullable();
             $table->integer('hiring')->unsigned()->default(0)->nullable();
             $table->integer('post_viewed')->unsigned()->nullable();
             $table->integer('post_rated')->unsigned()->nullable();

@@ -51,8 +51,9 @@
 <!--End Style-->
 <!--Main content-->
   <div class="container">
-      <div class="row">
+      <div class="row" >
           <!--side bar content-->
+<<<<<<< HEAD
         <div class="col-md-2 col-sm-3 bg-light sidebar">
             <nav class="nav-sidebar">
             <div class="collapse navbar-collapse" id="side-navbar-collapse">
@@ -68,6 +69,56 @@
             </nav>
         </div>
         
+=======
+        <nav class="col-md-2 col-sm-3 bg-light sidebar">
+        <div class="collapse navbar-collapse " id="side-navbar-collapse" >
+             <ul class="nav navbar-nav" >
+                    &nbsp;
+                 <li >
+                    <a  href="#">Overview <span class="sr-only">(current)</span></a>
+                 </li>
+                 <li >
+                    <a  href="#">Reports</a>
+                 </li>
+                 <li >
+                   <a  href="#">Analytics</a>
+                </li>
+            </ul>
+       
+             
+
+           <ul class="nav navbar-nav">
+                    &nbsp;
+              <li >
+                  <a  href="#">Nav item</a>
+             </li>
+             <li >
+                 <a  href="#">Nav item again</a>
+             </li>
+             <li c>
+                <a  href="#">One more nav</a>
+             </li>
+             <li >
+               <a  href="#">Another nav item</a>
+             </li>
+           </ul>
+         
+
+          <ul class="nav navbar-nav">
+                    &nbsp;
+             <li >
+                <a  href="#">Nav item again</a>
+             </li>
+             <li >
+               <a  href="#">One more nav</a>
+            </li>
+            <li >
+                <a  href="#">Another nav item</a>
+            </li>
+          </ul>
+         </div>
+        </nav>
+>>>>>>> e987c6b64193eeb29895990e5ab5111aab9e5fda
         <!--end side bar-->
         
                              <!--post body-->

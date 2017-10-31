@@ -4,7 +4,7 @@
 
 <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body">
@@ -35,8 +35,9 @@
                             <div class="col-md-6">
                                 <select placeholder="Gender" id="gender" type="text" class="form-control" 
                                 name="gender" value="{{ old('gender') }}" required autofocus>
-                                    <option>Male</option>
-                                    <option>Female</option>
+                                <option>Select-Availability</option>
+                                <option>Yes</option>
+                                <option>No</option>
                                 </select>
 
                                 @if ($errors->has('gender'))

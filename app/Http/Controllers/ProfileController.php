@@ -103,6 +103,7 @@ class ProfileController extends Controller
              'gender' => $request->input('gender'),
              'dob' => $request->input('dob'),
              'location' => $request->input('location'),
+             'available_for_job' => $request->input('available_for_job'),
              
             ]);
 
