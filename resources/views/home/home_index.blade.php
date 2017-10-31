@@ -53,7 +53,7 @@
   <div class="container">
       <div class="row" >
           <!--side bar content-->
-<<<<<<< HEAD
+
         <div class="col-md-2 col-sm-3 bg-light sidebar">
             <nav class="nav-sidebar">
             <div class="collapse navbar-collapse" id="side-navbar-collapse">
@@ -68,9 +68,8 @@
                 </div>
             </nav>
         </div>
-        
-=======
-        <nav class="col-md-2 col-sm-3 bg-light sidebar">
+  
+      {{--  <nav class="col-md-2 col-sm-3 bg-light sidebar">
         <div class="collapse navbar-collapse " id="side-navbar-collapse" >
              <ul class="nav navbar-nav" >
                     &nbsp;
@@ -117,8 +116,8 @@
             </li>
           </ul>
          </div>
-        </nav>
->>>>>>> e987c6b64193eeb29895990e5ab5111aab9e5fda
+        </nav> --}}
+
         <!--end side bar-->
         
                              <!--post body-->
