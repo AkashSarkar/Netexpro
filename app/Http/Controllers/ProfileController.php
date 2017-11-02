@@ -6,6 +6,7 @@ use App\User;
 use App\Interest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Image;
 
 class ProfileController extends Controller
 {
@@ -30,6 +31,32 @@ class ProfileController extends Controller
           
       
     }
+
+            public function update_avatar(Request $request){
+        
+               // Logic for user upload of avatar
+               if($request->hasFile('avatar')){
+                   $avatar = $request->file('avatar');
+                   $filename = time() . '.' . $avatar->getClientOriginalExtension();
+                   Image::make($avatar)->resize(150, 150)->save( public_path('/uploads/avatars/' . $filename ) );
+        
+                   $user = Auth::user();
+                   $user->avatar = $filename;
+                   $user->save();
+               }
+
+               if($request->hasFile('avatar1')){
+                $avatar1 = $request->file('avatar1');
+                $filename = time() . '.' . $avatar1->getClientOriginalExtension();
+                Image::make($avatar1)->resize(150, 150)->save( public_path('/uploads/avatars1/' . $filename ) );
+     
+                $user = Auth::user();
+                $user->avatar1 = $filename;
+                $user->save();
+            }
+               return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
+        
+           }
 
 
     /**

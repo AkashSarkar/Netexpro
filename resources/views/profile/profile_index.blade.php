@@ -3,11 +3,53 @@
 @section('content')
 
 
-
-
     <div class="fb-profile">
-        <img align="left" class="fb-image-lg" src="http://lorempixel.com/850/280/nightlife/5/" alt="Profile image example"/>
-        <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example"/>
+       <div>
+        <img align="left" class="fb-image-lg" src="/uploads/avatars/{{ $user->avatar }}" alt="Profile image example" style="height:400px;width:100%;"/>
+        <button id="Updateimage" type="button" class="btn btn-default btn-sm pull-right" style="margin-top:-40px; opacity: .5;" onclick="showForm()">
+        <i class="fa fa-upload" aria-hidden="true">Change Cover Photo</i>
+        </button>
+        <div id="theform" class="pull-right" style="margin-top:-60px;opacity: 50;">
+         <form enctype="multipart/form-data" action="/profile" method="POST">
+              <!--  <label>Update Profile Image</label>-->
+                <input type="file" name="avatar" style="
+                .custom-file-input::-webkit-file-upload-button {
+                    visibility: hidden;
+                    }
+                    .custom-file-input::before {
+                    content: 'Select some files';
+                    display: inline-block;
+                    background: -webkit-linear-gradient(top, #b2b2b2, #e3e3e3);
+                    border: 1px solid #999;
+                    border-radius: 5px;
+                    padding: 0px 0px;
+                    outline: none;
+                    white-space: nowrap;
+                    -webkit-user-select: none;
+                    cursor: pointer;
+                    text-shadow: 1px 1px #fff;
+                    font-weight: 700;
+                    font-size: 10pt;
+                    }
+                    .custom-file-input:hover::before {
+                    border-color: black;
+                    }
+                    .custom-file-input:active::before {
+                    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+                    }
+                
+                ">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="submit">
+                
+            </form>
+        </div>
+
+       </div>
+
+       <!--End of Cover image-->
+          <img align="left" class="fb-image-profile thumbnail" src="/uploads/avatars1/{{ $user->avatar1 }}" alt="Profile image example"/>
+        <!--End of Profile Pic-->
         <div class="fb-profile-text">
             <h1>{{ $user->firstname }} </h1>
             <p>{{ $interest->profession }}</p>
@@ -26,10 +68,26 @@
                 </div>
                
               </div>
+                <!--profile pic change-->
+    <button id="Updateprofile" type="button" class="btn btn-default btn-sm" style="margin-left:-150px; margin-top:20px; opacity: .5;" onclick="showForm1()">
+          <i class="fa fa-upload" aria-hidden="true">Change Profile Photo</i>
+        </button>
+          <div id="theform1">
+            <form enctype="multipart/form-data" action="/profile" method="POST">
+                <label>Update Profile</label>
+                <input type="file" name="avatar1">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="submit">
+              </form>
+        </div>
+        <!--End of profile pic change-->
             </div>
 
 
+            
     </div>
+
+
 
      <div class="container">
           <div class="row" style="padding-top: 30px;">
@@ -171,6 +229,25 @@
           </div>
         </div>
         <!--end Modal for post area-->
+
+        
+
+
+<script type = "text/javascript">
+    document.getElementById("theform").style.display = "none";
+     function showForm() {
+     document.getElementById("Updateimage").style.display = "none";
+     document.getElementById("theform").style.display = "block";
+}
+</script>
+
+<script type = "text/javascript">
+   document.getElementById("theform1").style.display = "none";
+   function showForm1() {
+     document.getElementById("Updateprofile").style.display = "none";
+     document.getElementById("theform1").style.display = "block";
+     }
+</script>
 
 
 

@@ -277,10 +277,6 @@
                     "HR",
                     "Executive"  
                  );
-
-
-
-
                ?>
 
         <form class="form-horizontal"  method="post" action="{{ route('jobpost.store') }}">
