@@ -329,20 +329,28 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                      <!--  <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                    Done
                                 </button>
                             </div>
-                        </div>
+                        </div>-->
 
-        </form><!--End of form-->
+        
     </div><!--End of modal body-->
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+      <!--  <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>-->
+      <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4 pull-right">
+                                <button type="submit" class="btn btn-primary">
+                                   Done
+                                </button>
+                            </div>
+                        </div>
     </div><!--End of footer-->
+    </form><!--End of form-->
     
       </div><!--End of modal content-->
   </div><!--End of modal-dialog-->
