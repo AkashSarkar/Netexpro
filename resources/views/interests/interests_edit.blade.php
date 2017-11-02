@@ -4,18 +4,19 @@
 
 <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Register</div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Update Professional Information</div>
 
                 <div class="panel-body">
-                   <form class="form-horizontal"  method="POST" action="{{ route('interests.store')}}">
+                   <form class="form-horizontal"  method="POST" action="{{ route('interests.update',[Auth::user()->id]) }}">
                         {{ csrf_field() }}
+                          <input type="hidden" name="_method" value="put">
 
                         <div class="form-group{{ $errors->has('profession') ? ' has-error' : '' }}">
                             <label for="profession" class="col-md-4 control-label">Profession<span class="required">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="profession" type="text" class="form-control" name="profession" value="{{ old('profession') }}" required autofocus>
+                                <input id="profession" type="text" class="form-control" name="profession" value="{{ $interest->profession }}" required autofocus>
 
                                 @if ($errors->has('profession'))
                                     <span class="help-block">
@@ -29,7 +30,7 @@
                             <label for="industry" class="col-md-4 control-label">Industry<span class="required">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="industry" type="text" class="form-control" name="industry" value="{{ old('industry') }}" required autofocus>
+                                <input id="industry" type="text" class="form-control" name="industry" value="{{ $interest->industry }}" required autofocus>
 
                                 @if ($errors->has('industry'))
                                     <span class="help-block">
@@ -39,11 +40,11 @@
                             </div>
                         </div>
 
-
+                       
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                   Next..
+                                   Update
                                 </button>
                             </div>
                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Interest;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
@@ -15,6 +16,7 @@ class InterestController extends Controller
     public function index()
     {
         //
+
         return view('interests.create');
     }
 
@@ -25,8 +27,11 @@ class InterestController extends Controller
      */
     public function create()
     {
-        //
-
+        
+         //$interest= Interest::find(Auth::user()->id);
+       //return view('profile.profile_index',['interest'=>$interest]);
+          
+        //return view( 'interests.create',['user'=>Auth::user()->id]);
     }
 
     /**
@@ -73,6 +78,10 @@ class InterestController extends Controller
     public function edit(Interest $interest)
     {
         //
+         $interest= Interest::find(Auth::user()->id);
+
+       //return view('profile.profile_edit', ['user'=> $user]);
+       return view('interests.interests_edit', ['interest'=>$interest]);
     }
 
     /**
@@ -85,6 +94,20 @@ class InterestController extends Controller
     public function update(Request $request, Interest $interest)
     {
         //
+
+         $interestsUpdate = Interest::where('id',Auth::user()->id)->update([
+            'profession' => $request->input('profession'),
+             'industry' => $request->input('industry'),
+             
+             
+            ]);
+
+        if($interestsUpdate){ 
+            
+            return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
+        }
+
+        return back()->withInput();
     }
 
     /**
