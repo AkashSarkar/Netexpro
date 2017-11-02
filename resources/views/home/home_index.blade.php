@@ -93,16 +93,53 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <div class="btn-group btn-group-md">
                      <button type="button" class="btn btn-link">Make post</button>
-                     <button type="button" class="btn btn-link">|</button>
-                     <button type="button" class="btn btn-link">Job post</button>
                  </div>
                   </div>
-                  <div class="modal-body">
-                    <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something"></textarea>
+                  <form method="post" action= "{{ route('posts.store',[Auth::user()->id]) }}"></form>
+                    {{  csrf_field()  }}
+                    <div class="form-group">
+                     <div class="modal-body">
+                    <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description" required></textarea>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-azure">Visibility </button>
-                      <button type="button" class="btn btn-azure pull-right"> Post</button>
+                
+                                <div class="row">
+                                <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                Post
+                                </button>
+                            </div>
+                        </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-azure dropdown-toggle" type="button" data-toggle="dropdown">Visibility
+                                    <span class="caret"></span></button>
+                                    
+                                        <ul class="dropdown-menu pull-right">
+                                        
+                                            <form style="padding-left: 10px">
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox" value="">Ridwana</label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox" value="">Deepita</label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox" value="">Akash</label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox" value="">Tanvir</label>
+                                                </div>
+                                            </form>
+
+                                        </ul>
+                                       
+                                </div>
+                               
+                                </div>
+                           
+
+                     
                       <ul class="nav nav-pills pull-left">
                           <li><a href="#"><i class="fa fa-map-marker"></i></a></li>
                           <li><a href="#"><i class="fa fa-camera"></i></a></li>
@@ -110,6 +147,12 @@
                           <li><a href="#"><i class="fa fa-microphone"></i></a></li>
                       </ul>
                 </div>
+                    
+
+
+                     </div>
+                  </form>
+
             </div>
             
           </div>
