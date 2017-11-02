@@ -25,14 +25,28 @@ class HomeController extends Controller
      */
     public function index()
     {
+       
+        if( Auth::check() )
+         {
+            //dump is used to see the id of the authenticated user that is currently logged in
+           // dump(Auth::user()->id);
+        //basically we are saying here is find the company where the user who created it is the same user currently logged in 
+        //use get() to get the companies of that specific id 
+            $user= User::find(Auth::user()->id);  
+            $post = Post::where('user_id', Auth::user()->id)->get();
+              //$user = User::all();
+              //$post = Post::all();
 
+        //passing values to view
+        return view('home.home_index',['user'=>$user , 'post'=>$post]);
+        }
         
-      $user= User::find(Auth::user()->id);
-      $post= Post::all()->sortByDesc('id');
+
+      //$post= Post::all()->sortByDesc('id');
      // $post = DB::table('posts')->where(Post::user_id, Auth::user()->id);
      // $post= Post::find(Auth::user()->id);
      //$post = Post::where('user_id',$user->id);
-        return view('home.home_index',['user'=>$user , 'post'=>$post]);
+      // return view(;
     }
     public function store(Request $request)
     {

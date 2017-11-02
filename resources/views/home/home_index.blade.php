@@ -105,7 +105,9 @@
                         </div>
 
                         <!--postshow-->
-                               @foreach($post as $post)
+                        
+                        @foreach($post as $post) 
+                             
                                         <div class="panel panel-default">
                                             <div class="panel-body">
                                                <section class="post-heading">
@@ -118,7 +120,9 @@
                                                                 </a>
                                                               </div>
                                                               <div class="media-body">
-                                                                <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a> 
+                                                            
+                                                     <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a>
+                                                       
                                                                 <a href="#" class="anchor-time">{{ $post->created_at }}</a>
                                                               </div>
                                                             </div>
@@ -131,6 +135,7 @@
                                                <section class="post-body">
                                                    <p>{{ $post->description }}</p>
                                                </section>
+                                             
                                                <section class="post-footer">
                                                    <hr>
                                                    <div class="post-footer-option container">
@@ -161,8 +166,8 @@
                                                </section>
                                             </div>
                                         </div>   
-                               @endforeach
-
+                               
+                                @endforeach
 
 
                         <!--end post show-->
