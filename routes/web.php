@@ -22,7 +22,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/interests', 'InterestController@update'); 
 
-    Route::post('/interests', 'InterestController@index')->name('interests');
+    
+    //Route::post('/post', 'PostController@store');
  
     Route::resource('interests', 'InterestController');
     Route::resource('users', 'UserController'); 
@@ -32,6 +33,7 @@ Route::middleware(['auth'])->group(function(){
 
    // Route::get('profile', 'ProfileController@index');
     Route::post('profile', 'ProfileController@update_avatar');
+    Route::resource('post', 'PostController');
 });
 
 
