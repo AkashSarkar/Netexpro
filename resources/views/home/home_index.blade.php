@@ -87,8 +87,8 @@
                     <!--end side bar-->
 
                     <!--post body-->
-                    <div class="col-md-7 col-sm-7 col-lg-7" data-toggle="modal" data-target="#myModal">
-                        <div class="panel panel-default">
+                    <div class="col-md-7 col-sm-7 col-lg-7" >
+                        <div class="panel panel-default" data-toggle="modal" data-target="#myModal">
                             <div class="panel-heading">
                                 <div class="btn-group btn-group-md">
                                     <button type="button" class="btn btn-link">Make post</button>
@@ -103,10 +103,74 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!--postshow-->
+                               @foreach($post as $post)
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                               <section class="post-heading">
+                                                    <div class="row">
+                                                        <div class="col-md-11">
+                                                            <div class="media">
+                                                              <div class="media-left">
+                                                                <a href="#">
+                                                                  <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                                                </a>
+                                                              </div>
+                                                              <div class="media-body">
+                                                                <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a> 
+                                                                <a href="#" class="anchor-time">{{ $post->created_at }}</a>
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                         <div class="col-md-1">
+                                                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                                         </div>
+                                                    </div>             
+                                               </section>
+                                               <section class="post-body">
+                                                   <p>{{ $post->description }}</p>
+                                               </section>
+                                               <section class="post-footer">
+                                                   <hr>
+                                                   <div class="post-footer-option container">
+                                                        <ul class="list-unstyled">
+                                                            <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
+                                                            <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
+                                                            <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
+                                                        </ul>
+                                                   </div>
+                                                   <div class="post-footer-comment-wrapper">
+                                                       <div class="comment-form">
+                                                           
+                                                       </div>
+                                                       <div class="comment">
+                                                            <div class="media">
+                                                              <div class="media-left">
+                                                                <a href="#">
+                                                                  <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                                                </a>
+                                                              </div>
+                                                              <div class="media-body">
+                                                                <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a> 
+                                                                <a href="#" class="anchor-time">51 mins</a>
+                                                              </div>
+                                                            </div>
+                                                       </div>
+                                                   </div>
+                                               </section>
+                                            </div>
+                                        </div>   
+                               @endforeach
+
+
+
+                        <!--end post show-->
                     </div>
+                     <!--post body end-->
 
             </div>
-            <!--post body end-->
+           
             <!--modal-->
             <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
@@ -149,6 +213,9 @@
         </div>
         
             <!--end Modal-->
+
+
+
     </div>
   </div>
 
