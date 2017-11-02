@@ -22,14 +22,15 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/interests', 'InterestController@update'); 
 
-    //Route::get('/posts', 'PostController@index');
-    Route::post('/posts', 'PostController@store');
+    
+    //Route::post('/post', 'PostController@store');
  
     Route::resource('interests', 'InterestController');
     Route::resource('users', 'UserController'); 
     Route::resource('home', 'HomeController');
     Route::resource('profile', 'ProfileController');
-    Route::resource('posts', 'PostController');
+    Route::resource('jobpost', 'JobpostController');
+    Route::resource('post', 'PostController');
 });
 
 

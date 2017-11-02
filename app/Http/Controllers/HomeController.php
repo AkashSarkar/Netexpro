@@ -25,4 +25,24 @@ class HomeController extends Controller
     {
         return view('home.home_index');
     }
+    public function store(Request $request)
+    {
+        //
+
+        console.log("hello");
+        if(Auth::check()){
+            $post = Post::create([
+                'description' => $request->input('description'),
+                'user_id'=>Auth::user()->id
+            ]);
+            
+          
+                return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
+                ->with('success' , 'successfully');
+            
+        }
+        return back()->withInput();
+        
+    }
+
 }

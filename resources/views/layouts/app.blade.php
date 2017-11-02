@@ -224,6 +224,13 @@
                                 name="CV" value=""  autofocus  style="width:110px;">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                   Done
+                                </button>
+                            </div>
+                        </div>
 
         </form><!--End of form-->
     </div><!--End of modal body-->
@@ -276,9 +283,9 @@
 
                ?>
 
-        <form class="form-horizontal"  method="post" action="">
+        <form class="form-horizontal"  method="post" action="{{ route('jobpost.store') }}">
                         {{ csrf_field() }}
-          <input type="hidden" name="_method" value="put">
+          <input type="hidden" name="_method" value="post">
 
           <!--<div class="container">-->
                 <label for="profession" class="col-md-4 control-label">Profession<span class="required">*</span></label>
@@ -291,15 +298,16 @@
                         </select>
                    </div><!--End of col-md-6-->
 
-                    <label for="$position" class="col-md-4 control-label">Positions<span class="required">*</span></label>
-                      <div class="col-md-6">
-                        <select class="form-control" name="$position"  value="{{ old('$position') }}">
-                            <span class="caret"></span>
-                            @foreach( $positions as $position)
-                            <option>{{ $position }}</option>
-                            @endforeach
-                        </select>
-                      </div>
+                   <!--<div class="container">-->
+                <label for="position" class="col-md-4 control-label">position<span class="required">*</span></label>
+                <div class="col-md-6">
+                     <select class="form-control" name="position"  value="{{ old('position') }}">
+                         <span class="caret"></span>
+                         @foreach( $positions as $position)
+                         <option>{{ $position }}</option>
+                         @endforeach
+                     </select>
+                </div><!--End of col-md-6-->
 
                       <label for="location" class="col-md-4 control-label">Prefered Location<span class="required">*</span></label>
                       <div class="col-md-6">
@@ -321,12 +329,28 @@
                             </div>
                         </div>
 
-        </form><!--End of form-->
+                      <!--  <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                   Done
+                                </button>
+                            </div>
+                        </div>-->
+
+        
     </div><!--End of modal body-->
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+      <!--  <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>-->
+      <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4 pull-right">
+                                <button type="submit" class="btn btn-primary">
+                                   Done
+                                </button>
+                            </div>
+                        </div>
     </div><!--End of footer-->
+    </form><!--End of form-->
     
       </div><!--End of modal content-->
   </div><!--End of modal-dialog-->
@@ -337,14 +361,17 @@
         $("input[name='job_post_option']").click(function(){
             var radioValue = $("input[name='job_post_option']:checked").val();
             if(radioValue==1){
-                setTimeout($('#jobModal').modal('hide'), 10000000);
-                setTimeout($('#available_job_modal').modal('show'), 10000000);
+                //setTimeout($('#jobModal').modal('hide'), 10000000);
+               $('#jobModal').modal('hide');
+               $('#available_job_modal').modal('show');
             }
 
 
             if(radioValue==2){
-                setTimeout($('#jobModal').modal('hide'), 10000000);
-                setTimeout($('#want_to_hire_modal').modal('show'), 10000000);
+                //setTimeout($('#jobModal').modal('hide'), 10000000);
+                $('#jobModal').modal('hide');
+                $('#want_to_hire_modal').modal('show');
+
             }
         });
         

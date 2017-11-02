@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\facades\Auth;
 
-class PostController extends Controller
+use App\jobpost;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class JobpostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,6 @@ class PostController extends Controller
     public function index()
     {
         //
-        
     }
 
     /**
@@ -38,30 +38,33 @@ class PostController extends Controller
     {
         //
 
-       
         if(Auth::check()){
-            $post = Post::create([
-                'description' => $request->input('description'),
-                'user_id'=>Auth::user()->id
+            $jobpost = jobpost::create([
+                'profession' => $request->input('profession'),
+                'position' => $request->input('position'),
+                'location' => $request->input('location'),
+                'Description' => $request->input('Description'),
+                'user_id' => Auth::user()->id
             ]);
-            
-          if($post)
-               { return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
-                ->with('success' , 'Successfully Post');
-               }
-            
+
+
+            if($jobpost){
+                return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
+                ->with('success' , 'successfully');
+            }
+
         }
-        return back()->withInput();
         
+            return back()->withInput()->with('errors', 'Error creating new company');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\jobpost  $jobpost
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(jobpost $jobpost)
     {
         //
     }
@@ -69,10 +72,10 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\jobpost  $jobpost
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(jobpost $jobpost)
     {
         //
     }
@@ -81,10 +84,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  \App\jobpost  $jobpost
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, jobpost $jobpost)
     {
         //
     }
@@ -92,10 +95,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  \App\jobpost  $jobpost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(jobpost $jobpost)
     {
         //
     }

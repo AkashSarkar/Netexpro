@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
 
-    protected function validator(array $data)
+    protected function validator(Request $request)
     {
-        return Validator::make($data, [
+        return Validator::make($request, [
             'phone_no' => 'char|max:11',
             
         ]);
