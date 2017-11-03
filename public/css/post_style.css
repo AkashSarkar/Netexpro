@@ -45,11 +45,12 @@ body{
         
         padding: 8px 0;
         border-right: 1px solid #ddd;
-        height:100vh;
+       
         
     
 
     }
+    
 
     .nav-sidebar a {
         color: #333;

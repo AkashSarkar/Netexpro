@@ -7,10 +7,10 @@
 <!--End Style-->
 <!--Main content-->
 <div class="container">
-    <div class="row">
+    <div class="row content">
         <!--side bar content-->
 
-        <div class="col-md-2 col-sm-3 bg-light sidebar">
+        <div class="col-md-2 col-sm-2 bg-light sidebar">
             <nav class="nav-sidebar">
                 <div class="collapse navbar-collapse" id="side-navbar-collapse">
                     <ul class="nav">
@@ -27,6 +27,8 @@
                             <a href="javascript:;">FAQ</a>
                         </li>
                         <li class="nav-divider"></li>
+                        
+                        
                         <li>
                             <a href="javascript:;">
                                 <i class="glyphicon glyphicon-off"></i> Sign out</a>
@@ -49,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <textarea class="form-control  p-text-area" rows="2" placeholder="Write something"></textarea>
+                                <textarea class="form-control  p-text-area" rows="2" placeholder="Write something" disabled></textarea>
                             </div>
                             <div class="panel-heading">
                                 <div class="btn-group btn-group-md">
@@ -57,13 +59,9 @@
                                 </div>
                             </div>
                         </div>
-                     </div>
-
-                        <!--postshow-->
-                        
+                         <!--postshow-->
                         @foreach($post as $post) 
-                                      <div class="col-md-7">
-                                        <div class="panel panel-default">
+                                    <div class="panel panel-default">
                                             <div class="panel-body">
                                                <section class="post-heading">
                                                     <div class="row">
@@ -129,17 +127,20 @@
                                                    
                                             </div>
                                         </div> 
-                                    </div>
-
-                               
-                                @endforeach
-
-
+                        @endforeach
                         <!--end post show-->
+                     </div>
+
+                       
+                        
+                        
+
+
+                        
                     
                      <!--post body end-->
 
-            </div>
+            
            
             <!--modal-->
             <div class="modal fade" id="myModal" role="dialog">
@@ -158,7 +159,7 @@
                   <input type="hidden" name="_method" value="post">
                   <div class="modal-body">
                     <div class="form-group">
-                    <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description" required></textarea>
+                    <textarea id="textareaID1" class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description"autofocus required></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -185,9 +186,9 @@
             <!--end Modal-->
 
 
-
+     </div>
     </div>
-  </div>
+  
 
 
 
