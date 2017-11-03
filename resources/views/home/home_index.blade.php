@@ -1,53 +1,7 @@
 @extends('layouts.app') @section('content')
 <!--style-->
 <style>
-    .nav-sidebar {
-        width: 100%;
-        padding: 8px 0;
-        border-right: 1px solid #ddd;
-    }
 
-    .nav-sidebar a {
-        color: #333;
-        -webkit-transition: all 0.08s linear;
-        -moz-transition: all 0.08s linear;
-        -o-transition: all 0.08s linear;
-        transition: all 0.08s linear;
-        -webkit-border-radius: 4px 0 0 4px;
-        -moz-border-radius: 4px 0 0 4px;
-        border-radius: 4px 0 0 4px;
-    }
-
-    .nav-sidebar .active a {
-        cursor: default;
-        background-color: #428bca;
-        color: #fff;
-        text-shadow: 1px 1px 1px #666;
-    }
-
-    .nav-sidebar .active a:hover {
-        background-color: #428bca;
-    }
-
-    .nav-sidebar .text-overflow a,
-    .nav-sidebar .text-overflow .media-body {
-        white-space: nowrap;
-        overflow: hidden;
-        -o-text-overflow: ellipsis;
-        text-overflow: ellipsis;
-    }
-    /* Right-aligned sidebar */
-
-    .nav-sidebar.pull-right {
-        border-right: 0;
-        border-left: 1px solid #ddd;
-    }
-
-    .nav-sidebar.pull-right a {
-        -webkit-border-radius: 0 4px 4px 0;
-        -moz-border-radius: 0 4px 4px 0;
-        border-radius: 0 4px 4px 0;
-    }
 </style>
 
 <!--End Style-->
@@ -103,16 +57,17 @@
                                 </div>
                             </div>
                         </div>
+                     </div>
 
                         <!--postshow-->
                         
                         @foreach($post as $post) 
-                             
+                                      <div class="col-md-7">
                                         <div class="panel panel-default">
                                             <div class="panel-body">
                                                <section class="post-heading">
                                                     <div class="row">
-                                                        <div class="col-md-11">
+                                                        <div class="col-md-12">
                                                             <div class="media">
                                                               <div class="media-left">
                                                                 <a href="#">
@@ -120,32 +75,35 @@
                                                                 </a>
                                                               </div>
                                                               <div class="media-body">
-                                                            
-                                                     <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a>
+                                                                    <a href="#"><i class="glyphicon glyphicon-chevron-down pull-right"></i></a>
+                                                        
+                                                                    <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a>
                                                        
                                                                 <a href="#" class="anchor-time">{{ $post->created_at }}</a>
                                                               </div>
                                                             </div>
                                                         </div>
-                                                         <div class="col-md-1">
-                                                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                                                         </div>
+                                                         
                                                     </div>             
                                                </section>
                                                <section class="post-body">
-                                                   <p>{{ $post->description }}</p>
+                                                   <p>{{ $post->description }}<hr></p>
                                                </section>
                                              
                                                <section class="post-footer">
-                                                   <hr>
-                                                   <div class="post-footer-option container">
+                                                   <div class="row">
+                                                   <div class="col-md-12">
                                                         <ul class="list-unstyled">
                                                             <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
                                                             <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
                                                             <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
                                                         </ul>
                                                    </div>
-                                                   <div class="post-footer-comment-wrapper">
+
+                                                 </div>
+                                                 <div class="row">
+                                                  <div class="post-footer-comment-wrapper">
+                                                    <div class="col-md-12 col-sm-12 col-lg-12">
                                                        <div class="comment-form">
                                                            
                                                        </div>
@@ -163,15 +121,22 @@
                                                             </div>
                                                        </div>
                                                    </div>
+                                                   </div>
+                                                 </div>
+                                               
                                                </section>
+                                               
+                                                   
                                             </div>
-                                        </div>   
+                                        </div> 
+                                    </div>
+
                                
                                 @endforeach
 
 
                         <!--end post show-->
-                    </div>
+                    
                      <!--post body end-->
 
             </div>
