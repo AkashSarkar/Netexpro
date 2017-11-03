@@ -41,10 +41,8 @@ class HomeController extends Controller
 
                           })
                      ->get();
-              //$user = User::all();
-              //$post = Post::all();
-              //$userpost=json_decode($userpost,true);
-              //dd($userpost);
+              $userpost=json_decode($userpost,true);
+            
 
         //passing values to view
      // return view('home.home_index')->with('userpost',json_decode($userpost,true));

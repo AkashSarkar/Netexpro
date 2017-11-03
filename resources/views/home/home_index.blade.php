@@ -60,7 +60,8 @@
                             </div>
                         </div>
                          <!--postshow-->
-                        @foreach($post as $post) 
+                         
+                        @foreach($userpost as $userpost)
                                     <div class="panel panel-default">
                                             <div class="panel-body">
                                                <section class="post-heading">
@@ -75,9 +76,9 @@
                                                               <div class="media-body">
                                                                     <a href="#"><i class="glyphicon glyphicon-chevron-down pull-right"></i></a>
                                                         
-                                                                    <a href="#" class="anchor-username"><h4 class="media-heading"> {{$userpost}}</h4></a>
+                                                                    <a href="#" class="anchor-username"><h4 class="media-heading"> {{$userpost['firstname']}}</h4></a>
                                                        
-                                                                <a href="#" class="anchor-time">{{ $post->created_at }}</a>
+                                                                <a href="#" class="anchor-time">{{ $userpost['created_at'] }}</a>
                                                               </div>
                                                             </div>
                                                         </div>
@@ -85,7 +86,7 @@
                                                     </div>             
                                                </section>
                                                <section class="post-body">
-                                                   <p>{{ $post->description }}<hr></p>
+                                                   <p>{{ $userpost['description'] }}<hr></p>
                                                </section>
                                              
                                                <section class="post-footer">
@@ -113,7 +114,7 @@
                                                                 </a>
                                                               </div>
                                                               <div class="media-body">
-                                                                <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a> 
+                                                                <a href="#" class="anchor-username"><h4 class="media-heading">{{ $userpost['firstname'] }}</h4></a> 
                                                                 <a href="#" class="anchor-time">51 mins</a>
                                                               </div>
                                                             </div>
