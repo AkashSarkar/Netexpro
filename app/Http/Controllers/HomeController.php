@@ -34,11 +34,21 @@ class HomeController extends Controller
         //use get() to get the companies of that specific id 
             $user= User::find(Auth::user()->id);  
             $post = Post::where('user_id', Auth::user()->id)->get();
+            $userpost=DB::table('users')
+                         ->join('posts', function ($join) {
+                          $join->on('users.id', '=', 'posts.user_id')
+                          ;
+
+                          })
+                     ->get();
               //$user = User::all();
               //$post = Post::all();
+              //$userpost=json_decode($userpost,true);
+              //dd($userpost);
 
         //passing values to view
-        return view('home.home_index',['user'=>$user , 'post'=>$post]);
+     // return view('home.home_index')->with('userpost',json_decode($userpost,true));
+        return view('home.home_index',['user'=>$user , 'post'=>$post,'userpost'=>$userpost]);
         }
         
 

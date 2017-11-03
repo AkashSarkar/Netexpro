@@ -75,7 +75,7 @@
                                                               <div class="media-body">
                                                                     <a href="#"><i class="glyphicon glyphicon-chevron-down pull-right"></i></a>
                                                         
-                                                                    <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a>
+                                                                    <a href="#" class="anchor-username"><h4 class="media-heading"> {{$userpost}}</h4></a>
                                                        
                                                                 <a href="#" class="anchor-time">{{ $post->created_at }}</a>
                                                               </div>
@@ -166,8 +166,31 @@
                       
                        <div class="form-group">
                            
+                                <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle pull-right" type="button" data-toggle="dropdown" style="margin-left:10px;">Visibility
+                                        <span class="caret"></span></button>
+                                        
+                                            <ul class="dropdown-menu pull-right" style="padding-left:20px ;text-align:justify;">
+                                            
+                                                <form  >
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" value="CSE"> CSE</label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" value="EEE"> EEE</label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" value="UIU"> UIU</label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" value="ETE"> ETE</label>
+                                                    </div>
+                                                </form>
+
+                                            </ul>
+                                </div>
+
                                 <button type="submit" class="btn btn-primary pull-right">Post</button>
-                                <button type="button" class="btn btn-primary"style="margin-right:10px;"> Visibility </button>
                             
                         </div>
                       <ul class="nav nav-pills pull-left">
