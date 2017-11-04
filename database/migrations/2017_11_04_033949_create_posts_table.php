@@ -14,7 +14,7 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->increments('id');
+            //$table->increments('id');
             $table->string('post_type');
             $table->longtext('description');
             $table->string('url')->nullable();
@@ -22,6 +22,8 @@ class CreatePostsTable extends Migration
             $table->string('location')->nullable();
             $table->float('ratting')->nullable();
             $table->string('post_tags')->nullable();
+            $table->string('post_id');
+            $table->primary('post_id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
                         

@@ -60,8 +60,8 @@
                             </div>
                         </div>
                          <!--postshow-->
-                         
-                        @foreach($userpost as $userpost)
+                         @if($posts!=null)
+                        @foreach($posts as $userpost)
                                     <div class="panel panel-default">
                                             <div class="panel-body">
                                                <section class="post-heading">
@@ -115,7 +115,7 @@
                                                               </div>
                                                               <div class="media-body">
                                                                 <a href="#" class="anchor-username"><h4 class="media-heading">{{ $userpost['firstname'] }}</h4></a> 
-                                                                <a href="#" class="anchor-time">51 mins</a>
+                                                                <a href="#" class="anchor-time"></a>
                                                               </div>
                                                             </div>
                                                        </div>
@@ -129,6 +129,7 @@
                                             </div>
                                         </div> 
                         @endforeach
+                        @endif
                         <!--end post show-->
 
                             <!--availablepostshow-->
@@ -239,7 +240,8 @@
                   <input type="hidden" name="_method" value="post">
                   <div class="modal-body">
                     <div class="form-group">
-                    <textarea id="textareaID1" class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description"autofocus required></textarea>
+                    <textarea id="textareaID1" class="form-control input-lg p-text-area" rows="2" 
+                    placeholder="Write something" name="description" autofocus required></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -247,25 +249,27 @@
                        <div class="form-group">
                            
                                 <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle pull-right" type="button" data-toggle="dropdown" style="margin-left:10px;">Visibility
+                                        <button class="btn btn-primary dropdown-toggle pull-right" type="button" data-toggle="dropdown" 
+                                        style="margin-left:10px;" >Visibility
                                         <span class="caret"></span></button>
                                         
-                                            <ul class="dropdown-menu pull-right" style="padding-left:20px ;text-align:justify;">
+                                            <ul class="dropdown-menu pull-right" style="padding-left:10px ;" required>
                                             
-                                                <form  >
+                                                
                                                     <div class="checkbox">
-                                                        <label><input type="checkbox" value="CSE"> CSE</label>
+                                                        <label><input type="checkbox" name="type[]" value="{{$interest->profession}}">
+                                                         {{$interest->profession}}</label>
                                                     </div>
                                                     <div class="checkbox">
-                                                        <label><input type="checkbox" value="EEE"> EEE</label>
+                                                        <label><input type="checkbox" name="type[]" value="{{$interest->industry}}">
+                                                        {{$interest->industry}}</label>
                                                     </div>
                                                     <div class="checkbox">
-                                                        <label><input type="checkbox" value="UIU"> UIU</label>
+                                                        <label><input type="checkbox" name="type[]" value="{{$user->education}}"> 
+                                                        {{$user->education}}</label>
                                                     </div>
-                                                    <div class="checkbox">
-                                                        <label><input type="checkbox" value="ETE"> ETE</label>
-                                                    </div>
-                                                </form>
+                                                   
+                                                
 
                                             </ul>
                                 </div>
