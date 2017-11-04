@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('home', 'HomeController');
     Route::resource('profile', 'ProfileController');
     Route::resource('jobpost', 'JobpostController');
+    Route::resource('availableforjob', 'AvailableForJobController');
+
 
    // Route::get('profile', 'ProfileController@index');
     Route::post('profile', 'ProfileController@update_avatar');

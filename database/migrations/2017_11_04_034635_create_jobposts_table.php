@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CretateInterestsTable extends Migration
+class CreateJobpostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,17 @@ class CretateInterestsTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('interests', function (Blueprint $table) {
+        Schema::create('jobposts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('interest_type')->nullable();
+            $table->string('position');
             $table->string('profession');
-            $table->string('industry');
-            $table->integer('interest_priority')->unsigned()->default(0)->nullable();
+            $table->integer('vacancy_number');
+            $table->string('circular');
+            $table->string('company_details');
+            $table->string('job_details');
+            $table->string('location');
+          
             $table->integer('user_id')->unsigned();
-
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
@@ -34,6 +36,6 @@ class CretateInterestsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('jobposts');
     }
 }

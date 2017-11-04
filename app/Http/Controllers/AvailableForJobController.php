@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\jobpost;
 use Illuminate\Http\Request;
+
+use App\AvailableForJob;
+
 use Illuminate\Support\Facades\Auth;
 
-class JobpostController extends Controller
+class AvailableForJobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,25 +38,24 @@ class JobpostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file = time() . '.'.$request->file('attachment')->getClientOriginalName();
+        $destination = base_path() . '/public/uploads/attachment';
+        $request->file('attachment')->move($destination, $file);
 
-        if(Auth::check()){
-            $jobpost = jobpost::create([
+               if(Auth::check()){
+                 $availableforjob = AvailableForJob::create([
                 'position' => $request->input('position'),
                 'profession' => $request->input('profession'),
-                'vacancy_number' => $request->input('vacancy_number'), 
-                'circular' => $request->input('circular'),
-                'company_details' => $request->input('company_details'),
-                'job_details' => $request->input('job_details'),
+                'CV' => $file, 
+                'highlight' => $request->input('highlight'),
                 'location' => $request->input('location'),
-                
-                'user_id' => Auth::user()->id
+                'user_id' => Auth::user()->id,
             ]);
 
 
-            if($jobpost){
+            if($availableforjob){
                 return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
-                ->with('success' , 'successfully');
+                ->with('success' , 'job posted successfully');
             }
 
         }
@@ -65,10 +66,10 @@ class JobpostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\jobpost  $jobpost
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(jobpost $jobpost)
+    public function show($id)
     {
         //
     }
@@ -76,10 +77,10 @@ class JobpostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\jobpost  $jobpost
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(jobpost $jobpost)
+    public function edit($id)
     {
         //
     }
@@ -88,10 +89,10 @@ class JobpostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\jobpost  $jobpost
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, jobpost $jobpost)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -99,10 +100,10 @@ class JobpostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\jobpost  $jobpost
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(jobpost $jobpost)
+    public function destroy($id)
     {
         //
     }

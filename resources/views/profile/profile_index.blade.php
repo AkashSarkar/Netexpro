@@ -11,6 +11,7 @@
         </button>
         <div id="theform" class="pull-right" style="margin-top:-60px;opacity: 50;">
          <form enctype="multipart/form-data" action="/profile" method="POST">
+               {{csrf_field()}}
               <!--  <label>Update Profile Image</label>-->
                 <input type="file" name="cover" style="
                 .custom-file-input::-webkit-file-upload-button {
@@ -68,12 +69,13 @@
                 </div>
                
               </div>
-                <!--profile pic change-->
+    <!--profile pic change-->
     <button id="Updateprofile" type="button" class="btn btn-default btn-sm" style="margin-left:-150px; margin-top:20px; opacity: .5;" onclick="showForm1()">
           <i class="fa fa-upload" aria-hidden="true">Change Profile Photo</i>
         </button>
           <div id="theform1">
             <form enctype="multipart/form-data" action="/profile" method="POST">
+                {{csrf_field()}}
                 <label>Update Profile</label>
                 <input type="file" name="profile">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">

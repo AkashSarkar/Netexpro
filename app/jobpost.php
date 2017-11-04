@@ -9,10 +9,14 @@ class jobpost extends Model
     //
 
     protected $fillable = [
-        'profession',
         'position',
+        'profession',
+        'vacancy_number',
+        'circular',
+        'company_details',
+        'job_details',
         'location',
-        'Description',
+       
         'user_id',
     ];
 }
