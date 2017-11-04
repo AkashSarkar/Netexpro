@@ -32,22 +32,28 @@ class HomeController extends Controller
            // dump(Auth::user()->id);
         //basically we are saying here is find the company where the user who created it is the same user currently logged in 
         //use get() to get the companies of that specific id 
+           //$user= User::find(Auth::user()->id);  
             $user= User::find(Auth::user()->id);  
             $post = Post::where('user_id', Auth::user()->id)->get();
             $userpost=DB::table('users')
                          ->join('posts', function ($join) {
                           $join->on('users.id', '=', 'posts.user_id')
                           ;
-
                           })
-                     ->get();
+                         ->get();
                      
-            $userpost=json_decode($userpost,true);
-            
+                $userpost=json_decode($userpost,true);
 
+              
+              //$post = Post::where('user_id', Auth::user()->id)->get();
+              $useravailablepost= DB::table('users')
+            ->join('available_for_jobs', 'users.id', '=', 'available_for_jobs.user_id')
+            ->get();
+
+            $useravailablepost=json_decode($useravailablepost,true);
         //passing values to view
      // return view('home.home_index')->with('userpost',json_decode($userpost,true));
-        return view('home.home_index',['user'=>$user , 'post'=>$post,'userpost'=>$userpost]);
+        return view('home.home_index',['userpost'=> $userpost,'useravailablepost'=>$useravailablepost]);
         }
         
 

@@ -130,6 +130,85 @@
                                         </div> 
                         @endforeach
                         <!--end post show-->
+
+                            <!--availablepostshow-->
+                         
+                            @foreach($useravailablepost as $useravailablepost)
+                                    <div class="panel panel-default">
+                                            <div class="panel-body">
+                                               <section class="post-heading">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="media">
+                                                              <div class="media-left">
+                                                                <a href="#">
+                                                                  <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                                                </a>
+                                                              </div>
+                                                              <div class="media-body">
+                                                                    <a href="#"><i class="glyphicon glyphicon-chevron-down pull-right"></i></a>
+                                                        
+                                                                    <a href="#" class="anchor-username"><h4 class="media-heading"> {{$useravailablepost['firstname']}}</h4></a>
+                                                       
+                                                                <a href="#" class="anchor-time">{{ $useravailablepost['created_at'] }}</a>
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                         
+                                                    </div>             
+                                               </section>
+                                               <section class="post-body">
+                                                   <h4 style="font-weight:bold;">******job seeking post******</h4>
+                                                <p><li>Position : <strong>{{ $useravailablepost['position'] }}</strong></li></p>
+                                                <p><li>Profession : <strong>{{ $useravailablepost['profession'] }}</strong></li></p>
+                                                <p><li>Preferred Job Location : <strong>{{ $useravailablepost['location'] }}</strong></li></p>
+                                                <p><li>Highlights(Any specified course/skills) : <strong>{{ $useravailablepost['highlight'] }}</strong></li></p>
+                                               <li> <a target="_blank" href="/uploads/attachment/{{$useravailablepost['CV']}}">Download CV from here..</a></li>
+                                                
+
+                                               </section>
+                                             
+                                               <section class="post-footer">
+                                                   <div class="row">
+                                                   <div class="col-md-12">
+                                                        <ul class="list-unstyled">
+                                                            <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
+                                                            <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
+                                                            <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
+                                                        </ul>
+                                                   </div>
+
+                                                 </div>
+                                                 <div class="row">
+                                                  <div class="post-footer-comment-wrapper">
+                                                    <div class="col-md-12 col-sm-12 col-lg-12">
+                                                       <div class="comment-form">
+                                                           
+                                                       </div>
+                                                       <div class="comment">
+                                                            <div class="media">
+                                                              <div class="media-left">
+                                                                <a href="#">
+                                                                  <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                                                </a>
+                                                              </div>
+                                                              <div class="media-body">
+                                                                <a href="#" class="anchor-username"><h4 class="media-heading">{{ $useravailablepost['firstname'] }}</h4></a> 
+                                                                <a href="#" class="anchor-time">51 mins</a>
+                                                              </div>
+                                                            </div>
+                                                       </div>
+                                                   </div>
+                                                   </div>
+                                                 </div>
+                                               
+                                               </section>
+                                               
+                                                   
+                                            </div>
+                                        </div> 
+                        @endforeach
+                        <!--end of available post show-->
                      </div>
 
                        
@@ -213,6 +292,12 @@
      </div>
     </div>
   
+  <!--  <script>
+        $(function() {
+            $('input[type=file]').simpleFilePreview();
+        })
+        
+    </script>-->
 
 
 
