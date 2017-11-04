@@ -38,15 +38,17 @@ class AvailableForJobController extends Controller
      */
     public function store(Request $request)
     {
+        $file = time() . '.'.$request->file('attachment')->getClientOriginalName();
+        $destination = base_path() . '/public/uploads/attachment';
+        $request->file('attachment')->move($destination, $file);
+
         if(Auth::check()){
-            $availableforjob = AvailableForJob::create([
+                 $availableforjob = AvailableForJob::create([
                 'position' => $request->input('position'),
                 'profession' => $request->input('profession'),
-                'CV' => $request->input('CV'), 
+                'CV' => $file, 
                 'highlight' => $request->input('highlight'),
                 'location' => $request->input('location'),
-                
-
                 'user_id' => Auth::user()->id,
             ]);
 

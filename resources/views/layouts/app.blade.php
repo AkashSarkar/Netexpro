@@ -201,7 +201,7 @@
                     "Executive"  
                  );
                ?>
-                  <form class="form-horizontal"  method="post" action="{{ route('availableforjob.store') }}">
+                  <form class="form-horizontal"  method="post" action="{{ route('availableforjob.store') }}" enctype="multipart/form-data">
                
                                 {{ csrf_field() }}
                         <input type="hidden" name="_method" value="post">
@@ -241,10 +241,9 @@
                         <!--cv start -->
                         <div class="form-group">
                               <label for="CV" class="col-md-4 control-label">CV <span class="required">*</span></label>
-                              
                               <div class="col-md-6">
-                                  <input placeholder="attach cv" id="cv" type="text" class="form-control" 
-                                  name="CV" value=""  autofocus  style="width:110px;">
+                                <input type="file" name="attachment" required>
+                                <h6>(Maximum 2MB)*</h6>
                               </div>
                         </div>
                         <!--cv end-->
