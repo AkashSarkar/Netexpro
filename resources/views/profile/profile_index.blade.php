@@ -68,7 +68,7 @@
                 </div>
                
               </div>
-                <!--profile pic change-->
+    <!--profile pic change-->
     <button id="Updateprofile" type="button" class="btn btn-default btn-sm" style="margin-left:-150px; margin-top:20px; opacity: .5;" onclick="showForm1()">
           <i class="fa fa-upload" aria-hidden="true">Change Profile Photo</i>
         </button>

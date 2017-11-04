@@ -35,7 +35,8 @@ class ProfileController extends Controller
             public function update_avatar(Request $request){
         
                // Logic for user upload of avatar
-               if($request->hasFile('cover')){
+               if($request->hasFile('cover'))
+               {
                    $cover = $request->file('cover');
                    $filename = time() . '.' . $cover->getClientOriginalExtension();
                    Image::make($cover)->save( public_path('/uploads/cover/' . $filename ) );
@@ -43,9 +44,11 @@ class ProfileController extends Controller
                    $user = Auth::user();
                    $user->cover_pic = $filename;
                    $user->save();
+                   return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Cover Picture Updated Successfully');
                }
 
-               if($request->hasFile('profile')){
+               else if($request->hasFile('profile'))
+               {
                 $profile = $request->file('profile');
                 $filename = time() . '.' . $profile->getClientOriginalExtension();
                 Image::make($profile)->resize(400,400)->save( public_path('/uploads/profile/' . $filename ) );
@@ -53,8 +56,12 @@ class ProfileController extends Controller
                 $user = Auth::user();
                 $user->p_pic = $filename;
                 $user->save();
-            }
-               return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
+                return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
+               }
+               else{
+                return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('errors','Something went wrong,please try again');
+               }
+               
         
            }
 
