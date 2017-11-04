@@ -36,9 +36,9 @@ class ProfileController extends Controller
         
                // Logic for user upload of avatar
                if($request->hasFile('cover')){
-                   $avatar = $request->file('cover');
-                   $filename = time() . '.' . $avatar->getClientOriginalExtension();
-                   Image::make($avatar)->save( public_path('/uploads/cover/' . $filename ) );
+                   $cover = $request->file('cover');
+                   $filename = time() . '.' . $cover->getClientOriginalExtension();
+                   Image::make($cover)->save( public_path('/uploads/cover/' . $filename ) );
         
                    $user = Auth::user();
                    $user->cover_pic = $filename;
@@ -46,9 +46,9 @@ class ProfileController extends Controller
                }
 
                if($request->hasFile('profile')){
-                $avatar1 = $request->file('profile');
-                $filename = time() . '.' . $avatar1->getClientOriginalExtension();
-                Image::make($avatar1)->save( public_path('/uploads/profile/' . $filename ) );
+                $profile = $request->file('profile');
+                $filename = time() . '.' . $profile->getClientOriginalExtension();
+                Image::make($profile)->resize(400,400)->save( public_path('/uploads/profile/' . $filename ) );
      
                 $user = Auth::user();
                 $user->p_pic = $filename;
