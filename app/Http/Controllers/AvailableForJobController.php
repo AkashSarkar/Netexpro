@@ -42,7 +42,7 @@ class AvailableForJobController extends Controller
         $destination = base_path() . '/public/uploads/attachment';
         $request->file('attachment')->move($destination, $file);
 
-        if(Auth::check()){
+               if(Auth::check()){
                  $availableforjob = AvailableForJob::create([
                 'position' => $request->input('position'),
                 'profession' => $request->input('profession'),
@@ -55,7 +55,7 @@ class AvailableForJobController extends Controller
 
             if($availableforjob){
                 return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
-                ->with('success' , 'successfully');
+                ->with('success' , 'job posted successfully');
             }
 
         }
