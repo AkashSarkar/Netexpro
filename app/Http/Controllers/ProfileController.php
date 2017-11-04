@@ -35,23 +35,23 @@ class ProfileController extends Controller
             public function update_avatar(Request $request){
         
                // Logic for user upload of avatar
-               if($request->hasFile('avatar')){
-                   $avatar = $request->file('avatar');
+               if($request->hasFile('cover')){
+                   $avatar = $request->file('cover');
                    $filename = time() . '.' . $avatar->getClientOriginalExtension();
-                   Image::make($avatar)->resize(150, 150)->save( public_path('/uploads/avatars/' . $filename ) );
+                   Image::make($avatar)->save( public_path('/uploads/cover/' . $filename ) );
         
                    $user = Auth::user();
-                   $user->avatar = $filename;
+                   $user->cover_pic = $filename;
                    $user->save();
                }
 
-               if($request->hasFile('avatar1')){
-                $avatar1 = $request->file('avatar1');
+               if($request->hasFile('profile')){
+                $avatar1 = $request->file('profile');
                 $filename = time() . '.' . $avatar1->getClientOriginalExtension();
-                Image::make($avatar1)->resize(150, 150)->save( public_path('/uploads/avatars1/' . $filename ) );
+                Image::make($avatar1)->save( public_path('/uploads/profile/' . $filename ) );
      
                 $user = Auth::user();
-                $user->avatar1 = $filename;
+                $user->p_pic = $filename;
                 $user->save();
             }
                return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');

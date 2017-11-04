@@ -5,14 +5,14 @@
 
     <div class="fb-profile">
        <div>
-        <img align="left" class="fb-image-lg" src="/uploads/avatars/{{ $user->avatar }}" alt="Profile image example" style="height:400px;width:100%;"/>
+        <img align="left" class="fb-image-lg" src="/uploads/cover/{{ $user->cover_pic }}" alt="Profile image example" style="height:400px;width:100%;"/>
         <button id="Updateimage" type="button" class="btn btn-default btn-sm pull-right" style="margin-top:-40px; opacity: .5;" onclick="showForm()">
         <i class="fa fa-upload" aria-hidden="true">Change Cover Photo</i>
         </button>
         <div id="theform" class="pull-right" style="margin-top:-60px;opacity: 50;">
          <form enctype="multipart/form-data" action="/profile" method="POST">
               <!--  <label>Update Profile Image</label>-->
-                <input type="file" name="avatar" style="
+                <input type="file" name="cover" style="
                 .custom-file-input::-webkit-file-upload-button {
                     visibility: hidden;
                     }
@@ -48,7 +48,7 @@
        </div>
 
        <!--End of Cover image-->
-          <img align="left" class="fb-image-profile thumbnail" src="/uploads/avatars1/{{ $user->avatar1 }}" alt="Profile image example"/>
+          <img align="left" class="fb-image-profile thumbnail" src="/uploads/profile/{{ $user->p_pic }}" alt="Profile image example"/>
         <!--End of Profile Pic-->
         <div class="fb-profile-text">
             <h1>{{ $user->firstname }} </h1>
@@ -75,7 +75,7 @@
           <div id="theform1">
             <form enctype="multipart/form-data" action="/profile" method="POST">
                 <label>Update Profile</label>
-                <input type="file" name="avatar1">
+                <input type="file" name="profile">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="submit">
               </form>

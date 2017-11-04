@@ -33,8 +33,8 @@ class CreateUsersTable extends Migration
             $table->integer('post_rated')->unsigned()->nullable();
             $table->integer('total_tagged_in')->unsigned()->nullable();
             //image
-            $table->string('avatar')->default('user.jpg');
-            $table->string('avatar1')->default('user.jpg');
+            $table->string('cover_pic')->default('user.jpg');
+            $table->string('p_pic')->default('user.jpg');
             
             $table->rememberToken();
             $table->timestamps();
