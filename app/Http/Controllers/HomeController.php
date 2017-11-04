@@ -41,7 +41,8 @@ class HomeController extends Controller
 
                           })
                      ->get();
-              $userpost=json_decode($userpost,true);
+                     
+            $userpost=json_decode($userpost,true);
             
 
         //passing values to view
