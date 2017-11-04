@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
+use App\Visibility;
 
 class PostController extends Controller
 {
@@ -37,12 +38,23 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-
+    
+       $id=time();
        
         if(Auth::check()){
+            $request->validate([
+                "type"=> 'required'
+            ]);
             $post = Post::create([
+                'post_id'=>$id,
                 'description' => $request->input('description'),
                 'user_id'=>Auth::user()->id
+            ]);
+           
+            $visibility=Visibility::create([
+                
+               'visibilities_type'=>json_encode($request->input('type')),
+                'post_id'=>$id
             ]);
             
           if($post)

@@ -15,7 +15,9 @@ class Post extends Model
         'location',
         'ratting',
         'post_tags',
+        'post_id',
         'user_id',
+        
 
     ];
 
