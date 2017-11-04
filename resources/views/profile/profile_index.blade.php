@@ -11,6 +11,7 @@
         </button>
         <div id="theform" class="pull-right" style="margin-top:-60px;opacity: 50;">
          <form enctype="multipart/form-data" action="/profile" method="POST">
+               {{csrf_field()}}
               <!--  <label>Update Profile Image</label>-->
                 <input type="file" name="cover" style="
                 .custom-file-input::-webkit-file-upload-button {
@@ -74,6 +75,7 @@
         </button>
           <div id="theform1">
             <form enctype="multipart/form-data" action="/profile" method="POST">
+                {{csrf_field()}}
                 <label>Update Profile</label>
                 <input type="file" name="profile">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
