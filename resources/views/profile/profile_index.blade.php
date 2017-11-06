@@ -69,7 +69,7 @@
                 </div>
                
               </div>
-    <!--profile pic change-->
+    <!--profile pic change start-->
     <button id="Updateprofile" type="button" class="btn btn-default btn-sm" style="margin-left:-150px; margin-top:20px; opacity: .5;" onclick="showForm1()">
           <i class="fa fa-upload" aria-hidden="true">Change Profile Photo</i>
         </button>
@@ -84,70 +84,67 @@
         </div>
         <!--End of profile pic change-->
             </div>
-
-
-            
     </div>
 
 
 
      <div class="container">
+
+      <!-- Start of first row. First row contains user personal info in left and write post on right -->
           <div class="row" style="padding-top: 30px;">
-           
+           <!-- User personal information start -->
                <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #f2f2f2;"><a><i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#personalInfoModal" style="margin-top: 10px;" aria-hidden="true" ></i></a>
                   
-                  </br>
-                  <p>Education: {{ $user->education }} </p>
-                  <p>Email: {{ $user->email }} </p>
-                  <p>Phone: {{ $user->phone_no }} </p>
-                  <p>Sex: {{ $user->gender }} </p>
-                  <p>Birth date: {{ $user->dob }} </p>
-                  <p>Location: {{ $user->location }} </p>
-                  <p>Availability: {{ $user->available_for_job }} </p>
-                
+                         </br>
+                            <p>Education:<strong> {{ $user->education }} </strong></p>
+                            <p>Email: <strong> {{ $user->email }} </strong> </p>
+                            <p>Phone: <strong> {{ $user->phone_no }} </strong> </p>
+                            <p>Sex:<strong>  {{ $user->gender }} </strong> </p>
+                            <p>Birth date: <strong> {{ $user->dob }} </strong> </p>
+                            <p>Location: <strong> {{ $user->location }} </strong> </p>
+                            <p>Availability: <strong> {{ $user->available_for_job }} </strong> </p>
+                         </br>  
                </div>
                
                  
-      <!--Modal for user personal information-->
-        <div class="modal fade" id="personalInfoModal" role="dialog" style="margin-top:12%; margin-left: -30%;">
-          <div class="modal-dialog" style="width: 400px">
-          
-            <!-- Modal content-->
-            <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h3>Personal Information</h3>
-                  </div>
-                  
-                 
-                  <div class="modal-body" >
-                    
-                        <li>Education:<strong> {{ $user->education }} </strong></li>
-                        <li>Email: <strong> {{ $user->email }} </strong> </li>
-                        <li>Phone: <strong> {{ $user->phone_no }} </strong> </li>
-                        <li>Sex:<strong>  {{ $user->gender }} </strong> </li>
-                        <li>Birth date: <strong> {{ $user->dob }} </strong> </li>
-                        <li>Location: <strong> {{ $user->location }} </strong> </li>
-                        <li>Availability: <strong> {{ $user->available_for_job }} </strong> </li>
-                
-                  </div>
-
-
-                   <div class="modal-footer">
-                      <button type="button" class="btn btn-azure pull-right" data-dismiss="modal">Close</button>
+          <!--Modal for user personal information start-->
+            <div class="modal fade" id="personalInfoModal" role="dialog" style="margin-top:12%; margin-left: -30%;">
+              <div class="modal-dialog" style="width: 400px">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3>Personal Information</h3>
+                      </div>
                       
-                      <ul class="nav nav-pills pull-left">
-                         <a href="/profile/{{$user->id}}/edit">Update personal Information  <span><i class="fa fa-pencil"></i></a></span>
-                      </ul>
-                   </div>
+                      <div class="modal-body" >
+                        
+                            <li>Education:<strong> {{ $user->education }} </strong></li>
+                            <li>Email: <strong> {{ $user->email }} </strong> </li>
+                            <li>Phone: <strong> {{ $user->phone_no }} </strong> </li>
+                            <li>Sex:<strong>  {{ $user->gender }} </strong> </li>
+                            <li>Birth date: <strong> {{ $user->dob }} </strong> </li>
+                            <li>Location: <strong> {{ $user->location }} </strong> </li>
+                            <li>Availability: <strong> {{ $user->available_for_job }} </strong> </li>
+                      </div>
+
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-azure pull-right" data-dismiss="modal">Close</button>
+                          <ul class="nav nav-pills pull-left">
+                             <a href="/profile/{{$user->id}}/edit">Update personal Information  <span><i class="fa fa-pencil"></i></a></span>
+                          </ul>
+                      </div>
+                </div>
+                
+              </div>
             </div>
-            
-          </div>
-        </div>
-        <!--end Modal for user personal information-->
-             
+            <!--end Modal for user personal information-->
+            <!-- User personal information end -->
 
 
+
+             <!--write post section start -->
              <div class="col-md-8 col-sm-12 col-lg-8 " >
             
                <div class="panel panel-default">
@@ -179,22 +176,55 @@
                        </div>
                     </div>
                 </div>
+                <!--Write post section end -->
+            </div>
+            <!-- end of first row. First row contains user personal info in left and write post on right -->
 
-          </div>
+              <!--Start of second row which contains professional information in left and posts show on right -->
+              <div class="row" style="margin-top:-10px;">
+                  
+                  <!--Professional information start -->
+                  <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #f2f2f2;"><a><i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#professionalInfoModal" style="margin-top: 10px;" aria-hidden="true" ></i></a>
+                       </br>
+                        <p>Profession: <strong> {{ $interest->profession }} </strong></p>
+                        <p>Industry: <strong> {{ $interest->industry }} </strong> </p>
+                        </br>
+                  </div>
 
-          <div class="row" style="margin-top:-10px;">
-           <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #f2f2f2;"><a href="/interests/{{$interest->id}}/edit"><i class="fa fa-pencil pull-right" style="margin-top: 10px;" aria-hidden="true" ></i></a>
-                 </br>
-                  <p>Profession: {{ $interest->profession }}</p>
-                   
-                  <p>Industry: {{ $interest->industry }} </p>
-           </div>
+            <!--Professional information modal start -->
+            <div class="modal fade" id="professionalInfoModal" role="dialog" style="margin-top:12%; margin-left: -30%;">
+              <div class="modal-dialog" style="width: 400px">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3>Professional Information</h3>
+                      </div>
+                      
+                      <div class="modal-body" >
+                        
+                            <li>Profession: <strong> {{ $interest->profession }} </strong></li>
+                            <li>Industry: <strong> {{ $interest->industry }} </strong> </li>
+                            
+                      </div>
 
-
-
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-azure pull-right" data-dismiss="modal">Close</button>
+                          <ul class="nav nav-pills pull-left">
+                             <a href="/interests/{{$interest->id}}/edit">Update professional Information  <span><i class="fa fa-pencil"></i></a></span>
+                          </ul>
+                      </div>
+                </div>
                 
-    <div  class="col-md-8 col-sm-12 col-lg-8 " >
-             @foreach($posts as $post)
+              </div>
+            </div>
+            <!--Professional information modal end -->
+              <!--Professional information end -->
+
+              <!-- General post show start --> 
+              <div  class="col-md-8 col-sm-12 col-lg-8 " >
+              @foreach($posts as $post)
                                     <div class="panel panel-default">
                                             <div class="panel-body">
                                                <section class="post-heading">
@@ -262,28 +292,174 @@
                                             </div>
                                         </div> 
                         @endforeach
+                  
+                   <!-- General post show end --> 
 
+                    <!--availablepostshow-->
+                     
+                        @foreach($useravailablepost as $useravailablepost)
+                                <div class="panel panel-default">
+                                        <div class="panel-body">
+                                           <section class="post-heading">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="media">
+                                                          <div class="media-left">
+                                                            <a href="#">
+                                                              <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                                            </a>
+                                                          </div>
+                                                          <div class="media-body">
+                                                                <a href="#"><i class="glyphicon glyphicon-chevron-down pull-right"></i></a>
+                                                    
+                                                                <a href="#" class="anchor-username"><h4 class="media-heading"> {{ $user->firstname }}</h4></a>
+                                                   
+                                                            <a href="#" class="anchor-time">{{ $useravailablepost->created_at }}</a>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                     
+                                                </div>             
+                                           </section>
 
-</div>
+                                         <section class="post-body" style="background-color: #ded5e0; border-radius: 10px; border-style: inset; padding: 10px">
+                                             <h4 style="font-weight:bold;">******job seeking post******</h4>
+                                          <p><li>Position : <strong>{{ $useravailablepost->position }}</strong></li></p>
+                                          <p><li>Profession : <strong>{{ $useravailablepost->profession }}</strong></li></p>
+                                          <p><li>Preferred Job Location : <strong>{{ $useravailablepost->location }}</strong></li></p>
+                                          <p><li>Highlights(Any specified course/skills) : <strong>{{ $useravailablepost->highlight }}</strong></li></p>
+                                          <li> <a target="_blank" href="/uploads/attachment/{{$useravailablepost['CV']}}">   
+                                          Download CV from here..</a></li>
+                                          </section>
+                                         
+                                           <section class="post-footer">
+                                               <div class="row">
+                                               <div class="col-md-12">
+                                                    <ul class="list-unstyled">
+                                                        <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
+                                                        <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
+                                                        <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
+                                                    </ul>
+                                               </div>
 
+                                             </div>
+                                             <div class="row">
+                                              <div class="post-footer-comment-wrapper">
+                                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                                   <div class="comment-form">
+                                                       
+                                                   </div>
+                                                   <div class="comment">
+                                                        <div class="media">
+                                                          <div class="media-left">
+                                                            <a href="#">
+                                                              <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                                            </a>
+                                                          </div>
+                                                          <div class="media-body">
+                                                            <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a> 
+                                                            <a href="#" class="anchor-time">51 mins</a>
+                                                          </div>
+                                                        </div>
+                                                   </div>
+                                               </div>
+                                               </div>
+                                             </div>
+                                           
+                                           </section>
+                                           
+                                               
+                                        </div>
+                                    </div> 
+                    @endforeach
+                    <!--end of available post show-->
 
+                   <!--Job hiring post show start -->
+                    @foreach($jobpost as $jobpost)
+                                    <div class="panel panel-default">
+                                            <div class="panel-body">
+                                               <section class="post-heading">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="media">
+                                                              <div class="media-left">
+                                                                <a href="#">
+                                                                  <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                                                </a>
+                                                              </div>
+                                                              <div class="media-body">
+                                                                    <a href="#"><i class="glyphicon glyphicon-chevron-down pull-right"></i></a>
+                                                        
+                                                                    <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a>
+                                                       
+                                                                <a href="#" class="anchor-time">{{ $jobpost->created_at }}</a>
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                         
+                                                    </div>             
+                                               </section>
+                                               <section class="post-body" style="background-color: #d4fcbd; border-radius: 10px; border-style: outset; padding: 10px">
+                                                <h4 style="font-weight:bold;">******Hiring post******</h4>
+                                                <p><li>Position : <strong>{{ $jobpost->position }}</strong></li></p>
+                                                <p><li>Profession : <strong>{{ $jobpost->profession }}</strong></li></p>
+                                                <p><li>No. of Vacancy : <strong>{{ $jobpost->vacancy_number }}</strong></li></p>
+                                                <p><li>Job Circular: <strong>{{ $jobpost->circular }}</strong></li></p>
+                                                <p><li>Company Details: <strong>{{ $jobpost->company_details }}</strong></li></p>
+                                                <p><li>Job Responsibilities: <strong>{{ $jobpost->job_details }}</strong></li></p>
+                                                <p><li>Job Location : <strong>{{ $jobpost->location }}</strong></li></p>
 
+                                               </section>
+                                             
+                                               <section class="post-footer">
+                                                   <div class="row">
+                                                   <div class="col-md-12">
+                                                        <ul class="list-unstyled">
+                                                            <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
+                                                            <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
+                                                            <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
+                                                        </ul>
+                                                   </div>
 
-
-
-
-
-
-
-
-
-            </div>
+                                                 </div>
+                                                 <div class="row">
+                                                  <div class="post-footer-comment-wrapper">
+                                                    <div class="col-md-12 col-sm-12 col-lg-12">
+                                                       <div class="comment-form">
+                                                           
+                                                       </div>
+                                                       <div class="comment">
+                                                            <div class="media">
+                                                              <div class="media-left">
+                                                                <a href="#">
+                                                                  <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                                                </a>
+                                                              </div>
+                                                              <div class="media-body">
+                                                                <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a> 
+                                                                <a href="#" class="anchor-time">51 mins</a>
+                                                              </div>
+                                                            </div>
+                                                       </div>
+                                                   </div>
+                                                   </div>
+                                                 </div>
+                                               
+                                               </section>
+                                               
+                                                   
+                                            </div>
+                                        </div> 
+                        @endforeach
+                   <!--Job hiring post show end -->
+                 </div>  
+          </div>
       </div>
 
 
 
 
-      <!--Modal for post area start-->
+      <!--Modal for post area start start-->
         <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
           

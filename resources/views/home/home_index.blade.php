@@ -60,7 +60,7 @@
                             </div>
                         </div>
                          <!--postshow-->
-                         @if($posts!=null)
+                        @if($posts!=null)
                         @foreach($posts as $userpost)
                                     <div class="panel panel-default">
                                             <div class="panel-body">
@@ -158,7 +158,7 @@
                                                      
                                                 </div>             
                                            </section>
-                                           <section class="post-body" style="background-color: #b7e4ff; border-radius: 10px; border-style: inset; padding: 10px">
+                                           <section class="post-body" style="background-color: #ded5e0; border-radius: 10px; border-style: inset; padding: 10px">
                                                <h4 style="font-weight:bold;">******job seeking post******</h4>
                                             <p><li>Position : <strong>{{ $useravailablepost['position'] }}</strong></li></p>
                                             <p><li>Profession : <strong>{{ $useravailablepost['profession'] }}</strong></li></p>
