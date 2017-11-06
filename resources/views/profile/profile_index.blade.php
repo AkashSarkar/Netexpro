@@ -481,7 +481,7 @@
                   <input type="hidden" name="_method" value="post">
                   <div class="modal-body">
                   <div class="form-group">
-                    <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description"></textarea>
+                    <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description" autofocus style="resize: none;"></textarea>
                   </div>
                   </div>
 

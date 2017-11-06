@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <textarea class="form-control  p-text-area" rows="2" placeholder="Write something" style="resize: none;" disabled ></textarea>
+                                <textarea class="form-control  p-text-area" rows="2" placeholder="Write something" style="resize: none;"></textarea>
                             </div>
                             <div class="panel-heading">
                                 <div class="btn-group btn-group-md">
@@ -313,7 +313,7 @@
                   <div class="modal-body">
                     <div class="form-group">
                     <textarea id="textareaID1" class="form-control input-lg p-text-area" rows="2" 
-                    placeholder="Write something" name="description" style="resize: none;" autofocus required></textarea>
+                    placeholder="Write something" name="description" style="resize: none;" autofocus ></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
