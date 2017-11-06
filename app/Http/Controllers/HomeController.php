@@ -64,6 +64,7 @@ class HomeController extends Controller
             ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
             ->get();
             $userpost=json_decode($userpost,true); 
+            
             $interest=Interest::find(Auth::user()->id);
             //dd($userpost);
            // $visibility_type=$userpost[7]['visibilities_type'];
@@ -92,6 +93,10 @@ class HomeController extends Controller
                         $post[$j]=$userpost[$i];
                         $j++;    
                     }
+
+
+                    if($j>0)
+                    break;
                 }
                 
                
