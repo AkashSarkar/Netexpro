@@ -1,0 +1,18 @@
+DATABASE Related:
+
+1.create a migration table in database->migration folder
+     php artisan make:migration create_tableNameInPlural_table
+
+2.The models are inside the app folder
+
+to create a model write this command: php artisan make:model tablenameinsingular -m
+
+   ->inside the models we declare the fields we want to fill in the database
+   ->inside each models we create functions for making 1to1,1toMany and manyToMany relation
+
+3.Update:
+
+->go to the controller to write query for what to update
+->route it to the show page checking if the update is successful with a sucess message
+->re
+    

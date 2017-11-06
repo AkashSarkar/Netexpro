@@ -54,7 +54,7 @@ class JobpostController extends Controller
 
             if($jobpost){
                 return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
-                ->with('success' , 'successfully');
+                ->with('success' , 'Successfully posted for hiring');
             }
 
         }
@@ -71,7 +71,20 @@ class JobpostController extends Controller
     public function show(jobpost $jobpost)
     {
         //
+        if( Auth::check() )
+         {
+            //dump is used to see the id of the authenticated user that is currently logged in
+           // dump(Auth::user()->id);
+        //basically we are saying here is find the company where the user who created it is the same user currently logged in 
+        //use get() to get the companies of that specific id 
+            
+           // $post = Post::where('user_id', Auth::user()->id)->get();
+           
+        
+       
+        }
     }
+ 
 
     /**
      * Show the form for editing the specified resource.
