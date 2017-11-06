@@ -51,10 +51,11 @@ class HomeController extends Controller
               
               //$post = Post::where('user_id', Auth::user()->id)->get();
               $useravailablepost= DB::table('users')
-            ->join('available_for_jobs', 'users.id', '=', 'available_for_jobs.user_id')
-            ->get();
+              ->join('available_for_jobs', 'users.id', '=', 'available_for_jobs.user_id')
+              ->orderBy('available_for_jobs.created_at','desc')
+              ->get();
 
-            $useravailablepost=json_decode($useravailablepost,true);
+              $useravailablepost=json_decode($useravailablepost,true);
 
               $jobpost=DB::table('users')
                          ->join('jobposts', function ($join) {
@@ -70,6 +71,7 @@ class HomeController extends Controller
             ->join('interests', 'users.id', '=', 'interests.user_id')
             ->join('posts', 'users.id', '=', 'posts.user_id')
             ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
+            ->orderBy('posts.created_at','desc')
             ->get();
             $userpost=json_decode($userpost,true); 
             

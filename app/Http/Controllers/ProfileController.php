@@ -26,7 +26,9 @@ class ProfileController extends Controller
        // $user = User::where('id', Auth::user()->id)->first();
 
       $user= User::find(Auth::user()->id);
-      $post = Post::where('user_id', Auth::user()->id)->get();
+      $post = Post::where('user_id', Auth::user()->id)
+      ->orderBy('created_at','desc')
+      ->get();
       // $interest = I::where('id', Auth::user()->id)->first();
       $interest= Interest::find(Auth::user()->id);
       return view('profile.profile_index',['user'=>$user, 'interest'=>$interest, 'posts'=>$post]);
