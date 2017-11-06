@@ -10,7 +10,7 @@
         <i class="fa fa-upload" aria-hidden="true">Change Cover Photo</i>
         </button>
         <div id="theform" class="pull-right" style="margin-top:-60px;opacity: 50;">
-         <form enctype="multipart/form-data" action="/profile" method="POST">
+         <form enctype="multipart/form-data" action="{{ route('profile.store') }}" method="POST">
                {{csrf_field()}}
               <!--  <label>Update Profile Image</label>-->
                 <input type="file" name="cover" style="
@@ -74,7 +74,7 @@
           <i class="fa fa-upload" aria-hidden="true">Change Profile Photo</i>
         </button>
           <div id="theform1">
-            <form enctype="multipart/form-data" action="/profile" method="POST">
+            <form enctype="multipart/form-data" action="{{ route('profile.store') }}" method="POST">
                 {{csrf_field()}}
                 <label>Update Profile</label>
                 <input type="file" name="profile">
@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" style="resize: none;"></textarea>     
+                        <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" data-toggle="modal" data-target="#myModal" style="resize: none;"></textarea>     
                     </div>
                     
                     <div class="panel-heading">
@@ -189,6 +189,94 @@
                    
                   <p>Industry: {{ $interest->industry }} </p>
            </div>
+
+
+
+                
+    <div  class="col-md-8 col-sm-12 col-lg-8 " >
+             @foreach($posts as $post)
+                                    <div class="panel panel-default">
+                                            <div class="panel-body">
+                                               <section class="post-heading">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="media">
+                                                              <div class="media-left">
+                                                                <a href="#">
+                                                                  <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                                                </a>
+                                                              </div>
+                                                              <div class="media-body">
+                                                                    <a href="#"><i class="glyphicon glyphicon-chevron-down pull-right"></i></a>
+                                                        
+                                                                    <a href="#" class="anchor-username"><h4 class="media-heading"> {{ $user->firstname }}</h4></a>
+                                                       
+                                                                <a href="#" class="anchor-time">{{ $post->created_at }}</a>
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                         
+                                                    </div>             
+                                               </section>
+                                               <section class="post-body" style="background-color: #f2f4f7; border-radius: 10px;  padding: 10px">
+                                                   <p>{{ $post->description }}<hr></p>
+                                               </section>
+                                             
+                                               <section class="post-footer">
+                                                   <div class="row">
+                                                   <div class="col-md-12">
+                                                        <ul class="list-unstyled">
+                                                            <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
+                                                            <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
+                                                            <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
+                                                        </ul>
+                                                   </div>
+
+                                                 </div>
+                                                 <div class="row">
+                                                  <div class="post-footer-comment-wrapper">
+                                                    <div class="col-md-12 col-sm-12 col-lg-12">
+                                                       <div class="comment-form">
+                                                           
+                                                       </div>
+                                                       <div class="comment">
+                                                            <div class="media">
+                                                              <div class="media-left">
+                                                                <a href="#">
+                                                                  <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                                                </a>
+                                                              </div>
+                                                              <div class="media-body">
+                                                                <a href="#" class="anchor-username"><h4 class="media-heading">{{ $user->firstname }}</h4></a> 
+                                                                <a href="#" class="anchor-time"></a>
+                                                              </div>
+                                                            </div>
+                                                       </div>
+                                                   </div>
+                                                   </div>
+                                                 </div>
+                                               
+                                               </section>
+                                               
+                                                   
+                                            </div>
+                                        </div> 
+                        @endforeach
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
       </div>
 
@@ -212,20 +300,82 @@
                       </div>
                   </div>
 
+                  <form  method="post" action="{{ route('profile.store')  }}">
+                        {{ csrf_field() }}
+                  <input type="hidden" name="_method" value="post">
                   <div class="modal-body">
-                    <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something"></textarea>
+                  <div class="form-group">
+                    <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description"></textarea>
+                  </div>
                   </div>
 
                   <div class="modal-footer">
-                   
-                      <button type="button" class="btn btn-azure pull-right">Post</button>
+                      
+                       <div class="form-group">
+                           
+                                <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle pull-right" type="button" data-toggle="dropdown" 
+                                        style="margin-left:10px;" >Visibility
+                                        <span class="caret"></span></button>
+                                        
+                                            <ul class="dropdown-menu pull-right" style="padding-left:10px ;" required>
+                                            
+                                                
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" name="type[]" value="{{$interest->profession}}">
+                                                         {{$interest->profession}}</label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" name="type[]" value="{{$interest->industry}}">
+                                                        {{$interest->industry}}</label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" name="type[]" value="{{$user->education}}"> 
+                                                        {{$user->education}}</label>
+                                                    </div>
+                                                   
+                                                
+
+                                            </ul>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary pull-right">submit</button>
+                            
+                        </div>
+                
                       <ul class="nav nav-pills pull-left">
-                          <li><a href="#"><i class="fa fa-map-marker"></i></a>Check-in</li>
-                          <li><a href="#"><i class="fa fa-camera"></i></a>Image</li>
-                          <li><a href="#"><i class=" fa fa-files-o"></i></a>Files</li>
-                          <li><a href="#"><i class="fa fa-microphone"></i></a>Voice</li>
+                          <li id="tooltip">
+                             <a href="#">
+                               <i class="fa fa-map-marker" >
+                                 <span id="tooltiptext">Check-in</span>
+                               </i>
+                             </a>
+                          </li>
+                          <li id="tooltip">
+                             <a href="#">
+                               <i class="fa fa-camera" >
+                                 <span id="tooltiptext">Upload image</span>
+                               </i>
+                             </a>
+                          </li>
+                          <li id="tooltip">
+                             <a href="#">
+                               <i class="fa fa-film" >
+                                 <span id="tooltiptext">Upload video</span>
+                               </i>
+                             </a>
+                          </li>
+                          <li id="tooltip">
+                             <a href="#">
+                               <i class="fa fa-microphone" >
+                                 <span id="tooltiptext">Record voice</span>
+                               </i>
+                             </a>
+                          </li>    
                       </ul>
-                   </div>
+                  </div>
+
+                   </form>
             </div>
             
           </div>

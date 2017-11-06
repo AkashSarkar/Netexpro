@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Post;
+use App\Visibility;
 use App\Interest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,10 +26,10 @@ class ProfileController extends Controller
        // $user = User::where('id', Auth::user()->id)->first();
 
       $user= User::find(Auth::user()->id);
-
+      $post = Post::where('user_id', Auth::user()->id)->get();
       // $interest = I::where('id', Auth::user()->id)->first();
-       $interest= Interest::find(Auth::user()->id);
-       return view('profile.profile_index',['user'=>$user, 'interest'=>$interest]);
+      $interest= Interest::find(Auth::user()->id);
+      return view('profile.profile_index',['user'=>$user, 'interest'=>$interest, 'posts'=>$post]);
           
       
     }
@@ -35,32 +37,7 @@ class ProfileController extends Controller
             public function update_avatar(Request $request){
         
                // Logic for user upload of avatar
-               if($request->hasFile('cover'))
-               {
-                   $cover = $request->file('cover');
-                   $filename = time() . '.' . $cover->getClientOriginalExtension();
-                   Image::make($cover)->save( public_path('/uploads/cover/' . $filename ) );
-        
-                   $user = Auth::user();
-                   $user->cover_pic = $filename;
-                   $user->save();
-                   return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Cover Picture Updated Successfully');
-               }
-
-               else if($request->hasFile('profile'))
-               {
-                $profile = $request->file('profile');
-                $filename = time() . '.' . $profile->getClientOriginalExtension();
-                Image::make($profile)->resize(400,400)->save( public_path('/uploads/profile/' . $filename ) );
-     
-                $user = Auth::user();
-                $user->p_pic = $filename;
-                $user->save();
-                return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
-               }
-               else{
-                return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('errors','Something went wrong,please try again');
-               }
+            
                
         
            }
@@ -85,6 +62,65 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         //
+         $check=0;
+
+         if($request->hasFile('cover'))
+               {
+                   $cover = $request->file('cover');
+                   $filename = time() . '.' . $cover->getClientOriginalExtension();
+                   Image::make($cover)->save( public_path('/uploads/cover/' . $filename ) );
+        
+                   $user = Auth::user();
+                   $user->cover_pic = $filename;
+                   $user->save();
+                   $check=1;
+                   return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Cover Picture Updated Successfully');
+               }
+
+               else if($request->hasFile('profile'))
+               {
+                $profile = $request->file('profile');
+                $filename = time() . '.' . $profile->getClientOriginalExtension();
+                Image::make($profile)->resize(400,400)->save( public_path('/uploads/profile/' . $filename ) );
+     
+                $user = Auth::user();
+                $user->p_pic = $filename;
+                $user->save();
+                $check=1;
+                return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
+               }
+              // else{
+              //  return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('errors','Something went wrong,please try again');
+             //  }
+
+               if($check==0){
+
+                 $id=time();
+       
+        if(Auth::check()){
+            $request->validate([
+                "type"=> 'required'
+            ]);
+            $post = Post::create([
+                'post_id'=>$id,
+                'description' => $request->input('description'),
+                'user_id'=>Auth::user()->id
+            ]);
+           
+            $visibility=Visibility::create([
+                
+               'visibilities_type'=>json_encode($request->input('type')),
+                'post_id'=>$id
+            ]);
+            
+          if($post)
+               { return redirect()->route('profile.index', ['user_id'=> Auth::user()->id])
+                ->with('success' , 'Successfully Post');
+               }
+            
+        }
+        return back()->withInput();
+               }
     }
 
     /**
