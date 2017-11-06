@@ -28,9 +28,15 @@ class ProfileController extends Controller
        // $user = User::where('id', Auth::user()->id)->first();
 
       $user= User::find(Auth::user()->id);
+<<<<<<< HEAD
       $post = Post::where('user_id', Auth::user()->id)->get();
       $jobpost = jobpost::where('user_id', Auth::user()->id)->get();
       $useravailablepost = AvailableForJob::where('user_id', Auth::user()->id)->get();
+=======
+      $post = Post::where('user_id', Auth::user()->id)
+      ->orderBy('created_at','desc')
+      ->get();
+>>>>>>> edb755bb288ddf0e91a1ee4fa5b5fceb9db9aeda
       // $interest = I::where('id', Auth::user()->id)->first();
       $interest= Interest::find(Auth::user()->id);
       return view('profile.profile_index',['user'=>$user, 'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost ]);
