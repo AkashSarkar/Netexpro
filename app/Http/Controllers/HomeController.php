@@ -8,6 +8,7 @@ use App\User;
 use App\Post;
 use App\Visibility;
 use App\Interest;
+//use App\jobpost;
 class HomeController extends Controller
 {
     /**
@@ -54,6 +55,13 @@ class HomeController extends Controller
             ->get();
 
             $useravailablepost=json_decode($useravailablepost,true);
+
+              $jobpost=DB::table('users')
+                         ->join('jobposts', function ($join) {
+                          $join->on('users.id', '=', 'jobposts.user_id');
+                        })->get();
+            
+             $jobpost=json_decode($jobpost,true);
         //passing values to view
      // return view('home.home_index')->with('userpost',json_decode($userpost,true));
   //  return view('home.home_index',['userpost'=> $userpost,'useravailablepost'=>$useravailablepost]);
@@ -101,7 +109,7 @@ class HomeController extends Controller
             
         //passing values to view
      // return view('home.home_index')->with('userpost',json_decode($userpost,true));
-        return view('home.home_index',['user'=>$user ,'posts'=>$post,'interest'=>$interest,'useravailablepost'=>$useravailablepost]);
+        return view('home.home_index',['user'=>$user ,'posts'=>$post,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost]);
         }
         
 

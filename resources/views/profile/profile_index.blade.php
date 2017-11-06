@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something"></textarea>     
+                        <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" style="resize: none;"></textarea>     
                     </div>
                     
                     <div class="panel-heading">

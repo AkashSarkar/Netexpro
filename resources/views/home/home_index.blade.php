@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <textarea class="form-control  p-text-area" rows="2" placeholder="Write something" disabled></textarea>
+                                <textarea class="form-control  p-text-area" rows="2" placeholder="Write something" style="resize: none;" disabled ></textarea>
                             </div>
                             <div class="panel-heading">
                                 <div class="btn-group btn-group-md">
@@ -158,7 +158,7 @@
                                                          
                                                     </div>             
                                                </section>
-                                               <section class="post-body">
+                                               <section class="post-body" style="background-color: #b7e4ff;">
                                                    <h4 style="font-weight:bold;">******job seeking post******</h4>
                                                 <p><li>Position : <strong>{{ $useravailablepost['position'] }}</strong></li></p>
                                                 <p><li>Profession : <strong>{{ $useravailablepost['profession'] }}</strong></li></p>
@@ -210,6 +210,90 @@
                                         </div> 
                         @endforeach
                         <!--end of available post show-->
+
+
+                        <!--job hiring post show-->
+                         
+                            @foreach($jobpost as $jobpost)
+                                    <div class="panel panel-default">
+                                            <div class="panel-body">
+                                               <section class="post-heading">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="media">
+                                                              <div class="media-left">
+                                                                <a href="#">
+                                                                  <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                                                </a>
+                                                              </div>
+                                                              <div class="media-body">
+                                                                    <a href="#"><i class="glyphicon glyphicon-chevron-down pull-right"></i></a>
+                                                        
+                                                                    <a href="#" class="anchor-username"><h4 class="media-heading"> {{$jobpost['firstname']}}</h4></a>
+                                                       
+                                                                <a href="#" class="anchor-time">{{ $jobpost['created_at'] }}</a>
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                         
+                                                    </div>             
+                                               </section>
+                                               <section class="post-body" style="background-color: #d4fcbd;">
+                                                   <h4 style="font-weight:bold;">******Hiring post******</h4>
+                                                <p><li>Position : <strong>{{ $jobpost['position'] }}</strong></li></p>
+                                                <p><li>Profession : <strong>{{ $jobpost['profession'] }}</strong></li></p>
+                                                <p><li>No. of Vacancy : <strong>{{ $jobpost['vacancy_number'] }}</strong></li></p>
+                                                <p><li>Job Circular: <strong>{{ $jobpost['circular'] }}</strong></li></p>
+                                                <p><li>Company Details: <strong>{{ $jobpost['company_details'] }}</strong></li></p>
+                                                <p><li>Job Responsibilities: <strong>{{ $jobpost['job_details'] }}</strong></li></p>
+                                                <p><li>Job Location : <strong>{{ $jobpost['location'] }}</strong></li></p>
+
+                                               </section>
+                                             
+                                               <section class="post-footer">
+                                                   <div class="row">
+                                                   <div class="col-md-12">
+                                                        <ul class="list-unstyled">
+                                                            <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
+                                                            <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
+                                                            <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
+                                                        </ul>
+                                                   </div>
+
+                                                 </div>
+                                                 <div class="row">
+                                                  <div class="post-footer-comment-wrapper">
+                                                    <div class="col-md-12 col-sm-12 col-lg-12">
+                                                       <div class="comment-form">
+                                                           
+                                                       </div>
+                                                       <div class="comment">
+                                                            <div class="media">
+                                                              <div class="media-left">
+                                                                <a href="#">
+                                                                  <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                                                </a>
+                                                              </div>
+                                                              <div class="media-body">
+                                                                <a href="#" class="anchor-username"><h4 class="media-heading">{{ $jobpost['firstname'] }}</h4></a> 
+                                                                <a href="#" class="anchor-time">51 mins</a>
+                                                              </div>
+                                                            </div>
+                                                       </div>
+                                                   </div>
+                                                   </div>
+                                                 </div>
+                                               
+                                               </section>
+                                               
+                                                   
+                                            </div>
+                                        </div> 
+                        @endforeach
+                        <!--end of job hiring post show-->
+
+
+
                      </div>
 
                        
@@ -241,7 +325,7 @@
                   <div class="modal-body">
                     <div class="form-group">
                     <textarea id="textareaID1" class="form-control input-lg p-text-area" rows="2" 
-                    placeholder="Write something" name="description" autofocus required></textarea>
+                    placeholder="Write something" name="description" style="resize: none;" autofocus required></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
