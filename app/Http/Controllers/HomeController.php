@@ -26,19 +26,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         
        
         if( Auth::check() )
          {
-            //dump is used to see the id of the authenticated user that is currently logged in
-           // dump(Auth::user()->id);
+            
         //basically we are saying here is find the company where the user who created it is the same user currently logged in 
         //use get() to get the companies of that specific id 
-           //$user= User::find(Auth::user()->id);  
+           
             $user= User::find(Auth::user()->id);  
-           // $post = Post::where('user_id', Auth::user()->id)->get();
+          
             $userpost=DB::table('users')
                          ->join('posts', function ($join) {
                           $join->on('users.id', '=', 'posts.user_id')
@@ -46,10 +45,7 @@ class HomeController extends Controller
                           })
                          ->get();
                      
-                $userpost=json_decode($userpost,true);
-
-              
-              //$post = Post::where('user_id', Auth::user()->id)->get();
+             $userpost=json_decode($userpost,true);
               $useravailablepost= DB::table('users')
               ->join('available_for_jobs', 'users.id', '=', 'available_for_jobs.user_id')
               ->orderBy('available_for_jobs.created_at','desc')
@@ -64,9 +60,7 @@ class HomeController extends Controller
             
              $jobpost=json_decode($jobpost,true);
         //passing values to view
-     // return view('home.home_index')->with('userpost',json_decode($userpost,true));
-  //  return view('home.home_index',['userpost'=> $userpost,'useravailablepost'=>$useravailablepost]);
-                     //})->get();
+     
             $userpost= DB::table('users')
             ->join('interests', 'users.id', '=', 'interests.user_id')
             ->join('posts', 'users.id', '=', 'posts.user_id')
@@ -76,12 +70,15 @@ class HomeController extends Controller
             $userpost=json_decode($userpost,true); 
             
             $interest=Interest::find(Auth::user()->id);
-            //dd($userpost);
-           // $visibility_type=$userpost[7]['visibilities_type'];
-           // $type=json_decode($visibility_type,true);
             
-           // dd($interest->profession);
+            //showing Users Posts according to users connection
             $post=null;
+            
+            // We set it to 1 if it's checked
+            // We set it to 0 if it's not checked
+            $connection_type=$request->input('connection');
+            
+            print_r($connection_type);
             $j=0;
             for($i=0;$i<count($userpost);$i++)
             {
@@ -112,25 +109,15 @@ class HomeController extends Controller
                
             }
                 
-           //dd($post);
-            
-        //passing values to view
-     // return view('home.home_index')->with('userpost',json_decode($userpost,true));
         return view('home.home_index',['user'=>$user ,'posts'=>$post,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost]);
         }
         
-
-      //$post= Post::all()->sortByDesc('id');
-     // $post = DB::table('posts')->where(Post::user_id, Auth::user()->id);
-     // $post= Post::find(Auth::user()->id);
-     //$post = Post::where('user_id',$user->id);
-      // return view(;
     }
     public function store(Request $request)
     {
         //
 
-        console.log("hello");
+        
         if(Auth::check()){
             $post = Post::create([
                 'description' => $request->input('description'),
@@ -145,26 +132,6 @@ class HomeController extends Controller
         return back()->withInput();
         
     }
-    public function show()
-    {
-        //
-        if( Auth::check() )
-         {
-            //dump is used to see the id of the authenticated user that is currently logged in
-           // dump(Auth::user()->id);
-        //basically we are saying here is find the company where the user who created it is the same user currently logged in 
-        //use get() to get the companies of that specific id 
-            
-           // $post = Post::where('user_id', Auth::user()->id)->get();
-            $userpost=DB::table('users')
-                         ->join('posts', function ($join) {
-                          $join->on('users.id', '=', 'posts.user_id');
-                        })->get();
-              $userpost=json_decode($userpost,true);
-        
-        return view('home.home_show',['userpost'=>$userpost ]);
-        }
-    }
-
+   
 
 }

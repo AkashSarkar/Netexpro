@@ -18,8 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/home.index', 'HomeController@index');
-   // Route::get('/home', 'HomeController@show');
+    Route::get('/home', 'HomeController@index');
+    Route::post('/home', 'HomeController@index');
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/interests', 'InterestController@update'); 
 
