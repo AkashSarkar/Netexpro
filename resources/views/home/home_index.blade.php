@@ -14,20 +14,22 @@
       <nav class="nav-sidebar">
         <div class="collapse navbar-collapse" id="side-navbar-collapse">
           <ul class="nav">
-            <li class="active">
-              <a href="/home">Home</a>
+            <li  >
+            <a href="{{ url('profile') }}" class="button_connection btn" name="connection"  value="{{$interest->profession}}">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{$user->firstname }} {{$user->lastname }}</a>
             </li>
+            <br>
               <form  action="{{ route('home.index')}}" >
                {{csrf_field()}}
-               <button type="submit" name="connection"  value="{{$interest->profession}}"> {{$interest->profession}}</button><br>
+               <button type="submit" class="button_connection btn" name="connection"  value="{{$interest->profession}}">
+               <i class="fa fa-briefcase" aria-hidden="true"></i> {{$interest->profession}}</button><br>
                 
-                <button type="submit" name="connection" value="{{$interest->industry}}"> {{$interest->industry}}</button><br>
-                <button type="submit" name="connection" value="{{$user->education}}"> {{$user->education}}</button><br>
+                <button type="submit" class="button_connection btn" name="connection" value="{{$interest->industry}}">
+                <i class="fa fa-industry" aria-hidden="true"></i> {{$interest->industry}}</button><br>
+                <button type="submit" class="button_connection btn" name="connection" value="{{$user->education}}">
+                <i class="fa fa-university" aria-hidden="true"></i> {{$user->education}}</button><br>
               </form>
-            <li>
-              <a href="javascript:;">
-                <i class="glyphicon glyphicon-off"></i> Sign out</a>
-            </li>
+            
           </ul>
         </div>
       </nav>
