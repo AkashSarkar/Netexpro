@@ -11,6 +11,7 @@ use App\Interest;
 //use App\jobpost;
 class HomeController extends Controller
 {
+  
     /**
      * Create a new controller instance.
      *
@@ -35,7 +36,7 @@ class HomeController extends Controller
             
         //basically we are saying here is find the company where the user who created it is the same user currently logged in 
         //use get() to get the companies of that specific id 
-           
+           //job posts
             $user= User::find(Auth::user()->id);  
           
             $userpost=DB::table('users')
@@ -74,67 +75,85 @@ class HomeController extends Controller
             //showing Users Posts according to users connection
             $post=null;
             
-            // We set it to 1 if it's checked
-            // We set it to 0 if it's not checked
+            //post indivisual connection
             $connection_type=$request->input('connection');
-            
-            print_r($connection_type);
-            $j=0;
-            for($i=0;$i<count($userpost);$i++)
-            {
-                $visibility_type=$userpost[$i]['visibilities_type'];
-                $type=json_decode($visibility_type,true);
-                $f=0;
-                for($k=0;$k<count($type);$k++)
+            if($connection_type){
+                $j=0;
+                for($i=0;$i<count($userpost);$i++)
                 {
-                    if($interest->profession==$type[$k]){
-                        
-                        $post[$j]=$userpost[$i];
-                        $j++;
-                        $f=1;
+                    $visibility_type=$userpost[$i]['visibilities_type'];
+                    $type=json_decode($visibility_type,true);
+                    $f=0;
+                    for($k=0;$k<count($type);$k++)
+                    {
+                        if($connection_type==$type[$k]){
+                            
+                            $post[$j]=$userpost[$i];
+                            $j++;
+                            $f=1;
+                        }
+                        if($f==1)
+                        break;
                     }
-                    elseif($interest->industry==$type[$k]){
-                        
-                        $post[$j]=$userpost[$i];
-                        $j++;
-                        $f=1;
-                    }
-                    elseif($user->education==$type[$k]){
-                        $post[$j]=$userpost[$i];
-                        $j++;
-                        $f=1;    
-                    }
-
-
-                    if($f==1)
-                    break;
+                    
+                   
                 }
-                
-               
             }
+            //all post in home
+            else{
+                $j=0;
+                for($i=0;$i<count($userpost);$i++)
+                {
+                    $visibility_type=$userpost[$i]['visibilities_type'];
+                    $type=json_decode($visibility_type,true);
+                    $f=0;
+                    for($k=0;$k<count($type);$k++)
+                    {
+                        if($interest->profession==$type[$k]){
+                            
+                            $post[$j]=$userpost[$i];
+                            $j++;
+                            $f=1;
+                        }
+                        elseif($interest->industry==$type[$k]){
+                            
+                            $post[$j]=$userpost[$i];
+                            $j++;
+                            $f=1;
+                        }
+                        elseif($user->education==$type[$k]){
+                            $post[$j]=$userpost[$i];
+                            $j++;
+                            $f=1;    
+                        }
+    
+    
+                        if($f==1)
+                        break;
+                    }
+                    
+                   
+                }
+            }
+            
+           
                 
         return view('home.home_index',['user'=>$user ,'posts'=>$post,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost]);
         }
         
     }
+
     public function store(Request $request)
     {
         //
-
-        
-        if(Auth::check()){
-            $post = Post::create([
-                'description' => $request->input('description'),
-                'user_id'=>Auth::user()->id
-            ]);
-            
-          
-                return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
-                ->with('success' , 'successfully');
-            
+        $connection_type=$request->input('con');
+        if($connection_type){
+            print_r("this is from store");
+            print_r($connection_type);
         }
-        return back()->withInput();
-        
+
+    
+    
     }
    
 

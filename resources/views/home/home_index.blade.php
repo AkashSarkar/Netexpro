@@ -17,11 +17,12 @@
             <li class="active">
               <a href="/home">Home</a>
             </li>
-              <form >
+              <form  action="{{ route('home.index')}}" >
                {{csrf_field()}}
-                <input  type="radio" name="connection" value="{{$interest->profession}}"> {{$interest->profession}}<br>
-                <input type="radio" name="connection" value="{{$interest->industry}}"> {{$interest->industry}}<br>
-                <input type="radio" name="connection" value="{{$user->education}}"> {{$user->education}}
+               <button type="submit" name="connection"  value="{{$interest->profession}}"> {{$interest->profession}}</button><br>
+                
+                <button type="submit" name="connection" value="{{$interest->industry}}"> {{$interest->industry}}</button><br>
+                <button type="submit" name="connection" value="{{$user->education}}"> {{$user->education}}</button><br>
               </form>
             <li>
               <a href="javascript:;">
@@ -32,7 +33,7 @@
       </nav>
     </div>
 
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
       
       $(document).ready(function(){
           $("input[name='connection']").click(function(){
@@ -43,12 +44,12 @@
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 type: "POST",
                 url: "/home",
-                data: {
-                  connection:radioValue
+                data:{
+                  'con':radioValue
                 },
                 success: function( response ) {
-                  if(data == "success")
-                  alert(response); 
+                  
+                  console.log(response); 
                 },
                error: function(response){
                  alert('Error'+response);
@@ -57,7 +58,7 @@
           });
           
       });
-  </script>
+  </script>-->
 
 
     <!--end side bar-->
