@@ -6,51 +6,18 @@
     <div class="fb-profile">
        <div>
         <img align="left" class="fb-image-lg" src="/uploads/cover/{{ $user->cover_pic }}" alt="Profile image example" style="height:400px;width:100%;"/>
-        <button id="Updateimage" type="button" class="btn btn-default btn-sm pull-right" style="margin-top:-40px; opacity: .5;" onclick="showForm()">
-        <i class="fa fa-upload" aria-hidden="true">Change Cover Photo</i>
-        </button>
-        <div id="theform" class="pull-right" style="margin-top:-60px;opacity: 50;">
-         <form enctype="multipart/form-data" action="{{ route('profile.store') }}" method="POST">
-               {{csrf_field()}}
-              <!--  <label>Update Profile Image</label>-->
-                <input type="file" name="cover" style="
-                .custom-file-input::-webkit-file-upload-button {
-                    visibility: hidden;
-                    }
-                    .custom-file-input::before {
-                    content: 'Select some files';
-                    display: inline-block;
-                    background: -webkit-linear-gradient(top, #b2b2b2, #e3e3e3);
-                    border: 1px solid #999;
-                    border-radius: 5px;
-                    padding: 0px 0px;
-                    outline: none;
-                    white-space: nowrap;
-                    -webkit-user-select: none;
-                    cursor: pointer;
-                    text-shadow: 1px 1px #fff;
-                    font-weight: 700;
-                    font-size: 10pt;
-                    }
-                    .custom-file-input:hover::before {
-                    border-color: black;
-                    }
-                    .custom-file-input:active::before {
-                    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-                    }
-                
-                ">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="submit">
-                
+        <div class="pull-right" style="margin-top:-60px;opacity: 50;">
+             <form id="target" enctype="multipart/form-data" action="{{ route('profile.store') }}" method="POST">
+                   {{csrf_field()}}
+                <input type="file" name="cover" id="my_file" onchange="form.submit()" style="display: none;">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+                <input type="button" class="btn btn-default btn-sm pull-right" value="Change Cover Image" 
+                onclick="update_cover()" style="opacity:0.5;margin:5px;">
             </form>
         </div>
-
        </div>
-
        <!--End of Cover image-->
           <img align="left" class="fb-image-profile thumbnail" src="/uploads/profile/{{ $user->p_pic }}" alt="Profile image example"/>
-        <!--End of Profile Pic-->
         <div class="fb-profile-text">
             <h1>{{ $user->firstname }} </h1>
             <p>{{ $interest->profession }}</p>
@@ -70,16 +37,12 @@
                
               </div>
     <!--profile pic change start-->
-    <button id="Updateprofile" type="button" class="btn btn-default btn-sm" style="margin-left:-150px; margin-top:20px; opacity: .5;" onclick="showForm1()">
-          <i class="fa fa-upload" aria-hidden="true">Change Profile Photo</i>
-        </button>
+        <input id="Updateprofile" type="button" class="btn btn-default btn-sm" style="margin-left:-150px; margin-top:20px; opacity: .5;" onclick="update_profile()" value="change profile pic">
           <div id="theform1">
             <form enctype="multipart/form-data" action="{{ route('profile.store') }}" method="POST">
                 {{csrf_field()}}
-                <label>Update Profile</label>
-                <input type="file" name="profile">
+                <input type="file" name="profile" id="myprofilepic" onchange="form.submit()" style="display: none;">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="submit">
               </form>
         </div>
         <!--End of profile pic change-->
@@ -562,19 +525,16 @@
 
 
 <script type = "text/javascript">
-    document.getElementById("theform").style.display = "none";
-     function showForm() {
-     document.getElementById("Updateimage").style.display = "none";
-     document.getElementById("theform").style.display = "block";
-}
-</script>
 
-<script type = "text/javascript">
-   document.getElementById("theform1").style.display = "none";
-   function showForm1() {
-     document.getElementById("Updateprofile").style.display = "none";
-     document.getElementById("theform1").style.display = "block";
-     }
+    function update_cover(){
+      document.getElementById('my_file').click();
+    }
+ 
+
+
+    function update_profile(){
+      document.getElementById('myprofilepic').click();
+    }
 </script>
 
 
