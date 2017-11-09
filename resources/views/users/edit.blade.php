@@ -35,7 +35,7 @@
                             <div class="col-md-6">
                                 <select placeholder="Gender" id="gender" type="text" class="form-control" 
                                 name="gender" value="{{ old('gender') }}" required autofocus>
-                                <option>Select-gender</option>
+                                <option></option>
                                 <option>Male</option>
                                 <option>Female</option>
                                 </select>

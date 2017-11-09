@@ -90,7 +90,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $user->p_pic }}"
                         width="40" height="40" alt="...">
                     </a>
                   </div>
@@ -146,7 +146,7 @@
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                          <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $user->p_pic }}"
                             width="32" height="32" alt="...">
                         </a>
                       </div>
@@ -181,7 +181,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $user->p_pic }}"
                         width="40" height="40" alt="...">
                     </a>
                   </div>
@@ -260,7 +260,7 @@
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                          <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $user->p_pic }}"
                             width="32" height="32" alt="...">
                         </a>
                       </div>
@@ -428,10 +428,23 @@
           <form method="post" action="{{ route('post.store') }}">
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="post">
-            <div class="modal-body">
-              <div class="form-group">
+            <div class="modal-body row">
+            <div class="col-md-12">
+                                Post type : 
+                                <input type="radio" name="post_type" value="status" checked>  Status
+                                <input type="radio" name="post_type" value="project">  Project
+
+                                @if ($errors->has('post_type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('post_type') }}</strong>
+                                    </span>
+                                @endif
+              </div>
+              
+              <div class="form-group col-md-12">
+              <br>
                 <textarea id="textareaID1" class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description"
-                  style="resize: none;" autofocus></textarea>
+                  style="resize: none;" required autofocus></textarea>
               </div>
             </div>
             <div class="modal-footer">
@@ -443,10 +456,10 @@
                     <span class="caret"></span>
                   </button>
 
-                  <ul class="dropdown-menu pull-right" style="padding-left:10px ;" required>
+                  <ul class="dropdown-menu pull-right {{ $errors->has('checkbox') ? ' has-error' : '' }}" style="padding-left:10px ;"  required autofocus>
 
 
-                    <div class="checkbox">
+                    <div class="checkbox" >
                       <label>
                         <input type="checkbox" name="type[]" value="{{$interest->profession}}"> {{$interest->profession}}
                       </label>
@@ -461,6 +474,11 @@
                         <input type="checkbox" name="type[]" value="{{$user->education}}"> {{$user->education}}
                       </label>
                     </div>
+                    @if ($errors->has('checkbox'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('checkbox') }}</strong>
+                                    </span>
+                                @endif
 
 
 
