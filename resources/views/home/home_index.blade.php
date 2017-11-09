@@ -431,8 +431,8 @@
             <div class="modal-body row">
             <div class="col-md-12">
                                 Post type : 
-                                <input type="radio" name="post_type" value="status" checked>  Status
-                                <input type="radio" name="post_type" value="project">  Project
+                                <input type="radio"  name="post_type" value="status" checked>  Status
+                                <input type="radio"  name="post_type" value="project">  Project
 
                                 @if ($errors->has('post_type'))
                                     <span class="help-block">
@@ -446,49 +446,89 @@
                 <textarea id="textareaID1" class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description"
                   style="resize: none;" required autofocus></textarea>
               </div>
+
+              <div class="form-group col-md-12" id="show_porjectFields">
+                <input  class="form-control input-lg p-text-area"  placeholder="URL" name="url"
+                  style="resize: none;" required autofocus>
+              </div>
+             
             </div>
+
             <div class="modal-footer">
 
               <div class="form-group">
 
                 <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle pull-right" type="button" data-toggle="dropdown" style="margin-left:10px;">Visibility
+                  <button class="btn btn-primary dropdown-toggle pull-right" 
+                    type="button" data-toggle="dropdown" style="margin-left:10px;">Visibility
                     <span class="caret"></span>
                   </button>
-
-                  <ul class="dropdown-menu pull-right {{ $errors->has('checkbox') ? ' has-error' : '' }}" style="padding-left:10px ;"  required autofocus>
+                    
+                  <ul class="dropdown-menu pull-right" style="padding-left:10px ;" >
 
 
                     <div class="checkbox" >
                       <label>
-                        <input type="checkbox" name="type[]" value="{{$interest->profession}}"> {{$interest->profession}}
+                        <input type="checkbox" name="type[]" value="{{$interest->profession}}" required> {{$interest->profession}}
                       </label>
                     </div>
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" name="type[]" value="{{$interest->industry}}"> {{$interest->industry}}
+                        <input type="checkbox" name="type[]" value="{{$interest->industry}}" required> {{$interest->industry}}
                       </label>
                     </div>
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" name="type[]" value="{{$user->education}}"> {{$user->education}}
+                        <input type="checkbox" name="type[]" value="{{$user->education}}" required> {{$user->education}}
                       </label>
                     </div>
-                    @if ($errors->has('checkbox'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('checkbox') }}</strong>
-                                    </span>
-                                @endif
+                   
+              <script type="text/javascript">
+               //shows projects fields
+                $(document).ready(function(){
+                  $("#show_porjectFields").hide();
+                   $("input[name='post_type']").click(function(){
+                    var post_type=$("input[name='post_type']:checked").val();
+                    if(post_type=="project")
+                      $("#show_porjectFields").show();
+                    else
+                      $("#show_porjectFields").hide();
+                  });
+                });
+                
+                
+                //handles visivility validation
+                $(function(){
 
+                  var requiredCheckboxes = $(':checkbox[required]');
+                  requiredCheckboxes.change(function(){
+
+                  if(requiredCheckboxes.is(':checked')) {
+                    requiredCheckboxes.removeAttr('required');
+                  }
+
+                   else {
+                     requiredCheckboxes.attr('required', 'required');
+                     
+                     }
+                  });
+                });
+
+                
+              
+              </script>
 
 
                   </ul>
                 </div>
 
-                <button type="submit" class="btn btn-primary pull-right">Post</button>
+                <button type="submit" class="btn btn-primary pull-right" >Post</button>
 
+                
+              <span id="box"></span>
               </div>
-
+              
+              
               <ul class="nav nav-pills pull-left">
                 <li id="tooltip">
                   <a href="#">
