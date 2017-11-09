@@ -84,25 +84,29 @@ class HomeController extends Controller
             {
                 $visibility_type=$userpost[$i]['visibilities_type'];
                 $type=json_decode($visibility_type,true);
+                $f=0;
                 for($k=0;$k<count($type);$k++)
                 {
                     if($interest->profession==$type[$k]){
                         
                         $post[$j]=$userpost[$i];
                         $j++;
+                        $f=1;
                     }
                     elseif($interest->industry==$type[$k]){
                         
                         $post[$j]=$userpost[$i];
                         $j++;
+                        $f=1;
                     }
                     elseif($user->education==$type[$k]){
                         $post[$j]=$userpost[$i];
-                        $j++;    
+                        $j++;
+                        $f=1;    
                     }
 
 
-                    if($j>0)
+                    if($f==1)
                     break;
                 }
                 
