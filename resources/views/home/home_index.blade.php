@@ -15,8 +15,18 @@
         <div class="collapse navbar-collapse" id="side-navbar-collapse">
           <ul class="nav">
             <li  >
-            <a href="{{ url('profile') }}" class="button_connection btn" name="connection"  value="{{$interest->profession}}">
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{$user->firstname }} {{$user->lastname }}</a>
+            <!--profile button-->
+              <div class="media button_connection btn">
+                    <a href="{{ url('profile') }}">
+                        <div class="media-left "><img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
+                              width="20" height="20" alt="..."></div>
+                        <div class="media-body">
+                            <h5 class="media-heading"> {{$user->firstname }} {{$user->lastname }}</h5>
+                        </div>
+                    </a>
+              </div>
+              <!--end profile button-->
+                
             </li>
             <br>
               <form  action="{{ route('home.index')}}" >
@@ -92,7 +102,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $user->p_pic }}"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}"
                         width="40" height="40" alt="...">
                     </a>
                   </div>
@@ -148,7 +158,7 @@
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $user->p_pic }}"
+                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}"
                             width="32" height="32" alt="...">
                         </a>
                       </div>
@@ -183,7 +193,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $user->p_pic }}"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$useravailablepost['p_pic']}}"
                         width="40" height="40" alt="...">
                     </a>
                   </div>
@@ -262,7 +272,7 @@
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $user->p_pic }}"
+                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $useravailablepost['p_pic'] }}"
                             width="32" height="32" alt="...">
                         </a>
                       </div>
@@ -298,7 +308,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $jobpost['p_pic'] }}"
                         width="40" height="40" alt="...">
                     </a>
                   </div>
@@ -388,7 +398,7 @@
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                          <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $jobpost['p_pic'] }}"
                             width="32" height="32" alt="...">
                         </a>
                       </div>
@@ -451,7 +461,7 @@
 
               <div class="form-group col-md-12" id="show_porjectFields">
                 <input  class="form-control input-lg p-text-area"  placeholder="URL" name="url"
-                  style="resize: none;" required autofocus>
+                  style="resize: none;" autofocus>
               </div>
              
             </div>
