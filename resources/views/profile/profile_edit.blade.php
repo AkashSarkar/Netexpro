@@ -2,6 +2,16 @@
 
 @section('content')
 
+<?php
+$educations=array(
+    "United International University",
+    "Ahsanullah University of Science and technology",
+    "BUET",
+    "DU",
+    "NSU"
+);
+?>
+
 <div class="row">
         <div class="col-md-8 col-md-offset-2">
          <div class="panel panel-primary">
@@ -18,7 +28,15 @@
                             <label for="education" class="col-md-4 control-label">Education</label>
 
                             <div class="col-md-6">
-                                <input placeholder="Institution Name" id="education" type="text" class="form-control" name="education" value="{{ $user->education }}" autofocus>
+                               <!-- <input placeholder="Institution Name" id="education" type="text" class="form-control" name="education" value="{{ $user->education }}" autofocus>-->
+
+                               <select class="form-control" name="education"  value="{{ old('education')}}" >
+                                 <span class="caret"></span>
+                                 <option>{{ $user->education }}</option>
+                                 @foreach( $educations as $education)
+                                 <option>{{ $education }}</option>
+                                 @endforeach
+                                </select>
 
                                 @if ($errors->has('education'))
                                     <span class="help-block">

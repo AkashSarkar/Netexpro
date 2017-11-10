@@ -139,9 +139,17 @@ $(function() {
             </div>
           </section>
           <section class="post-body" style="background-color: #f2f4f7; border-radius: 10px;  padding: 10px">
-            <p>{{ $userpost['description'] }}
-              <hr>
-            </p>
+            <p>{{ $userpost['description'] }} </p>
+            
+            <!--project show-->
+            @if($userpost['post_type']=="project")
+              <div class=" row">
+                <div class="col-md-12">
+                  <a href="{{ $userpost['url'] }} "> {{ $userpost['url'] }}</a>
+                </div>
+              </div>
+            @endif
+            <!-- end project show-->
           </section>
 
           <section class="post-footer">
@@ -149,8 +157,13 @@ $(function() {
               <div class="col-md-12">
                 <ul class="list-unstyled">
                   <li>
-                    <a href="#">
-                      <i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
+                  <!-- Shows Rate text and icon if post type is Project-->
+                    @if($userpost['post_type']=="project")
+                      <a href="#"><i class="fa fa-star" aria-hidden="true"></i>Rate</a>
+                    @else
+                      <a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
+                    @endif
+                  <!--End Shows Rate text and icon if post type is Project-->
                   </li>
                   <li>
                     <a href="#">
@@ -477,10 +490,10 @@ $(function() {
 
 
               
-             {{--  <div class="form-group col-md-12" id="show_porjectFields">
-                <input  class="form-control input-lg p-text-area"  placeholder="URL" name="url"
-                  style="resize: none;" required autofocus>
-              </div> --}}
+             <div class="form-group col-md-12" id="show_porjectFields">
+                <input id="url" class="form-control input-lg p-text-area"  placeholder="URL" name="url"
+                  style="resize: none;" required >
+              </div>
              
             </div>
 
@@ -520,9 +533,18 @@ $(function() {
                    $("input[name='post_type']").click(function(){
                     var post_type=$("input[name='post_type']:checked").val();
                     if(post_type=="project")
+                    {
                       $("#show_porjectFields").show();
-                    else
+                       $('#url').Attr('required',true);
+                    }
+                      
+                    else{
+                      
+                      $('#url').removeAttr('required');
                       $("#show_porjectFields").hide();
+                     
+                    }
+                      
                   });
                 });
                 

@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
+<?php
+ $locations=array(
+     "Dhaka",
+     "Chittagong",
+     "Comilla",
+     "Sylhet"
+ );
+?>
 <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-primary">
@@ -35,7 +42,6 @@
                             <div class="col-md-6">
                                 <select placeholder="Gender" id="gender" type="text" class="form-control" 
                                 name="gender" value="{{ old('gender') }}" required autofocus>
-                                <option></option>
                                 <option>Male</option>
                                 <option>Female</option>
                                 </select>
@@ -82,8 +88,17 @@
                             <label for="location" class="col-md-4 control-label">Location <span class="required">*</span> </label>
 
                             <div class="col-md-6">
-                                <input placeholder="location" id="location" type="text" class="form-control" 
-                                name="location" value="{{ old('location') }}" required autofocus>
+                             <!--   <input placeholder="location" id="location" type="text" class="form-control" 
+                                name="location" value="{{ old('location') }}" required autofocus>-->
+
+
+                                
+                                  <select class="form-control" name="location"  value="{{ old('location') }}" >
+                                        <span class="caret"></span>
+                                        @foreach( $locations as $location)
+                                        <option>{{ $location }}</option>
+                                        @endforeach
+                                  </select>
 
                                 @if ($errors->has('location'))
                                     <span class="help-block">
