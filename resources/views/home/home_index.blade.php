@@ -459,10 +459,17 @@
                   style="resize: none;" required autofocus></textarea>
               </div>
 
-              <div class="form-group col-md-12" id="show_porjectFields">
+
+              
+             {{--  <div class="form-group col-md-12" id="show_porjectFields">
                 <input  class="form-control input-lg p-text-area"  placeholder="URL" name="url"
+<<<<<<< HEAD
                   style="resize: none;" autofocus>
               </div>
+=======
+                  style="resize: none;" required autofocus>
+              </div> --}}
+>>>>>>> b32944435c1c7164fdd9589b61cf6dbdc59f16e6
              
             </div>
 
