@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+<?php
+$educations = array(
+    "United International University",
+    "Ahsanullah University of Science and technology",
+    "BUET",
+    "DU",
+    "NSU"
+);
+?>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -79,7 +88,16 @@
                             <label for="education" class="col-md-4 control-label">Education</label>
 
                             <div class="col-md-6">
-                                <input placeholder="Institution Name" id="education" type="text" class="form-control" name="education" value="{{ old('education') }}" required autofocus>
+                             <!--   <input placeholder="Institution Name" id="education" type="text" class="form-control" name="education" value="{{ old('education') }}" required autofocus>-->
+                             
+                                
+
+                                <select class="form-control" name="education"  value="{{ old('education') }}" >
+                                        <span class="caret"></span>
+                                        @foreach( $educations as $education)
+                                        <option>{{ $education }}</option>
+                                        @endforeach
+                                    </select>
 
                                 @if ($errors->has('education'))
                                     <span class="help-block">
