@@ -213,7 +213,7 @@
                         <div class="form-group">
                         <label for="position" class="col-md-4 control-label">Preferred Job Position<span class="required">*</span></label>
                                <div class="col-md-6" >
-                                    <select class="form-control" name="position"  value="" >
+                                    <select class="form-control" name="position"  value="{{ old('position') }}" >
                                         <span class="caret"></span>
                                         @foreach( $positions as $position)
                                         <option>{{ $position }}</option>
