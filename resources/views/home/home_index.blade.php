@@ -36,7 +36,7 @@ $(function() {
                     <a href="{{ url('profile') }}">
                         <div class="media-left "><img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                               width="20" height="20" alt="..."></div>
-                        <div class="media-body">
+                        <div class="media-body" data-toggle="tooltip" data-placement="bottom" title="{{$user->firstname }} {{$user->lastname }}" >
                             <h5 class="media-heading"> {{$user->firstname }} {{$user->lastname }}</h5>
                         </div>
                     </a>
@@ -47,16 +47,21 @@ $(function() {
             <br>
               <form  action="{{ route('home.index')}}" >
                {{csrf_field()}}
-               <button type="submit" class="button_connection button_m btn" id="bm" name="connection"  value="{{$interest->profession}}">
+               <button type="submit" class="button_connection button_m btn" id="bm" name="connection"  value="{{$interest->profession}}"
+               data-toggle="tooltip" data-placement="bottom" title="{{$interest->profession}}">
                <i class="fa fa-briefcase" aria-hidden="true"></i> {{$interest->profession}}</button><br>
                 
-                <button type="submit" class="button_connection button_m  btn" id="bm1" name="connection" value="{{$interest->industry}}">
+                <button type="submit" class="button_connection button_m  btn" id="bm1" name="connection" value="{{$interest->industry}}"
+                data-toggle="tooltip" data-placement="bottom" title="{{$interest->industry}}">
                 <i class="fa fa-industry" aria-hidden="true"></i> {{$interest->industry}}</button><br>
-                <button type="submit" class="button_connection button_m  btn" id="bm2" name="connection" value="{{$user->education}}">
+
+                <button type="submit" class="button_connection button_m  btn" id="bm2" name="connection" value="{{$user->education}}"
+                data-toggle="tooltip" data-placement="bottom" title="{{$user->education}}">
                 <i class="fa fa-university" aria-hidden="true"></i> {{$user->education}}</button><br>
               </form>
             
           </ul>
+          
         </div>
       </nav>
     </div>
@@ -540,12 +545,14 @@ $(function() {
                //shows projects fields
                 $(document).ready(function(){
                   $("#show_porjectFields").hide();
+                   $('#url').removeAttr('required');
                    $("input[name='post_type']").click(function(){
                     var post_type=$("input[name='post_type']:checked").val();
                     if(post_type=="project")
                     {
-                      $("#show_porjectFields").show();
                        $('#url').Attr('required',true);
+                      $("#show_porjectFields").show();
+                      
                     }
                       
                     else{
@@ -620,4 +627,10 @@ $(function() {
     <!--end Modal-->
   </div>
 </div>
+
+<script>
+              $(document).ready(function(){
+                  $('[data-toggle="tooltip"]').tooltip();   
+              });
+          </script>
 @endsection
