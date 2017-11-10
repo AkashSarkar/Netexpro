@@ -91,7 +91,7 @@ body{
     .nav-sidebar.pull-right a {
         
     }
-
+/* side nav buttons */
    .button_connection
    {
     background-color: #DAD8D8;
@@ -115,7 +115,7 @@ body{
     overflow: hidden !important;
     text-align: justify !important;
     text-decoration:none !important;
-    padding:10px;  
+    padding :10px;  
     
     
    }
@@ -142,9 +142,12 @@ body{
    {
        background-color: #e7e7e7;   
    }
+/* end side nav buttons */
+/* home post */
 .show_home_post{
     margin-left: -9%;
 }
+/*end home post*/
    .tooltip {
     position: relative;
     display: inline-block;
