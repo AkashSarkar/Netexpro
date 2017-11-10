@@ -3,20 +3,36 @@
 <style>
 
 </style>
-
+<!--script-->
+<script>
+$(function() {
+  $(window).resize(function () {
+    if (window.innerWidth <1022) {
+      $("#h_post").removeClass("show_home_post");
+      $("#bp").removeClass("button_m");
+      $("#bm").removeClass("button_m");
+      $("#bm1").removeClass("button_m");
+      $("#bm2").removeClass("button_m");
+     // $("#bp").removeClass("button_profile");
+      
+    }
+  });
+});
+</script>
+<!--end script -->
 <!--End Style-->
 <!--Main content-->
 <div class="container">
   <div class="row content">
     <!--side bar content-->
 
-    <div class="col-md-2 col-sm-2 bg-light sidebar">
+    <div class="col-md-3 col-sm-3 bg-light sidebar">
       <nav class="nav-sidebar">
         <div class="collapse navbar-collapse" id="side-navbar-collapse">
           <ul class="nav">
             <li  >
             <!--profile button-->
-              <div class="media button_connection btn">
+              <div class="media button_profile button_m " id="bp">
                     <a href="{{ url('profile') }}">
                         <div class="media-left "><img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                               width="20" height="20" alt="..."></div>
@@ -31,12 +47,12 @@
             <br>
               <form  action="{{ route('home.index')}}" >
                {{csrf_field()}}
-               <button type="submit" class="button_connection btn" name="connection"  value="{{$interest->profession}}">
+               <button type="submit" class="button_connection button_m btn" id="bm" name="connection"  value="{{$interest->profession}}">
                <i class="fa fa-briefcase" aria-hidden="true"></i> {{$interest->profession}}</button><br>
                 
-                <button type="submit" class="button_connection btn" name="connection" value="{{$interest->industry}}">
+                <button type="submit" class="button_connection button_m  btn" id="bm1" name="connection" value="{{$interest->industry}}">
                 <i class="fa fa-industry" aria-hidden="true"></i> {{$interest->industry}}</button><br>
-                <button type="submit" class="button_connection btn" name="connection" value="{{$user->education}}">
+                <button type="submit" class="button_connection button_m  btn" id="bm2" name="connection" value="{{$user->education}}">
                 <i class="fa fa-university" aria-hidden="true"></i> {{$user->education}}</button><br>
               </form>
             
@@ -76,7 +92,7 @@
     <!--end side bar-->
 
     <!--post body-->
-    <div class="col-md-7 col-sm-7 col-lg-7">
+    <div class="col-md-7 col-sm-7 col-lg-7 show_home_post" id="h_post">
       <div class="panel panel-default" data-toggle="modal" data-target="#myModal">
         <div class="panel-heading">
           <div class="btn-group btn-group-md">
