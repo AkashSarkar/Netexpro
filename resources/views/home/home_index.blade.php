@@ -49,7 +49,7 @@ $(function() {
                {{csrf_field()}}
                <button type="submit" class="button_connection button_m btn" id="bm" name="connection"  value="{{$interest->profession}}"
                data-toggle="tooltip" data-placement="bottom" title="{{$interest->profession}}">
-               <i class="fa fa-briefcase" aria-hidden="true"></i> {{$interest->profession}}</button><br>
+               <i class="fa fa-briefcase" aria-hidden="true"></i></i> {{$interest->profession}}</button><br>
                 
                 <button type="submit" class="button_connection button_m  btn" id="bm1" name="connection" value="{{$interest->industry}}"
                 data-toggle="tooltip" data-placement="bottom" title="{{$interest->industry}}">
@@ -143,7 +143,7 @@ $(function() {
 
             </div>
           </section>
-          <section class="post-body" style="background-color: #f2f4f7; border-radius: 10px;  padding: 10px">
+          <section class="post-body" style="background-color: #EEEEEE; border-radius: 10px;  padding: 10px">
             <p>{{ $userpost['description'] }} </p>
             
             <!--project show-->
@@ -247,7 +247,7 @@ $(function() {
 
             </div>
           </section>
-          <section class="post-body" style="background-color: #ded5e0; border-radius: 10px; border-style: inset; padding: 10px">
+          <section class="post-body" style="background-color: #D7CCC8; border-radius: 10px; border-style: inset; padding: 10px">
             <h4 style="font-weight:bold;">******job seeking post******</h4>
             <p>
               <li>Position :
@@ -362,7 +362,7 @@ $(function() {
 
             </div>
           </section>
-          <section class="post-body" style="background-color: #d4fcbd; border-radius: 10px; border-style: outset; padding: 10px">
+          <section class="post-body" style="background-color: #CFD8DC; border-radius: 10px; border-style: outset; padding: 10px">
             <h4 style="font-weight:bold;">******Hiring post******</h4>
             <p>
               <li>Position :
