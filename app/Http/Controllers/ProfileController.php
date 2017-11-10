@@ -111,6 +111,8 @@ class ProfileController extends Controller
             $post = Post::create([
                 'post_id'=>$id,
                 'description' => $request->input('description'),
+                'url' => $request->input('url'),
+                'post_type'=>$request->input('post_type'),
                 'user_id'=>Auth::user()->id
             ]);
            

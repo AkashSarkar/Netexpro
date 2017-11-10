@@ -510,6 +510,16 @@
                       </label>
                     </div>
                    
+              
+                  </ul>
+                </div>
+
+                <button type="submit" class="btn btn-primary pull-right" >Post</button>
+
+                
+              <span id="box"></span>
+              </div>
+
               <script type="text/javascript">
                //shows projects fields
                 $(document).ready(function(){
@@ -553,16 +563,6 @@
                 
               
               </script>
-
-
-                  </ul>
-                </div>
-
-                <button type="submit" class="btn btn-primary pull-right" >Post</button>
-
-                
-              <span id="box"></span>
-              </div>
               
               
               <ul class="nav nav-pills pull-left">
