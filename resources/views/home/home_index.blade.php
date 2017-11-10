@@ -449,10 +449,12 @@
                   style="resize: none;" required autofocus></textarea>
               </div>
 
-              <div class="form-group col-md-12" id="show_porjectFields">
+
+              
+             {{--  <div class="form-group col-md-12" id="show_porjectFields">
                 <input  class="form-control input-lg p-text-area"  placeholder="URL" name="url"
                   style="resize: none;" required autofocus>
-              </div>
+              </div> --}}
              
             </div>
 

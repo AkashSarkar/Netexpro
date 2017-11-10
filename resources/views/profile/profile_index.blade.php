@@ -66,7 +66,7 @@
                             <p>Birth date: <strong> {{ $user->dob }} </strong> </p>
                             <p>Location: <strong> {{ $user->location }} </strong> </p>
                             <p>Availability: <strong> {{ $user->available_for_job }} </strong> </p>
-                         </br>  
+                        
                </div>
                
                  
@@ -113,11 +113,8 @@
                <div class="panel panel-default">
                    <div class="panel-heading">
                        <div class="btn-group btn-group-md">
-                           <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Project</button>
-                           <button type="button" class="btn btn-link" >|</button>
-                           <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Job post</button>
-                           <button type="button" class="btn btn-link">|</button>
-                           <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Activity </button>
+                           <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Make post</button>
+                          
                        </div>
                     </div>
 
@@ -128,13 +125,12 @@
                     <div class="panel-heading">
                       <div class="modal-footer">
                        
-                          <button type="button" class="btn btn-azure pull-right">Post</button>
-                           <ul class="nav nav-pills pull-left">
-                          <li><a href="#"><i class="fa fa-map-marker"></i></a>Check-in</li>
-                          <li><a href="#"><i class="fa fa-camera"></i></a>Image</li>
-                          <li><a href="#"><i class=" fa fa-files-o"></i></a>Files</li>
-                          <li><a href="#"><i class="fa fa-microphone"></i></a>Voice</li>
-                      </ul>
+                          <div class="panel-heading pull-left">
+                            <div class="btn-group btn-group-md">
+                              <button type="button" class="btn btn-primary">Photo/File</button>
+                            </div>
+                          </div>
+                     
                        </div>
                        </div>
                     </div>
@@ -432,21 +428,42 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <div class="btn-group btn-group-md">
                          <button type="button" class="btn btn-link">Make post</button>
-                         <button type="button" class="btn btn-link">|</button>
-                         <button type="button" class="btn btn-link">Job post</button>
-                         <button type="button" class="btn btn-link">|</button>
-                         <button type="button" class="btn btn-link">Activity </button>
+                        
                       </div>
                   </div>
 
                   <form  method="post" action="{{ route('profile.store')  }}">
                         {{ csrf_field() }}
                   <input type="hidden" name="_method" value="post">
-                  <div class="modal-body">
-                  <div class="form-group">
-                    <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description" autofocus style="resize: none;"></textarea>
-                  </div>
-                  </div>
+
+
+                 <div class="modal-body row">
+            <div class="col-md-12">
+                                Post type : 
+                                <input type="radio"  name="post_type" value="status" checked>  Status
+                                <input type="radio"  name="post_type" value="project">  Project
+
+                                @if ($errors->has('post_type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('post_type') }}</strong>
+                                    </span>
+                                @endif
+              </div>
+              
+              <div class="form-group col-md-12">
+              <br>
+                <textarea id="textareaID1" class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description"
+                  style="resize: none;" required autofocus></textarea>
+              </div>
+
+
+              
+             {{--  <div class="form-group col-md-12" id="show_porjectFields">
+                <input  class="form-control input-lg p-text-area"  placeholder="URL" name="url"
+                  style="resize: none;" required autofocus>
+              </div> --}}
+             
+            </div>
 
                   <div class="modal-footer">
                       
