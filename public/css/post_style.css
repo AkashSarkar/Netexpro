@@ -99,17 +99,26 @@ body{
     background-color: white;
     color: black;
     text-overflow: ellipsis;
-    text-decoration: none;
+    text-decoration: none !important;
     white-space: nowrap;
     width: 148px;
     overflow: hidden;
     text-align: justify !important;
     text-decoration:none !important;
    }
+   .button_connection a
+   {
+    text-decoration: none !important;
+   }
+   .button_connection a:hover
+   {
+    text-decoration: none !important;
+    color :black !important;
+   }
 
    .button_connection:hover 
    {
-       background-color: #e7e7e7;
+       background-color: #e7e7e7;   
    }
    .tooltip {
     position: relative;
