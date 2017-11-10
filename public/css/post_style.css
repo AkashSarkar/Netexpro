@@ -44,7 +44,7 @@ body{
 .nav-sidebar {
         
         padding: 8px 0;
-        border-right: 1px solid #ddd;
+       
        
         
     
@@ -84,48 +84,71 @@ body{
     /* Right-aligned sidebar */
 
     .nav-sidebar.pull-right {
-        border-right: 0;
-        border-left: 1px solid #ddd;
+        
+        
     }
 
     .nav-sidebar.pull-right a {
-        -webkit-border-radius: 0 4px 4px 0;
-        -moz-border-radius: 0 4px 4px 0;
-        border-radius: 0 4px 4px 0;
+        
     }
 
    .button_connection
    {
-    background-color: white;
+    background-color: #DAD8D8;
     color: black;
     text-overflow: ellipsis;
     text-decoration: none !important;
     white-space: nowrap;
-    width: 148px;
-    overflow: hidden;
+    width: 170px;
+    overflow: hidden !important;
     text-align: justify !important;
     text-decoration:none !important;
+    
+    
    }
-   .button_connection a
+   .button_profile
+   {
+    background-color: #DAD8D8;
+    color: black;
+    text-decoration: none !important;
+    width: 170px;
+    overflow: hidden !important;
+    text-align: justify !important;
+    text-decoration:none !important;
+    padding:10px;  
+    
+    
+   }
+   .button_m{
+    margin-left: -25%;
+   }
+   .button_profile a
    {
     text-decoration: none !important;
+    
    }
-   .button_connection a:hover
+   .button_profile a:hover
    {
     text-decoration: none !important;
     color :black !important;
+     
+   }
+   .button_profile:hover
+   {
+    background-color: #e7e7e7; 
    }
 
    .button_connection:hover 
    {
        background-color: #e7e7e7;   
    }
+.show_home_post{
+    margin-left: -9%;
+}
    .tooltip {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
-
-
 }
 .tooltip .tooltiptext {
     visibility: hidden;

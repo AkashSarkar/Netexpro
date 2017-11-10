@@ -32,7 +32,7 @@
 
 </head>
 
-<body>
+<body style="background-color:#DAD8D8">
     <div id="app">
         <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container">
