@@ -182,11 +182,72 @@
                   <li>
                   <!-- Shows Rate text and icon if post type is Project-->
                     @if($userpost['post_type']=="project")
-                      <a href="#"><i class="fa fa-star" aria-hidden="true"></i>Rate</a>
+                     <a href="#" data-toggle="modal" data-target="#starModal"><i class="glyphicon glyphicon-star"></i>Rate</a>
                     @else
                       <a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
                     @endif
                   <!--End Shows Rate text and icon if post type is Project-->
+
+
+  <!--modal Star rating start  -->
+
+              <div class="modal fade" id="starModal" role="dialog">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                         </div>
+                        <!-- Modal content-->
+                         <form method="post" action="{{ route('rating.store') }}" >
+                            {{ csrf_field() }}
+
+
+                            <input type="hidden" name="_method" value="post">
+                            <input type="hidden" name="post_id" value="{{$userpost['post_id']}}">
+                          
+                           <div class="modal-body">
+                             <div class="stars mt-20 mb-20">
+                           
+                               <input class="star star-5" value="5" id="star-5" type="radio" name="rating"/>
+                               <label class="star star-5" for="star-5"></label>
+                               <input class="star star-4" value="4" id="star-4" type="radio" name="rating"/>
+                               <label class="star star-4" for="star-4"></label>
+                               <input class="star star-3" value="3" id="star-3" type="radio" name="rating"/>
+                               <label class="star star-3" for="star-3"></label>
+                               <input class="star star-2" value="2" id="star-2" type="radio" name="rating"/>
+                               <label class="star star-2" for="star-2"></label>
+                               <input class="star star-1" value="1" id="star-1" type="radio" name="rating"/>
+                               <label class="star star-1" for="star-1"></label>
+                              
+                               
+                               
+                               
+                               
+                             </div>
+            </div>
+            <div class="modal-footer">
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary pull-right" >Post</button>
+              </div>
+            </div>
+            
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+<!-- modal Star rating end-->
+
+
+
+
+
+
+
+
+
+
                   </li>
                   <li>
                     <a href="#">
@@ -732,7 +793,7 @@
                         });
                       });
                 //end sidebar style
-              
+             
 </script>
 
 @endsection

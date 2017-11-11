@@ -57,7 +57,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Imagepost');
     }
 
-
+    
+    public function ratings()
+    {
+        return $this->hasMany('App\Rating');
+    }
 
      
 }

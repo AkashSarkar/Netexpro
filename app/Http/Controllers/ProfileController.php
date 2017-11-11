@@ -29,6 +29,8 @@ class ProfileController extends Controller
 
       $user= User::find(Auth::user()->id);
       $post = Post::where('user_id', Auth::user()->id)->get();
+
+      
       $jobpost = jobpost::where('user_id', Auth::user()->id)->get();
       $useravailablepost = AvailableForJob::where('user_id', Auth::user()->id)->get();
       $post = Post::where('user_id', Auth::user()->id)
@@ -36,7 +38,7 @@ class ProfileController extends Controller
       ->get();
       // $interest = I::where('id', Auth::user()->id)->first();
       $interest= Interest::find(Auth::user()->id);
-      return view('profile.profile_index',['user'=>$user, 'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost ]);
+      return view('profile.profile_index',['user'=>$user, 'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost, 'no_of_project_by_auth_user'=>$no_of_project_by_auth_user ]);
           
       
     }
