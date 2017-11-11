@@ -36,7 +36,7 @@ $(function() {
                     <a href="{{ url('profile') }}">
                         <div class="media-left "><img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                               width="20" height="20" alt="..."></div>
-                        <div class="media-body">
+                        <div class="media-body" data-toggle="tooltip" data-placement="bottom" title="{{$user->firstname }} {{$user->lastname }}" >
                             <h5 class="media-heading"> {{$user->firstname }} {{$user->lastname }}</h5>
                         </div>
                     </a>
@@ -47,16 +47,21 @@ $(function() {
             <br>
               <form  action="{{ route('home.index')}}" >
                {{csrf_field()}}
-               <button type="submit" class="button_connection button_m btn" id="bm" name="connection"  value="{{$interest->profession}}">
-               <i class="fa fa-briefcase" aria-hidden="true"></i> {{$interest->profession}}</button><br>
+               <button type="submit" class="button_connection button_m btn" id="bm" name="connection"  value="{{$interest->profession}}"
+               data-toggle="tooltip" data-placement="bottom" title="{{$interest->profession}}">
+               <i class="fa fa-briefcase" aria-hidden="true"></i></i> {{$interest->profession}}</button><br>
                 
-                <button type="submit" class="button_connection button_m  btn" id="bm1" name="connection" value="{{$interest->industry}}">
+                <button type="submit" class="button_connection button_m  btn" id="bm1" name="connection" value="{{$interest->industry}}"
+                data-toggle="tooltip" data-placement="bottom" title="{{$interest->industry}}">
                 <i class="fa fa-industry" aria-hidden="true"></i> {{$interest->industry}}</button><br>
-                <button type="submit" class="button_connection button_m  btn" id="bm2" name="connection" value="{{$user->education}}">
+
+                <button type="submit" class="button_connection button_m  btn" id="bm2" name="connection" value="{{$user->education}}"
+                data-toggle="tooltip" data-placement="bottom" title="{{$user->education}}">
                 <i class="fa fa-university" aria-hidden="true"></i> {{$user->education}}</button><br>
               </form>
             
           </ul>
+          
         </div>
       </nav>
     </div>
@@ -139,7 +144,7 @@ $(function() {
 
             </div>
           </section>
-          <section class="post-body" style="background-color: #f2f4f7; border-radius: 10px;  padding: 10px">
+          <section class="post-body" style="background-color: #EEEEEE; border-radius: 10px;  padding: 10px">
             <p>{{ $userpost['description'] }} </p>
             
             <!--project show-->
@@ -260,7 +265,7 @@ $(function() {
 
             </div>
           </section>
-          <section class="post-body" style="background-color: #ded5e0; border-radius: 10px; border-style: inset; padding: 10px">
+          <section class="post-body" style="background-color: #D7CCC8; border-radius: 10px; border-style: inset; padding: 10px">
             <h4 style="font-weight:bold;">******job seeking post******</h4>
             <p>
               <li>Position :
@@ -375,7 +380,7 @@ $(function() {
 
             </div>
           </section>
-          <section class="post-body" style="background-color: #d4fcbd; border-radius: 10px; border-style: outset; padding: 10px">
+          <section class="post-body" style="background-color: #CFD8DC; border-radius: 10px; border-style: outset; padding: 10px">
             <h4 style="font-weight:bold;">******Hiring post******</h4>
             <p>
               <li>Position :
@@ -544,17 +549,33 @@ $(function() {
                       </label>
                     </div>
                    
+              
+                  </ul>
+                </div>
+
+                <button type="submit" class="btn btn-primary pull-right" >Post</button>
+
+                
+              <span id="box"></span>
+              </div>
+
               <script type="text/javascript">
                //shows projects fields
                 $(document).ready(function(){
+<<<<<<< HEAD
                     $("#show_porjectFields").hide();
                     $('#url').removeAttr('required');
+=======
+                  $("#show_porjectFields").hide();
+                   $('#url').removeAttr('required');
+>>>>>>> b87f240e1b80e05e0a27fc80952be2c57cb60948
                    $("input[name='post_type']").click(function(){
                     var post_type=$("input[name='post_type']:checked").val();
                     if(post_type=="project")
                     {
-                      $("#show_porjectFields").show();
                        $('#url').Attr('required',true);
+                      $("#show_porjectFields").show();
+                      
                     }
                       
                     else{
@@ -588,6 +609,7 @@ $(function() {
                 
               
               </script>
+<<<<<<< HEAD
 
 
                   </ul>
@@ -598,6 +620,8 @@ $(function() {
                 
               <span id="box"></span>
               </div>
+=======
+>>>>>>> b87f240e1b80e05e0a27fc80952be2c57cb60948
               
               
               <ul class="nav nav-pills pull-left">
@@ -645,6 +669,7 @@ $(function() {
     <!--end Modal-->
   </div>
 </div>
+<<<<<<< HEAD
 @endsection
 
 <script>
@@ -652,3 +677,12 @@ $(function() {
       document.getElementById('my_images').click();
     }
 </script>
+=======
+
+<script>
+              $(document).ready(function(){
+                  $('[data-toggle="tooltip"]').tooltip();   
+              });
+          </script>
+@endsection
+>>>>>>> b87f240e1b80e05e0a27fc80952be2c57cb60948
