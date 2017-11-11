@@ -20,6 +20,8 @@
   <div class="fb-profile-text">
     <h1>{{ $user->firstname }} </h1>
     <p>{{ $interest->profession }}</p>
+                  
+
   </div>
 
   <div class="row" style="padding-top: 10px;">

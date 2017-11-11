@@ -26,6 +26,8 @@ class ProfileController extends Controller
 
       $user= User::find(Auth::user()->id);
       $post = Post::where('user_id', Auth::user()->id)->get();
+
+      
       $jobpost = jobpost::where('user_id', Auth::user()->id)->get();
       $useravailablepost = AvailableForJob::where('user_id', Auth::user()->id)->get();
       $post = Post::where('user_id', Auth::user()->id)

@@ -29,5 +29,9 @@ class Post extends Model
     {
         return $this->hasMany('App\Imagepost');
     }
+      public function ratings()
+    {
+        return $this->hasMany('App\Rating');
+    }
     
 }

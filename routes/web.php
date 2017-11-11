@@ -33,7 +33,8 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('jobpost', 'JobpostController');
     Route::resource('availableforjob', 'AvailableForJobController');
 
-
+    Route::post('/rating', 'RatingController@index');
+    Route::resource('rating', 'RatingController');
    // Route::get('profile', 'ProfileController@index');
   //  Route::post('profile', 'ProfileController@update_avatar');
     Route::resource('post', 'PostController');
