@@ -10,6 +10,7 @@ use App\jobpost;
 use App\AvailableForJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Imagepost;
 use Image;
 
 class ProfileController extends Controller
@@ -21,11 +22,7 @@ class ProfileController extends Controller
      */
     public function index()
      {
-        
-       // $user = User::where('id', $user->id)->first();
-       // dd($user);
-
-       // $user = User::where('id', Auth::user()->id)->first();
+      $images=Imagepost::all();
 
       $user= User::find(Auth::user()->id);
       $post = Post::where('user_id', Auth::user()->id)->get();
@@ -34,20 +31,12 @@ class ProfileController extends Controller
       $post = Post::where('user_id', Auth::user()->id)
       ->orderBy('created_at','desc')
       ->get();
-      // $interest = I::where('id', Auth::user()->id)->first();
+      
       $interest= Interest::find(Auth::user()->id);
-      return view('profile.profile_index',['user'=>$user, 'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost ]);
+      return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost ]);
           
       
     }
-
-            public function update_avatar(Request $request){
-        
-               // Logic for user upload of avatar
-            
-               
-        
-           }
 
 
     /**
@@ -69,9 +58,9 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         //
-         $check=0;
-
-         if($request->hasFile('cover'))
+              $check=0;
+         
+              if($request->hasFile('cover'))
                {
                    $cover = $request->file('cover');
                    $filename = time() . '.' . $cover->getClientOriginalExtension();
@@ -96,13 +85,12 @@ class ProfileController extends Controller
                 $check=1;
                 return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
                }
-              // else{
+            //  else{
               //  return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('errors','Something went wrong,please try again');
-             //  }
+        // }
 
-               if($check==0){
-
-                 $id=time();
+        if($check==0){
+          $id=time();
        
         if(Auth::check()){
             $request->validate([
@@ -115,22 +103,44 @@ class ProfileController extends Controller
                 'post_type'=>$request->input('post_type'),
                 'user_id'=>Auth::user()->id
             ]);
+            
            
             $visibility=Visibility::create([
                 
                'visibilities_type'=>json_encode($request->input('type')),
                 'post_id'=>$id
             ]);
-            
+           
           if($post)
-               { return redirect()->route('profile.index', ['user_id'=> Auth::user()->id])
+               { 
+                
+                   
+                if ($request->hasFile('post_images'))
+                {
+                   
+        
+                    foreach($request->post_images as $images)
+                    {
+        
+                        $filename = time() . '.' .$images->getClientOriginalName();
+                        Image::make($images)->save( public_path('/uploads/postimages/' . $filename ) );
+                        
+                        $imagepost = Imagepost::create([
+                            'post_id'=>$id,
+                            'post_image' => $filename,
+                        ]);
+        
+                    } 
+        
+                return redirect()->route('profile.index', ['user_id'=> Auth::user()->id])
                 ->with('success' , 'Successfully Post');
                }
             
         }
-        return back()->withInput();
+           return back()->withInput();
                }
     }
+}
 
     /**
      * Display the specified resource.
@@ -141,8 +151,6 @@ class ProfileController extends Controller
     public function show(User $user)
     {
         //
-      
-   
     }
 
     /**

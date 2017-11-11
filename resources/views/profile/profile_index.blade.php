@@ -276,6 +276,29 @@
               </div>
             @endif
             <!-- end project show-->
+
+                     <!--image show-->
+                     @foreach($images as $imgpost)
+                            @if( $post['post_id']==$imgpost->post_id)
+                               <h4>Project Images : </h4>
+                                  <div class=" row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="well well-sm">
+                                          
+                                                  @foreach($images as $imagepost)
+                                                    @if($post['post_id']==$imagepost->post_id)
+                                                    <img class="fb-image-lg" 
+                                                      src="/uploads/postimages/{{$imagepost->post_image}}" alt="Project image "
+                                                      style="height:100px;width:20%;"/>
+                                                    @endif
+                                                  @endforeach
+                                            </div>
+                                        </div>
+                                      </div>
+                                @break;
+                            @endif
+                       @endforeach
+                      <!-- end image show-->
           </section>
 
           <section class="post-footer">
@@ -596,7 +619,7 @@
         </div>
       </div>
 
-      <form method="post" action="{{ route('profile.store')  }}">
+      <form method="post" enctype="multipart/form-data" action="{{ route('profile.store')  }}">
         {{ csrf_field() }}
         <input type="hidden" name="_method" value="post">
 
@@ -605,11 +628,8 @@
           <div class="col-md-12">
             Post type :
             <input type="radio" name="post_type" value="status" checked> Status
-            <input type="radio" name="post_type" value="project"> Project @if ($errors->has('post_type'))
-            <span class="help-block">
-              <strong>{{ $errors->first('post_type') }}</strong>
-            </span>
-            @endif
+            <input type="radio" name="post_type" value="project"> Project 
+            
           </div>
 
           <div class="form-group col-md-12">
@@ -623,6 +643,11 @@
           <div class="form-group col-md-12" id="show_porjectFields">
             <input id="url" class="form-control input-lg p-text-area" placeholder="URL" name="url" style="resize: none;" required>
           </div>
+
+
+          <div class="form-group col-md-12" >
+                <p id="show_imageFields" style="font-weight:700;"> </p>
+            </div>
 
         </div>
 
@@ -667,7 +692,82 @@
                 <button type="submit" class="btn btn-primary pull-right" >Post</button>
               </div>
 
-          <script type="text/javascript">
+
+
+          <ul class="nav nav-pills pull-left">
+            <li id="tooltip">
+              <a href="#">
+                <i class="fa fa-map-marker">
+                  <span id="tooltiptext">Check-in</span>
+                </i>
+              </a>
+            </li>
+            <li id="tooltip">
+            <a href="#">
+            <span onclick="upload_image()">
+              <i class="fa fa-camera">
+                <span id="tooltiptext">Upload image</span>
+              </i>
+              </span>
+             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input id="my_images" type="file" name="post_images[]" multiple="true" style="display: none;">
+            </a>
+          </li>
+            <li id="tooltip">
+              <a href="#">
+                <i class="fa fa-film">
+                  <span id="tooltiptext">Upload video</span>
+                </i>
+              </a>
+            </li>
+            <li id="tooltip">
+              <a href="#">
+                <i class="fa fa-microphone">
+                  <span id="tooltiptext">Record voice</span>
+                </i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+<!--end Modal for post area-->
+
+
+
+
+<script type="text/javascript">
+  function update_cover() {
+    document.getElementById('my_file').click();
+  }
+
+
+
+  function update_profile() {
+    document.getElementById('myprofilepic').click();
+  }
+
+  function upload_image()
+  {
+    document.getElementById('my_images').click();
+  }
+     //image show while select
+     
+  $(document).ready(function(){
+    $('input[type="file"]').change(function(e){          
+      var fileName = e.target.files;
+      $('#show_imageFields').html(fileName.length +" Images Selected");
+      /*for(var i=0;i<fileName.length;i++){
+        console.log(fileName[i].name);
+      }*/
+    });
+  });
+                //end image show while select
+
            //shows projects fields
                 $(document).ready(function(){
                     $("#show_porjectFields").hide();
@@ -749,60 +849,6 @@
                   });
                 });
           </script>
-
-          <ul class="nav nav-pills pull-left">
-            <li id="tooltip">
-              <a href="#">
-                <i class="fa fa-map-marker">
-                  <span id="tooltiptext">Check-in</span>
-                </i>
-              </a>
-            </li>
-            <li id="tooltip">
-              <a href="#">
-                <i class="fa fa-camera">
-                  <span id="tooltiptext">Upload image</span>
-                </i>
-              </a>
-            </li>
-            <li id="tooltip">
-              <a href="#">
-                <i class="fa fa-film">
-                  <span id="tooltiptext">Upload video</span>
-                </i>
-              </a>
-            </li>
-            <li id="tooltip">
-              <a href="#">
-                <i class="fa fa-microphone">
-                  <span id="tooltiptext">Record voice</span>
-                </i>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-      </form>
-    </div>
-
-  </div>
-</div>
-<!--end Modal for post area-->
-
-
-
-
-<script type="text/javascript">
-  function update_cover() {
-    document.getElementById('my_file').click();
-  }
-
-
-
-  function update_profile() {
-    document.getElementById('myprofilepic').click();
-  }
-</script>
 
 
 
