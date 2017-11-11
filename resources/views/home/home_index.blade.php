@@ -1,4 +1,5 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app')
+ @section('content')
 <!--style-->
 <style>
 
@@ -516,7 +517,7 @@ $(function() {
              <div class="form-group col-md-12" id="show_porjectFields">
                 <input id="url" class="form-control input-lg p-text-area"  placeholder="URL" name="url"
                   style="resize: none;" required >
-              </div>
+            </div>
              
             </div>
 
@@ -553,7 +554,7 @@ $(function() {
                   </ul>
                 </div>
 
-                <button type="submit" class="btn btn-primary pull-right" >Post</button>
+               <!-- <button type="submit" class="btn btn-primary pull-right" >Post</button>-->
 
                 
               <span id="box"></span>
@@ -562,18 +563,14 @@ $(function() {
               <script type="text/javascript">
                //shows projects fields
                 $(document).ready(function(){
-<<<<<<< HEAD
                     $("#show_porjectFields").hide();
                     $('#url').removeAttr('required');
-=======
-                  $("#show_porjectFields").hide();
-                   $('#url').removeAttr('required');
->>>>>>> b87f240e1b80e05e0a27fc80952be2c57cb60948
                    $("input[name='post_type']").click(function(){
                     var post_type=$("input[name='post_type']:checked").val();
+                    console.log('hello');
                     if(post_type=="project")
                     {
-                       $('#url').Attr('required',true);
+                       $('#url').attr('required');
                       $("#show_porjectFields").show();
                       
                     }
@@ -585,10 +582,10 @@ $(function() {
                      
                     }
                       
-                  });
+                  
                 });
                 
-                
+                });
                 //handles visivility validation
                 $(function(){
 
@@ -609,19 +606,6 @@ $(function() {
                 
               
               </script>
-<<<<<<< HEAD
-
-
-                  </ul>
-                </div>
-
-             
-
-                
-              <span id="box"></span>
-              </div>
-=======
->>>>>>> b87f240e1b80e05e0a27fc80952be2c57cb60948
               
               
               <ul class="nav nav-pills pull-left">
@@ -640,7 +624,7 @@ $(function() {
                     </i>
                     </span>
                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input id="my_images" type="file" name="post_images[]" multiple="true" style="display: block;">
+                    <input id="my_images" type="file" name="post_images[]" multiple="true" style="display: none;">
                   </a>
                 </li>
                 <li id="tooltip">
@@ -658,7 +642,7 @@ $(function() {
                   </a>
                 </li>
               </ul>
-              <button type="submit" class="btn btn-primary pull-right" >Post</button>
+              <button type="submit" class="btn btn-primary pull-right" style="margin-top:-15px;">Post</button>
             </div>
             
           </form>
@@ -669,20 +653,14 @@ $(function() {
     <!--end Modal-->
   </div>
 </div>
-<<<<<<< HEAD
-@endsection
+
 
 <script>
     function upload_image(){
       document.getElementById('my_images').click();
     }
+  $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+  });
 </script>
-=======
-
-<script>
-              $(document).ready(function(){
-                  $('[data-toggle="tooltip"]').tooltip();   
-              });
-          </script>
 @endsection
->>>>>>> b87f240e1b80e05e0a27fc80952be2c57cb60948
