@@ -5,21 +5,6 @@
 
 </style>
 <!--script-->
-<script>
-$(function() {
-  $(window).resize(function () {
-    if (window.innerWidth <1022) {
-      $("#h_post").removeClass("show_home_post");
-      $("#bp").removeClass("button_m");
-      $("#bm").removeClass("button_m");
-      $("#bm1").removeClass("button_m");
-      $("#bm2").removeClass("button_m");
-     // $("#bp").removeClass("button_profile");
-      
-    }
-  });
-});
-</script>
 <!--end script -->
 <!--End Style-->
 <!--Main content-->
@@ -145,37 +130,52 @@ $(function() {
 
             </div>
           </section>
-          <section class="post-body" style="background-color: #EEEEEE; border-radius: 10px;  padding: 10px">
-            <p>{{ $userpost['description'] }} </p>
+          <section class="post-body well well-sm " style="background-color: #EEEEEE; border-radius: 4px;  ">
+            
+            <div class=" row">
+                <div class="col-md-12">
+                  <div class="well well-sm">
+                  <p style="font-size:18px;font-weight:400;">{{ $userpost['description'] }} </p>
+                    </div>
+                </div>
+              </div>
             
             <!--project show-->
             @if($userpost['post_type']=="project")
+            <h4>URL :</h4>
               <div class=" row">
                 <div class="col-md-12">
-                  <a href="{{ $userpost['url'] }} "> {{ $userpost['url'] }}</a>
+                  <div class="well well-md">
+                    <a href="{{ $userpost['url'] }} "> {{ $userpost['url'] }}</a>
+                    </div>
                 </div>
               </div>
             @endif
             <!-- end project show-->
               <!--image show-->
-            
-              <div class=" row">
-                <div class="col-md-12">
-                
-                @foreach($images as $imagepost)
-                  @if( $userpost['post_id']==$imagepost->post_id)
-                  <img class="fb-image-sm" 
-                    src="/uploads/postimages/{{$imagepost->post_image}}" alt="Project image "
-                   style="height:400px;width:100%;"/>
+              @foreach($images as $imgpost)
+                  @if( $userpost['post_id']==$imgpost->post_id)
+                     <h4>Project Images : </h4>
+                        <div class=" row">
+                              <div class="col-md-12 col-lg-12">
+                                  <div class="well well-sm">
+                                
+                                        @foreach($images as $imagepost)
+                                          @if( $userpost['post_id']==$imagepost->post_id)
+                                          <img class="fb-image-lg" 
+                                            src="/uploads/postimages/{{$imagepost->post_image}}" alt="Project image "
+                                            style="height:100px;width:20%;"/>
+                                          @endif
+                                        @endforeach
+                                  </div>
+                              </div>
+                            </div>
+                      @break;
                   @endif
-                @endforeach
-
-                </div>
-              </div>
-      
+             @endforeach
             <!-- end image show-->
           </section>
-
+           <hr>
           <section class="post-footer">
             <div class="row">
               <div class="col-md-12">
@@ -266,7 +266,7 @@ $(function() {
 
             </div>
           </section>
-          <section class="post-body" style="background-color: #D7CCC8; border-radius: 10px; border-style: inset; padding: 10px">
+          <section class="post-body well well-lg" style="background-color: #D7CCC8; border-radius: 4px;">
             <h4 style="font-weight:bold;">******job seeking post******</h4>
             <p>
               <li>Position :
@@ -294,7 +294,7 @@ $(function() {
 
 
           </section>
-
+          <hr>
           <section class="post-footer">
             <div class="row">
               <div class="col-md-12">
@@ -381,7 +381,7 @@ $(function() {
 
             </div>
           </section>
-          <section class="post-body" style="background-color: #CFD8DC; border-radius: 10px; border-style: outset; padding: 10px">
+          <section class="post-body well well-lg" style="background-color: #CFD8DC; border-radius: 5px; border-style: outset;">
             <h4 style="font-weight:bold;">******Hiring post******</h4>
             <p>
               <li>Position :
@@ -420,7 +420,7 @@ $(function() {
             </p>
 
           </section>
-
+          <hr>
           <section class="post-footer">
             <div class="row">
               <div class="col-md-12">
@@ -652,6 +652,23 @@ $(function() {
                  $(document).ready(function(){
                   $('[data-toggle="tooltip"]').tooltip();   
                 });
+
+
+                //sidebar button style
+                $(function() {
+                        $(window).resize(function () {
+                          if (window.innerWidth <1022) {
+                            $("#h_post").removeClass("show_home_post");
+                            $("#bp").removeClass("button_m");
+                            $("#bm").removeClass("button_m");
+                            $("#bm1").removeClass("button_m");
+                            $("#bm2").removeClass("button_m");
+                          // $("#bp").removeClass("button_profile");
+                            
+                          }
+                        });
+                      });
+                //end sidebar style
               
 </script>
 
