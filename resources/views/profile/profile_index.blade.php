@@ -630,74 +630,124 @@
 
           <div class="form-group">
 
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle pull-right" 
-              type="button" data-toggle="dropdown" style="margin-left:10px;">Visibility
-                <span class="caret"></span>
-              </button>
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle pull-right" 
+                    type="button" data-toggle="dropdown"  id="btn_text" style="margin-left:10px;">
+                   
+                  </button>
+                    
+                  <ul class="dropdown-menu pull-right" style="padding-left:10px ;" >
 
-              <ul class="dropdown-menu pull-right" style="padding-left:10px ;">
+                    <div >
+                      <label>
+                        <input type="checkbox" id="selectall" checked > All Connection
+                      </label>
+                    </div>
 
-
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="type[]" value="{{$interest->profession}}"  required> {{$interest->profession}}
-                  </label>
+                    <div>
+                      <label>
+                        <input type="checkbox" id="checkItem1" class="checkItem" name="type[]" value="{{$interest->profession}}" checked required> {{$interest->profession}}
+                      </label>
+                    </div>
+                    <div >
+                      <label>
+                        <input type="checkbox" id="checkItem2" class="checkItem" name="type[]" value="{{$interest->industry}}" checked required> {{$interest->industry}}
+                      </label>
+                    </div>
+                    <div >
+                      <label>
+                        <input type="checkbox" id="checkItem3" class="checkItem" name="type[]" value="{{$user->education}}" checked required> {{$user->education}}
+                      </label>
+                    </div>
+                   
+              
+                  </ul>
                 </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="type[]" value="{{$interest->industry}}"  required> {{$interest->industry}}
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="type[]" value="{{$user->education}}"  required> {{$user->education}}
-                  </label>
-                </div>
 
-
-
-              </ul>
-            </div>
-
-            <button type="submit" class="btn btn-primary pull-right">Post</button>
-
-          </div>
+                <button type="submit" class="btn btn-primary pull-right" >Post</button>
+              </div>
 
           <script type="text/javascript">
-            //shows projects fields
-            $(document).ready(function () {
-              $("#show_porjectFields").hide();
-              $("input[name='post_type']").click(function () {
-                var post_type = $("input[name='post_type']:checked").val();
-                if (post_type == "project") {
-                  $("#show_porjectFields").show();
-                  $('#url').Attr('required', true);
-                } else {
+           //shows projects fields
+                $(document).ready(function(){
+                    $("#show_porjectFields").hide();
+                    $('#url').removeAttr('required');
+                   $("input[name='post_type']").click(function(){
+                    var post_type=$("input[name='post_type']:checked").val();
+                    if(post_type =="project")
+                    {
+                       $('#url').attr('required',true);
+                      $("#show_porjectFields").show();
+                      
+                    }
+                      
+                    else{
+                      
+                      $('#url').removeAttr('required');
+                      $("#show_porjectFields").hide();
+                     
+                    }
+                      
+                  });
 
-                  $('#url').removeAttr('required');
-                  $("#show_porjectFields").hide();
+                  //select all check box
 
-                }
+              $("#btn_text").html("All Connection  <span class='caret'></span>");
+               $("#selectall").click(function(){
+                 $("#btn_text").html("All Connection  <span class='caret'></span>");
+                    if(this.checked){
+                      
+                        $('.checkItem').each(function(){
+                        this.checked = true;
+                        
+                        
+                    })
+                    }else{
+                      $("#btn_text").html("Select Connection <span class='caret'></span>");
+                         $('.checkItem').each(function(){
+                            this.checked = false;
+                         })
+                      }
+                  });
 
-              });
-            });
+                  $(".checkItem").click(function(){
+                    $('#selectall').removeAttr('checked');
+                    $('.checkItem').removeAttr('checked');
+                    var checkedItems=$('.checkItem:checked');
+                    if(checkedItems.length >0)
+                    {
+                      var res="";
+                      checkedItems.each(function (){
+                        res+=$(this).val() +" ";
+                      });
+                      $("#btn_text").html(res +"<span class='caret'></span>");
+                    }else{
+                      $("#btn_text").html(checkedItem.val() +"<span class='caret'></span>");
+                    }
+                    
+                    
+                  });
+               
+                //end select all check box
+                });
+                
+                
+                //handles visivility validation
+                $(function(){
 
+                  var requiredCheckboxes = $(':checkbox[required]');
+                  requiredCheckboxes.change(function(){
 
-            //handles visivility validation
-            $(function () {
+                  if(requiredCheckboxes.is(':checked')) {
+                    requiredCheckboxes.removeAttr('required');
+                  }
 
-              var requiredCheckboxes = $(':checkbox[required]');
-              requiredCheckboxes.change(function () {
-
-                if (requiredCheckboxes.is(':checked')) {
-                  requiredCheckboxes.removeAttr('required');
-                } else {
-                  requiredCheckboxes.attr('required', 'required');
-
-                }
-              });
-            });
+                   else {
+                     requiredCheckboxes.attr('required', 'required');
+                     
+                     }
+                  });
+                });
           </script>
 
           <ul class="nav nav-pills pull-left">

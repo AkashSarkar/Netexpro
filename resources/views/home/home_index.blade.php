@@ -527,26 +527,31 @@ $(function() {
 
                 <div class="dropdown">
                   <button class="btn btn-primary dropdown-toggle pull-right" 
-                    type="button" data-toggle="dropdown" style="margin-left:10px;">Visibility
-                    <span class="caret"></span>
+                    type="button" data-toggle="dropdown"  id="btn_text" style="margin-left:10px;">
+                   
                   </button>
                     
                   <ul class="dropdown-menu pull-right" style="padding-left:10px ;" >
 
+                    <div >
+                      <label>
+                        <input type="checkbox" id="selectall" checked > All Connection
+                      </label>
+                    </div>
 
-                    <div class="checkbox" >
+                    <div>
                       <label>
-                        <input type="checkbox" name="type[]" value="{{$interest->profession}}" required> {{$interest->profession}}
+                        <input type="checkbox" id="checkItem1" class="checkItem" name="type[]" value="{{$interest->profession}}" checked required> {{$interest->profession}}
                       </label>
                     </div>
-                    <div class="checkbox">
+                    <div >
                       <label>
-                        <input type="checkbox" name="type[]" value="{{$interest->industry}}" required> {{$interest->industry}}
+                        <input type="checkbox" id="checkItem2" class="checkItem" name="type[]" value="{{$interest->industry}}" checked required> {{$interest->industry}}
                       </label>
                     </div>
-                    <div class="checkbox">
+                    <div >
                       <label>
-                        <input type="checkbox" name="type[]" value="{{$user->education}}" required> {{$user->education}}
+                        <input type="checkbox" id="checkItem3" class="checkItem" name="type[]" value="{{$user->education}}" checked required> {{$user->education}}
                       </label>
                     </div>
                    
@@ -625,6 +630,46 @@ $(function() {
                     }
                       
                   });
+
+                  //select all check box
+
+              $("#btn_text").html("All Connection  <span class='caret'></span>");
+               $("#selectall").click(function(){
+                 $("#btn_text").html("All Connection  <span class='caret'></span>");
+                    if(this.checked){
+                      
+                        $('.checkItem').each(function(){
+                        this.checked = true;
+                        
+                        
+                    })
+                    }else{
+                      $("#btn_text").html("Select Connection <span class='caret'></span>");
+                         $('.checkItem').each(function(){
+                            this.checked = false;
+                         })
+                      }
+                  });
+
+                  $(".checkItem").click(function(){
+                    $('#selectall').removeAttr('checked');
+                    $('.checkItem').removeAttr('checked');
+                    var checkedItems=$('.checkItem:checked');
+                    if(checkedItems.length >0)
+                    {
+                      var res="";
+                      checkedItems.each(function (){
+                        res+=$(this).val() +" ";
+                      });
+                      $("#btn_text").html(res +"<span class='caret'></span>");
+                    }else{
+                      $("#btn_text").html(checkedItem.val() +"<span class='caret'></span>");
+                    }
+                    
+                    
+                  });
+               
+                //end select all check box
                 });
                 
                 
@@ -644,6 +689,8 @@ $(function() {
                      }
                   });
                 });
+
+                
 
                  function upload_image(){
                   document.getElementById('my_images').click();
