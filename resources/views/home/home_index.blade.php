@@ -554,60 +554,9 @@ $(function() {
                   </ul>
                 </div>
 
-               <!-- <button type="submit" class="btn btn-primary pull-right" >Post</button>-->
-
-                
-              <span id="box"></span>
+                <button type="submit" class="btn btn-primary pull-right" >Post</button>
               </div>
 
-              <script type="text/javascript">
-               //shows projects fields
-                $(document).ready(function(){
-                    $("#show_porjectFields").hide();
-                    $('#url').removeAttr('required');
-                   $("input[name='post_type']").click(function(){
-                    var post_type=$("input[name='post_type']:checked").val();
-                    console.log('hello');
-                    if(post_type=="project")
-                    {
-                       $('#url').attr('required');
-                      $("#show_porjectFields").show();
-                      
-                    }
-                      
-                    else{
-                      
-                      $('#url').removeAttr('required');
-                      $("#show_porjectFields").hide();
-                     
-                    }
-                      
-                  
-                });
-                
-                });
-                //handles visivility validation
-                $(function(){
-
-                  var requiredCheckboxes = $(':checkbox[required]');
-                  requiredCheckboxes.change(function(){
-
-                  if(requiredCheckboxes.is(':checked')) {
-                    requiredCheckboxes.removeAttr('required');
-                  }
-
-                   else {
-                     requiredCheckboxes.attr('required', 'required');
-                     
-                     }
-                  });
-                });
-
-                
-              
-              </script>
-              
-              
               <ul class="nav nav-pills pull-left">
                 <li id="tooltip">
                   <a href="#">
@@ -642,7 +591,7 @@ $(function() {
                   </a>
                 </li>
               </ul>
-              <button type="submit" class="btn btn-primary pull-right" style="margin-top:-15px;">Post</button>
+              
             </div>
             
           </form>
@@ -654,13 +603,56 @@ $(function() {
   </div>
 </div>
 
+<script type="text/javascript">
+               //shows projects fields
+                $(document).ready(function(){
+                    $("#show_porjectFields").hide();
+                    $('#url').removeAttr('required');
+                   $("input[name='post_type']").click(function(){
+                    var post_type=$("input[name='post_type']:checked").val();
+                    if(post_type =="project")
+                    {
+                       $('#url').attr('required',true);
+                      $("#show_porjectFields").show();
+                      
+                    }
+                      
+                    else{
+                      
+                      $('#url').removeAttr('required');
+                      $("#show_porjectFields").hide();
+                     
+                    }
+                      
+                  });
+                });
+                
+                
+                //handles visivility validation
+                $(function(){
 
-<script>
-    function upload_image(){
-      document.getElementById('my_images').click();
-    }
-  $(document).ready(function(){
-      $('[data-toggle="tooltip"]').tooltip();   
-  });
+                  var requiredCheckboxes = $(':checkbox[required]');
+                  requiredCheckboxes.change(function(){
+
+                  if(requiredCheckboxes.is(':checked')) {
+                    requiredCheckboxes.removeAttr('required');
+                  }
+
+                   else {
+                     requiredCheckboxes.attr('required', 'required');
+                     
+                     }
+                  });
+                });
+
+                 function upload_image(){
+                  document.getElementById('my_images').click();
+                }
+
+                 $(document).ready(function(){
+                  $('[data-toggle="tooltip"]').tooltip();   
+                });
+              
 </script>
+
 @endsection
