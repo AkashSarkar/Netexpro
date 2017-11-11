@@ -554,76 +554,8 @@ $(function() {
                 </div>
 
                 <button type="submit" class="btn btn-primary pull-right" >Post</button>
-
-                
-              <span id="box"></span>
               </div>
 
-              <script type="text/javascript">
-               //shows projects fields
-                $(document).ready(function(){
-<<<<<<< HEAD
-                    $("#show_porjectFields").hide();
-                    $('#url').removeAttr('required');
-=======
-                  $("#show_porjectFields").hide();
-                   $('#url').removeAttr('required');
->>>>>>> b87f240e1b80e05e0a27fc80952be2c57cb60948
-                   $("input[name='post_type']").click(function(){
-                    var post_type=$("input[name='post_type']:checked").val();
-                    if(post_type=="project")
-                    {
-                       $('#url').Attr('required',true);
-                      $("#show_porjectFields").show();
-                      
-                    }
-                      
-                    else{
-                      
-                      $('#url').removeAttr('required');
-                      $("#show_porjectFields").hide();
-                     
-                    }
-                      
-                  });
-                });
-                
-                
-                //handles visivility validation
-                $(function(){
-
-                  var requiredCheckboxes = $(':checkbox[required]');
-                  requiredCheckboxes.change(function(){
-
-                  if(requiredCheckboxes.is(':checked')) {
-                    requiredCheckboxes.removeAttr('required');
-                  }
-
-                   else {
-                     requiredCheckboxes.attr('required', 'required');
-                     
-                     }
-                  });
-                });
-
-                
-              
-              </script>
-<<<<<<< HEAD
-
-
-                  </ul>
-                </div>
-
-             
-
-                
-              <span id="box"></span>
-              </div>
-=======
->>>>>>> b87f240e1b80e05e0a27fc80952be2c57cb60948
-              
-              
               <ul class="nav nav-pills pull-left">
                 <li id="tooltip">
                   <a href="#">
@@ -658,7 +590,7 @@ $(function() {
                   </a>
                 </li>
               </ul>
-              <button type="submit" class="btn btn-primary pull-right" >Post</button>
+              
             </div>
             
           </form>
@@ -669,20 +601,57 @@ $(function() {
     <!--end Modal-->
   </div>
 </div>
-<<<<<<< HEAD
-@endsection
 
-<script>
-    function upload_image(){
-      document.getElementById('my_images').click();
-    }
-</script>
-=======
+<script type="text/javascript">
+               //shows projects fields
+                $(document).ready(function(){
+                    $("#show_porjectFields").hide();
+                    $('#url').removeAttr('required');
+                   $("input[name='post_type']").click(function(){
+                    var post_type=$("input[name='post_type']:checked").val();
+                    if(post_type =="project")
+                    {
+                       $('#url').attr('required',true);
+                      $("#show_porjectFields").show();
+                      
+                    }
+                      
+                    else{
+                      
+                      $('#url').removeAttr('required');
+                      $("#show_porjectFields").hide();
+                     
+                    }
+                      
+                  });
+                });
+                
+                
+                //handles visivility validation
+                $(function(){
 
-<script>
-              $(document).ready(function(){
+                  var requiredCheckboxes = $(':checkbox[required]');
+                  requiredCheckboxes.change(function(){
+
+                  if(requiredCheckboxes.is(':checked')) {
+                    requiredCheckboxes.removeAttr('required');
+                  }
+
+                   else {
+                     requiredCheckboxes.attr('required', 'required');
+                     
+                     }
+                  });
+                });
+
+                 function upload_image(){
+                  document.getElementById('my_images').click();
+                }
+
+                 $(document).ready(function(){
                   $('[data-toggle="tooltip"]').tooltip();   
-              });
-          </script>
+                });
+              
+</script>
+
 @endsection
->>>>>>> b87f240e1b80e05e0a27fc80952be2c57cb60948
