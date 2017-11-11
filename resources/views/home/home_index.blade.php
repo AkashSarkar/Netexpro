@@ -109,7 +109,8 @@ $(function() {
         </div>
       </div>
       <!--postshow-->
-      @if($posts!=null) @foreach($posts as $userpost)
+      @if($posts!=null) 
+      @foreach($posts as $userpost)
       <div class="panel panel-default">
         <div class="panel-body">
           <section class="post-heading">
@@ -150,6 +151,23 @@ $(function() {
               </div>
             @endif
             <!-- end project show-->
+              <!--image show-->
+            
+              <div class=" row">
+                <div class="col-md-12">
+                
+                @foreach($images as $imagepost)
+                  @if( $userpost['post_id']==$imagepost->post_id)
+                  <img class="fb-image-sm" 
+                    src="/uploads/postimages/{{$imagepost->post_image}}" alt="Project image "
+                   style="height:400px;width:100%;"/>
+                  @endif
+                @endforeach
+
+                </div>
+              </div>
+      
+            <!-- end image show-->
           </section>
 
           <section class="post-footer">
@@ -466,7 +484,7 @@ $(function() {
               <button type="button" class="btn btn-link">Make post</button>
             </div>
           </div>
-          <form method="post" action="{{ route('post.store') }}">
+          <form enctype="multipart/form-data" method="post" action="{{ route('post.store') }}" >
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="post">
             <div class="modal-body row">
@@ -529,7 +547,8 @@ $(function() {
               <script type="text/javascript">
                //shows projects fields
                 $(document).ready(function(){
-                  $("#show_porjectFields").hide();
+                    $("#show_porjectFields").hide();
+                    $('#url').removeAttr('required');
                    $("input[name='post_type']").click(function(){
                     var post_type=$("input[name='post_type']:checked").val();
                     if(post_type=="project")
@@ -574,7 +593,7 @@ $(function() {
                   </ul>
                 </div>
 
-                <button type="submit" class="btn btn-primary pull-right" >Post</button>
+             
 
                 
               <span id="box"></span>
@@ -591,9 +610,13 @@ $(function() {
                 </li>
                 <li id="tooltip">
                   <a href="#">
+                  <span onclick="upload_image()">
                     <i class="fa fa-camera">
                       <span id="tooltiptext">Upload image</span>
                     </i>
+                    </span>
+                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input id="my_images" type="file" name="post_images[]" multiple="true" style="display: block;">
                   </a>
                 </li>
                 <li id="tooltip">
@@ -611,7 +634,9 @@ $(function() {
                   </a>
                 </li>
               </ul>
+              <button type="submit" class="btn btn-primary pull-right" >Post</button>
             </div>
+            
           </form>
         </div>
       </div>
@@ -621,3 +646,9 @@ $(function() {
   </div>
 </div>
 @endsection
+
+<script>
+    function upload_image(){
+      document.getElementById('my_images').click();
+    }
+</script>

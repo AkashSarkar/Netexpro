@@ -25,4 +25,9 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
+    public function imagepost()
+    {
+        return $this->hasMany('App\Imagepost');
+    }
+    
 }

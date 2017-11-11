@@ -5,6 +5,8 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
 use App\Visibility;
+use App\Imagepost;
+use Image;
 
 class PostController extends Controller
 {
@@ -29,19 +31,20 @@ class PostController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         //
+
+     
+
+
     
        $id=time();
        
         if(Auth::check()){
+            
+
             $request->validate([
                 "type"=> 'required'
             ]);
@@ -60,7 +63,25 @@ class PostController extends Controller
             ]);
             
           if($post)
-               { return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
+               {
+                    if ($request->hasFile('post_images'))
+                    {
+            
+                        foreach($request->post_images as $images)
+                        {
+            
+                            $filename = time() . '.' .$images->getClientOriginalName();
+                            Image::make($images)->save( public_path('/uploads/postimages/' . $filename ) );
+                            
+                            $imagepost = Imagepost::create([
+                                'post_id'=>$id,
+                                'post_image' => $filename,
+                            ]);
+            
+                        }
+         
+                }
+                    return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
                 ->with('success' , 'Successfully Post');
                }
             

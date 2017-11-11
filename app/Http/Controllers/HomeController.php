@@ -8,6 +8,7 @@ use App\User;
 use App\Post;
 use App\Visibility;
 use App\Interest;
+use App\Imagepost;
 //use App\jobpost;
 class HomeController extends Controller
 {
@@ -69,6 +70,15 @@ class HomeController extends Controller
             ->orderBy('posts.created_at','desc')
             ->get();
             $userpost=json_decode($userpost,true); 
+          // dd($userpost);
+
+            //image get for post
+
+          /*  $imagepost= DB::table('posts')
+            ->join('imageposts', 'posts.post_id', '=', 'imageposts.post_id')
+            ->get();
+            $imagepost=json_decode($imagepost,true);*/ 
+            $images=Imagepost::all();
             
             $interest=Interest::find(Auth::user()->id);
             
@@ -82,6 +92,7 @@ class HomeController extends Controller
                 for($i=0;$i<count($userpost);$i++)
                 {
                     $visibility_type=$userpost[$i]['visibilities_type'];
+                    //$image=json_decode($userpost[$i]['images'],true);
                     $type=json_decode($visibility_type,true);
                     $f=0;
                     for($k=0;$k<count($type);$k++)
@@ -106,6 +117,8 @@ class HomeController extends Controller
                 {
                     $visibility_type=$userpost[$i]['visibilities_type'];
                     $type=json_decode($visibility_type,true);
+                   // $image=json_decode($userpost[$i]['images'],true);
+                    //dd($image);
                     $f=0;
                     for($k=0;$k<count($type);$k++)
                     {
@@ -138,7 +151,7 @@ class HomeController extends Controller
             
            
                 
-        return view('home.home_index',['user'=>$user ,'posts'=>$post,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost]);
+        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost]);
         }
         
     }
