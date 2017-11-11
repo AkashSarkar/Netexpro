@@ -52,7 +52,7 @@ class RatingController extends Controller
 
         if($rate){
            return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
-                ->with('success' , 'Successfully Post');
+                ->with('success' , 'Successfully Rating');
                }
        
         return back()->withInput();

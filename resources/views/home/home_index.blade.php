@@ -182,72 +182,64 @@
                   <li>
                   <!-- Shows Rate text and icon if post type is Project-->
                     @if($userpost['post_type']=="project")
-                     <a href="#" data-toggle="modal" data-target="#starModal"><i class="glyphicon glyphicon-star"></i>Rate</a>
+                                   <!--<a href="#" data-toggle="modal" data-target="#starModal"><i class="glyphicon glyphicon-star"></i>Rate</a>-->
+                                   <div class="HeaderBarThreshold" onclick=()>
+                                   <form method="post" action="{{ route('rating.store') }}" >
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="_method" value="post">
+                                            <input type="hidden" name="post_id" value="{{$userpost['post_id']}}">
+                           
+                                            <div class="star-rating" style="position:absolute;margin-top:-40px; margin-left:-20px;">
+                                              <input id="star-10" type="submit" name="rating" value="10" style="visibility:hidden;" >
+                                              <label for="star-10" title="10 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-9" type="submit" name="rating" value="9" style="visibility:hidden;">
+                                              <label for="star-9" title="9 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i> 
+                                              </label>
+                                              <input id="star-8" type="submit" name="rating" value="8" style="visibility:hidden;">
+                                              <label for="star-8" title="8 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-7" type="submit" name="rating" value="7" style="visibility:hidden;">
+                                              <label for="star-7" title="7 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-6" type="submit" name="rating" value="6" style="visibility:hidden;">
+                                              <label for="star-6" title="6 star" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-5" type="submit" name="rating" value="5" style="visibility:hidden;" >
+                                              <label for="star-5" title="5 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-4" type="submit" name="rating" value="4" style="visibility:hidden;">
+                                              <label for="star-4" title="4 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i> 
+                                              </label>
+                                              <input id="star-3" type="submit" name="rating" value="3" style="visibility:hidden;">
+                                              <label for="star-3" title="3 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-2" type="submit" name="rating" value="2" style="visibility:hidden;">
+                                              <label for="star-2" title="2 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-1" type="submit" name="rating" value="1" style="visibility:hidden;">
+                                              <label for="star-1" title="1 star" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                            </div>
+                                            
+                                          <a href="#" ontouchstart=""> <i class="active fa fa-star" aria-hidden="true"></i> Rate</a>
+                                          </form>
+                                            
+                              </div>
                     @else
-                      <a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
+                      <a href="#" ><i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
                     @endif
                   <!--End Shows Rate text and icon if post type is Project-->
-
-
-  <!--modal Star rating start  -->
-
-              <div class="modal fade" id="starModal" role="dialog">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                         </div>
-                        <!-- Modal content-->
-                         <form method="post" action="{{ route('rating.store') }}" >
-                            {{ csrf_field() }}
-
-
-                            <input type="hidden" name="_method" value="post">
-                            <input type="hidden" name="post_id" value="{{$userpost['post_id']}}">
-                          
-                           <div class="modal-body">
-                             <div class="stars mt-20 mb-20">
-                           
-                               <input class="star star-5" value="5" id="star-5" type="radio" name="rating"/>
-                               <label class="star star-5" for="star-5"></label>
-                               <input class="star star-4" value="4" id="star-4" type="radio" name="rating"/>
-                               <label class="star star-4" for="star-4"></label>
-                               <input class="star star-3" value="3" id="star-3" type="radio" name="rating"/>
-                               <label class="star star-3" for="star-3"></label>
-                               <input class="star star-2" value="2" id="star-2" type="radio" name="rating"/>
-                               <label class="star star-2" for="star-2"></label>
-                               <input class="star star-1" value="1" id="star-1" type="radio" name="rating"/>
-                               <label class="star star-1" for="star-1"></label>
-                              
-                               
-                               
-                               
-                               
-                             </div>
-            </div>
-            <div class="modal-footer">
-              <div class="form-group">
-                  <button type="submit" class="btn btn-primary pull-right" >Post</button>
-              </div>
-            </div>
-            
-          </form>
-
-        </div>
-      </div>
-    </div>
-
-<!-- modal Star rating end-->
-
-
-
-
-
-
-
-
-
-
                   </li>
                   <li>
                     <a href="#">
