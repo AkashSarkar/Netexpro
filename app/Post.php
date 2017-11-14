@@ -34,4 +34,11 @@ class Post extends Model
         return $this->hasMany('App\Rating');
     }
     
+   // public function avgRating()
+       // {
+        //    return $this->ratings()
+           //   ->selectRaw('avg(rating) , rating')
+         //     ->groupBy('rating');
+      //  } 
+
 }

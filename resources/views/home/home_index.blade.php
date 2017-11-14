@@ -236,7 +236,7 @@
                                               </label>
                                             </div>
                                             
-                                          <a href="#" ontouchstart=""> <i class="active fa fa-star" aria-hidden="true"></i> Rate</a>
+                                          <a href="#" ontouchstart=""> <i class="active fa fa-star" aria-hidden="true"></i> Rate</a> <strong>average rating: {{ $userpost['ratting'] }} </strong>
                                           </form>
                                             
                               </div>

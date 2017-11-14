@@ -19,25 +19,20 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::post('/home', 'HomeController@store');
     Route::get('/profile', 'ProfileController@index')->name('profile');
-    Route::get('/interests', 'InterestController@update'); 
+    Route::get('/interests', 'InterestController@update');
 
+    Route::post('/home', 'HomeController@store');
+    Route::post('/rating', 'RatingController@index');
     
-    //Route::post('/post', 'PostController@store');
- 
     Route::resource('interests', 'InterestController');
     Route::resource('users', 'UserController'); 
     Route::resource('home', 'HomeController');
     Route::resource('profile', 'ProfileController');
     Route::resource('jobpost', 'JobpostController');
     Route::resource('availableforjob', 'AvailableForJobController');
-
-    Route::post('/rating', 'RatingController@index');
-    Route::resource('rating', 'RatingController');
-   // Route::get('profile', 'ProfileController@index');
-  //  Route::post('profile', 'ProfileController@update_avatar');
     Route::resource('post', 'PostController');
+    Route::resource('rating', 'RatingController');
 });
 
 

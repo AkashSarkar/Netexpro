@@ -1,5 +1,6 @@
-@extends('layouts.app') @section('content')
 
+@extends('layouts.app')
+ @section('content')
 
 <div class="fb-profile">
   <div>
@@ -20,6 +21,9 @@
   <div class="fb-profile-text">
     <h1>{{ $user->firstname }} </h1>
     <p>{{ $interest->profession }}</p>
+    <p>Projects done by {{ $user->firstname }} :
+            <strong> {{ $projects }} </strong>
+    </p>
                   
 
   </div>
@@ -50,6 +54,13 @@
     <!--End of profile pic change-->
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    
+  </div>
+</div>
+
 
 
 
@@ -163,11 +174,13 @@
         <div class="panel-heading">
           <div class="modal-footer">
 
-            <div class="panel-heading pull-left">
-              <div class="btn-group btn-group-md">
-                <button type="button" class="btn btn-primary">Photo/File</button>
-              </div>
-            </div>
+            <div class="btn-group btn-group-md">
+           <button type="button" class="btn btn-primary">Photo/File</button>
+           {{--<label>Photo
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input id="my_images" type="file" name="post_images[]" multiple="true" style="display: none;">
+            </label>--}} 
+          </div>
 
           </div>
         </div>
@@ -193,6 +206,9 @@
       <p>Industry:
         <strong> {{ $interest->industry }} </strong>
       </p>
+      <p>Projects done:
+            <strong> {{ $projects }} </strong>
+      </p> 
       </br>
     </div>
 

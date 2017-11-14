@@ -27,7 +27,10 @@ class ProfileController extends Controller
       $user= User::find(Auth::user()->id);
       $post = Post::where('user_id', Auth::user()->id)->get();
 
-      
+
+      $no_of_project_done_by_user = Post::where('post_type','=','project')->where('user_id', Auth::user()->id)->count();
+
+
       $jobpost = jobpost::where('user_id', Auth::user()->id)->get();
       $useravailablepost = AvailableForJob::where('user_id', Auth::user()->id)->get();
       $post = Post::where('user_id', Auth::user()->id)
@@ -35,7 +38,7 @@ class ProfileController extends Controller
       ->get();
       
       $interest= Interest::find(Auth::user()->id);
-      return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost ]);
+      return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user]);
           
       
     }

@@ -17,10 +17,19 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
         
+
+       //$avgRating = Post::with('avgRating')->get();
+           
+       //$posts = Post::with('avgRating')->get();
+       //$posts->first()->avgRating();
+       //dd($posts);
+
+       // return redirect()->route('post.store', ['user_id'=> Auth::user()->id, 'posts'=>$posts])
+       //      ->with('success' , 'Successfully Rate');
     }
 
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -38,11 +47,11 @@ class PostController extends Controller
 
      
 
-
-    
        $id=time();
        
         if(Auth::check()){
+
+
             
 
             $request->validate([
@@ -50,10 +59,13 @@ class PostController extends Controller
             ]);
             $post = Post::create([
                 'post_id'=>$id,
+                //'ratting'=>$posts,
                 'description' => $request->input('description'),
                 'url' => $request->input('url'),
                 'post_type'=>$request->input('post_type'),
                 'user_id'=>Auth::user()->id
+                
+                
             ]);
            
             $visibility=Visibility::create([
@@ -89,6 +101,9 @@ class PostController extends Controller
         return back()->withInput();
         
     }
+
+    
+
 
     /**
      * Display the specified resource.

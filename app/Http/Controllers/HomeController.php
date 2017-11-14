@@ -9,6 +9,7 @@ use App\Post;
 use App\Visibility;
 use App\Interest;
 use App\Imagepost;
+use App\Rating;
 //use App\jobpost;
 class HomeController extends Controller
 {
@@ -62,6 +63,16 @@ class HomeController extends Controller
             
              $jobpost=json_decode($jobpost,true);
         //passing values to view
+            
+
+           //$avg_rating = DB::table('ratings')
+          // ->join('posts', 'ratings.post_id', '=', 'posts.post_id')
+          // ->select(DB::raw('avg(rating) as ratting, posts.*'))
+          // ->groupBy('post_id')
+          // ->get();
+
+            
+         
      
             $userpost= DB::table('users')
             ->join('interests', 'users.id', '=', 'interests.user_id')
@@ -149,7 +160,7 @@ class HomeController extends Controller
                 }
             }
             
-           
+        
                 
         return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost]);
         }
@@ -165,7 +176,16 @@ class HomeController extends Controller
             print_r($connection_type);
         }
 
-    
+
+        if(Auth::check()){
+            
+           $post = Post::create([
+               
+               
+              
+            ]);
+
+    }
     
     }
    
