@@ -19,7 +19,7 @@
   <img align="left" class="fb-image-profile thumbnail" src="/uploads/profile/{{ $user->p_pic }}" alt="Profile image example"
   />
   <div class="fb-profile-text">
-    <h1>{{ $user->firstname }} </h1>
+    <h1 style=" font: italic bold 30px/30px Georgia, serif;">{{ $user->firstname }} {{ $user->lastname }} </h1>
     <p>{{ $interest->profession }}</p>
     <p>Projects done by {{ $user->firstname }} :
              <strong> {{ $projects }} </strong>
@@ -98,12 +98,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h3>Personal Information</h3>
+            <h3>Personal Information <strong> {{ $user->firstname }} </strong></h3>
           </div>
 
           <div class="modal-body">
-
-            <li>Education:
+            
+           <li>Education:
               <strong> {{ $user->education }} </strong>
             </li>
             <li>Email:

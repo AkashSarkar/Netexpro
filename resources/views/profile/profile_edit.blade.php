@@ -22,6 +22,36 @@ $educations=array(
                         {{ csrf_field() }}
 
                         <input type="hidden" name="_method" value="put">
+                          <!-- First Name -->
+                        <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
+                            <label for="firstname" class="col-md-4 control-label">Firstname</label>
+
+                            <div class="col-md-6">
+                                <input placeholder="firstname" id="firstname" type="text" class="form-control" 
+                                name="firstname" value="{{ $user->firstname }}"  autofocus>
+
+                                @if ($errors->has('firstname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                         <!-- Last Name -->
+                         <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
+                            <label for="lastname" class="col-md-4 control-label">LastName</label>
+
+                            <div class="col-md-6">
+                                <input placeholder="lastname" id="lastname" type="text" class="form-control" 
+                                name="lastname" value="{{ $user->lastname }}"  autofocus>
+
+                                @if ($errors->has('lastname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <!-- Education -->
                         <div class="form-group{{ $errors->has('education') ? ' has-error' : '' }}">

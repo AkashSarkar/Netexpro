@@ -186,6 +186,8 @@ class ProfileController extends Controller
         //save data
 
         $userUpdate = User::where('id',Auth::user()->id)->update([
+            'firstname' => $request->input('firstname'),
+            'lastname' => $request->input('lastname'),
             'education' => $request->input('education'),
              'email' => $request->input('email'),
              'phone_no' => $request->input('phone_no'),
