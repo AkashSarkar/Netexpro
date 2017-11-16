@@ -95,11 +95,7 @@
         </div>
         <div class="panel-heading">
           <div class="btn-group btn-group-md">
-           {{--<button type="button" class="btn btn-primary">Photo/File</button>
-           <label>Photo
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input id="my_images" type="file" name="post_images[]" multiple="true" style="display: none;">
-            </label>--}} 
+           
           </div>
         </div>
       </div>
@@ -237,6 +233,9 @@
                                             </div>
                                             
                                           <a href="#" ontouchstart=""> <i class="active fa fa-star" aria-hidden="true"></i> Rate</a>
+                                          
+                                          <strong>{{ $avg_rating }}</strong>
+                               
                                           </form>
                                             
                               </div>

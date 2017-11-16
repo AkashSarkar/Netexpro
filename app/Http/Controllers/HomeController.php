@@ -9,6 +9,7 @@ use App\Post;
 use App\Visibility;
 use App\Interest;
 use App\Imagepost;
+use App\Rating;
 //use App\jobpost;
 class HomeController extends Controller
 {
@@ -39,6 +40,11 @@ class HomeController extends Controller
         //use get() to get the companies of that specific id 
            //job posts
             $user= User::find(Auth::user()->id);  
+
+            $avg_rating = Rating::selectRaw('avg(rating)')
+                          ->groupBy('post_id')->get();
+
+                // dd($avg_rating);         
           
             $userpost=DB::table('users')
                          ->join('posts', function ($join) {
@@ -151,7 +157,7 @@ class HomeController extends Controller
             
            
                 
-        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost]);
+        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'avg_rating'=>$avg_rating]);
         }
         
     }
