@@ -242,9 +242,36 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <a href="#">
-                      <i class="glyphicon glyphicon-chevron-down pull-right"></i>
-                    </a>
+
+                    <div class="dropdown ">
+                      <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
+                      </button>
+                      
+                        <ul class="dropdown-menu pull-right">
+                          <li><a href="#" 
+                            onclick="
+                             var result = confirm('Are you sure you with to delete this post?');
+                             
+                             if( result){
+                               event.preventDefault();
+                               document.getElementById('delete-form').submit();
+                              }
+                                    " 
+                                     >
+
+                                     Delete
+
+                          </a>
+                          
+                          <form id="delete-form" action="#" method="POST" style="display:none;">
+                             <input type="hidden" name="_method" value="delete">
+                             {{ csrf_field() }}
+                          </form>
+
+                          </li>
+                        </ul>
+                      
+                    </div>
 
                     <a href="#" class="anchor-username">
                       <h4 class="media-heading"> {{ $user->firstname }}</h4>
@@ -428,9 +455,35 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <a href="#">
-                      <i class="glyphicon glyphicon-chevron-down pull-right"></i>
-                    </a>
+                   <div class="dropdown ">
+                      <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
+                      </button>
+                      
+                        <ul class="dropdown-menu pull-right">
+                          <li><a href="#" 
+                            onclick="
+                             var result = confirm('Are you sure you with to delete this post?');
+                             
+                             if( result){
+                               event.preventDefault();
+                               document.getElementById('delete-form').submit();
+                              }
+                                    " 
+                                     >
+
+                                     Delete
+
+                          </a>
+                          
+                          <form id="delete-form" action="#" method="POST" style="display:none;">
+                             <input type="hidden" name="_method" value="delete">
+                             {{ csrf_field() }}
+                          </form>
+
+                          </li>
+                        </ul>
+                      
+                    </div>
 
                     <a href="#" class="anchor-username">
                       <h4 class="media-heading"> {{ $user->firstname }}</h4>
@@ -526,8 +579,8 @@
       @endforeach
       <!--end of available post show-->
  
-       <!--Job hiring post show start -->
-     @foreach($jobpost as $jobpost)
+      <!--Job hiring post show start -->
+      @foreach($jobpost as $jobpost)
           <div class="panel panel-default">
             <div class="panel-body">
               <section class="post-heading">
@@ -541,9 +594,35 @@
                         </a>
                       </div>
                       <div class="media-body">
-                        <a href="#">
-                          <i class="glyphicon glyphicon-chevron-down pull-right"></i>
-                        </a>
+                        <div class="dropdown ">
+                      <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
+                      </button>
+                      
+                        <ul class="dropdown-menu pull-right">
+                          <li><a href="#" 
+                            onclick="
+                             var result = confirm('Are you sure you with to delete this post?');
+                             
+                             if( result){
+                               event.preventDefault();
+                               document.getElementById('delete-form').submit();
+                              }
+                                    " 
+                                     >
+
+                                     Delete
+
+                          </a>
+                          
+                          <form id="delete-form" action="#" method="POST" style="display:none;">
+                             <input type="hidden" name="_method" value="delete">
+                             {{ csrf_field() }}
+                          </form>
+
+                          </li>
+                        </ul>
+                      
+                    </div>
 
                         <a href="#" class="anchor-username">
                           <h4 class="media-heading">{{ $user->firstname }}</h4>
