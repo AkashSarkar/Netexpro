@@ -117,6 +117,13 @@ class JobpostController extends Controller
      */
     public function destroy(jobpost $jobpost)
     {
-        //
+        $jobpostDelete = Jobpost::find( $jobpost->id );
+       
+         if($jobpostDelete->delete())
+        {
+            return redirect()->route('home.index')->with('success','project deleted successfully.');
+        }
+
+        return back()->withInput()->with('errors', 'project could not be deleted.');
     }
 }

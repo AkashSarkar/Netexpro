@@ -204,8 +204,8 @@
 </div>
 
 <div class="column middle">
-  <div class="panel panel-default" style="border-width:5px;  
-                                              border-style:outset; padding: 10px;">
+  <div class="panel panel-default" style="background-color: white; border-width:5px;  
+    border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
         <div class="panel-heading">
           <div class="btn-group btn-group-md">
             <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Make post</button>
@@ -263,7 +263,7 @@
 
                           </a>
                           
-                          <form id="delete-form" action="#" method="POST" style="display:none;">
+                          <form id="delete-form" action="{{ route('post.destroy', $post['post_id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" value="delete">
                              {{ csrf_field() }}
                           </form>
@@ -475,7 +475,7 @@
 
                           </a>
                           
-                          <form id="delete-form" action="#" method="POST" style="display:none;">
+                          <form id="delete-form" action="{{ route('availableforjob.destroy', $useravailablepost['id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" value="delete">
                              {{ csrf_field() }}
                           </form>
@@ -497,7 +497,7 @@
             </div>
           </section>
 
-          <section class="post-body" style="background-color: #ded5e0; border-radius: 10px; border-style: inset; padding: 10px">
+          <section class="post-body well well-lg" style="background-color: #D7CCC8; border-radius: 4px;">
             <h4 style="font-weight:bold;">******job seeking post******</h4>
             <p>
               <li>Position :
@@ -614,7 +614,7 @@
 
                           </a>
                           
-                          <form id="delete-form" action="#" method="POST" style="display:none;">
+                          <form id="delete-form" action="{{ route('jobpost.destroy', $jobpost['id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" value="delete">
                              {{ csrf_field() }}
                           </form>
@@ -635,8 +635,8 @@
 
                 </div>
               </section>
-              <section class="post-body" style="background-color: #d4fcbd; border-radius: 10px; border-style: outset; padding: 10px">
-                <h4 style="font-weight:bold;">******Hiring post******</h4>
+              <section class="post-body well well-lg" style="background-color: #CFD8DC; border-radius: 4px;">
+            <h4 style="font-weight:bold;">******Hiring post******</h4>
                 <p>
                   <li>Position :
                     <strong>{{ $jobpost->position }}</strong>

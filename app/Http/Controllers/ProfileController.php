@@ -212,8 +212,9 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user,Post $post)
     {
-        //
+      
+       
     }
 }

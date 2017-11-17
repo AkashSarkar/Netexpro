@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Post extends Model
 {
     //
+
+    protected $primaryKey = 'post_id';
     protected $fillable = [
         'post_type',
         'description',
@@ -33,5 +36,6 @@ class Post extends Model
     {
         return $this->hasMany('App\Rating');
     }
+
     
 }

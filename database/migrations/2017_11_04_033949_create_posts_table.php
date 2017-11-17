@@ -37,6 +37,7 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-       
+         Schema::disableForeignKeyConstraints();
+      // $table->dropForeign('posts_user_id_foreign');
     }
 }

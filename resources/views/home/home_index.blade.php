@@ -84,7 +84,7 @@
 
     <!--post body-->
     <div class="col-md-7 col-sm-7 col-lg-7 show_home_post" id="h_post">
-      <div class="panel panel-default" data-toggle="modal" data-target="#myModal">
+      <div class="panel panel-default" data-toggle="modal" data-target="#myModal" style="background-color: white; border-width:5px;border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
         <div class="panel-heading">
           <div class="btn-group btn-group-md">
             <button type="button" class="btn btn-link">Make post</button>
@@ -115,7 +115,7 @@
                     </a>
                   </div>
                   <div class="media-body">
-                  
+                   @if($userpost['user_id'] == Auth::user()->id)
                     <div class="dropdown ">
                       <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
                       </button>
@@ -136,7 +136,7 @@
 
                           </a>
                           
-                          <form id="delete-form" action="#" method="POST" style="display:none;">
+                          <form id="delete-form" action="{{ route('post.destroy', $userpost['post_id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" value="delete">
                              {{ csrf_field() }}
                           </form>
@@ -145,6 +145,7 @@
                         </ul>
                       
                     </div>
+                    @endif
 
                     <a href="#" class="anchor-username">
                       <h4 class="media-heading"> {{$userpost['firstname']}}</h4>
@@ -333,6 +334,8 @@
                     </a>
                   </div>
                   <div class="media-body">
+
+                   @if($useravailablepost['user_id'] == Auth::user()->id)
                      <div class="dropdown ">
                         <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
                         </button>
@@ -354,7 +357,7 @@
 
                           </a>
                           
-                          <form id="delete-form" action="#" method="POST" style="display:none;">
+                          <form id="delete-form" action="{{ route('availableforjob.destroy', $useravailablepost['id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" value="delete">
                              {{ csrf_field() }}
                           </form>
@@ -362,7 +365,7 @@
                           </li>
                         </ul>
                     </div>
-
+                    @endif
 
                     <a href="#" class="anchor-username">
                       <h4 class="media-heading"> {{$useravailablepost['firstname']}}</h4>
@@ -476,6 +479,7 @@
                     </a>
                   </div>
                   <div class="media-body">
+                  @if($jobpost['user_id'] == Auth::user()->id)
                     <div class="dropdown ">
                         <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
                         </button>
@@ -495,7 +499,7 @@
 
                           </a>
                           
-                          <form id="delete-form" action="#" method="POST" style="display:none;">
+                          <form id="delete-form" action="{{ route('jobpost.destroy', $jobpost['id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" value="delete">
                              {{ csrf_field() }}
                           </form>
@@ -503,6 +507,7 @@
                           </li>
                         </ul>
                     </div>
+                    @endif
 
                     <a href="#" class="anchor-username">
                       <h4 class="media-heading"> {{$jobpost['firstname']}}</h4>

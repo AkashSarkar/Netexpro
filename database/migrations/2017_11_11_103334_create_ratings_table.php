@@ -22,7 +22,9 @@ class CreateRatingsTable extends Migration
             $table->string('post_id');
            
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('post_id')->references('post_id')->on('posts');
+            $table->foreign('post_id')->references('post_id')->on('posts')->onDelete('cascade');
+            //$table->dropForeign(['post_id']);
+            //$table->dropForeign(['user_id']);
         });
     }
 
@@ -34,5 +36,6 @@ class CreateRatingsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('ratings');
+
     }
 }

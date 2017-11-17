@@ -17,7 +17,7 @@ class CreateVisibilitiesTable extends Migration
             $table->increments('id');
             $table->string('visibilities_type');
             $table->string('post_id');
-            $table->foreign('post_id')->references('post_id')->on('posts');
+            $table->foreign('post_id')->references('post_id')->on('posts')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,5 +30,6 @@ class CreateVisibilitiesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('visibilities');
+       
     }
 }

@@ -36,11 +36,9 @@ class HomeController extends Controller
         if( Auth::check() )
          {
             
-        //basically we are saying here is find the company where the user who created it is the same user currently logged in 
-        //use get() to get the companies of that specific id 
            //job posts
             $user= User::find(Auth::user()->id);  
-
+            $allPost = Post::all();
             $avg_rating = Rating::selectRaw('avg(rating)')
                           ->groupBy('post_id')->get();
 
@@ -76,7 +74,7 @@ class HomeController extends Controller
             ->orderBy('posts.created_at','desc')
             ->get();
             $userpost=json_decode($userpost,true); 
-          // dd($userpost);
+       
 
             //image get for post
 
@@ -84,6 +82,7 @@ class HomeController extends Controller
             ->join('imageposts', 'posts.post_id', '=', 'imageposts.post_id')
             ->get();
             $imagepost=json_decode($imagepost,true);*/ 
+            
             $images=Imagepost::all();
             
             $interest=Interest::find(Auth::user()->id);
@@ -157,7 +156,7 @@ class HomeController extends Controller
             
            
                 
-        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'avg_rating'=>$avg_rating]);
+        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'avg_rating'=>$avg_rating, 'post'=>$allPost]);
         }
         
     }
