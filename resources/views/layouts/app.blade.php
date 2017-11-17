@@ -93,7 +93,7 @@
 
                       <!--Start navbar right list elements -->
                       <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="{{ url('home') }}">Home</a></li>
+                            <li><a href="{{ url('home') }}">Home</a></li>
                             <li><a href="" data-toggle="modal" data-target="#jobModal">Jobs</a></li>
                             <li><a href="{{ url('profile') }}">{{ Auth::user()->firstname }}</a></li>
                                             
