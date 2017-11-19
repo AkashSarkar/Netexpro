@@ -1,4 +1,8 @@
 @extends('layouts.app')
+
+@section('page-title')
+    Home
+@endsection
  @section('content')
 <!--style-->
 <style>
@@ -261,8 +265,8 @@
                                             </div>
                                             
                                           <a href="#" ontouchstart=""> <i class="active fa fa-star" aria-hidden="true"></i> Rate</a>
-                                          
-                                          <strong>{{ $avg_rating }}</strong>
+                                        
+                                          <strong></strong>
                                
                                           </form>
                                             

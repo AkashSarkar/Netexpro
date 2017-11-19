@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Registration
+@endsection
+
 @section('content')
 <?php
 $educations = array(

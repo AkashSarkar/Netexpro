@@ -1,4 +1,9 @@
 @extends('layouts.app') 
+
+@section('page-title')
+   {{ $user->firstname }} {{ $user->lastname }}
+@endsection
+
 @section('content')
 
 
@@ -237,7 +242,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$post['p_pic']}}"
                         width="40" height="40" alt="...">
                     </a>
                   </div>
@@ -450,7 +455,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$post['p_pic']}}"
                         width="40" height="40" alt="...">
                     </a>
                   </div>
@@ -588,11 +593,11 @@
                   <div class="col-md-12">
                     <div class="media">
                       <div class="media-left">
-                        <a href="#">
-                          <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
-                            width="40" height="40" alt="...">
-                        </a>
-                      </div>
+                    <a href="#">
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$post['p_pic']}}"
+                        width="40" height="40" alt="...">
+                    </a>
+                  </div>
                       <div class="media-body">
                         <div class="dropdown ">
                       <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">

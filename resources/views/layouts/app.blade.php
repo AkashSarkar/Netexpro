@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Netexpro</title>
+    <title>@yield('page-title')</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
@@ -30,6 +30,8 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     
     <!-- End of Styles -->
+
+
 
 </head>
 
