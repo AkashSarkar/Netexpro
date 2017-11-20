@@ -10,6 +10,7 @@ use App\Visibility;
 use App\Interest;
 use App\Imagepost;
 use App\Rating;
+use App\Comment;
 //use App\jobpost;
 class HomeController extends Controller
 {
@@ -39,11 +40,12 @@ class HomeController extends Controller
            //job posts
             $user= User::find(Auth::user()->id);  
             $allPost = Post::all();
+
             $avg_rating = Rating::selectRaw('avg(rating)')
                           ->groupBy('post_id')->get();
 
-                // dd($avg_rating);         
-          
+                // dd($avg_rating);
+           
             $userpost=DB::table('users')
                          ->join('posts', function ($join) {
                           $join->on('users.id', '=', 'posts.user_id')
@@ -51,20 +53,24 @@ class HomeController extends Controller
                           })
                          ->get();
                      
-             $userpost=json_decode($userpost,true);
+            $userpost=json_decode($userpost,true);
+
+            //$comments = DB::table('comments')->join('posts', 'comments.post_id', '=', 'posts.post_id')->get();
+               
+
               $useravailablepost= DB::table('users')
               ->join('available_for_jobs', 'users.id', '=', 'available_for_jobs.user_id')
               ->orderBy('available_for_jobs.created_at','desc')
               ->get();
 
-              $useravailablepost=json_decode($useravailablepost,true);
+            $useravailablepost=json_decode($useravailablepost,true);
 
-              $jobpost=DB::table('users')
+            $jobpost=DB::table('users')
                          ->join('jobposts', function ($join) {
                           $join->on('users.id', '=', 'jobposts.user_id');
                         })->get();
             
-             $jobpost=json_decode($jobpost,true);
+            $jobpost=json_decode($jobpost,true);
         //passing values to view
      
             $userpost= DB::table('users')
@@ -156,7 +162,7 @@ class HomeController extends Controller
             
            
                 
-        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'avg_rating'=>$avg_rating, 'post'=>$allPost]);
+        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'avg_rating'=>$avg_rating, 'post'=>$allPost] );
         }
         
     }
@@ -173,6 +179,6 @@ class HomeController extends Controller
     
     
     }
-   
+
 
 }

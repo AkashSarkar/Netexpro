@@ -36,6 +36,9 @@ class Post extends Model
     {
         return $this->hasMany('App\Rating');
     }
-
+       public function comments()
+    {
+        return $this->morphMany('App\Comment','commentable');
+    }
     
 }
