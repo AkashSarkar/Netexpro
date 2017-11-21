@@ -53,13 +53,12 @@ class JobpostController extends Controller
 
 
             if($jobpost){
-                return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
-                ->with('success' , 'Successfully posted for hiring');
+                return back()->with('success' , 'Successfully posted for hiring');
             }
 
         }
         
-            return back()->withInput()->with('errors', 'Error creating new company');
+            return back()->withInput()->with('errors', 'Error creating new hiring post');
     }
 
     /**

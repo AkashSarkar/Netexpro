@@ -23,4 +23,8 @@ class Comment extends Model
     {
         return $this->hasone('\App\User', 'id', 'user_id');
     }
+     public function post()
+    {
+        return $this->hasone('\App\Post', 'id', 'post_id');
+    }
 }

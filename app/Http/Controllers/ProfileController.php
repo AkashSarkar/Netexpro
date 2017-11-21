@@ -25,7 +25,7 @@ class ProfileController extends Controller
       $images=Imagepost::all();
 
       $user= User::find(Auth::user()->id);
-      $post = Post::where('user_id', Auth::user()->id)->get();
+      //$post = Post::where('user_id', Auth::user()->id)->get();
       $no_of_project_done_by_user = Post::where('post_type','=','project')->where('user_id', Auth::user()->id)->count();
       
       $jobpost = jobpost::where('user_id', Auth::user()->id)->get();

@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function(){
    // Route::get('profile', 'ProfileController@index');
   //  Route::post('profile', 'ProfileController@update_avatar');
     Route::resource('post', 'PostController');
-    Route::resource('comment', 'CommentController');
+    Route::resource('comment', 'CommentsController');
 });
 
 

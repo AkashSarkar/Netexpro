@@ -54,13 +54,12 @@ class AvailableForJobController extends Controller
 
 
             if($availableforjob){
-                return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
-                ->with('success' , 'job posted successfully');
+                return back()->with('success' , 'available for job posted successfully');
             }
 
         }
         
-            return back()->withInput()->with('errors', 'Error creating new company');
+            return back()->withInput()->with('errors', 'Error creating available for job post');
     }
 
     /**

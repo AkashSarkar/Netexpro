@@ -41,6 +41,8 @@ class HomeController extends Controller
             $user= User::find(Auth::user()->id);  
             $allPost = Post::all();
 
+           // $postss = Post::where('user_id', Auth::user()->id)->get();
+
             $avg_rating = Rating::selectRaw('avg(rating)')
                           ->groupBy('post_id')->get();
 
@@ -162,7 +164,7 @@ class HomeController extends Controller
             
            
                 
-        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'avg_rating'=>$avg_rating, 'post'=>$allPost] );
+        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'avg_rating'=>$avg_rating] );
         }
         
     }

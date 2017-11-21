@@ -295,18 +295,26 @@
                  
                     <!--Comment show start -->
                    
-                    <div class="well well-sm">
+                     <div class="well well-sm">
+                    <div class="media">
                       <div class="media-left">
                         <a href="#">
                             <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}"
-                            width="32" height="32" alt="..."><span>Ridwana</span> 
+                            width="32" height="32" alt="...">
                         </a>
+                        </div>
+                         <div class="media-body">
+                            <a href="#" class="anchor-username">
+                              <h4 class="media-heading">name</h4>
+                            </a>
+                            <a href="#" class="anchor-time">date</a>
+                          </div>
                         <div class="commentText">
-                            <p class="">Dummy comment</p> <span class="date sub-text" style=" color:#aaa;font-family:verdana;font-size:11px;">on Monday 20,2017</span>
+                            <p class="">dummy comment</p> 
                         </div>
                      </div>
                     </div>
-                 
+                    
                     <!--Comment show end-->
                    
                     <!--Create Comment start -->
