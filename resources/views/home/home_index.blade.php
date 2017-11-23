@@ -703,8 +703,14 @@
             </div>
 
             <div class="form-group col-md-12" >
-                <p id="show_imageFields" style="font-weight:700;"> </p>
-            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    
+                         <a  id="image_preview"></a>
+                     
+               </div>
+          </div>
+        </div>
              
             </div>
 
@@ -858,15 +864,33 @@
                   //end select all check box
 
                   //image show while select
-                  $('input[type="file"]').change(function(e){
+                 // $('input[type="file"]').change(function(e){
                     
-                    var fileName = e.target.files;
-                    $('#show_imageFields').html(fileName.length +" Images Selected");
+                   // var fileName = e.target.files;
+                   // $('#show_imageFields').html(fileName.length +" Images Selected");
                     /*for(var i=0;i<fileName.length;i++){
                       console.log(fileName[i].name);
                     }*/
-                  });
+                 // });
                 //end image show while select
+
+                $('input[type="file"]').change(function(e){
+          for(var i=0;i<this.files.length;i++){
+          var file = this.files[i];
+          var reader = new FileReader();
+          reader.onload = function(e){
+            
+              $('<img />',{
+                  "src":e.target.result,
+                  "width":"15%",
+                  "height":"100px",
+                  "style":"padding:2px; width:20% ; height:100px;",
+              }).appendTo(image_preview);
+          }
+        
+          reader.readAsDataURL(this.files[i]);
+          }
+          });
                
                 
                 });
