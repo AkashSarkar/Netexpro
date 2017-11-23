@@ -186,3 +186,14 @@ color: #f2b600
 }
 
 /*End rating style*/
+/*post style disable*/
+#user_post{
+    background-color: white;
+    cursor: pointer;
+}
+#user_post:hover
+{
+    cursor: pointer;
+
+}
+/*post style disable*/
