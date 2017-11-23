@@ -18,6 +18,7 @@ class CreateVisibilitiesTable extends Migration
             $table->string('visibilities_type');
             $table->string('post_id');
             $table->foreign('post_id')->references('post_id')->on('posts')->onDelete('cascade');
+            $table->dropForeign(['post_id']);
             $table->timestamps();
         });
     }

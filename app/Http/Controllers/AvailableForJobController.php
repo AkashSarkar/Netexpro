@@ -104,12 +104,12 @@ class AvailableForJobController extends Controller
      */
     public function destroy(AvailableForJob $availableforjob)
     {
-    
+
     $available_for_job_postDelete = AvailableForJob::find( $availableforjob->id );
-       
+
          if($available_for_job_postDelete->delete())
         {
-            return redirect()->route('home.index')->with('success','project deleted successfully.');
+            return back()->with('success','project deleted successfully.');
         }
 
         return back()->withInput()->with('errors', 'project could not be deleted.'); //

@@ -127,7 +127,7 @@
                         <ul class="dropdown-menu pull-right">
                           <li><a href="#" 
                             onclick="
-                             var result = confirm('Are you sure you with to delete this post?');
+                             var result = confirm('Are you sure you want to delete this post?');
                              
                              if( result){
                                event.preventDefault();
@@ -141,7 +141,7 @@
                           </a>
                           
                           <form id="delete-form" action="{{ route('post.destroy', $userpost['post_id']) }}" method="POST" style="display:none;">
-                             <input type="hidden" name="_method" value="delete">
+                             <input type="hidden" name="_method" method="PUT" value="delete">
                              {{ csrf_field() }}
                           </form>
 
@@ -388,11 +388,11 @@
 
                           <a href="#" 
                             onclick="
-                             var result = confirm('Are you sure you with to delete this post?');
+                             var result = confirm('Are you sure you want to delete this post?');
                              
                              if( result){
                                event.preventDefault();
-                               document.getElementById('delete-form').submit();
+                               document.getElementById('delete-form1').submit();
                               }
                                     " 
                                      >
@@ -401,8 +401,8 @@
 
                           </a>
                           
-                          <form id="delete-form" action="{{ route('availableforjob.destroy', $useravailablepost['id']) }}" method="POST" style="display:none;">
-                             <input type="hidden" name="_method" value="delete">
+                          <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost['id']) }}" method="POST" style="display:none;">
+                             <input type="hidden" name="_method" method="PUT" value="delete">
                              {{ csrf_field() }}
                           </form>
 
@@ -530,11 +530,11 @@
                         <ul class="dropdown-menu pull-right">
                           <li><a href="#" 
                             onclick="
-                             var result = confirm('Are you sure you with to delete this post?');
+                             var result = confirm('Are you sure you want to delete this post?');
                              
                              if( result){
                                event.preventDefault();
-                               document.getElementById('delete-form').submit();
+                               document.getElementById('delete-form2').submit();
                               }
                                     " 
                                      >
@@ -543,8 +543,8 @@
 
                           </a>
                           
-                          <form id="delete-form" action="{{ route('jobpost.destroy', $jobpost['id']) }}" method="POST" style="display:none;">
-                             <input type="hidden" name="_method" value="delete">
+                          <form id="delete-form2" action="{{ route('jobpost.destroy', $jobpost['id']) }}" method="POST" style="display:none;">
+                             <input type="hidden" name="_method" method="PUT" value="delete">
                              {{ csrf_field() }}
                           </form>
 

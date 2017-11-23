@@ -19,7 +19,7 @@ class CreateImagepostsTable extends Migration
             $table->string('post_image');
 
             $table->foreign('post_id')->references('post_id')->on('posts')->onDelete('cascade');
-            
+            $table->dropForeign(['post_id']);
             $table->timestamps();
         });
     }
