@@ -95,7 +95,7 @@
           </div>
         </div>
         <div class="panel-body">
-          <textarea class="form-control  p-text-area" rows="2" placeholder="Write something" style="resize: none;"></textarea>
+          <textarea class="form-control  p-text-area" rows="2" placeholder="Write something" style="resize: none;" id="user_post" disabled></textarea>
         </div>
         <div class="panel-heading">
           <div class="btn-group btn-group-md">
