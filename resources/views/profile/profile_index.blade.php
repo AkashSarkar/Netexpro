@@ -1,4 +1,10 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app') 
+
+@section('page-title')
+   {{ $user->firstname }} {{ $user->lastname }}
+@endsection
+
+@section('content')
 
 
 <div class="fb-profile">
@@ -18,9 +24,11 @@
   <img align="left" class="fb-image-profile thumbnail" src="/uploads/profile/{{ $user->p_pic }}" alt="Profile image example"
   />
   <div class="fb-profile-text">
-    <h1>{{ $user->firstname }} </h1>
+    <h1 style=" font: italic bold 30px/30px Georgia, serif;">{{ $user->firstname }} {{ $user->lastname }} </h1>
     <p>{{ $interest->profession }}</p>
-                  
+    <p>Projects done by {{ $user->firstname }} :
+             <strong> {{ $projects }} </strong>
+    </p>             
 
   </div>
 
@@ -38,7 +46,7 @@
 
     </div>
     <!--profile pic change start-->
-    <input id="Updateprofile" type="button" class="btn btn-default btn-sm" style="margin-left:-150px; margin-top:20px; opacity: .5;"
+    <input id="Updateprofile" type="button" class="btn btn-default btn-sm" style="margin-left:-135px; margin-top:-10px; opacity: .5;"
       onclick="update_profile()" value="change profile pic">
     <div id="theform1">
       <form enctype="multipart/form-data" action="{{ route('profile.store') }}" method="POST">
@@ -51,16 +59,14 @@
   </div>
 </div>
 
-
-
 <div class="container">
-
-  <!-- Start of first row. First row contains user personal info in left and write post on right -->
-  <div class="row" style="padding-top: 30px;">
-    <!-- User personal information start -->
-    <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #f2f2f2;">
+<div class="row">
+<div class="column side">
+<section style="background-color: white; border-width:5px;  
+    border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
+ 
       <a>
-        <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#personalInfoModal" style="margin-top: 10px;" aria-hidden="true"></i>
+        <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#personalInfoModal" style="margin-top: 10px;cursor:pointer" aria-hidden="true" ></i>
       </a>
 
       </br>
@@ -86,7 +92,7 @@
         <strong> {{ $user->available_for_job }} </strong>
       </p>
 
-    </div>
+   
 
 
     <!--Modal for user personal information start-->
@@ -97,12 +103,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h3>Personal Information</h3>
+            <h3>Personal Information <strong> {{ $user->firstname }} </strong></h3>
           </div>
 
           <div class="modal-body">
-
-            <li>Education:
+            
+           <li>Education:
               <strong> {{ $user->education }} </strong>
             </li>
             <li>Email:
@@ -141,49 +147,14 @@
     </div>
     <!--end Modal for user personal information-->
     <!-- User personal information end -->
-
-
-
-    <!--write post section start -->
-    <div class="col-md-8 col-sm-12 col-lg-8 ">
-
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="btn-group btn-group-md">
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Make post</button>
-
-          </div>
-        </div>
-
-        <div class="panel-body">
-          <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" data-toggle="modal" data-target="#myModal"
-            style="resize: none;"></textarea>
-        </div>
-
-        <div class="panel-heading">
-          <div class="modal-footer">
-
-            <div class="panel-heading pull-left">
-              <div class="btn-group btn-group-md">
-                <button type="button" class="btn btn-primary">Photo/File</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--Write post section end -->
-  </div>
-  <!-- end of first row. First row contains user personal info in left and write post on right -->
-
-  <!--Start of second row which contains professional information in left and posts show on right -->
-  <div class="row" style="margin-top:-10px;">
-
-    <!--Professional information start -->
-    <div class="col-md-4 col-sm-12 col-lg-4 " style="background-color: #f2f2f2;">
+     </section>
+   </br>
+     <section style="background-color: white; border-width:5px;  
+    border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
+     <!--Professional information start -->
+    
       <a>
-        <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#professionalInfoModal" style="margin-top: 10px;"
+        <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#professionalInfoModal" style="margin-top: 10px;cursor:pointer;"
           aria-hidden="true"></i>
       </a>
       </br>
@@ -194,7 +165,7 @@
         <strong> {{ $interest->industry }} </strong>
       </p>
       </br>
-    </div>
+   
 
     <!--Professional information modal start -->
     <div class="modal fade" id="professionalInfoModal" role="dialog" style="margin-top:12%; margin-left: -30%;">
@@ -234,9 +205,34 @@
     </div>
     <!--Professional information modal end -->
     <!--Professional information end -->
+     </section>
+</div>
 
-    <!-- General post show start -->
-    <div class="col-md-8 col-sm-12 col-lg-8 ">
+<div class="column middle">
+  <div class="panel panel-default" style="background-color: white; border-width:5px;  
+    border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
+        <div class="panel-heading">
+          <div class="btn-group btn-group-md">
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Make post</button>
+
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Write something" data-toggle="modal" data-target="#myModal"
+            style="resize: none;"></textarea>
+        </div>
+
+          <div class="panel-heading">
+          <div class="btn-group btn-group-md">
+          
+          </div>
+        </div>
+      </div>
+
+
+      <!-- General post show start -->
+
       @foreach($posts as $post)
       <div class="panel panel-default">
         <div class="panel-body">
@@ -246,14 +242,41 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                         width="40" height="40" alt="...">
                     </a>
                   </div>
                   <div class="media-body">
-                    <a href="#">
-                      <i class="glyphicon glyphicon-chevron-down pull-right"></i>
-                    </a>
+
+                    <div class="dropdown ">
+                      <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
+                      </button>
+                      
+                        <ul class="dropdown-menu pull-right">
+                          <li><a href="#" 
+                            onclick="
+                             var result = confirm('Are you sure you with to delete this post?');
+                             
+                             if( result){
+                               event.preventDefault();
+                               document.getElementById('delete-form').submit();
+                              }
+                                    " 
+                                     >
+
+                                     Delete
+
+                          </a>
+                          
+                          <form id="delete-form" action="{{ route('post.destroy', $post['post_id']) }}" method="POST" style="display:none;">
+                             <input type="hidden" name="_method" value="delete">
+                             {{ csrf_field() }}
+                          </form>
+
+                          </li>
+                        </ul>
+                      
+                    </div>
 
                     <a href="#" class="anchor-username">
                       <h4 class="media-heading"> {{ $user->firstname }}</h4>
@@ -266,7 +289,7 @@
 
             </div>
           </section>
-          <section class="post-body" style="background-color: #f2f4f7; border-radius: 10px;  padding: 10px">
+          <section class="post-body well well-sm " style="background-color: #EEEEEE; border-radius: 4px;  ">
             <p>{{ $post->description }} </p>
 
              <!--project show-->
@@ -310,10 +333,68 @@
                   <li>
                     <!-- Shows Rate text and icon if post type is Project-->
                     @if($post['post_type']=="project")
-                      <a href="#"><i class="fa fa-star" aria-hidden="true"></i>Rate</a>
+                      
+                                   <div class="HeaderBarThreshold" onclick=()>
+                                   <form method="post" action="{{ route('rating.store') }}" >
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="_method" value="post">
+                                            <input type="hidden" name="post_id" value="{{$post['post_id']}}">
+                           
+                                            <div class="star-rating" style="position:absolute;margin-top:-40px; margin-left:-20px;">
+                                              <input id="star-10" type="submit" name="rating" value="10" style="visibility:hidden;" >
+                                              <label for="star-10" title="10 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-9" type="submit" name="rating" value="9" style="visibility:hidden;">
+                                              <label for="star-9" title="9 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i> 
+                                              </label>
+                                              <input id="star-8" type="submit" name="rating" value="8" style="visibility:hidden;">
+                                              <label for="star-8" title="8 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-7" type="submit" name="rating" value="7" style="visibility:hidden;">
+                                              <label for="star-7" title="7 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-6" type="submit" name="rating" value="6" style="visibility:hidden;">
+                                              <label for="star-6" title="6 star" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-5" type="submit" name="rating" value="5" style="visibility:hidden;" >
+                                              <label for="star-5" title="5 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-4" type="submit" name="rating" value="4" style="visibility:hidden;">
+                                              <label for="star-4" title="4 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i> 
+                                              </label>
+                                              <input id="star-3" type="submit" name="rating" value="3" style="visibility:hidden;">
+                                              <label for="star-3" title="3 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-2" type="submit" name="rating" value="2" style="visibility:hidden;">
+                                              <label for="star-2" title="2 stars" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                              <input id="star-1" type="submit" name="rating" value="1" style="visibility:hidden;">
+                                              <label for="star-1" title="1 star" id="star"  style="visibility:hidden;">
+                                                  <i class="active fa fa-star" aria-hidden="true"></i>
+                                              </label>
+                                            </div>
+                                            
+                                          <a href="#" ontouchstart=""> <i class="active fa fa-star" aria-hidden="true"></i> Rate</a>
+                                          <strong>average rate</strong>
+                               
+                                          </form>
+                                            
+                              </div>
                     @else
-                      <a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
+                      <a href="#" ><i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
                     @endif
+                  <!--End Shows Rate text and icon if post type is Project-->
+
+
                   <!--End Shows Rate text and icon if post type is Project-->
                   </li>
                   <li>
@@ -331,42 +412,85 @@
             <div class="row">
               <div class="post-footer-comment-wrapper">
                 <div class="col-md-12 col-sm-12 col-lg-12">
-                  <div class="comment-form">
+                
 
-                  </div>
-                  <div class="comment">
+
+
+                  <!--Comment show start -->
+                   @foreach($post->comments as $comment)
+                    <div class="well well-sm">
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                          <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                             width="32" height="32" alt="...">
                         </a>
-                      </div>
-                      <div class="media-body">
-                        <a href="#" class="anchor-username">
-                          <h4 class="media-heading">{{ $user->firstname }}</h4>
-                        </a>
-                        <a href="#" class="anchor-time"></a>
-                      </div>
+                        </div>
+                         <div class="media-body">
+                            <a href="#" class="anchor-username">
+                              <h4 class="media-heading">{{ $comment->user->firstname }}</h4>
+                            </a>
+                            <a href="#" class="anchor-time">{{ $comment->created_at }}</a>
+                          </div>
+                        <div class="commentText">
+                            <p class="">{{ $comment->body }}</p> 
+                        </div>
+                     </div>
                     </div>
-                  </div>
+                    @endforeach
+                    <!--Comment show end-->
+                   
+                    <!--Create Comment start -->
+                    <div class="comment-form">
+                      <div class="comment">
+                        <div class="media">
+                          <div class="media-left">
+                            <a href="#">
+                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
+                                width="32" height="32" alt="...">
+                            </a>
+                          </div>
+
+                          <div class="media-body">
+                           <form method="POST" action="{{ route('comment.store') }}">
+                           {{ csrf_field() }}
+
+                              <input type="hidden" name="commentable_type" value="App\Post">
+                              <input type="hidden" name="commentable_id" value="{{ $post['post_id'] }}">
+
+                              <div class="form-group">
+                                  <input class="form-control" type="text" name="body" placeholder="Your comments" />
+                              </div>
+                              <div class="form-group">
+                                  <input class="form-control" type="file" name="url" placeholder="upload file/image" />
+                              </div>
+                              <div class="form-group">
+                                  <button class="btn btn-default">Add</button>
+                              </div>
+                          </form>
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!--Create Comment end -->
+
+
                 </div>
               </div>
             </div>
 
           </section>
-
-
-        </div>
+       </div>
       </div>
       @endforeach
 
       <!-- General post show end -->
 
-      <!--availablepostshow-->
+      
+     <!--availablepostshow-->
 
       @foreach($useravailablepost as $useravailablepost)
-      <div class="panel panel-default">
+      <div class="panel panel-default" >
         <div class="panel-body">
           <section class="post-heading">
             <div class="row">
@@ -374,14 +498,40 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                         width="40" height="40" alt="...">
                     </a>
                   </div>
                   <div class="media-body">
-                    <a href="#">
-                      <i class="glyphicon glyphicon-chevron-down pull-right"></i>
-                    </a>
+                   <div class="dropdown ">
+                      <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
+                      </button>
+                      
+                        <ul class="dropdown-menu pull-right">
+                          <li><a href="#" 
+                            onclick="
+                             var result = confirm('Are you sure you with to delete this post?');
+                             
+                             if( result){
+                               event.preventDefault();
+                               document.getElementById('delete-form').submit();
+                              }
+                                    " 
+                                     >
+
+                                     Delete
+
+                          </a>
+                          
+                          <form id="delete-form" action="{{ route('availableforjob.destroy', $useravailablepost['id']) }}" method="POST" style="display:none;">
+                             <input type="hidden" name="_method" value="delete">
+                             {{ csrf_field() }}
+                          </form>
+
+                          </li>
+                        </ul>
+                      
+                    </div>
 
                     <a href="#" class="anchor-username">
                       <h4 class="media-heading"> {{ $user->firstname }}</h4>
@@ -395,7 +545,7 @@
             </div>
           </section>
 
-          <section class="post-body" style="background-color: #ded5e0; border-radius: 10px; border-style: inset; padding: 10px">
+          <section class="post-body well well-lg" style="background-color: #D7CCC8; border-radius: 4px;">
             <h4 style="font-weight:bold;">******job seeking post******</h4>
             <p>
               <li>Position :
@@ -446,25 +596,67 @@
             <div class="row">
               <div class="post-footer-comment-wrapper">
                 <div class="col-md-12 col-sm-12 col-lg-12">
-                  <div class="comment-form">
 
-                  </div>
-                  <div class="comment">
+
+                   <!--Comment show start -->
+                   @foreach($useravailablepost->comments as $comment)
+                    <div class="well well-sm">
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                          <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                             width="32" height="32" alt="...">
                         </a>
-                      </div>
-                      <div class="media-body">
-                        <a href="#" class="anchor-username">
-                          <h4 class="media-heading">{{ $user->firstname }}</h4>
-                        </a>
-                        <a href="#" class="anchor-time">51 mins</a>
-                      </div>
+                        </div>
+                         <div class="media-body">
+                            <a href="#" class="anchor-username">
+                              <h4 class="media-heading">{{ $comment->user->firstname }}</h4>
+                            </a>
+                            <a href="#" class="anchor-time">{{ $comment->created_at }}</a>
+                          </div>
+                        <div class="commentText">
+                            <p class="">{{ $comment->body }}</p> 
+                        </div>
+                     </div>
                     </div>
-                  </div>
+                    @endforeach
+                    <!--Comment show end-->
+                   
+                    <!--Create Comment start -->
+                    <div class="comment-form">
+                      <div class="comment">
+                        <div class="media">
+                          <div class="media-left">
+                            <a href="#">
+                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
+                                width="32" height="32" alt="...">
+                            </a>
+                          </div>
+
+                          <div class="media-body">
+                           <form method="POST" action="{{ route('comment.store') }}">
+                           {{ csrf_field() }}
+
+                              <input type="hidden" name="commentable_type" value="App\AvailableForJob">
+                              <input type="hidden" name="commentable_id" value="{{ $useravailablepost['id'] }}">
+
+                              <div class="form-group">
+                                  <input class="form-control" type="text" name="body" placeholder="Your comments" />
+                              </div>
+                              <div class="form-group">
+                                  <input class="form-control" type="file" name="url" placeholder="upload file/image" />
+                              </div>
+                              <div class="form-group">
+                                  <button class="btn btn-default">Add</button>
+                              </div>
+                          </form>
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!--Create Comment end -->
+
+
                 </div>
               </div>
             </div>
@@ -476,136 +668,201 @@
       </div>
       @endforeach
       <!--end of available post show-->
-
+ 
       <!--Job hiring post show start -->
       @foreach($jobpost as $jobpost)
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <section class="post-heading">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="media">
-                  <div class="media-left">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <section class="post-heading">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="media">
+                      <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                         width="40" height="40" alt="...">
                     </a>
                   </div>
-                  <div class="media-body">
-                    <a href="#">
-                      <i class="glyphicon glyphicon-chevron-down pull-right"></i>
-                    </a>
-
-                    <a href="#" class="anchor-username">
-                      <h4 class="media-heading">{{ $user->firstname }}</h4>
-                    </a>
-
-                    <a href="#" class="anchor-time">{{ $jobpost->created_at }}</a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </section>
-          <section class="post-body" style="background-color: #d4fcbd; border-radius: 10px; border-style: outset; padding: 10px">
-            <h4 style="font-weight:bold;">******Hiring post******</h4>
-            <p>
-              <li>Position :
-                <strong>{{ $jobpost->position }}</strong>
-              </li>
-            </p>
-            <p>
-              <li>Profession :
-                <strong>{{ $jobpost->profession }}</strong>
-              </li>
-            </p>
-            <p>
-              <li>No. of Vacancy :
-                <strong>{{ $jobpost->vacancy_number }}</strong>
-              </li>
-            </p>
-            <p>
-              <li>Job Circular:
-                <strong>{{ $jobpost->circular }}</strong>
-              </li>
-            </p>
-            <p>
-              <li>Company Details:
-                <strong>{{ $jobpost->company_details }}</strong>
-              </li>
-            </p>
-            <p>
-              <li>Job Responsibilities:
-                <strong>{{ $jobpost->job_details }}</strong>
-              </li>
-            </p>
-            <p>
-              <li>Job Location :
-                <strong>{{ $jobpost->location }}</strong>
-              </li>
-            </p>
-
-          </section>
-
-          <section class="post-footer">
-            <div class="row">
-              <div class="col-md-12">
-                <ul class="list-unstyled">
-                  <li>
-                    <a href="#">
-                      <i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="glyphicon glyphicon-comment"></i> Comment</a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="glyphicon glyphicon-share-alt"></i> Share</a>
-                  </li>
-                </ul>
-              </div>
-
-            </div>
-            <div class="row">
-              <div class="post-footer-comment-wrapper">
-                <div class="col-md-12 col-sm-12 col-lg-12">
-                  <div class="comment-form">
-
-                  </div>
-                  <div class="comment">
-                    <div class="media">
-                      <div class="media-left">
-                        <a href="#">
-                          <img class="media-object photo-profile img-circle" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g"
-                            width="32" height="32" alt="...">
-                        </a>
-                      </div>
                       <div class="media-body">
+                        <div class="dropdown ">
+                      <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
+                      </button>
+                      
+                        <ul class="dropdown-menu pull-right">
+                          <li><a href="#" 
+                            onclick="
+                             var result = confirm('Are you sure you with to delete this post?');
+                             
+                             if( result){
+                               event.preventDefault();
+                               document.getElementById('delete-form').submit();
+                              }
+                                    " 
+                                     >
+
+                                     Delete
+
+                          </a>
+                          
+                          <form id="delete-form" action="{{ route('jobpost.destroy', $jobpost['id']) }}" method="POST" style="display:none;">
+                             <input type="hidden" name="_method" value="delete">
+                             {{ csrf_field() }}
+                          </form>
+
+                          </li>
+                        </ul>
+                      
+                    </div>
+
                         <a href="#" class="anchor-username">
                           <h4 class="media-heading">{{ $user->firstname }}</h4>
                         </a>
-                        <a href="#" class="anchor-time">51 mins</a>
+
+                        <a href="#" class="anchor-time">{{ $jobpost->created_at }}</a>
                       </div>
                     </div>
                   </div>
+
                 </div>
-              </div>
+              </section>
+              <section class="post-body well well-lg" style="background-color: #CFD8DC; border-radius: 4px;">
+            <h4 style="font-weight:bold;">******Hiring post******</h4>
+                <p>
+                  <li>Position :
+                    <strong>{{ $jobpost->position }}</strong>
+                  </li>
+                </p>
+                <p>
+                  <li>Profession :
+                    <strong>{{ $jobpost->profession }}</strong>
+                  </li>
+                </p>
+                <p>
+                  <li>No. of Vacancy :
+                    <strong>{{ $jobpost->vacancy_number }}</strong>
+                  </li>
+                </p>
+                <p>
+                  <li>Job Circular:
+                    <strong>{{ $jobpost->circular }}</strong>
+                  </li>
+                </p>
+                <p>
+                  <li>Company Details:
+                    <strong>{{ $jobpost->company_details }}</strong>
+                  </li>
+                </p>
+                <p>
+                  <li>Job Responsibilities:
+                    <strong>{{ $jobpost->job_details }}</strong>
+                  </li>
+                </p>
+                <p>
+                  <li>Job Location :
+                    <strong>{{ $jobpost->location }}</strong>
+                  </li>
+                </p>
+
+              </section>
+
+              <section class="post-footer">
+                <div class="row">
+                  <div class="col-md-12">
+                    <ul class="list-unstyled">
+                      <li>
+                        <a href="#">
+                          <i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="glyphicon glyphicon-comment"></i> Comment</a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="glyphicon glyphicon-share-alt"></i> Share</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="post-footer-comment-wrapper">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+
+                       <!--Comment show start -->
+                   @foreach($jobpost->comments as $comment)
+                    <div class="well well-sm">
+                    <div class="media">
+                      <div class="media-left">
+                        <a href="#">
+                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
+                            width="32" height="32" alt="...">
+                        </a>
+                        </div>
+                         <div class="media-body">
+                            <a href="#" class="anchor-username">
+                              <h4 class="media-heading">{{ $comment->user->firstname }}</h4>
+                            </a>
+                            <a href="#" class="anchor-time">{{ $comment->created_at }}</a>
+                          </div>
+                        <div class="commentText">
+                            <p class="">{{ $comment->body }}</p> 
+                        </div>
+                     </div>
+                    </div>
+                    @endforeach
+                    <!--Comment show end-->
+                   
+                    <!--Create Comment start -->
+                    <div class="comment-form">
+                      <div class="comment">
+                        <div class="media">
+                          <div class="media-left">
+                            <a href="#">
+                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
+                                width="32" height="32" alt="...">
+                            </a>
+                          </div>
+
+                          <div class="media-body">
+                           <form method="POST" action="{{ route('comment.store') }}">
+                           {{ csrf_field() }}
+
+                              <input type="hidden" name="commentable_type" value="App\Jobpost">
+                              <input type="hidden" name="commentable_id" value="{{ $jobpost['id'] }}">
+
+                              <div class="form-group">
+                                  <input class="form-control" type="text" name="body" placeholder="Your comments" />
+                              </div>
+                              <div class="form-group">
+                                  <input class="form-control" type="file" name="url" placeholder="upload file/image" />
+                              </div>
+                              <div class="form-group">
+                                  <button class="btn btn-default">Add</button>
+                              </div>
+                          </form>
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!--Create Comment end -->
+
+
+                    </div>
+                  </div>
+                </div>
+
+              </section>
+
+
             </div>
+          </div>
+          @endforeach
+          <!--Job hiring post show end -->
 
-          </section>
-
-
-        </div>
-      </div>
-      @endforeach
-      <!--Job hiring post show end -->
-    </div>
   </div>
 </div>
-
-
-
+</div>
 
 <!--Modal for post area start start-->
 <div class="modal fade" id="myModal" role="dialog">
@@ -740,8 +997,6 @@
 <!--end Modal for post area-->
 
 
-
-
 <script type="text/javascript">
   function update_cover() {
     document.getElementById('my_file').click();
@@ -855,3 +1110,8 @@
 
 
 @endsection
+
+
+
+
+

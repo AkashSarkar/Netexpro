@@ -19,4 +19,9 @@ class jobpost extends Model
        
         'user_id',
     ];
+
+       public function comments()
+    {
+        return $this->morphMany('App\Comment','commentable');
+    }
 }

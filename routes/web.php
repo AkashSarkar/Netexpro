@@ -23,7 +23,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/interests', 'InterestController@update'); 
 
-    
+    //Route::delete('profile/{post_id}','PostController@destroy1')->name('post');
+
     //Route::post('/post', 'PostController@store');
  
     Route::resource('interests', 'InterestController');
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function(){
    // Route::get('profile', 'ProfileController@index');
   //  Route::post('profile', 'ProfileController@update_avatar');
     Route::resource('post', 'PostController');
+    Route::resource('comment', 'CommentsController');
 });
 
 

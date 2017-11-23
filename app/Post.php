@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Post extends Model
 {
     //
+
+    protected $primaryKey = 'post_id';
     protected $fillable = [
         'post_type',
         'description',
@@ -32,6 +35,10 @@ class Post extends Model
       public function ratings()
     {
         return $this->hasMany('App\Rating');
+    }
+       public function comments()
+    {
+        return $this->morphMany('App\Comment','commentable');
     }
     
 }

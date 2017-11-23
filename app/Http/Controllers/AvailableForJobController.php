@@ -54,13 +54,12 @@ class AvailableForJobController extends Controller
 
 
             if($availableforjob){
-                return redirect()->route('home.index', ['user_id'=> Auth::user()->id])
-                ->with('success' , 'job posted successfully');
+                return back()->with('success' , 'available for job posted successfully');
             }
 
         }
         
-            return back()->withInput()->with('errors', 'Error creating new company');
+            return back()->withInput()->with('errors', 'Error creating available for job post');
     }
 
     /**
@@ -103,8 +102,16 @@ class AvailableForJobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(AvailableForJob $availableforjob)
     {
-        //
+    
+    $available_for_job_postDelete = AvailableForJob::find( $availableforjob->id );
+       
+         if($available_for_job_postDelete->delete())
+        {
+            return redirect()->route('home.index')->with('success','project deleted successfully.');
+        }
+
+        return back()->withInput()->with('errors', 'project could not be deleted.'); //
     }
 }

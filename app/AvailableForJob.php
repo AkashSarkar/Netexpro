@@ -15,4 +15,9 @@ class AvailableForJob extends Model
         'location',
         'user_id',
     ];
+
+       public function comments()
+    {
+        return $this->morphMany('App\Comment','commentable');
+    }
 }

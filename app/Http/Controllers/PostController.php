@@ -10,6 +10,8 @@ use Image;
 
 class PostController extends Controller
 {
+
+     //protected $primaryKey = 'post_id';
     /**
      * Display a listing of the resource.
      *
@@ -132,6 +134,18 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+
+ 
+        $postDelete = Post::find( $post->post_id );
+       
+
+        if($postDelete->delete())
+        {
+            return redirect()->route('home.index')->with('success','project deleted successfully.');
+        }
+
+        return back()->withInput()->with('errors', 'project could not be deleted.'); 
+       
+       
     }
 }
