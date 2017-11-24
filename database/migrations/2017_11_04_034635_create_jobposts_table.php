@@ -14,7 +14,7 @@ class CreateJobpostsTable extends Migration
     public function up()
     {
         Schema::create('jobposts', function (Blueprint $table) {
-            $table->increments('id');
+           // $table->increments('id');
             $table->string('position');
             $table->string('profession');
             $table->integer('vacancy_number');
@@ -22,7 +22,8 @@ class CreateJobpostsTable extends Migration
             $table->string('company_details');
             $table->string('job_details');
             $table->string('location');
-          
+            $table->string('jobpost_id');
+            $table->primary('jobpost_id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

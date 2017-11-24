@@ -457,6 +457,11 @@
 
                               <input type="hidden" name="commentable_type" value="App\Post">
                               <input type="hidden" name="commentable_id" value="{{ $post['post_id'] }}">
+                              <input type="hidden" name="firstname" value="{{ $user['firstname'] }}">
+                              <input type="hidden" name="lastname" value="{{ $user['lastname'] }}">
+
+
+
 
                               <div class="form-group">
                                   <input class="form-control" type="text" name="body" placeholder="Your comments" />
@@ -523,7 +528,7 @@
 
                           </a>
                           
-                          <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost['id']) }}" method="POST" style="display:none;">
+                          <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost['useravailablepost_id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" method="PUT" value="delete">
                              {{ csrf_field() }}
                           </form>
@@ -638,7 +643,9 @@
                            {{ csrf_field() }}
 
                               <input type="hidden" name="commentable_type" value="App\AvailableForJob">
-                              <input type="hidden" name="commentable_id" value="{{ $useravailablepost['id'] }}">
+                              <input type="hidden" name="commentable_id" value="{{ $useravailablepost['useravailablepost_id'] }}">
+                              <input type="hidden" name="firstname" value="{{ $user['firstname'] }}">
+                              <input type="hidden" name="lastname" value="{{ $user['lastname'] }}">
 
                               <div class="form-group">
                                   <input class="form-control" type="text" name="body" placeholder="Your comments" />
@@ -704,7 +711,7 @@
 
                           </a>
                           
-                          <form id="delete-form2" action="{{ route('jobpost.destroy', $jobpost['id']) }}" method="POST" style="display:none;">
+                          <form id="delete-form2" action="{{ route('jobpost.destroy', $jobpost['jobpost_id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" method="PUT" value="delete">
                              {{ csrf_field() }}
                           </form>
@@ -829,7 +836,9 @@
                            {{ csrf_field() }}
 
                               <input type="hidden" name="commentable_type" value="App\Jobpost">
-                              <input type="hidden" name="commentable_id" value="{{ $jobpost['id'] }}">
+                              <input type="hidden" name="commentable_id" value="{{ $jobpost['jobpost_id'] }}">
+                              <input type="hidden" name="firstname" value="{{ $user['firstname'] }}">
+                              <input type="hidden" name="lastname" value="{{ $user['lastname'] }}">
 
                               <div class="form-group">
                                   <input class="form-control" type="text" name="body" placeholder="Your comments" />

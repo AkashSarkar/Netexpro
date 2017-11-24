@@ -48,14 +48,7 @@ class HomeController extends Controller
 
                 // dd($avg_rating);
            
-            $userpost=DB::table('users')
-                         ->join('posts', function ($join) {
-                          $join->on('users.id', '=', 'posts.user_id')
-                          ;
-                          })
-                         ->get();
-                     
-            $userpost=json_decode($userpost,true);
+           
 
             //$comments = DB::table('comments')->join('posts', 'comments.post_id', '=', 'posts.post_id')->get();
                
@@ -85,15 +78,7 @@ class HomeController extends Controller
           
             $userpost=json_decode($userpost,true); 
 
-            $comment = DB::table('posts')->join('comments', 'posts.post_id','=','comments.commentable_id')->get();
-             //dd($comment);
-            //dd($userpost);
-            //image get for post
-
-          /*  $imagepost= DB::table('posts')
-            ->join('imageposts', 'posts.post_id', '=', 'imageposts.post_id')
-            ->get();
-            $imagepost=json_decode($imagepost,true);*/ 
+           
             $comments=Comment::all();
             $images=Imagepost::all();
             

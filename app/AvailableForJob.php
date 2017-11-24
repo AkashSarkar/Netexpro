@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AvailableForJob extends Model
 {
+    protected $primaryKey = 'useravailablepost_id';
      protected $fillable = [
         'position',
         'profession',
@@ -14,6 +15,7 @@ class AvailableForJob extends Model
         'highlight',
         'location',
         'user_id',
+        'useravailablepost_id',
     ];
 
       public function comments()

@@ -13,13 +13,17 @@ class CreateAvailableForJobsTable extends Migration
      */
     public function up()
     {
+
+        
         Schema::create('available_for_jobs', function (Blueprint $table) {
-            $table->increments('id');
+            //$table->increments('id');
             $table->string('position');
             $table->string('profession');
             $table->string('CV');
             $table->string('highlight');
             $table->string('location');
+            $table->string('useravailablepost_id');
+            $table->primary('useravailablepost_id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->dropForeign(['user_id']);

@@ -38,6 +38,8 @@ class AvailableForJobController extends Controller
      */
     public function store(Request $request)
     {
+         $id=time();
+
         $file = time() . '.'.$request->file('attachment')->getClientOriginalName();
         $destination = base_path() . '/public/uploads/attachment';
         $request->file('attachment')->move($destination, $file);
@@ -49,6 +51,7 @@ class AvailableForJobController extends Controller
                 'CV' => $file, 
                 'highlight' => $request->input('highlight'),
                 'location' => $request->input('location'),
+                'useravailablepost_id'=>$id,
                 'user_id' => Auth::user()->id,
             ]);
 
@@ -105,7 +108,7 @@ class AvailableForJobController extends Controller
     public function destroy(AvailableForJob $availableforjob)
     {
 
-    $available_for_job_postDelete = AvailableForJob::find( $availableforjob->id );
+    $available_for_job_postDelete = AvailableForJob::find( $availableforjob->useravailablepost_id );
 
          if($available_for_job_postDelete->delete())
         {

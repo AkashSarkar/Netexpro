@@ -306,12 +306,12 @@
                         </div>
                          <div class="media-body">
                             <a href="#" class="anchor-username">
-                              <h4 class="media-heading">{{$userpost['firstname']}}</h4>
+                              <h4 class="media-heading">{{ $comment['firstname'] }}</h4>
                             </a>
-                            <a href="#" class="anchor-time">{{$comment->created_at}}</a>
+                            <a href="#" class="anchor-time">{{ $comment->created_at }}</a>
                           </div>
                         <div class="commentText">
-                            <p class="">{{$comment->body}}</p> 
+                            <p class="">{{ $comment->body }}</p> 
                         </div>
                      </div>
                     </div>
@@ -336,6 +336,8 @@
 
                               <input type="hidden" name="commentable_type" value="App\Post">
                               <input type="hidden" name="commentable_id" value="{{ $userpost['post_id'] }}">
+                              <input type="hidden" name="firstname" value="{{ $user['firstname'] }}">
+                              <input type="hidden" name="lastname" value="{{ $user['lastname'] }}">
 
                               <div class="form-group">
                                   <input class="form-control" type="text" name="body" placeholder="Your comments" />
@@ -403,7 +405,7 @@
 
                           </a>
                           
-                          <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost['id']) }}" method="POST" style="display:none;">
+                          <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost['useravailablepost_id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" method="PUT" value="delete">
                              {{ csrf_field() }}
                           </form>
@@ -480,18 +482,18 @@
                   
                  <!--Comment show start -->
                   @foreach($comments as $comment)
-                    @if( $useravailablepost['id']==$comment->commentable_id)
+                    @if( $useravailablepost['useravailablepost_id']==$comment->commentable_id)
                      <div class="well well-sm">
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}"
+                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$useravailablepost['p_pic']}}"
                             width="32" height="32" alt="...">
                         </a>
                         </div>
                          <div class="media-body">
                             <a href="#" class="anchor-username">
-                              <h4 class="media-heading">{{$useravailablepost['firstname']}}</h4>
+                              <h4 class="media-heading">{{ $comment['firstname'] }}</h4>
                             </a>
                             <a href="#" class="anchor-time">{{$comment->created_at}}</a>
                           </div>
@@ -510,7 +512,7 @@
                         <div class="media">
                           <div class="media-left">
                             <a href="#">
-                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}"
+                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$useravailablepost['p_pic']}}"
                                 width="32" height="32" alt="...">
                             </a>
                           </div>
@@ -520,7 +522,10 @@
                            {{ csrf_field() }}
 
                               <input type="hidden" name="commentable_type" value="App\AvailableForJob">
-                              <input type="hidden" name="commentable_id" value="{{ $useravailablepost['id'] }}">
+                              <input type="hidden" name="commentable_id" value="{{ $useravailablepost['useravailablepost_id'] }}">
+                               <input type="hidden" name="firstname" value="{{ $useravailablepost['firstname'] }}">
+                              <input type="hidden" name="lastname" value="{{ $useravailablepost['lastname'] }}">
+
 
                               <div class="form-group">
                                   <input class="form-control" type="text" name="body" placeholder="Your comments" />
@@ -587,7 +592,7 @@
 
                           </a>
                           
-                          <form id="delete-form2" action="{{ route('jobpost.destroy', $jobpost['id']) }}" method="POST" style="display:none;">
+                          <form id="delete-form2" action="{{ route('jobpost.destroy', $jobpost['jobpost_id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" method="PUT" value="delete">
                              {{ csrf_field() }}
                           </form>
@@ -674,7 +679,7 @@
 
                   <!--Comment show start -->
                   @foreach($comments as $comment)
-                    @if( $jobpost['id']==$comment->commentable_id)
+                    @if( $jobpost['jobpost_id']==$comment->commentable_id)
                      <div class="well well-sm">
                     <div class="media">
                       <div class="media-left">
@@ -685,7 +690,7 @@
                         </div>
                          <div class="media-body">
                             <a href="#" class="anchor-username">
-                              <h4 class="media-heading">{{$jobpost['firstname']}}</h4>
+                              <h4 class="media-heading">{{ $comment['firstname'] }}</h4>
                             </a>
                             <a href="#" class="anchor-time">{{$comment->created_at}}</a>
                           </div>
@@ -714,7 +719,10 @@
                            {{ csrf_field() }}
 
                               <input type="hidden" name="commentable_type" value="App\Jobpost">
-                              <input type="hidden" name="commentable_id" value="{{ $jobpost['id'] }}">
+                              <input type="hidden" name="commentable_id" value="{{ $jobpost['jobpost_id'] }}">
+                               <input type="hidden" name="firstname" value="{{ $userpost['firstname'] }}">
+                              <input type="hidden" name="lastname" value="{{ $userpost['lastname'] }}">
+
 
                               <div class="form-group">
                                   <input class="form-control" type="text" name="body" placeholder="Your comments" />

@@ -44,7 +44,6 @@ class RatingController extends Controller
             $rate = Rating::create([
                 
                 'rating' => $request->input('rating'),
-                
                 'post_id'=>$request->input('post_id'),
                 'user_id'=>Auth::user()->id
             ]);

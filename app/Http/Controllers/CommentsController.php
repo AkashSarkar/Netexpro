@@ -46,7 +46,10 @@ class CommentsController extends Controller
                 'url' => $request->input('url'),
                 'commentable_type'=>$request->input('commentable_type'),
                 'commentable_id'=>$request->input('commentable_id'),
+                'firstname'=>Auth::user()->firstname,
+                'lastname'=>Auth::user()->lastname,
                 'user_id'=>Auth::user()->id
+              
             ]);
            }
 

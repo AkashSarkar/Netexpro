@@ -36,7 +36,7 @@ class JobpostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id=time();
 
         if(Auth::check()){
             $jobpost = jobpost::create([
@@ -47,7 +47,7 @@ class JobpostController extends Controller
                 'company_details' => $request->input('company_details'),
                 'job_details' => $request->input('job_details'),
                 'location' => $request->input('location'),
-                
+                'jobpost_id'=>$id,
                 'user_id' => Auth::user()->id
             ]);
 
@@ -116,7 +116,7 @@ class JobpostController extends Controller
      */
     public function destroy(jobpost $jobpost)
     {
-        $jobpostDelete = Jobpost::find( $jobpost->id );
+        $jobpostDelete = Jobpost::find( $jobpost->jobpost_id );
        
          if($jobpostDelete->delete())
         {

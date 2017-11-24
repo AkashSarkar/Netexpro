@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class jobpost extends Model
 {
     //
-
+    protected $primaryKey = 'jobpost_id';
     protected $fillable = [
         'position',
         'profession',
@@ -16,7 +16,7 @@ class jobpost extends Model
         'company_details',
         'job_details',
         'location',
-       
+        'jobpost_id',
         'user_id',
     ];
 
