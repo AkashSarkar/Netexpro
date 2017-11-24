@@ -36,7 +36,7 @@
             </li>
             <br>
               <form  action="{{ route('home.index')}}" >
-               {{csrf_field()}}
+               
                <button type="submit" class="button_connection button_m btn" id="bm" name="connection"  value="{{$interest->profession}}"
                data-toggle="tooltip" data-placement="bottom" title="{{$interest->profession}}">
                <i class="fa fa-briefcase" aria-hidden="true"></i></i> {{$interest->profession}}</button><br>
@@ -264,7 +264,7 @@
                                               </label>
                                             </div>
                                             
-                                          <a href="#" ontouchstart=""> <i class="active fa fa-star" aria-hidden="true"></i> Rate</a>
+                                          <a href="#" ontouchstart=""> <i class="active fa fa-star" aria-hidden="true"></i> Rate {{$userpost['ratting']}}</a>
                                         
                                           <strong></strong>
                                
@@ -388,20 +388,12 @@
                         <ul class="dropdown-menu pull-right">
                           <li>
 
-                          <a href="#" 
-                            onclick="
-                             var result = confirm('Are you sure you want to delete this post?');
+                          <a href="#" onclick=" var result = confirm('Are you sure you want to delete this post?');
                              
                              if( result){
                                event.preventDefault();
                                document.getElementById('delete-form1').submit();
-                              }
-                                    " 
-                                     >
-
-                                     Delete
-
-                          </a>
+                              }"> Delete </a>
                           
                           <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost['id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" method="PUT" value="delete">

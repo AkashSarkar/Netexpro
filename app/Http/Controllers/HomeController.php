@@ -43,19 +43,12 @@ class HomeController extends Controller
 
            // $postss = Post::where('user_id', Auth::user()->id)->get();
 
-            $avg_rating = Rating::selectRaw('avg(rating)')
-                          ->groupBy('post_id')->get();
-
-                // dd($avg_rating);
+           $avg_rating = DB::table('ratings')
+           ->select( DB::raw('AVG(rating) as avg_rating'),'post_id')
+           ->groupBy('post_id')
+           ->get();
            
-            $userpost=DB::table('users')
-                         ->join('posts', function ($join) {
-                          $join->on('users.id', '=', 'posts.user_id')
-                          ;
-                          })
-                         ->get();
-                     
-            $userpost=json_decode($userpost,true);
+           
 
             //$comments = DB::table('comments')->join('posts', 'comments.post_id', '=', 'posts.post_id')->get();
                
@@ -85,7 +78,7 @@ class HomeController extends Controller
           
             $userpost=json_decode($userpost,true); 
 
-            $comment = DB::table('posts')->join('comments', 'posts.post_id','=','comments.commentable_id')->get();
+           // $comment = DB::table('posts')->join('comments', 'posts.post_id','=','comments.commentable_id')->get();
              //dd($comment);
             //dd($userpost);
             //image get for post
@@ -117,6 +110,17 @@ class HomeController extends Controller
                         if($connection_type==$type[$k]){
                             
                             $post[$j]=$userpost[$i];
+                            //adding average ratings with post
+                            if($post[$j]['post_type']=="project"){
+                                
+                                for($rate=0;$rate<count($avg_rating);$rate++){
+                                    if($post[$j]['post_id']==$avg_rating[$rate]->post_id)
+                                    {
+                                        $post[$j]['ratting'] =$avg_rating[$rate]->avg_rating;
+                                    }
+                                }
+                            }
+                            //end of average rating
                             $j++;
                             $f=1;
                         }
@@ -142,17 +146,50 @@ class HomeController extends Controller
                         if($interest->profession==$type[$k]){
                             
                             $post[$j]=$userpost[$i];
+                            //adding average ratings with post
+                            if($post[$j]['post_type']=="project"){
+                                
+                                for($rate=0;$rate<count($avg_rating);$rate++){
+                                    if($post[$j]['post_id']==$avg_rating[$rate]->post_id)
+                                    {
+                                        $post[$j]['ratting'] =$avg_rating[$rate]->avg_rating;
+                                    }
+                                }
+                            }
+                            //end of average rating
                             $j++;
                             $f=1;
                         }
                         elseif($interest->industry==$type[$k]){
                             
                             $post[$j]=$userpost[$i];
+                            //adding average ratings with post
+                            if($post[$j]['post_type']=="project"){
+                                
+                                for($rate=0;$rate<count($avg_rating);$rate++){
+                                    if($post[$j]['post_id']==$avg_rating[$rate]->post_id)
+                                    {
+                                        $post[$j]['ratting'] =$avg_rating[$rate]->avg_rating;
+                                    }
+                                }
+                            }
+                            //end of average rating
                             $j++;
                             $f=1;
                         }
                         elseif($user->education==$type[$k]){
                             $post[$j]=$userpost[$i];
+                            //adding average ratings with post
+                            if($post[$j]['post_type']=="project"){
+                                
+                                for($rate=0;$rate<count($avg_rating);$rate++){
+                                    if($post[$j]['post_id']==$avg_rating[$rate]->post_id)
+                                    {
+                                        $post[$j]['ratting'] =$avg_rating[$rate]->avg_rating;
+                                    }
+                                }
+                            }
+                            //end of average rating
                             $j++;
                             $f=1;    
                         }
@@ -168,7 +205,7 @@ class HomeController extends Controller
             
            
                 
-        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'avg_rating'=>$avg_rating,'comments'=>$comments]);
+        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'comments'=>$comments]);
         }
         
     }
