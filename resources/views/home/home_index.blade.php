@@ -300,8 +300,12 @@
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}"
+
+                        
+                           <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment['p_pic']}}"
                             width="32" height="32" alt="...">
+                         
+                          
                         </a>
                         </div>
                          <div class="media-body">
@@ -325,7 +329,7 @@
                         <div class="media">
                           <div class="media-left">
                             <a href="#">
-                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}"
+                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                                 width="32" height="32" alt="...">
                             </a>
                           </div>
@@ -338,6 +342,7 @@
                               <input type="hidden" name="commentable_id" value="{{ $userpost['post_id'] }}">
                               <input type="hidden" name="firstname" value="{{ $user['firstname'] }}">
                               <input type="hidden" name="lastname" value="{{ $user['lastname'] }}">
+                              <input type="hidden" name="p_pic" value="{{ $user['p_pic'] }}">
 
                               <div class="form-group">
                                   <input class="form-control" type="text" name="body" placeholder="Your comments" />
@@ -479,7 +484,7 @@
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$useravailablepost['p_pic']}}"
+                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment['p_pic']}}"
                             width="32" height="32" alt="...">
                         </a>
                         </div>
@@ -504,7 +509,7 @@
                         <div class="media">
                           <div class="media-left">
                             <a href="#">
-                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$useravailablepost['p_pic']}}"
+                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                                 width="32" height="32" alt="...">
                             </a>
                           </div>
@@ -517,6 +522,7 @@
                               <input type="hidden" name="commentable_id" value="{{ $useravailablepost['useravailablepost_id'] }}">
                                <input type="hidden" name="firstname" value="{{ $useravailablepost['firstname'] }}">
                               <input type="hidden" name="lastname" value="{{ $useravailablepost['lastname'] }}">
+                              <input type="hidden" name="p_pic" value="{{ $useravailablepost['p_pic'] }}">
 
 
                               <div class="form-group">
@@ -676,7 +682,7 @@
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}"
+                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment['p_pic']}}"
                             width="32" height="32" alt="...">
                         </a>
                         </div>
@@ -701,7 +707,7 @@
                         <div class="media">
                           <div class="media-left">
                             <a href="#">
-                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}"
+                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
                                 width="32" height="32" alt="...">
                             </a>
                           </div>
@@ -714,7 +720,7 @@
                               <input type="hidden" name="commentable_id" value="{{ $jobpost['jobpost_id'] }}">
                                <input type="hidden" name="firstname" value="{{ $userpost['firstname'] }}">
                               <input type="hidden" name="lastname" value="{{ $userpost['lastname'] }}">
-
+                               <input type="hidden" name="p_pic" value="{{ $userpost['p_pic'] }}">
 
                               <div class="form-group">
                                   <input class="form-control" type="text" name="body" placeholder="Your comments" />

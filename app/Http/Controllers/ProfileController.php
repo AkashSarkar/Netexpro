@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Post;
 use App\Visibility;
@@ -11,6 +11,7 @@ use App\AvailableForJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Imagepost;
+use App\Comment;
 use Image;
 
 class ProfileController extends Controller
@@ -84,6 +85,13 @@ class ProfileController extends Controller
                 $user = Auth::user();
                 $user->p_pic = $filename;
                 $user->save();
+
+                $commentuserpic= Comment::where('user_id', Auth::user()->id)->get();
+                foreach ($commentuserpic as $pic) {
+                $pic->p_pic=$filename;
+                $pic->save();
+                }
+               
                 $check=1;
                 return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
                }

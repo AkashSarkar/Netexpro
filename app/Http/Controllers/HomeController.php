@@ -41,7 +41,8 @@ class HomeController extends Controller
             $user= User::find(Auth::user()->id);  
             $allPost = Post::all();
 
-           // $postss = Post::where('user_id', Auth::user()->id)->get();
+            $allUser = User::all();
+        
 
            $avg_rating = DB::table('ratings')
            ->select( DB::raw('AVG(rating) as avg_rating'),'post_id')
@@ -49,12 +50,7 @@ class HomeController extends Controller
            ->get();
            
            
-           
-
-            //$comments = DB::table('comments')->join('posts', 'comments.post_id', '=', 'posts.post_id')->get();
-               
-
-              $useravailablepost= DB::table('users')
+            $useravailablepost= DB::table('users')
               ->join('available_for_jobs', 'users.id', '=', 'available_for_jobs.user_id')
               ->orderBy('available_for_jobs.created_at','desc')
               ->get();
@@ -67,29 +63,23 @@ class HomeController extends Controller
                         })->get();
             
             $jobpost=json_decode($jobpost,true);
-        //passing values to view
+          
      
             $userpost= DB::table('users')
             ->join('interests', 'users.id', '=', 'interests.user_id')
             ->join('posts', 'users.id', '=', 'posts.user_id')
             ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
-            //->join('comments', 'posts.post_id','=','comments.commentable_id')
+            //->join('comments', 'users.id','=','comments.commentable_id')
             ->orderBy('posts.created_at','desc')
             ->get();
           
             $userpost=json_decode($userpost,true); 
 
-           
-           // $comment = DB::table('posts')->join('comments', 'posts.post_id','=','comments.commentable_id')->get();
-             //dd($comment);
-            //dd($userpost);
-            //image get for post
-
-          /*  $imagepost= DB::table('posts')
-            ->join('imageposts', 'posts.post_id', '=', 'imageposts.post_id')
-            ->get();
-            $imagepost=json_decode($imagepost,true);*/ 
             $comments=Comment::all();
+            
+            
+
+
             $images=Imagepost::all();
             
             $interest=Interest::find(Auth::user()->id);
@@ -207,7 +197,7 @@ class HomeController extends Controller
             
            
                 
-        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'comments'=>$comments]);
+        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'comments'=>$comments, 'allUser'=>$allUser]);
         }
         
     }

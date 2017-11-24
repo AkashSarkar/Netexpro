@@ -15,6 +15,7 @@ class Comment extends Model
         'user_id',
         'firstname',
         'lastname',
+        'p_pic',
     ];
 
     public function commentable()
