@@ -7,11 +7,12 @@ use App\Post;
 use App\Visibility;
 use App\Interest;
 use App\jobpost;
+use App\Imagepost;
+use App\Comment;
 use App\AvailableForJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Imagepost;
-use App\Comment;
+
 use Image;
 
 class ProfileController extends Controller
@@ -91,13 +92,11 @@ class ProfileController extends Controller
                 $pic->p_pic=$filename;
                 $pic->save();
                 }
-               
+            
                 $check=1;
                 return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
                }
-            //  else{
-              //  return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('errors','Something went wrong,please try again');
-        // }
+
 
         if($check==0){
           $id=time();
@@ -145,6 +144,9 @@ class ProfileController extends Controller
                 return redirect()->route('profile.index', ['user_id'=> Auth::user()->id])
                 ->with('success' , 'Successfully Post');
                }
+
+
+
             
         }
            return back()->withInput();
@@ -206,12 +208,23 @@ class ProfileController extends Controller
              
             ]);
 
-        if($userUpdate){ 
+          if($userUpdate){
+
+            $user = Auth::user();
+            $user->firstname = $request->input('firstname');
+            $user->lastname = $request->input('lastname');
+            $user->save();
+
+            $commentusername= Comment::where('user_id', Auth::user()->id)->get();
+            foreach ($commentusername as $name)  {
+                $name->firstname= $user->firstname;
+                $name->lastname= $user->lastname;
+                $name->save();
+                }               
             
             return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
-        }
-
-        return back()->withInput();
+            }
+       
     }
 
     /**
