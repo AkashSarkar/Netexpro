@@ -35,9 +35,28 @@ class ProfileController extends Controller
       $post = Post::where('user_id', Auth::user()->id)
       ->orderBy('created_at','desc')
       ->get();
+
+      $userComment = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('posts', 'posts.post_id', '=', 'comments.commentable_id')
+            ->orderBy('comments.created_at','desc')
+            ->get();
+
+      $jobComment = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('jobposts', 'jobposts.jobpost_id', '=', 'comments.commentable_id')
+            ->orderBy('comments.created_at','desc')
+            ->get();
+
+      $useravailableComment = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('available_for_jobs', 'available_for_jobs.useravailablepost_id', '=', 'comments.commentable_id')
+            ->orderBy('comments.created_at','desc')
+            ->get();
       
       $interest= Interest::find(Auth::user()->id);
-      return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user]);
+      return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 'jobComment'=>$jobComment, 
+        'useravailableComment'=>$useravailableComment]);
           
       
     }
@@ -87,11 +106,7 @@ class ProfileController extends Controller
                 $user->p_pic = $filename;
                 $user->save();
 
-                $commentuserpic= Comment::where('user_id', Auth::user()->id)->get();
-                foreach ($commentuserpic as $pic) {
-                $pic->p_pic=$filename;
-                $pic->save();
-                }
+               
             
                 $check=1;
                 return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
@@ -208,19 +223,7 @@ class ProfileController extends Controller
              
             ]);
 
-          if($userUpdate){
-
-            $user = Auth::user();
-            $user->firstname = $request->input('firstname');
-            $user->lastname = $request->input('lastname');
-            $user->save();
-
-            $commentusername= Comment::where('user_id', Auth::user()->id)->get();
-            foreach ($commentusername as $name)  {
-                $name->firstname= $user->firstname;
-                $name->lastname= $user->lastname;
-                $name->save();
-                }               
+          if($userUpdate){               
             
             return redirect()->route('profile.index', ['user'=>Auth::user()->id])->with('success','Profile Updated Successfully');
             }

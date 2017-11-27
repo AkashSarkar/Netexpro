@@ -43,12 +43,8 @@ class CommentsController extends Controller
             $comment = Comment::create([
                 
                 'body' => $request->input('body'),
-                'url' => $request->input('url'),
                 'commentable_type'=>$request->input('commentable_type'),
                 'commentable_id'=>$request->input('commentable_id'),
-                'firstname'=>Auth::user()->firstname,
-                'lastname'=>Auth::user()->lastname,
-                'p_pic'=>Auth::user()->p_pic,
                 'user_id'=>Auth::user()->id
               
             ]);

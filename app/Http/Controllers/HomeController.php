@@ -69,16 +69,31 @@ class HomeController extends Controller
             ->join('interests', 'users.id', '=', 'interests.user_id')
             ->join('posts', 'users.id', '=', 'posts.user_id')
             ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
-            //->join('comments', 'users.id','=','comments.commentable_id')
+           // ->join('comments', 'users.id','=','comments.user_id')
             ->orderBy('posts.created_at','desc')
             ->get();
           
             $userpost=json_decode($userpost,true); 
 
-            $comments=Comment::all();
-            
-            
+            $userComment = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('posts', 'posts.post_id', '=', 'comments.commentable_id')
+            ->orderBy('comments.created_at','desc')
+            ->get();
 
+            $jobComment = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('jobposts', 'jobposts.jobpost_id', '=', 'comments.commentable_id')
+            ->orderBy('comments.created_at','desc')
+            ->get();
+
+            $useravailableComment = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('available_for_jobs', 'available_for_jobs.useravailablepost_id', '=', 'comments.commentable_id')
+            ->orderBy('comments.created_at','desc')
+            ->get();
+
+          
 
             $images=Imagepost::all();
             
@@ -197,7 +212,8 @@ class HomeController extends Controller
             
            
                 
-        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'comments'=>$comments, 'allUser'=>$allUser]);
+        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'userComment'=>$userComment, 'jobComment'=>$jobComment, 
+        'useravailableComment'=>$useravailableComment]);
         }
         
     }
