@@ -1,9 +1,4 @@
-@extends('layouts.app')
-
-@section('page-title')
-    Home
-@endsection
- @section('content')
+@extends('layouts.app') @section('page-title') Home @endsection @section('content')
 <!--style-->
 <style>
 
@@ -20,38 +15,44 @@
       <nav class="nav-sidebar">
         <div class="collapse navbar-collapse" id="side-navbar-collapse">
           <ul class="nav">
-            <li  >
-            <!--profile button-->
+            <li>
+              <!--profile button-->
               <div class="media button_profile button_m " id="bp">
-                    <a href="{{ url('profile') }}">
-                        <div class="media-left "><img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
-                              width="20" height="20" alt="..."></div>
-                        <div class="media-body" data-toggle="tooltip" data-placement="bottom" title="{{$user->firstname }} {{$user->lastname }}" >
-                            <h5 class="media-heading"> {{$user->firstname }} {{$user->lastname }}</h5>
-                        </div>
-                    </a>
+                <a href="{{ url('profile') }}">
+                  <div class="media-left ">
+                    <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="20"
+                      height="20" alt="...">
+                  </div>
+                  <div class="media-body" data-toggle="tooltip" data-placement="bottom" title="{{$user->firstname }} {{$user->lastname }}">
+                    <h5 class="media-heading"> {{$user->firstname }} {{$user->lastname }}</h5>
+                  </div>
+                </a>
               </div>
               <!--end profile button-->
-                
+
             </li>
             <br>
-              <form  action="{{ route('home.index')}}" >
-               
-               <button type="submit" class="button_connection button_m btn" id="bm" name="connection"  value="{{$interest->profession}}"
-               data-toggle="tooltip" data-placement="bottom" title="{{$interest->profession}}">
-               <i class="fa fa-briefcase" aria-hidden="true"></i></i> {{$interest->profession}}</button><br>
-                
-                <button type="submit" class="button_connection button_m  btn" id="bm1" name="connection" value="{{$interest->industry}}"
-                data-toggle="tooltip" data-placement="bottom" title="{{$interest->industry}}">
-                <i class="fa fa-industry" aria-hidden="true"></i> {{$interest->industry}}</button><br>
+            <form action="{{ route('home.index')}}">
 
-                <button type="submit" class="button_connection button_m  btn" id="bm2" name="connection" value="{{$user->education}}"
-                data-toggle="tooltip" data-placement="bottom" title="{{$user->education}}">
-                <i class="fa fa-university" aria-hidden="true"></i> {{$user->education}}</button><br>
-              </form>
-            
+              <button type="submit" class="button_connection button_m btn" id="bm" name="connection" value="{{$interest->profession}}"
+                data-toggle="tooltip" data-placement="bottom" title="{{$interest->profession}}">
+                <i class="fa fa-briefcase" aria-hidden="true"></i>
+                </i> {{$interest->profession}}</button>
+              <br>
+
+              <button type="submit" class="button_connection button_m  btn" id="bm1" name="connection" value="{{$interest->industry}}"
+                data-toggle="tooltip" data-placement="bottom" title="{{$interest->industry}}">
+                <i class="fa fa-industry" aria-hidden="true"></i> {{$interest->industry}}</button>
+              <br>
+
+              <button type="submit" class="button_connection button_m  btn" id="bm2" name="connection" value="{{$user->education}}" data-toggle="tooltip"
+                data-placement="bottom" title="{{$user->education}}">
+                <i class="fa fa-university" aria-hidden="true"></i> {{$user->education}}</button>
+              <br>
+            </form>
+
           </ul>
-          
+
         </div>
       </nav>
     </div>
@@ -99,13 +100,12 @@
         </div>
         <div class="panel-heading">
           <div class="btn-group btn-group-md">
-           
+
           </div>
         </div>
       </div>
       <!--postshow-->
-      @if($posts!=null) 
-      @foreach($posts as $userpost)
+      @if($posts!=null) @foreach($posts as $userpost)
       <div class="panel panel-default">
         <div class="panel-body">
           <section class="post-heading">
@@ -114,40 +114,37 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}"
-                        width="40" height="40" alt="...">
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}" width="40" height="40" alt="...">
                     </a>
                   </div>
                   <div class="media-body">
-                   @if($userpost['user_id'] == Auth::user()->id)
+                    @if($userpost['user_id'] == Auth::user()->id)
                     <div class="dropdown ">
                       <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
                       </button>
-                      
-                        <ul class="dropdown-menu pull-right">
-                          <li><a href="#" 
-                            onclick="
+
+                      <ul class="dropdown-menu pull-right">
+                        <li>
+                          <a href="#" onclick="
                              var result = confirm('Are you sure you want to delete this post?');
                              
                              if( result){
                                event.preventDefault();
                                document.getElementById('delete-form').submit();
                               }
-                                    " 
-                                     >
+                                    ">
 
-                                     Delete
+                            Delete
 
                           </a>
-                          
+
                           <form id="delete-form" action="{{ route('post.destroy', $userpost['post_id']) }}" method="POST" style="display:none;">
-                             <input type="hidden" name="_method" method="PUT" value="delete">
-                             {{ csrf_field() }}
+                            <input type="hidden" name="_method" method="PUT" value="delete"> {{ csrf_field() }}
                           </form>
 
-                          </li>
-                        </ul>
-                      
+                        </li>
+                      </ul>
+
                     </div>
                     @endif
 
@@ -163,48 +160,41 @@
             </div>
           </section>
           <section class="post-body well well-sm " style="background-color: #EEEEEE; border-radius: 4px;  ">
-          
-              <div class=" row">
-                  <div class="col-md-12">
-                    <div class="well well-sm">
-                    <p style="font-size:18px;font-weight:400;">{{ $userpost['description'] }} </p>
-                      </div>
-                  </div>
-                </div>  
+
+            <div class=" row">
+              <div class="col-md-12">
+                <div class="well well-sm">
+                  <p style="font-size:18px;font-weight:400;">{{ $userpost['description'] }} </p>
+                </div>
+              </div>
+            </div>
             <!--project show-->
             @if($userpost['post_type']=="project")
             <h4>URL :</h4>
-              <div class=" row">
-                <div class="col-md-12">
-                  <div class="well well-md">
-                    <a href="{{ $userpost['url'] }} "> {{ $userpost['url'] }}</a>
-                    </div>
+            <div class=" row">
+              <div class="col-md-12">
+                <div class="well well-md">
+                  <a href="{{ $userpost['url'] }} "> {{ $userpost['url'] }}</a>
                 </div>
               </div>
+            </div>
             @endif
             <!-- end project show-->
-                            <!--image show-->
-                            @foreach($images as $imgpost)
-                            @if( $userpost['post_id']==$imgpost->post_id)
-                               <h4>Project Images : </h4>
-                                  <div class=" row">
-                                        <div class="col-md-12 col-lg-12">
-                                            <div class="well well-sm">
-                                          
-                                                  @foreach($images as $imagepost)
-                                                    @if( $userpost['post_id']==$imagepost->post_id)
-                                                    <img class="fb-image-lg" 
-                                                      src="/uploads/postimages/{{$imagepost->post_image}}" alt="Project image "
-                                                      style="height:100px;width:20%;"/>
-                                                    @endif
-                                                  @endforeach
-                                            </div>
-                                        </div>
-                                      </div>
-                                @break;
-                            @endif
-                       @endforeach
-                      <!-- end image show-->
+            <!--image show-->
+            @foreach($images as $imgpost) @if( $userpost['post_id']==$imgpost->post_id)
+            <h4>Project Images : </h4>
+            <div class=" row">
+              <div class="col-md-12 col-lg-12">
+                <div class="well well-sm">
+
+                  @foreach($images as $imagepost) @if( $userpost['post_id']==$imagepost->post_id)
+                  <img class="fb-image-lg" src="/uploads/postimages/{{$imagepost->post_image}}" alt="Project image " style="height:100px;width:20%;"
+                  /> @endif @endforeach
+                </div>
+              </div>
+            </div>
+            @break; @endif @endforeach
+            <!-- end image show-->
           </section>
           <hr>
           <section class="post-footer">
@@ -212,69 +202,76 @@
               <div class="col-md-12">
                 <ul class="list-unstyled">
                   <li>
-                  <!-- Shows Rate text and icon if post type is Project-->
+                    <!-- Shows Rate text and icon if post type is Project-->
                     @if($userpost['post_type']=="project")
-                                   <!--<a href="#" data-toggle="modal" data-target="#starModal"><i class="glyphicon glyphicon-star"></i>Rate</a>-->
-                                   <div class="HeaderBarThreshold" onclick=()>
-                                   <form method="post" action="{{ route('rating.store') }}" >
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="_method" value="post">
-                                            <input type="hidden" name="post_id" value="{{$userpost['post_id']}}">
-                           
-                                            <div class="star-rating" style="position:absolute;margin-top:-40px; margin-left:-20px;">
-                                              <input id="star-10" type="submit" name="rating" value="10" style="visibility:hidden;" >
-                                              <label for="star-10" title="10 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-9" type="submit" name="rating" value="9" style="visibility:hidden;">
-                                              <label for="star-9" title="9 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i> 
-                                              </label>
-                                              <input id="star-8" type="submit" name="rating" value="8" style="visibility:hidden;">
-                                              <label for="star-8" title="8 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-7" type="submit" name="rating" value="7" style="visibility:hidden;">
-                                              <label for="star-7" title="7 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-6" type="submit" name="rating" value="6" style="visibility:hidden;">
-                                              <label for="star-6" title="6 star" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-5" type="submit" name="rating" value="5" style="visibility:hidden;" >
-                                              <label for="star-5" title="5 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-4" type="submit" name="rating" value="4" style="visibility:hidden;">
-                                              <label for="star-4" title="4 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i> 
-                                              </label>
-                                              <input id="star-3" type="submit" name="rating" value="3" style="visibility:hidden;">
-                                              <label for="star-3" title="3 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-2" type="submit" name="rating" value="2" style="visibility:hidden;">
-                                              <label for="star-2" title="2 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-1" type="submit" name="rating" value="1" style="visibility:hidden;">
-                                              <label for="star-1" title="1 star" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                            </div>
-                                            
-                                          <a href="#" ontouchstart=""> <i class="active fa fa-star" aria-hidden="true"></i> Rate {{$userpost['ratting']}}</a>
-                                        
-                                          <strong></strong>
-                               
-                                          </form>
-                                            
-                              </div>
-                    @else
-                      <a href="#" ><i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
+                    <!--<a href="#" data-toggle="modal" data-target="#starModal"><i class="glyphicon glyphicon-star"></i>Rate</a>-->
+                    <?php $rate=0;?> @if($isLiked) @foreach($isLiked as $like) @if($like['user_id']== Auth::user()->id && $userpost['post_id']==$like['post_id'])
+                   <a><i class="active fa fa-star" aria-hidden="true"></i></a>
+                    <a>Rated</a>
+                    <span> {{$userpost['ratting']}}</span>
+
+                    <?php $rate+=1;?> @break; @endif @endforeach
+                    
+                    @endif 
+                    @if($rate==0)
+                    <div id="hoverDisable{{$userpost['post_id']}}" class="HeaderBarThreshold">
+
+                      <div class="star-rating" style="position:absolute;margin-top:-40px; margin-left:-20px;">
+
+                        <label for="star-10" onclick="rate({{$userpost['post_id']}},10)" title="10 stars" id="star" style="visibility:hidden;">
+                          <i class="active fa fa-star" aria-hidden="true"></i>
+                        </label>
+
+                        <label for="star-9" title="9 stars" onclick="rate({{$userpost['post_id']}},9)" id="star" style="visibility:hidden;">
+                          <i class="active fa fa-star" aria-hidden="true"></i>
+                        </label>
+
+                        <label for="star-8" title="8 stars" onclick="rate({{$userpost['post_id']}},8)" id="star" style="visibility:hidden;">
+                          <i class="active fa fa-star" aria-hidden="true"></i>
+                        </label>
+
+                        <label for="star-7" title="7 stars" onclick="rate({{$userpost['post_id']}},7)" id="star" style="visibility:hidden;">
+                          <i class="active fa fa-star" aria-hidden="true"></i>
+                        </label>
+
+                        <label for="star-6" title="6 star" onclick="rate({{$userpost['post_id']}},6)" id="star" style="visibility:hidden;">
+                          <i class="active fa fa-star" aria-hidden="true"></i>
+                        </label>
+
+                        <label for="star-5" title="5 stars" onclick="rate({{$userpost['post_id']}},5)" id="star" style="visibility:hidden;">
+                          <i class="active fa fa-star" aria-hidden="true"></i>
+                        </label>
+
+                        <label for="star-4" title="4 stars" onclick="rate({{$userpost['post_id']}},4)" id="star" style="visibility:hidden;">
+                          <i class="active fa fa-star" aria-hidden="true"></i>
+                        </label>
+
+                        <label for="star-3" title="3 stars" onclick="rate({{$userpost['post_id']}},3)" id="star" style="visibility:hidden;">
+                          <i class="active fa fa-star" aria-hidden="true"></i>
+                        </label>
+
+                        <label for="star-2" title="2 stars" onclick="rate({{$userpost['post_id']}},2)" id="star" style="visibility:hidden;">
+                          <i class="active fa fa-star" aria-hidden="true"></i>
+                        </label>
+
+
+                        <label for="star-1" title="1 star" onclick="rate({{$userpost['post_id']}},1)" id="star" style="visibility:hidden;">
+                          <i class="active fa fa-star" aria-hidden="true"></i>
+                        </label>
+
+
+                      </div>
+                      <a><i class="active fa fa-star" aria-hidden="true"></i></a>
+                      <a  id="after_rate{{$userpost['post_id']}}" ontouchstart=""> Rate</a>
+                       <span id="{{$userpost['post_id']}}">{{$userpost['ratting']}}</span>
+
+                    </div>
                     @endif
-                  <!--End Shows Rate text and icon if post type is Project-->
+                     @else
+                    <a href="#">
+                      <i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
+                    @endif
+                    <!--End Shows Rate text and icon if post type is Project-->
                   </li>
                   <li>
                     <a href="#">
@@ -292,68 +289,63 @@
               <div class="post-footer-comment-wrapper">
                 <div class="col-md-12 col-sm-12 col-lg-12">
 
-                 
-                    <!--Comment show start -->
-                  @foreach($userComment as $comment)
-                    @if( $userpost['post_id']==$comment->commentable_id)
-                     <div class="well well-sm">
+
+                  <!--Comment show start -->
+                  @foreach($userComment as $comment) @if( $userpost['post_id']==$comment->commentable_id)
+                  <div class="well well-sm">
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
 
-                        
-                         <img class="media-object photo-profile img-circle" 
-                         src="/uploads/profile/{{$comment->p_pic}}"
-                            width="32" height="32" alt="..."> 
-                         
-                          
+
+                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment->p_pic}}" width="32" height="32" alt="...">
+
+
                         </a>
-                        </div>
-                         <div class="media-body">
-                            <a href="#" class="anchor-username">
-                              <h4 class="media-heading">{{ $comment->firstname }}</h4>
-                            </a>
-                            <a href="#" class="anchor-time">{{ $comment->created_at }}</a>
-                          </div>
-                        <div class="commentText">
-                            <p class="">{{ $comment->body }}</p> 
-                        </div>
-                     </div>
+                      </div>
+                      <div class="media-body">
+                        <a href="#" class="anchor-username">
+                          <h4 class="media-heading">{{ $comment->firstname }}</h4>
+                        </a>
+                        <a href="#" class="anchor-time">{{ $comment->created_at }}</a>
+                      </div>
+                      <div class="commentText">
+                        <p class="">{{ $comment->body }}</p>
+                      </div>
                     </div>
-                    @endif
-                    @endforeach
-                    <!--Comment show end-->
-                   
-                    <!--Create Comment start -->
-                    <div class="comment-form">
-                      <div class="comment">
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
-                                width="32" height="32" alt="...">
-                            </a>
-                          </div>
+                  </div>
+                  @endif @endforeach
+                  <!--Comment show end-->
 
-                          <div class="media-body">
-                           <form method="POST" action="{{ route('comment.store') }}">
-                           {{ csrf_field() }}
+                  <!--Create Comment start -->
+                  <div class="comment-form">
+                    <div class="comment">
+                      <div class="media">
+                        <div class="media-left">
+                          <a href="#">
+                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="32" height="32" alt="...">
+                          </a>
+                        </div>
 
-                              <input type="hidden" name="commentable_type" value="App\Post">
-                              <input type="hidden" name="commentable_id" value="{{ $userpost['post_id'] }}">
+                        <div class="media-body">
+                          <form method="POST" action="{{ route('comment.store') }}">
+                            {{ csrf_field() }}
 
-                              <div class="form-group">
-                                  <input class="form-control" type="text" name="body" placeholder="Your comments" />
-                              </div>
-                              <div class="form-group">
-                                  <button class="btn btn-default">Add</button>
-                              </div>
+                            <input type="hidden" name="commentable_type" value="App\Post">
+                            <input type="hidden" name="commentable_id" value="{{ $userpost['post_id'] }}">
+
+                            <div class="form-group">
+                              <input class="form-control" type="text" name="body" placeholder="Your comments" />
+                            </div>
+                            <div class="form-group">
+                              <button class="btn btn-default">Add</button>
+                            </div>
                           </form>
-                          </div>
                         </div>
-                        </div>
+                      </div>
                     </div>
-                    <!--Create Comment end -->
+                  </div>
+                  <!--Create Comment end -->
                 </div>
               </div>
             </div>
@@ -377,18 +369,18 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$useravailablepost['p_pic']}}"
-                        width="40" height="40" alt="...">
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$useravailablepost['p_pic']}}" width="40" height="40"
+                        alt="...">
                     </a>
                   </div>
                   <div class="media-body">
 
-                   @if($useravailablepost['user_id'] == Auth::user()->id)
-                     <div class="dropdown ">
-                        <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
-                        </button>
-                        <ul class="dropdown-menu pull-right">
-                          <li>
+                    @if($useravailablepost['user_id'] == Auth::user()->id)
+                    <div class="dropdown ">
+                      <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
+                      </button>
+                      <ul class="dropdown-menu pull-right">
+                        <li>
 
                           <a href="#" onclick=" var result = confirm('Are you sure you want to delete this post?');
                              
@@ -396,14 +388,14 @@
                                event.preventDefault();
                                document.getElementById('delete-form1').submit();
                               }"> Delete </a>
-                          
-                          <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost['useravailablepost_id']) }}" method="POST" style="display:none;">
-                             <input type="hidden" name="_method" method="PUT" value="delete">
-                             {{ csrf_field() }}
+
+                          <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost['useravailablepost_id']) }}" method="POST"
+                            style="display:none;">
+                            <input type="hidden" name="_method" method="PUT" value="delete"> {{ csrf_field() }}
                           </form>
 
-                          </li>
-                        </ul>
+                        </li>
+                      </ul>
                     </div>
                     @endif
 
@@ -471,64 +463,59 @@
             <div class="row">
               <div class="post-footer-comment-wrapper">
                 <div class="col-md-12 col-sm-12 col-lg-12">
-                  
-                 <!--Comment show start -->
-                  @foreach($useravailableComment as $comment)
-                    @if( $useravailablepost['useravailablepost_id']==$comment->commentable_id)
-                     <div class="well well-sm">
+
+                  <!--Comment show start -->
+                  @foreach($useravailableComment as $comment) @if( $useravailablepost['useravailablepost_id']==$comment->commentable_id)
+                  <div class="well well-sm">
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                            <img class="media-object photo-profile img-circle" 
-                            src="/uploads/profile/{{$comment->p_pic}}"
-                            width="32" height="32" alt="...">
+                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment->p_pic}}" width="32" height="32" alt="...">
                         </a>
-                        </div>
-                         <div class="media-body">
-                            <a href="#" class="anchor-username">
-                              <h4 class="media-heading">{{ $comment->firstname }}</h4>
-                            </a>
-                            <a href="#" class="anchor-time">{{$comment->created_at}}</a>
-                          </div>
-                        <div class="commentText">
-                            <p class="">{{$comment->body}}</p> 
-                        </div>
-                     </div>
+                      </div>
+                      <div class="media-body">
+                        <a href="#" class="anchor-username">
+                          <h4 class="media-heading">{{ $comment->firstname }}</h4>
+                        </a>
+                        <a href="#" class="anchor-time">{{$comment->created_at}}</a>
+                      </div>
+                      <div class="commentText">
+                        <p class="">{{$comment->body}}</p>
+                      </div>
                     </div>
-                    @endif
-                    @endforeach
-                    <!--Comment show end-->
-                   
-                    <!--Create Comment start -->
-                    <div class="comment-form">
-                      <div class="comment">
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
-                                width="32" height="32" alt="...">
-                            </a>
-                          </div>
+                  </div>
+                  @endif @endforeach
+                  <!--Comment show end-->
 
-                          <div class="media-body">
-                           <form method="POST" action="{{ route('comment.store') }}">
-                           {{ csrf_field() }}
+                  <!--Create Comment start -->
+                  <div class="comment-form">
+                    <div class="comment">
+                      <div class="media">
+                        <div class="media-left">
+                          <a href="#">
+                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="32" height="32" alt="...">
+                          </a>
+                        </div>
 
-                              <input type="hidden" name="commentable_type" value="App\AvailableForJob">
-                              <input type="hidden" name="commentable_id" value="{{ $useravailablepost['useravailablepost_id'] }}">
+                        <div class="media-body">
+                          <form method="POST" action="{{ route('comment.store') }}">
+                            {{ csrf_field() }}
 
-                              <div class="form-group">
-                                  <input class="form-control" type="text" name="body" placeholder="Your comments" />
-                              </div>
-                              <div class="form-group">
-                                  <button class="btn btn-default">Add</button>
-                              </div>
+                            <input type="hidden" name="commentable_type" value="App\AvailableForJob">
+                            <input type="hidden" name="commentable_id" value="{{ $useravailablepost['useravailablepost_id'] }}">
+
+                            <div class="form-group">
+                              <input class="form-control" type="text" name="body" placeholder="Your comments" />
+                            </div>
+                            <div class="form-group">
+                              <button class="btn btn-default">Add</button>
+                            </div>
                           </form>
-                          </div>
                         </div>
-                        </div>
+                      </div>
                     </div>
-                    <!--Create Comment end -->
+                  </div>
+                  <!--Create Comment end -->
 
                 </div>
               </div>
@@ -554,38 +541,36 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $jobpost['p_pic'] }}"
-                        width="40" height="40" alt="...">
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $jobpost['p_pic'] }}" width="40" height="40"
+                        alt="...">
                     </a>
                   </div>
                   <div class="media-body">
-                  @if($jobpost['user_id'] == Auth::user()->id)
+                    @if($jobpost['user_id'] == Auth::user()->id)
                     <div class="dropdown ">
-                        <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
-                        </button>
-                        <ul class="dropdown-menu pull-right">
-                          <li><a href="#" 
-                            onclick="
+                      <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
+                      </button>
+                      <ul class="dropdown-menu pull-right">
+                        <li>
+                          <a href="#" onclick="
                              var result = confirm('Are you sure you want to delete this post?');
                              
                              if( result){
                                event.preventDefault();
                                document.getElementById('delete-form2').submit();
                               }
-                                    " 
-                                     >
+                                    ">
 
-                                     Delete
+                            Delete
 
                           </a>
-                          
+
                           <form id="delete-form2" action="{{ route('jobpost.destroy', $jobpost['jobpost_id']) }}" method="POST" style="display:none;">
-                             <input type="hidden" name="_method" method="PUT" value="delete">
-                             {{ csrf_field() }}
+                            <input type="hidden" name="_method" method="PUT" value="delete"> {{ csrf_field() }}
                           </form>
 
-                          </li>
-                        </ul>
+                        </li>
+                      </ul>
                     </div>
                     @endif
 
@@ -639,7 +624,7 @@
             </p>
 
           </section>
-           <hr>
+          <hr>
           <section class="post-footer">
             <div class="row">
               <div class="col-md-12">
@@ -665,62 +650,57 @@
                 <div class="col-md-12 col-sm-12 col-lg-12">
 
                   <!--Comment show start -->
-                  @foreach($jobComment as $comment)
-                    @if( $jobpost['jobpost_id']==$comment->commentable_id)
-                     <div class="well well-sm">
+                  @foreach($jobComment as $comment) @if( $jobpost['jobpost_id']==$comment->commentable_id)
+                  <div class="well well-sm">
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                            <img class="media-object photo-profile img-circle" 
-                            src="/uploads/profile/{{$comment->p_pic}}"
-                            width="32" height="32" alt="...">
+                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment->p_pic}}" width="32" height="32" alt="...">
                         </a>
-                        </div>
-                         <div class="media-body">
-                            <a href="#" class="anchor-username">
-                              <h4 class="media-heading">{{ $comment->firstname }}</h4>
-                            </a>
-                            <a href="#" class="anchor-time">{{$comment->created_at}}</a>
-                          </div>
-                        <div class="commentText">
-                            <p class="">{{$comment->body}}</p> 
-                        </div>
-                     </div>
+                      </div>
+                      <div class="media-body">
+                        <a href="#" class="anchor-username">
+                          <h4 class="media-heading">{{ $comment->firstname }}</h4>
+                        </a>
+                        <a href="#" class="anchor-time">{{$comment->created_at}}</a>
+                      </div>
+                      <div class="commentText">
+                        <p class="">{{$comment->body}}</p>
+                      </div>
                     </div>
-                    @endif
-                    @endforeach
-                    <!--Comment show end-->
-                   
-                    <!--Create Comment start -->
-                    <div class="comment-form">
-                      <div class="comment">
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}"
-                                width="32" height="32" alt="...">
-                            </a>
-                          </div>
+                  </div>
+                  @endif @endforeach
+                  <!--Comment show end-->
 
-                          <div class="media-body">
-                           <form method="POST" action="{{ route('comment.store') }}">
-                           {{ csrf_field() }}
+                  <!--Create Comment start -->
+                  <div class="comment-form">
+                    <div class="comment">
+                      <div class="media">
+                        <div class="media-left">
+                          <a href="#">
+                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="32" height="32" alt="...">
+                          </a>
+                        </div>
 
-                              <input type="hidden" name="commentable_type" value="App\Jobpost">
-                              <input type="hidden" name="commentable_id" value="{{ $jobpost['jobpost_id'] }}">
+                        <div class="media-body">
+                          <form method="POST" action="{{ route('comment.store') }}">
+                            {{ csrf_field() }}
 
-                              <div class="form-group">
-                                  <input class="form-control" type="text" name="body" placeholder="Your comments" />
-                              </div>
-                              <div class="form-group">
-                                  <button class="btn btn-default">Add</button>
-                              </div>
+                            <input type="hidden" name="commentable_type" value="App\Jobpost">
+                            <input type="hidden" name="commentable_id" value="{{ $jobpost['jobpost_id'] }}">
+
+                            <div class="form-group">
+                              <input class="form-control" type="text" name="body" placeholder="Your comments" />
+                            </div>
+                            <div class="form-group">
+                              <button class="btn btn-default">Add</button>
+                            </div>
                           </form>
-                          </div>
                         </div>
-                        </div>
+                      </div>
                     </div>
-                    <!--Create Comment end -->
+                  </div>
+                  <!--Create Comment end -->
 
                 </div>
               </div>
@@ -749,45 +729,42 @@
               <button type="button" class="btn btn-link">Make post</button>
             </div>
           </div>
-          <form enctype="multipart/form-data" method="post" action="{{ route('post.store') }}" >
+          <form enctype="multipart/form-data" method="post" action="{{ route('post.store') }}">
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="post">
             <div class="modal-body row">
-            <div class="col-md-12">
-                                Post type : 
-                                <input type="radio"  name="post_type" value="status" checked>  Status
-                                <input type="radio"  name="post_type" value="project">  Project
-
-                                @if ($errors->has('post_type'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('post_type') }}</strong>
-                                    </span>
-                                @endif
+              <div class="col-md-12">
+                Post type :
+                <input type="radio" name="post_type" value="status" checked> Status
+                <input type="radio" name="post_type" value="project"> Project @if ($errors->has('post_type'))
+                <span class="help-block">
+                  <strong>{{ $errors->first('post_type') }}</strong>
+                </span>
+                @endif
               </div>
-              
+
               <div class="form-group col-md-12">
-              <br>
+                <br>
                 <textarea id="textareaID1" class="form-control input-lg p-text-area" rows="2" placeholder="Write something" name="description"
                   style="resize: none;" required autofocus></textarea>
               </div>
 
 
-              
-             <div class="form-group col-md-12" id="show_porjectFields">
-                <input id="url" class="form-control input-lg p-text-area"  placeholder="URL" name="url"
-                  style="resize: none;" required >
-            </div>
 
-            <div class="form-group col-md-12" >
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    
-                         <a  id="image_preview"></a>
-                     
-               </div>
-          </div>
-        </div>
-             
+              <div class="form-group col-md-12" id="show_porjectFields">
+                <input id="url" class="form-control input-lg p-text-area" placeholder="URL" name="url" style="resize: none;" required>
+              </div>
+
+              <div class="form-group col-md-12">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+
+                    <a id="image_preview"></a>
+
+                  </div>
+                </div>
+              </div>
+
             </div>
 
             <div class="modal-footer">
@@ -795,16 +772,15 @@
               <div class="form-group">
 
                 <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle pull-right" 
-                    type="button" data-toggle="dropdown"  id="btn_text" style="margin-left:10px;">
-                   
-                  </button>
-                    
-                  <ul class="dropdown-menu pull-right" style="padding-left:10px ;" >
+                  <button class="btn btn-primary dropdown-toggle pull-right" type="button" data-toggle="dropdown" id="btn_text" style="margin-left:10px;">
 
-                    <div >
+                  </button>
+
+                  <ul class="dropdown-menu pull-right" style="padding-left:10px ;">
+
+                    <div>
                       <label>
-                        <input type="checkbox" id="selectall" checked > All Connection
+                        <input type="checkbox" id="selectall" checked> All Connection
                       </label>
                     </div>
 
@@ -813,22 +789,22 @@
                         <input type="checkbox" id="checkItem1" class="checkItem" name="type[]" value="{{$interest->profession}}" checked required> {{$interest->profession}}
                       </label>
                     </div>
-                    <div >
+                    <div>
                       <label>
                         <input type="checkbox" id="checkItem2" class="checkItem" name="type[]" value="{{$interest->industry}}" checked required> {{$interest->industry}}
                       </label>
                     </div>
-                    <div >
+                    <div>
                       <label>
                         <input type="checkbox" id="checkItem3" class="checkItem" name="type[]" value="{{$user->education}}" checked required> {{$user->education}}
                       </label>
                     </div>
-                   
-              
+
+
                   </ul>
                 </div>
 
-                <button type="submit" class="btn btn-primary pull-right" >Post</button>
+                <button type="submit" class="btn btn-primary pull-right">Post</button>
               </div>
 
               <ul class="nav nav-pills pull-left">
@@ -841,12 +817,12 @@
                 </li>
                 <li id="tooltip">
                   <a href="#">
-                  <span onclick="upload_image()">
-                    <i class="fa fa-camera">
-                      <span id="tooltiptext">Upload image</span>
-                    </i>
+                    <span onclick="upload_image()">
+                      <i class="fa fa-camera">
+                        <span id="tooltiptext">Upload image</span>
+                      </i>
                     </span>
-                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input id="my_images" type="file" name="post_images[]" multiple="true" style="display: none;">
                   </a>
                 </li>
@@ -865,9 +841,9 @@
                   </a>
                 </li>
               </ul>
-              
+
             </div>
-            
+
           </form>
         </div>
       </div>
@@ -878,144 +854,187 @@
 </div>
 
 <script type="text/javascript">
-               //shows projects fields
-                $(document).ready(function(){
-                    $("#show_porjectFields").hide();
-                    $('#url').removeAttr('required');
-                   $("input[name='post_type']").click(function(){
-                    var post_type=$("input[name='post_type']:checked").val();
-                    if(post_type =="project")
-                    {
-                       $('#url').attr('required',true);
-                      $("#show_porjectFields").show();
-                      
-                    }
-                      
-                    else{
-                      
-                      $('#url').removeAttr('required');
-                      $("#show_porjectFields").hide();
-                     
-                    }
-                      
-                  });
+  //shows projects fields
+  $(document).ready(function () {
+    $("#show_porjectFields").hide();
+    $('#url').removeAttr('required');
+    $("input[name='post_type']").click(function () {
+      var post_type = $("input[name='post_type']:checked").val();
+      if (post_type == "project") {
+        $('#url').attr('required', true);
+        $("#show_porjectFields").show();
 
-                  //select all check box
+      } else {
 
-              $("#btn_text").html("All Connection  <span class='caret'></span>");
-               $("#selectall").click(function(){
-                 $("#btn_text").html("All Connection  <span class='caret'></span>");
-                    if(this.checked){
-                      
-                        $('.checkItem').each(function(){
-                        this.checked = true;
-                        
-                        
-                    })
-                    }else{
-                      $("#btn_text").html("Select Connection <span class='caret'></span>");
-                         $('.checkItem').each(function(){
-                            this.checked = false;
-                         })
-                      }
-                  });
+        $('#url').removeAttr('required');
+        $("#show_porjectFields").hide();
 
-                  $(".checkItem").click(function(){
-                    $('#selectall').removeAttr('checked');
-                    $('.checkItem').removeAttr('checked');
-                    var checkedItems=$('.checkItem:checked');
-                    if(checkedItems.length >0)
-                    {
-                      var res="";
-                      checkedItems.each(function (){
-                        res+=$(this).val() +" ";
-                      });
-                      $("#btn_text").html(res +"<span class='caret'></span>");
-                    }else{
-                      $("#btn_text").html(checkedItem.val() +"<span class='caret'></span>");
-                    }
-                    
-                    
-                  });
-                  //end select all check box
+      }
 
-                  //image show while select
-                 // $('input[type="file"]').change(function(e){
-                    
-                   // var fileName = e.target.files;
-                   // $('#show_imageFields').html(fileName.length +" Images Selected");
-                    /*for(var i=0;i<fileName.length;i++){
-                      console.log(fileName[i].name);
-                    }*/
-                 // });
-                //end image show while select
+    });
 
-                $('input[type="file"]').change(function(e){
-          for(var i=0;i<this.files.length;i++){
-          var file = this.files[i];
-          var reader = new FileReader();
-          reader.onload = function(e){
-            
-              $('<img />',{
-                  "src":e.target.result,
-                  "width":"15%",
-                  "height":"100px",
-                  "style":"padding:2px; width:20% ; height:100px;",
-              }).appendTo(image_preview);
-          }
-        
-          reader.readAsDataURL(this.files[i]);
-          }
-          });
-               
-                
-                });
-                
-                
-                //handles visivility validation
-                $(function(){
+    //select all check box
 
-                  var requiredCheckboxes = $(':checkbox[required]');
-                  requiredCheckboxes.change(function(){
+    $("#btn_text").html("All Connection  <span class='caret'></span>");
+    $("#selectall").click(function () {
+      $("#btn_text").html("All Connection  <span class='caret'></span>");
+      if (this.checked) {
 
-                  if(requiredCheckboxes.is(':checked')) {
-                    requiredCheckboxes.removeAttr('required');
-                  }
+        $('.checkItem').each(function () {
+          this.checked = true;
 
-                   else {
-                     requiredCheckboxes.attr('required', 'required');
-                     
-                     }
-                  });
-                });
 
-                
+        })
+      } else {
+        $("#btn_text").html("Select Connection <span class='caret'></span>");
+        $('.checkItem').each(function () {
+          this.checked = false;
+        })
+      }
+    });
 
-                 function upload_image(){
-                  document.getElementById('my_images').click();
-                }
+    $(".checkItem").click(function () {
+      $('#selectall').removeAttr('checked');
+      $('.checkItem').removeAttr('checked');
+      var checkedItems = $('.checkItem:checked');
+      if (checkedItems.length > 0) {
+        var res = "";
+        checkedItems.each(function () {
+          res += $(this).val() + " ";
+        });
+        $("#btn_text").html(res + "<span class='caret'></span>");
+      } else {
+        $("#btn_text").html(checkedItem.val() + "<span class='caret'></span>");
+      }
 
-                 $(document).ready(function(){
-                  $('[data-toggle="tooltip"]').tooltip();   
-                });
-                  
-                  
-                  //sidebar button style
-                      $(function() {
-                        $(window).resize(function () {
-                          if (window.innerWidth <1022) {
-                            $("#h_post").removeClass("show_home_post");
-                            $("#bp").removeClass("button_m");
-                            $("#bm").removeClass("button_m");
-                            $("#bm1").removeClass("button_m");
-                            $("#bm2").removeClass("button_m");
-                          // $("#bp").removeClass("button_profile");
-                            
-                          }
-                        });
-                      });
-                //end sidebar style
+
+    });
+    //end select all check box
+
+    //image show while select
+    // $('input[type="file"]').change(function(e){
+
+    // var fileName = e.target.files;
+    // $('#show_imageFields').html(fileName.length +" Images Selected");
+    /*for(var i=0;i<fileName.length;i++){
+      console.log(fileName[i].name);
+    }*/
+    // });
+    //end image show while select
+
+    $('input[type="file"]').change(function (e) {
+      for (var i = 0; i < this.files.length; i++) {
+        var file = this.files[i];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+
+          $('<img />', {
+            "src": e.target.result,
+            "width": "15%",
+            "height": "100px",
+            "style": "padding:2px; width:20% ; height:100px;",
+          }).appendTo(image_preview);
+        }
+
+        reader.readAsDataURL(this.files[i]);
+      }
+    });
+  });//end document ready
+
+ //ajax post 
+  function rate(post_id, rating) {
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "<?php echo url('/rating') ?>",
+      data: "rating=" + rating + "&post_id=" + post_id,
+      async:false,
+      success: function (data) {
+
+        console.log("inserted");
+       
+      }
+    });
+
+     //get avg rating
+        $.ajax({
+          url: "{{url('/rating/getdata')}}",
+          type: 'GET',
+          data: {
+            'post_id': post_id
+          },
+          success: function (response) {
+            console.log(response); 
              
+            
+            $("#after_rate"+post_id).html("Rated ");
+            $("#"+post_id).html(response);
+            $("#hoverDisable"+post_id).removeClass("HeaderBarThreshold");
+          }
+        });
+        //end avg rating
+
+  } //end ajax post
+
+  //check if user likes a post or not
+  /* $(function(){
+     $.ajax({
+               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+               type: "GET",
+               url: "<?php echo url('/rating/showlikedPost') ?>",
+              
+               success: function(e) {
+                 console.log(e);
+               }
+       });
+   });*/
+  //end if user likes a post or not
+
+
+  //handles visivility validation
+  $(function () {
+
+    var requiredCheckboxes = $(':checkbox[required]');
+    requiredCheckboxes.change(function () {
+
+      if (requiredCheckboxes.is(':checked')) {
+        requiredCheckboxes.removeAttr('required');
+      } else {
+        requiredCheckboxes.attr('required', 'required');
+
+      }
+    });
+  });
+
+
+
+  function upload_image() {
+    document.getElementById('my_images').click();
+  }
+
+  $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+
+  //sidebar button style
+  $(function () {
+    $(window).resize(function () {
+      if (window.innerWidth < 1022) {
+        $("#h_post").removeClass("show_home_post");
+        $("#bp").removeClass("button_m");
+        $("#bm").removeClass("button_m");
+        $("#bm1").removeClass("button_m");
+        $("#bm2").removeClass("button_m");
+        // $("#bp").removeClass("button_profile");
+
+      }
+    });
+  });
+  //end sidebar style
 </script>
 
 @endsection

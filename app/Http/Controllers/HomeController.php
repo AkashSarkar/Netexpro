@@ -43,12 +43,18 @@ class HomeController extends Controller
 
             $allUser = User::all();
         
-
+            //avg rating
            $avg_rating = DB::table('ratings')
            ->select( DB::raw('AVG(rating) as avg_rating'),'post_id')
            ->groupBy('post_id')
            ->get();
-           
+           //end avg rating
+
+           //check if user rated post or not
+           $isLike=Rating::where('user_id',Auth::user()->id)->get();
+           $isLike=json_decode( $isLike,true);
+           //end of check rated post
+
            
             $useravailablepost= DB::table('users')
               ->join('available_for_jobs', 'users.id', '=', 'available_for_jobs.user_id')
@@ -213,7 +219,7 @@ class HomeController extends Controller
            
                 
         return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'userComment'=>$userComment, 'jobComment'=>$jobComment, 
-        'useravailableComment'=>$useravailableComment]);
+        'useravailableComment'=>$useravailableComment,'isLiked'=>$isLike]);
         }
         
     }

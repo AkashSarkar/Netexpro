@@ -35,6 +35,32 @@ class RatingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function isLiked(){
+        $isLike=Rating::all();
+
+        return $isLike;
+    }
+
+    public function getdata(Request $request)
+    {
+        $id=$request->post_id;
+
+        $avg_rating = Rating::where('post_id', $id)->avg('rating');
+        
+        
+        /*DB::table('ratings')
+        ->select( DB::raw('AVG(rating) as avg_rating,MAX(post_id)'))
+        ->where('post_id','=','$id')
+        
+        ->get();*/
+
+       return $avg_rating;
+
+      
+    }
+
+
     public function store(Request $request)
     {
         if(Auth::check()){
