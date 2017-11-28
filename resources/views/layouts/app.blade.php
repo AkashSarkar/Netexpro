@@ -30,7 +30,182 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     
     <!-- End of Styles -->
+ <!--gallery modal -->
+ <!--gallery modal online script-->
+<style>
+.img-modal {
+  display: block;
+}
 
+.img-modal .modal-dialog {
+    /* An arbitrary minimum height. Feel free to modify this one as well */
+    min-height: 350px;
+    height: 80%;
+}
+
+.img-modal .modal-content, .img-modal .modal-body, .img-modal .row, .img-modal .modal-image {
+    height: 100%;
+}
+
+.modal-content {
+    border-radius: 0;
+}
+
+.modal-body {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.modal-image {
+    background: #000;
+    padding :0;
+}
+
+.modal-image img {
+    margin: 0 auto;
+    max-height: 100%;
+    max-width: 100%;
+    
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.img-modal .img-modal-btn {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: black;
+    opacity: 0;
+    font-size: 1.5em;
+    width: 45px;
+    color: #fff;
+    transition: opacity .2s ease-in;
+}
+
+.img-modal .modal-image:hover .img-modal-btn {
+    opacity: 0.4;  
+}
+
+.img-modal .modal-image:hover .img-modal-btn:hover {
+   opacity: 0.75;   
+}
+
+.img-modal .img-modal-btn.right {
+    right: 0;
+}
+
+.img-modal .img-modal-btn i {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-top: -.75em;
+}
+
+.img-modal .modal-meta {
+    position: relative;   
+    height: 100%;
+}
+
+.img-modal .modal-meta-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 45px;
+    padding: 5px 10px;
+    overflow-y: auto;
+}
+
+.img-modal .modal-meta-top .img-poster img {
+    height: 70px;
+    width: 70px;
+    float: left;
+    margin-right: 15px;
+}
+
+.img-modal .modal-meta-top .img-poster strong {
+    display: block; 
+    padding-top: 15px;
+}
+
+.img-modal .modal-meta-top .img-poster span {
+    display: block;   
+    color: #aaa;
+    font-size:.9em;
+}
+
+.img-modal .modal-meta-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    border-top: solid 1px #ccc;
+}
+
+.img-modal .img-comment-list {
+    list-style: none;  
+    padding: 0;
+}
+.img-modal .img-comment-list li {
+    margin:0;
+    margin-top:10px;
+}
+
+.img-modal .img-comment-list li > div {
+    display:table-cell;
+}
+
+.img-modal .img-comment-list img {
+    border-radius:50%;
+    width: 42px;
+    height: 42px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.img-modal .img-comment-list p {
+    margin: 0;
+}
+
+.img-modal .img-comment-list span {
+    font-size: .8em; 
+    color: #aaa;
+}
+
+@media only screen and (max-width : 992px) {
+    .modal-content {
+        border-radius: 0;
+        max-height: 100%;
+        overflow-y: auto;
+    }
+    
+    .img-modal .modal-image {
+        height: calc(100% - 100px);
+    }
+    
+    .img-modal .modal-meta {
+        height: auto;
+    }
+    
+    .img-modal .modal-meta-top {
+        position: static;
+        padding-top: 15px;
+    }
+    
+    .img-modal .modal-meta-bottom {
+        position: static;
+        margin: 0 -15px;
+    }
+}
+</style>
+    <!--end gallery modal-->
 
 
 </head>
@@ -460,6 +635,33 @@
 
 
 <script type="text/javascript">
+$(function(){
+     $(".img-modal-btn.right").on('click', function(e){
+        e.preventDefault();
+        cur = $(this).parent().find('img:visible()');
+        next = cur.next('img');
+        par = cur.parent();
+        if (!next.length) { next = $(cur.parent().find("img").get(0)) }
+        cur.addClass('hidden');
+        next.removeClass('hidden');
+        
+        return false;
+    })
+    
+    $(".img-modal-btn.left").on('click', function(e){
+        e.preventDefault();
+        cur = $(this).parent().find('img:visible()');
+        next = cur.prev('img');
+        par = cur.parent();
+        children = cur.parent().find("img");
+        if (!next.length) { next = $(children.get(children.length-1)) }
+        cur.addClass('hidden');
+        next.removeClass('hidden');
+        
+        return false;
+    })
+
+});
     $(document).ready(function(){
         $("input[name='job_post_option']").click(function(){
             var radioValue = $("input[name='job_post_option']:checked").val();
