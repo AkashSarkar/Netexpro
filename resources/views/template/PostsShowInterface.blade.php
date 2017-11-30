@@ -129,7 +129,7 @@
                               <strong>
                                 <a href=""> {{$userpost['firstname']}} {{$userpost['lastname']}}</a>
                               </strong>
-                              <span>12 minutes ago</span>
+                              <span>{{$userpost['created_at']}}</span>
                             </div>
 
                             <ul class="img-comment-list">
