@@ -93,6 +93,9 @@
 
     </div>
     <!--post body end-->
+       <!--Post Modal-->
+       @include('template.postModal')
+ 
 
     <!--modal-->
      

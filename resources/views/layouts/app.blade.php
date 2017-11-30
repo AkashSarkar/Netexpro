@@ -325,8 +325,6 @@
             </div>
         </div>
     </div>
-    <!--Post Modal-->
-    @include('template.postModal')
     <!-- Job Modal -->
     @include('template.jobPostModal')
 
