@@ -5,7 +5,7 @@
 
 
                   <!--Comment show start -->
-                  @foreach($userComment as $comment) @if( $userpost['post_id']==$comment->commentable_id)
+                  @foreach($userComment as $comment) @if( $userpost->post_id==$comment->commentable_id)
                   <div class="well well-sm">
                     <div class="media">
                       <div class="media-left">
@@ -46,7 +46,7 @@
                             {{ csrf_field() }}
 
                             <input type="hidden" name="commentable_type" value="App\Post">
-                            <input type="hidden" name="commentable_id" value="{{ $userpost['post_id'] }}">
+                            <input type="hidden" name="commentable_id" value="{{ $userpost->post_id }}">
 
                             <div class="form-group">
                               <input class="form-control" type="text" name="body" placeholder="Your comments" />

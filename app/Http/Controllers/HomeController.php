@@ -48,6 +48,8 @@ class HomeController extends Controller
            ->select( DB::raw('AVG(rating) as avg_rating'),'post_id')
            ->groupBy('post_id')
            ->get();
+
+           //dd($avg_rating);
            //end avg rating
 
            //check if user rated post or not
@@ -110,110 +112,144 @@ class HomeController extends Controller
             
             //post indivisual connection
             $connection_type=$request->input('connection');
+            
             if($connection_type){
-                $j=0;
-                for($i=0;$i<count($userpost);$i++)
+               
+                $post=DB::table('users')
+                ->join('interests', 'users.id', '=', 'interests.user_id')
+                ->join('posts', 'users.id', '=', 'posts.user_id')
+                ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
+                ->where('visibilities_type','=',$connection_type)
+                ->orderBy('posts.created_at','desc')
+                ->get();
+                //dd($post);
+                
+                //adding average ratings with post
+                for($i=0;$i<count($post);$i++)
                 {
-                    $visibility_type=$userpost[$i]['visibilities_type'];
-                    //$image=json_decode($userpost[$i]['images'],true);
-                    $type=json_decode($visibility_type,true);
-                    $f=0;
-                    for($k=0;$k<count($type);$k++)
-                    {
-                        if($connection_type==$type[$k]){
-                            
-                            $post[$j]=$userpost[$i];
-                            //adding average ratings with post
-                            if($post[$j]['post_type']=="project"){
-                                
-                                for($rate=0;$rate<count($avg_rating);$rate++){
-                                    if($post[$j]['post_id']==$avg_rating[$rate]->post_id)
-                                    {
-                                        $post[$j]['ratting'] =$avg_rating[$rate]->avg_rating;
-                                    }
-                                }
-                            }
-                            //end of average rating
-                            $j++;
-                            $f=1;
-                        }
-                        if($f==1)
-                        break;
-                    }
                     
+                    if($post[$i]->post_type=="project"){
+                        
+                        for($rate=0;$rate<count($avg_rating);$rate++){
+                            if($post[$i]->post_id==$avg_rating[$rate]->post_id)
+                            {
+                                $post[$i]->ratting =$avg_rating[$rate]->avg_rating;
+                            }
+                        }
+                    }
                    
                 }
+                 //end of average rating
             }
             //all post in home
-            else{
-                $j=0;
-                for($i=0;$i<count($userpost);$i++)
-                {
-                    $visibility_type=$userpost[$i]['visibilities_type'];
-                    $type=json_decode($visibility_type,true);
-                   // $image=json_decode($userpost[$i]['images'],true);
-                    //dd($image);
-                    $f=0;
-                    for($k=0;$k<count($type);$k++)
-                    {
-                        if($interest->profession==$type[$k]){
-                            
-                            $post[$j]=$userpost[$i];
-                            //adding average ratings with post
-                            if($post[$j]['post_type']=="project"){
-                                
-                                for($rate=0;$rate<count($avg_rating);$rate++){
-                                    if($post[$j]['post_id']==$avg_rating[$rate]->post_id)
-                                    {
-                                        $post[$j]['ratting'] =$avg_rating[$rate]->avg_rating;
-                                    }
-                                }
-                            }
-                            //end of average rating
-                            $j++;
-                            $f=1;
-                        }
-                        elseif($interest->industry==$type[$k]){
-                            
-                            $post[$j]=$userpost[$i];
-                            //adding average ratings with post
-                            if($post[$j]['post_type']=="project"){
-                                
-                                for($rate=0;$rate<count($avg_rating);$rate++){
-                                    if($post[$j]['post_id']==$avg_rating[$rate]->post_id)
-                                    {
-                                        $post[$j]['ratting'] =$avg_rating[$rate]->avg_rating;
-                                    }
-                                }
-                            }
-                            //end of average rating
-                            $j++;
-                            $f=1;
-                        }
-                        elseif($user->education==$type[$k]){
-                            $post[$j]=$userpost[$i];
-                            //adding average ratings with post
-                            if($post[$j]['post_type']=="project"){
-                                
-                                for($rate=0;$rate<count($avg_rating);$rate++){
-                                    if($post[$j]['post_id']==$avg_rating[$rate]->post_id)
-                                    {
-                                        $post[$j]['ratting'] =$avg_rating[$rate]->avg_rating;
-                                    }
-                                }
-                            }
-                            //end of average rating
-                            $j++;
-                            $f=1;    
-                        }
-    
-    
-                        if($f==1)
-                        break;
-                    }
-                    
-                   
-                }
+           else{
+
+                //gets 45% values of industry
+                $industry_posts=DB::table('users')
+                ->join('interests', 'users.id', '=', 'interests.user_id')
+                ->join('posts', 'users.id', '=', 'posts.user_id')
+                ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
+                ->where('visibilities_type','=',$interest->industry)
+                ->orderBy('posts.created_at','desc')
+                ->get();
+                //end of gets 45% values of industry
+
+                //gets 35% values of profession
+                $profession=$interest->profession;
+                $ind=$interest->industry;
+                
+                $profession_posts=DB::select('SELECT 
+                            users.firstname,
+                            users.lastname,
+                            users.cover_pic,
+                            users.p_pic,
+                            posts.description,
+                            posts.url,
+                            posts.post_type,
+                            posts.file_attach,
+                            posts.ratting,
+                            posts.post_id,
+                            posts.user_id,
+                            posts.created_at,
+                            posts.updated_at,
+                            visibilities.visibilities_type,
+                            visibilities.post_id 
+                            FROM users  JOIN posts JOIN visibilities 
+                            WHERE users.id=posts.user_id 
+                            AND posts.post_id = visibilities.post_id 
+                            AND visibilities_type = :profession
+                            GROUP BY visibilities.visibilities_type,
+                            visibilities.post_id,
+                            users.firstname,
+                            users.lastname,
+                            users.cover_pic,
+                            users.p_pic,
+                            posts.description,
+                            posts.url,
+                            posts.post_type,
+                            posts.file_attach,
+                            posts.ratting,
+                            posts.post_id,
+                            posts.user_id,
+                            posts.created_at,
+                            posts.updated_at
+                            HAVING visibilities.post_id 
+                            not in (SELECT post_id FROM visibilities WHERE visibilities_type = :industry)',
+                            ['profession'=>$profession,'industry'=>$ind]);
+                //end of gets 35% values of profession
+
+
+                //gets 20% values of education
+                $education=$user->education;
+                $profession=$interest->profession;
+                $ind=$interest->industry;
+               // dd($education);
+                $education_posts=DB::select('SELECT 
+                            users.firstname,
+                            users.lastname,
+                            users.cover_pic,
+                            users.p_pic,
+                            posts.description,
+                            posts.url,
+                            posts.post_type,
+                            posts.file_attach,
+                            posts.ratting,
+                            posts.post_id,
+                            posts.user_id,
+                            posts.created_at,
+                            posts.updated_at,
+                            visibilities.visibilities_type,
+                            visibilities.post_id
+                            FROM users  JOIN posts JOIN visibilities 
+                            WHERE users.id=posts.user_id 
+                            AND posts.post_id = visibilities.post_id 
+                            AND visibilities_type = :education
+                            GROUP BY visibilities.visibilities_type , 
+                            users.firstname,
+                            users.lastname,
+                            users.cover_pic,
+                            users.p_pic,
+                            posts.description,
+                            posts.url,
+                            posts.post_type,
+                            posts.file_attach,
+                            posts.ratting,
+                            posts.post_id,
+                            posts.user_id,
+                            posts.created_at,
+                            posts.updated_at,
+                            visibilities.post_id
+                            HAVING visibilities.post_id 
+                            not in (SELECT post_id FROM visibilities 
+                            WHERE visibilities_type = :industry OR  visibilities_type = :profession)',
+                            ['education'=>$education,'industry'=>$ind,'profession'=>$profession]);
+                //end of gets 20 % values of education
+                //dd($education_posts);
+                //$post = array_merge( $industry_posts->toArray(), $profession_posts->toArray(),$education_posts->toArray());
+                $collection = $industry_posts->merge($profession_posts);
+                $post=$collection->merge($education_posts);
+               //dd($post);
+                
             }
             
            
@@ -226,12 +262,7 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-        //
-        $connection_type=$request->input('con');
-        if($connection_type){
-            print_r("this is from store");
-            print_r($connection_type);
-        }
+       
 
     
     

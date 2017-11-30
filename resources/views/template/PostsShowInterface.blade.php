@@ -7,11 +7,11 @@
           <div class="media">
             <div class="media-left">
               <a href="#">
-                <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost['p_pic']}}" width="40" height="40" alt="...">
+                <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$userpost->p_pic}}" width="40" height="40" alt="...">
               </a>
             </div>
             <div class="media-body">
-              @if($userpost['user_id'] == Auth::user()->id)
+              @if($userpost->user_id == Auth::user()->id)
               <div class="dropdown ">
                 <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
                 </button>
@@ -31,7 +31,7 @@
 
                     </a>
 
-                    <form id="delete-form" action="{{ route('post.destroy', $userpost['post_id']) }}" method="POST" style="display:none;">
+                    <form id="delete-form" action="{{ route('post.destroy', $userpost->post_id) }}" method="POST" style="display:none;">
                       <input type="hidden" name="_method" method="PUT" value="delete"> {{ csrf_field() }}
                     </form>
 
@@ -42,10 +42,10 @@
               @endif
 
               <a href="#" class="anchor-username">
-                <h4 class="media-heading"> {{$userpost['firstname']}}</h4>
+                <h4 class="media-heading"> {{$userpost->firstname}}</h4>
               </a>
 
-              <a href="#" class="anchor-time">{{ $userpost['created_at'] }}</a>
+              <a href="#" class="anchor-time">{{ $userpost->created_at }}</a>
             </div>
           </div>
         </div>
@@ -57,17 +57,17 @@
       <div class=" row">
         <div class="col-md-12">
           <div class="well well-sm">
-            <p style="font-size:18px;font-weight:400;">{{ $userpost['description'] }} </p>
+            <p style="font-size:18px;font-weight:400;">{{ $userpost->description }} </p>
           </div>
         </div>
       </div>
       <!--project show-->
-      @if($userpost['post_type']=="project")
+      @if($userpost->post_type=="project")
       <h4>URL :</h4>
       <div class=" row">
         <div class="col-md-12">
           <div class="well well-md">
-            <a href="{{ $userpost['url'] }} "> {{ $userpost['url'] }}</a>
+            <a href="{{ $userpost->url }} "> {{ $userpost->url }}</a>
           </div>
         </div>
       </div>
@@ -76,14 +76,14 @@
 
       <!--image show-->
       <?php $i=0; ?>
-      <?php $a=array();?> @foreach($images as $imgpost) @if( $userpost['post_id']==$imgpost->post_id)
+      <?php $a=array();?> @foreach($images as $imgpost) @if( $userpost->post_id==$imgpost->post_id)
       <h4>Project Images : </h4>
       <div class=" row">
         <div class="col-md-12 col-lg-12">
           <div class="well well-sm">
 
 
-            @foreach($images as $imagepost) @if( $userpost['post_id']==$imagepost->post_id)
+            @foreach($images as $imagepost) @if( $userpost->post_id==$imagepost->post_id)
 
 
             <?php $i++; ?>
@@ -103,9 +103,16 @@
                       <div class="row">
                         <div class="col-md-8 modal-image">
                           <!--A variable for Gallery modal as flag-->
-                          <?php $f=0; ?> @foreach($images as $gallery) @if( $gallery->post_id == $imagepost->post_id ) @if( $gallery->post_image==$imagepost->post_image)
-                          <img class="img-responsive" src="/uploads/postimages/{{$gallery->post_image}}"> @else
-                          <img class="img-responsive hidden" src="/uploads/postimages/{{$gallery->post_image}}"> @endif @endif @endforeach
+                          <?php $f=0; ?> 
+                          @foreach($images as $gallery) 
+                            @if( $gallery->post_id == $imagepost->post_id ) 
+                              @if( $gallery->post_image==$imagepost->post_image)
+                                <img class="img-responsive" src="/uploads/postimages/{{$gallery->post_image}}">
+                              @else
+                                <img class="img-responsive hidden" src="/uploads/postimages/{{$gallery->post_image}}"> 
+                              @endif 
+                            @endif 
+                          @endforeach
 
 
 
@@ -124,12 +131,12 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <div class="img-poster clearfix">
                               <a href="">
-                                <img class="img-circle" src="/uploads/profile/{{$userpost['p_pic']}}" />
+                                <img class="img-circle" src="/uploads/profile/{{$userpost->p_pic}}" />
                               </a>
                               <strong>
-                                <a href=""> {{$userpost['firstname']}} {{$userpost['lastname']}}</a>
+                                <a href=""> {{$userpost->firstname}} {{$userpost->lastname}}</a>
                               </strong>
-                              <span>{{$userpost['created_at']}}</span>
+                              <span>{{$userpost->created_at}}</span>
                             </div>
 
                             <ul class="img-comment-list">
@@ -193,11 +200,14 @@
 
 
 
-            @endif @endforeach
+            @endif 
+            @endforeach
           </div>
         </div>
       </div>
-      @break; @endif @endforeach
+      @break; 
+      @endif 
+      @endforeach
       <!-- end image show-->
     </section>
     <hr>
@@ -207,58 +217,66 @@
           <ul class="list-unstyled">
             <li>
               <!-- Shows Rate text and icon if post type is Project-->
-              @if($userpost['post_type']=="project")
+              @if($userpost->post_type=="project")
               <!--<a href="#" data-toggle="modal" data-target="#starModal"><i class="glyphicon glyphicon-star"></i>Rate</a>-->
-              <?php $rate=0;?> @if($isLiked) @foreach($isLiked as $like) @if($like['user_id']== Auth::user()->id && $userpost['post_id']==$like['post_id'])
-              <a>
-                <i class="active fa fa-star" aria-hidden="true"></i>
-              </a>
-              <a>Rated</a>
-              <span> {{$userpost['ratting']}}</span>
+              <?php $rate=0;?> 
+              @if($isLiked) 
+                @foreach($isLiked as $like) 
+                  @if($like['user_id']== Auth::user()->id && $userpost->post_id==$like['post_id'])
+                    <a>
+                      <i class="active fa fa-star" aria-hidden="true"></i>
+                    </a>
+                    <a>Rated</a>
+                    <span> {{$userpost->ratting}}</span>
 
-              <?php $rate+=1;?> @break; @endif @endforeach @endif @if($rate==0)
-              <div id="hoverDisable{{$userpost['post_id']}}" class="HeaderBarThreshold">
+                    <?php $rate+=1;?> 
+                    @break; 
+                  @endif 
+                @endforeach 
+              @endif 
+              @if($rate==0)
+              <div id="hoverDisable{{$userpost->post_id}}" class="HeaderBarThreshold">
 
                 <div class="star-rating" style="position:absolute;margin-top:-40px; margin-left:-20px;">
 
-                  <label for="star-10" onclick="rate({{$userpost['post_id']}},10)" title="10 stars" id="star" style="visibility:hidden;">
+                  <label for="star-10" onclick="rate({{$userpost->post_id}},10)" title="10 stars" id="star" style="visibility:hidden;">
                     <i class="active fa fa-star" aria-hidden="true"></i>
                   </label>
 
-                  <label for="star-9" title="9 stars" onclick="rate({{$userpost['post_id']}},9)" id="star" style="visibility:hidden;">
+                  <label for="star-9" title="9 stars" onclick="rate({{$userpost->post_id}},9)" id="star" style="visibility:hidden;">
                     <i class="active fa fa-star" aria-hidden="true"></i>
                   </label>
 
-                  <label for="star-8" title="8 stars" onclick="rate({{$userpost['post_id']}},8)" id="star" style="visibility:hidden;">
+                  <label for="star-8" title="8 stars" onclick="rate({{$userpost->post_id}},8)" id="star" style="visibility:hidden;">
                     <i class="active fa fa-star" aria-hidden="true"></i>
                   </label>
 
-                  <label for="star-7" title="7 stars" onclick="rate({{$userpost['post_id']}},7)" id="star" style="visibility:hidden;">
+                  <label for="star-7" title="7 stars" onclick="rate({{$userpost->post_id}},7)" id="star" style="visibility:hidden;">
                     <i class="active fa fa-star" aria-hidden="true"></i>
                   </label>
 
-                  <label for="star-6" title="6 star" onclick="rate({{$userpost['post_id']}},6)" id="star" style="visibility:hidden;">
+                  <label for="star-6" title="6 star" onclick="rate({{$userpost->post_id}},6)" id="star" style="visibility:hidden;">
                     <i class="active fa fa-star" aria-hidden="true"></i>
                   </label>
 
-                  <label for="star-5" title="5 stars" onclick="rate({{$userpost['post_id']}},5)" id="star" style="visibility:hidden;">
+                  <label for="star-5" title="5 stars" onclick="rate({{$userpost->post_id}},5)" id="star" style="visibility:hidden;">
                     <i class="active fa fa-star" aria-hidden="true"></i>
                   </label>
 
-                  <label for="star-4" title="4 stars" onclick="rate({{$userpost['post_id']}},4)" id="star" style="visibility:hidden;">
+                  <label for="star-4" title="4 stars" onclick="rate({{$userpost->post_id}},4)" id="star" style="visibility:hidden;">
                     <i class="active fa fa-star" aria-hidden="true"></i>
                   </label>
 
-                  <label for="star-3" title="3 stars" onclick="rate({{$userpost['post_id']}},3)" id="star" style="visibility:hidden;">
+                  <label for="star-3" title="3 stars" onclick="rate({{$userpost->post_id}},3)" id="star" style="visibility:hidden;">
                     <i class="active fa fa-star" aria-hidden="true"></i>
                   </label>
 
-                  <label for="star-2" title="2 stars" onclick="rate({{$userpost['post_id']}},2)" id="star" style="visibility:hidden;">
+                  <label for="star-2" title="2 stars" onclick="rate({{$userpost->post_id}},2)" id="star" style="visibility:hidden;">
                     <i class="active fa fa-star" aria-hidden="true"></i>
                   </label>
 
 
-                  <label for="star-1" title="1 star" onclick="rate({{$userpost['post_id']}},1)" id="star" style="visibility:hidden;">
+                  <label for="star-1" title="1 star" onclick="rate({{$userpost->post_id}},1)" id="star" style="visibility:hidden;">
                     <i class="active fa fa-star" aria-hidden="true"></i>
                   </label>
 
@@ -267,8 +285,8 @@
                 <a>
                   <i class="active fa fa-star" aria-hidden="true"></i>
                 </a>
-                <a id="after_rate{{$userpost['post_id']}}" ontouchstart=""> Rate</a>
-                <span id="{{$userpost['post_id']}}">{{$userpost['ratting']}}</span>
+                <a id="after_rate{{$userpost->post_id}}" ontouchstart=""> Rate</a>
+                <span id="{{$userpost->post_id}}">{{$userpost->ratting}}</span>
 
               </div>
               @endif @else
