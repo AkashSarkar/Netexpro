@@ -57,32 +57,7 @@
       </nav>
     </div>
 
-    <!--<script type="text/javascript">
-      
-      $(document).ready(function(){
-          $("input[name='connection']").click(function(){
-              var radioValue = $("input[name='connection']:checked").val();
-              console.log(radioValue);
-
-              $.ajax({
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                type: "POST",
-                url: "/home",
-                data:{
-                  'con':radioValue
-                },
-                success: function( response ) {
-                  
-                  console.log(response); 
-                },
-               error: function(response){
-                 alert('Error'+response);
-                 }
-               });
-          });
-          
-      });
-  </script>-->
+    
 
 
     <!--end side bar-->
@@ -121,6 +96,9 @@
 
     </div>
     <!--post body end-->
+       <!--Post Modal-->
+       @include('template.postModal')
+ 
 
     <!--modal-->
      
