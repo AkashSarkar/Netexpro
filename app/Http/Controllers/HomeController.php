@@ -153,7 +153,22 @@ class HomeController extends Controller
                 ->orderBy('posts.created_at','desc')
                 ->get();
                 //end of gets 45% values of industry
-
+                //adding average ratings with post
+                for($i=0;$i<count($industry_posts);$i++)
+                {
+                    
+                    if($industry_posts[$i]->post_type=="project"){
+                        
+                        for($rate=0;$rate<count($avg_rating);$rate++){
+                            if($industry_posts[$i]->post_id==$avg_rating[$rate]->post_id)
+                            {
+                                $industry_posts[$i]->ratting =$avg_rating[$rate]->avg_rating;
+                            }
+                        }
+                    }
+                   
+                }
+                 //end of average rating
                 //gets 35% values of profession
                 $profession=$interest->profession;
                 $ind=$interest->industry;
@@ -198,6 +213,23 @@ class HomeController extends Controller
                             ['profession'=>$profession,'industry'=>$ind]);
                 //end of gets 35% values of profession
 
+
+                //adding average ratings with post
+                for($i=0;$i<count( $profession_posts);$i++)
+                {
+                    
+                    if( $profession_posts[$i]->post_type=="project"){
+                        
+                        for($rate=0;$rate<count($avg_rating);$rate++){
+                            if( $profession_posts[$i]->post_id==$avg_rating[$rate]->post_id)
+                            {
+                                $profession_posts[$i]->ratting =$avg_rating[$rate]->avg_rating;
+                            }
+                        }
+                    }
+                   
+                }
+                 //end of average rating
 
                 //gets 20% values of education
                 $education=$user->education;
@@ -244,6 +276,23 @@ class HomeController extends Controller
                             WHERE visibilities_type = :industry OR  visibilities_type = :profession)',
                             ['education'=>$education,'industry'=>$ind,'profession'=>$profession]);
                 //end of gets 20 % values of education
+
+                 //adding average ratings with post
+                 for($i=0;$i<count($education_posts);$i++)
+                 {
+                     
+                     if($education_posts[$i]->post_type=="project"){
+                         
+                         for($rate=0;$rate<count($avg_rating);$rate++){
+                             if(  $education_posts[$i]->post_id==$avg_rating[$rate]->post_id)
+                             {
+                                $education_posts[$i]->ratting =$avg_rating[$rate]->avg_rating;
+                             }
+                         }
+                     }
+                    
+                 }
+                  //end of average rating
                 //dd($education_posts);
                 //$post = array_merge( $industry_posts->toArray(), $profession_posts->toArray(),$education_posts->toArray());
                 $collection = $industry_posts->merge($profession_posts);
