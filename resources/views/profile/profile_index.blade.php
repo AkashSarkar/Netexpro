@@ -335,7 +335,7 @@
                     @if($post['post_type']=="project")
                       
                                    <div class="HeaderBarThreshold" onclick=()>
-                                   <form method="post" action="{{ route('rating.store') }}" >
+                                   <form method="post" action="" >
                                             {{ csrf_field() }}
                                             <input type="hidden" name="_method" value="post">
                                             <input type="hidden" name="post_id" value="{{$post['post_id']}}">
