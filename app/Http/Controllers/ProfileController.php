@@ -90,7 +90,7 @@ class ProfileController extends Controller
             ->get();
       
       $interest= Interest::find(Auth::user()->id);
-      $user_rate_info=DB:: select('SELECT post_id,p_pic,firstname,lastname,ratings.created_at 
+      $user_rate_info=DB:: select('SELECT user_id,post_id,p_pic,firstname,lastname,ratings.created_at 
       FROM users  join ratings 
       WHERE ratings.user_id= users.id  ');
 
