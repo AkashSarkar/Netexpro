@@ -50,6 +50,14 @@
                 <i class="fa fa-university" aria-hidden="true"></i> {{$user->education}}</button>
               <br>
             </form>
+            <br>
+            <section>
+              <button type="submit" class="button_connection button_m  btn" data-toggle="tooltip"
+                data-placement="bottom" title= 'All Jobposts'>
+               <a href="{{ url('jobpost') }}">
+               All Jobposts</a></button>
+              <br>
+            </section>
 
           </ul>
 
@@ -84,12 +92,6 @@
       @include('template.user_available_post_interface')              
      
       <!--end of available post show-->
-
-
-      <!--job hiring post show-->
-      @include('template.jobHirePost_Interface')
-
-      <!--end of job hiring post show-->
 
     </div>
     <!--post body end-->

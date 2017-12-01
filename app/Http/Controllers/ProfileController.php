@@ -129,11 +129,14 @@ class ProfileController extends Controller
             ]);
             
            
-            $visibility=Visibility::create([
-                
-               'visibilities_type'=>json_encode($request->input('type')),
-                'post_id'=>$id
-            ]);
+            $connections=$request->input('type');
+            for($i=0;$i<count($connections);$i++){
+                $visibility=Visibility::create([
+                    
+                   'visibilities_type'=>$connections[$i],
+                    'post_id'=>$id
+                ]);
+            }
            
           if($post)
                { 

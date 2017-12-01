@@ -260,13 +260,7 @@
                              if( result){
                                event.preventDefault();
                                document.getElementById('delete-form').submit();
-                              }
-                                    " 
-                                     >
-
-                                     Delete
-
-                          </a>
+                              } " > Delete </a>
                           
                           <form id="delete-form" action="{{ route('post.destroy', $post['post_id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" method="PUT" value="delete">
@@ -415,9 +409,10 @@
                 
 
 
-
+                  
                   <!--Comment show start -->
                    @foreach($userComment as $comment)
+                      @if($post['post_id']== $comment->commentable_id)
                     <div class="well well-sm">
                     <div class="media">
                       <div class="media-left">
@@ -437,6 +432,7 @@
                         </div>
                      </div>
                     </div>
+                    @endif
                     @endforeach
                     <!--Comment show end-->
                    

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\jobpost;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class JobpostController extends Controller
@@ -15,7 +17,22 @@ class JobpostController extends Controller
      */
     public function index()
     {
-        //
+         $user= User::find(Auth::user()->id);  
+            $jobpost=DB::table('users')
+                         ->join('jobposts', function ($join) {
+                          $join->on('users.id', '=', 'jobposts.user_id');
+                        })->get();
+            
+            $jobpost=json_decode($jobpost,true);
+
+
+            $jobComment = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('jobposts', 'jobposts.jobpost_id', '=', 'comments.commentable_id')
+            ->orderBy('comments.created_at','desc')
+            ->get();
+
+        return view('jobpost.jobpost_index',['user'=>$user,'jobpost'=>$jobpost,'jobComment'=>$jobComment]);
     }
 
     /**
@@ -120,9 +137,9 @@ class JobpostController extends Controller
        
          if($jobpostDelete->delete())
         {
-            return back()->with('success','project deleted successfully.');
+            return back()->with('success','Hiring post deleted successfully.');
         }
 
-        return back()->withInput()->with('errors', 'project could not be deleted.');
+        return back()->withInput()->with('errors', 'Post could not be deleted.');
     }
 }
