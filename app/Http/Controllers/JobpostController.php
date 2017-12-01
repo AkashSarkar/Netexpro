@@ -137,9 +137,9 @@ class JobpostController extends Controller
        
          if($jobpostDelete->delete())
         {
-            return back()->with('success','project deleted successfully.');
+            return back()->with('success','Hiring post deleted successfully.');
         }
 
-        return back()->withInput()->with('errors', 'project could not be deleted.');
+        return back()->withInput()->with('errors', 'Post could not be deleted.');
     }
 }
