@@ -300,11 +300,13 @@ class HomeController extends Controller
                //dd($post);
                 
             }
-            
-           
+            $user_rate_info=DB:: select('SELECT post_id,p_pic,firstname,lastname,ratings.created_at 
+                            FROM users  join ratings 
+                            WHERE ratings.user_id= users.id  ');
+         
                 
         return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'userComment'=>$userComment, 'jobComment'=>$jobComment, 
-        'useravailableComment'=>$useravailableComment,'isLiked'=>$isLike]);
+        'useravailableComment'=>$useravailableComment,'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
         }
         
     }
