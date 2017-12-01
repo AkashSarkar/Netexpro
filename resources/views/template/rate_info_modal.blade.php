@@ -1,14 +1,22 @@
-<?php $rate_count=0;?> 
+<?php $rate_count=0; $fla=0?> 
     @foreach($user_rate_info as $rate_info) 
         @if($rate_info->post_id==$userpost->post_id)
 
 
-            <?php $rate_count=$rate_count+1;?>
-            <?php $rating_post_id=$rate_info->post_id;
+            <?php $rate_count=$rate_count+1; $rating_post_id=$rate_info->post_id?>
+            @if($rate_info->user_id==$user->id)
+            <?php ;
+             $fname="You";
+             $lname=" ";
+             $fla=$fla+1;
+            ?>
+            @elseif($fla==0)
+            <?php ;
              $fname=$rate_info->firstname;
              $lname=$rate_info->lastname;
 
             ?>
+            @endif
 
         @endif 
     @endforeach 
