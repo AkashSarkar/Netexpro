@@ -103,16 +103,9 @@
                       <div class="row">
                         <div class="col-md-8 modal-image">
                           <!--A variable for Gallery modal as flag-->
-                          <?php $f=0; ?> 
-                          @foreach($images as $gallery) 
-                            @if( $gallery->post_id == $imagepost->post_id ) 
-                              @if( $gallery->post_image==$imagepost->post_image)
-                                <img class="img-responsive" src="/uploads/postimages/{{$gallery->post_image}}">
-                              @else
-                                <img class="img-responsive hidden" src="/uploads/postimages/{{$gallery->post_image}}"> 
-                              @endif 
-                            @endif 
-                          @endforeach
+                          <?php $f=0; ?> @foreach($images as $gallery) @if( $gallery->post_id == $imagepost->post_id ) @if( $gallery->post_image==$imagepost->post_image)
+                          <img class="img-responsive" src="/uploads/postimages/{{$gallery->post_image}}"> @else
+                          <img class="img-responsive hidden" src="/uploads/postimages/{{$gallery->post_image}}"> @endif @endif @endforeach
 
 
 
@@ -200,16 +193,15 @@
 
 
 
-            @endif 
-            @endforeach
+            @endif @endforeach
           </div>
         </div>
       </div>
-      @break; 
-      @endif 
-      @endforeach
+      @break; @endif @endforeach
       <!-- end image show-->
     </section>
+    
+    @include('template.rate_info_modal')
     <hr>
     <section class="post-footer">
       <div class="row">
@@ -219,22 +211,14 @@
               <!-- Shows Rate text and icon if post type is Project-->
               @if($userpost->post_type=="project")
               <!--<a href="#" data-toggle="modal" data-target="#starModal"><i class="glyphicon glyphicon-star"></i>Rate</a>-->
-              <?php $rate=0;?> 
-              @if($isLiked) 
-                @foreach($isLiked as $like) 
-                  @if($like['user_id']== Auth::user()->id && $userpost->post_id==$like['post_id'])
-                    <a>
-                      <i class="active fa fa-star" aria-hidden="true"></i>
-                    </a>
-                    <a>Rated</a>
-                    <span> {{$userpost->ratting}}</span>
+              <?php $rate=0;?> @if($isLiked) @foreach($isLiked as $like) @if($like['user_id']== Auth::user()->id && $userpost->post_id==$like['post_id'])
+              <a>
+                <i class="active fa fa-star" aria-hidden="true"></i>
+              </a>
+              <a>Rated</a>
+              <span> {{$userpost->ratting}}</span>
 
-                    <?php $rate+=1;?> 
-                    @break; 
-                  @endif 
-                @endforeach 
-              @endif 
-              @if($rate==0)
+              <?php $rate+=1;?> @break; @endif @endforeach @endif @if($rate==0)
               <div id="hoverDisable{{$userpost->post_id}}" class="HeaderBarThreshold">
 
                 <div class="star-rating" style="position:absolute;margin-top:-40px; margin-left:-20px;">
