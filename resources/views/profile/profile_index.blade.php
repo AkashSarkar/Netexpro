@@ -258,12 +258,7 @@
                              if( result){
                                event.preventDefault();
                                document.getElementById('delete-form').submit();
-                              }
-                                    ">
-
-                      Delete
-
-                    </a>
+                              } "> Delete </a>
 
                     <form id="delete-form" action="{{ route('post.destroy', $userpost->post_id) }}" method="POST" style="display:none;">
                       <input type="hidden" name="_method" method="PUT" value="delete"> {{ csrf_field() }}
