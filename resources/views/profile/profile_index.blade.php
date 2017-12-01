@@ -409,9 +409,10 @@
                 
 
 
-
+                  
                   <!--Comment show start -->
                    @foreach($userComment as $comment)
+                      @if($post['post_id']== $comment->commentable_id)
                     <div class="well well-sm">
                     <div class="media">
                       <div class="media-left">
@@ -431,6 +432,7 @@
                         </div>
                      </div>
                     </div>
+                    @endif
                     @endforeach
                     <!--Comment show end-->
                    
