@@ -84,9 +84,9 @@
           </div>
         </div>
       </div>
-      <!--postshow-->
+      <!--postshow rating comments -->
       @include('template.PostsShowInterface')
-      <!--end post show-->
+      <!--end post show rating comments-->
 
       <!--availablepostshow-->
       @include('template.user_available_post_interface')              
@@ -95,11 +95,12 @@
 
     </div>
     <!--post body end-->
+      
        <!--Post Modal-->
        @include('template.postModal')
  
 
-    <!--modal-->
+      <!--modal-->
      
   </div>
 </div>

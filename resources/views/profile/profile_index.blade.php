@@ -326,70 +326,83 @@
                 <ul class="list-unstyled">
                   <li>
                     <!-- Shows Rate text and icon if post type is Project-->
-                    @if($post['post_type']=="project")
-                      
-                                   <div class="HeaderBarThreshold" onclick=()>
-                                   <form method="post" action="" >
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="_method" value="post">
-                                            <input type="hidden" name="post_id" value="{{$post['post_id']}}">
-                           
-                                            <div class="star-rating" style="position:absolute;margin-top:-40px; margin-left:-20px;">
-                                              <input id="star-10" type="submit" name="rating" value="10" style="visibility:hidden;" >
-                                              <label for="star-10" title="10 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-9" type="submit" name="rating" value="9" style="visibility:hidden;">
-                                              <label for="star-9" title="9 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i> 
-                                              </label>
-                                              <input id="star-8" type="submit" name="rating" value="8" style="visibility:hidden;">
-                                              <label for="star-8" title="8 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-7" type="submit" name="rating" value="7" style="visibility:hidden;">
-                                              <label for="star-7" title="7 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-6" type="submit" name="rating" value="6" style="visibility:hidden;">
-                                              <label for="star-6" title="6 star" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-5" type="submit" name="rating" value="5" style="visibility:hidden;" >
-                                              <label for="star-5" title="5 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-4" type="submit" name="rating" value="4" style="visibility:hidden;">
-                                              <label for="star-4" title="4 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i> 
-                                              </label>
-                                              <input id="star-3" type="submit" name="rating" value="3" style="visibility:hidden;">
-                                              <label for="star-3" title="3 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-2" type="submit" name="rating" value="2" style="visibility:hidden;">
-                                              <label for="star-2" title="2 stars" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                              <input id="star-1" type="submit" name="rating" value="1" style="visibility:hidden;">
-                                              <label for="star-1" title="1 star" id="star"  style="visibility:hidden;">
-                                                  <i class="active fa fa-star" aria-hidden="true"></i>
-                                              </label>
-                                            </div>
-                                            
-                                          <a href="#" ontouchstart=""> <i class="active fa fa-star" aria-hidden="true"></i> Rate</a>
-                                          <strong>average rate</strong>
-                               
-                                          </form>
-                                            
-                              </div>
-                    @else
-                      <a href="#" ><i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
-                    @endif
-                  <!--End Shows Rate text and icon if post type is Project-->
+              @if($post->post_type=="project")
+              <!--<a href="#" data-toggle="modal" data-target="#starModal"><i class="glyphicon glyphicon-star"></i>Rate</a>-->
+              <?php $rate=0;?> 
+              @if($isLiked) 
+                @foreach($isLiked as $like) 
+                  @if($like['user_id']== Auth::user()->id && $post->post_id==$like['post_id'])
+                    <a>
+                      <i class="active fa fa-star" aria-hidden="true"></i>
+                    </a>
+                    <a>Rated</a>
+                    <span> {{$post->ratting}}</span>
+
+                    <?php $rate+=1;?> 
+                    @break; 
+                  @endif 
+                @endforeach 
+              @endif 
+              @if($rate==0)
+              <div id="hoverDisable{{$post->post_id}}" class="HeaderBarThreshold">
+
+                <div class="star-rating" style="position:absolute;margin-top:-40px; margin-left:-20px;">
+
+                  <label for="star-10" onclick="rate({{$post->post_id}},10)" title="10 stars" id="star" style="visibility:hidden;">
+                    <i class="active fa fa-star" aria-hidden="true"></i>
+                  </label>
+
+                  <label for="star-9" title="9 stars" onclick="rate({{$post->post_id}},9)" id="star" style="visibility:hidden;">
+                    <i class="active fa fa-star" aria-hidden="true"></i>
+                  </label>
+
+                  <label for="star-8" title="8 stars" onclick="rate({{$post->post_id}},8)" id="star" style="visibility:hidden;">
+                    <i class="active fa fa-star" aria-hidden="true"></i>
+                  </label>
+
+                  <label for="star-7" title="7 stars" onclick="rate({{$post->post_id}},7)" id="star" style="visibility:hidden;">
+                    <i class="active fa fa-star" aria-hidden="true"></i>
+                  </label>
+
+                  <label for="star-6" title="6 star" onclick="rate({{$post->post_id}},6)" id="star" style="visibility:hidden;">
+                    <i class="active fa fa-star" aria-hidden="true"></i>
+                  </label>
+
+                  <label for="star-5" title="5 stars" onclick="rate({{$post->post_id}},5)" id="star" style="visibility:hidden;">
+                    <i class="active fa fa-star" aria-hidden="true"></i>
+                  </label>
+
+                  <label for="star-4" title="4 stars" onclick="rate({{$post->post_id}},4)" id="star" style="visibility:hidden;">
+                    <i class="active fa fa-star" aria-hidden="true"></i>
+                  </label>
+
+                  <label for="star-3" title="3 stars" onclick="rate({{$post->post_id}},3)" id="star" style="visibility:hidden;">
+                    <i class="active fa fa-star" aria-hidden="true"></i>
+                  </label>
+
+                  <label for="star-2" title="2 stars" onclick="rate({{$post->post_id}},2)" id="star" style="visibility:hidden;">
+                    <i class="active fa fa-star" aria-hidden="true"></i>
+                  </label>
 
 
-                  <!--End Shows Rate text and icon if post type is Project-->
+                  <label for="star-1" title="1 star" onclick="rate({{$post->post_id}},1)" id="star" style="visibility:hidden;">
+                    <i class="active fa fa-star" aria-hidden="true"></i>
+                  </label>
+
+
+                </div>
+                <a>
+                  <i class="active fa fa-star" aria-hidden="true"></i>
+                </a>
+                <a id="after_rate{{$post->post_id}}" ontouchstart=""> Rate</a>
+                <span id="{{$post->post_id}}">{{$post->ratting}}</span>
+
+              </div>
+              @endif @else
+              <a href="#">
+                <i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
+              @endif
+              <!--End Shows Rate text and icon if post type is Project-->
                   </li>
                   <li>
                     <a href="#">
@@ -512,13 +525,7 @@
                              if( result){
                                event.preventDefault();
                                document.getElementById('delete-form1').submit();
-                              }
-                                    " 
-                                     >
-
-                                     Delete
-
-                          </a>
+                              } " > Delete </a>
                           
                           <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost['useravailablepost_id']) }}" method="POST" style="display:none;">
                              <input type="hidden" name="_method" method="PUT" value="delete">
@@ -1034,7 +1041,7 @@
         }
         });
     });
-                //end image show while select
+  //end image show while select
 
            //shows projects fields
                 $(document).ready(function(){
@@ -1098,6 +1105,45 @@
                
                 //end select all check box
                 });
+
+
+                //ajax post 
+  function rate(post_id, rating) {
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "<?php echo url('/rating') ?>",
+      data: "rating=" + rating + "&post_id=" + post_id,
+      async:false,
+      success: function (data) {
+
+        console.log("inserted");
+       
+      }
+    });
+
+     //get avg rating
+        $.ajax({
+          url: "{{url('/rating/getdata')}}",
+          type: 'GET',
+          data: {
+            'post_id': post_id
+          },
+          success: function (response) {
+            console.log(response); 
+             
+            
+            $("#after_rate"+post_id).html("Rated ");
+            $("#"+post_id).html(response);
+            $("#hoverDisable"+post_id).removeClass("HeaderBarThreshold");
+          }
+        });
+        //end avg rating
+
+  }
                 
                 
                 //handles visivility validation

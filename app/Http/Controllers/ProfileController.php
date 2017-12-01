@@ -9,6 +9,7 @@ use App\Interest;
 use App\jobpost;
 use App\Imagepost;
 use App\Comment;
+use App\Rating;
 use App\AvailableForJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,9 +33,43 @@ class ProfileController extends Controller
       
       $jobpost = jobpost::where('user_id', Auth::user()->id)->get();
       $useravailablepost = AvailableForJob::where('user_id', Auth::user()->id)->get();
+      
+      
       $post = Post::where('user_id', Auth::user()->id)
       ->orderBy('created_at','desc')
       ->get();
+
+
+       //avg rating
+       $avg_rating = DB::table('ratings')
+       ->select( DB::raw('AVG(rating) as avg_rating'),'post_id')
+       ->groupBy('post_id')
+       ->get();
+
+       //dd($avg_rating);
+       //end avg rating
+
+       //check if user rated post or not
+       $isLike=Rating::where('user_id',Auth::user()->id)->get();
+       $isLike=json_decode( $isLike,true);
+       //end of check rated post
+
+       //adding average ratings with post
+       for($i=0;$i<count($post);$i++)
+       {
+           
+           if($post[$i]->post_type=="project"){
+               
+               for($rate=0;$rate<count($avg_rating);$rate++){
+                   if($post[$i]->post_id==$avg_rating[$rate]->post_id)
+                   {
+                       $post[$i]->ratting =$avg_rating[$rate]->avg_rating;
+                   }
+               }
+           }
+          
+       }
+        //end of average rating
 
       $userComment = DB::table('comments')
             ->join('users', 'users.id', '=', 'comments.user_id')
@@ -56,7 +91,7 @@ class ProfileController extends Controller
       
       $interest= Interest::find(Auth::user()->id);
       return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 'jobComment'=>$jobComment, 
-        'useravailableComment'=>$useravailableComment]);
+        'useravailableComment'=>$useravailableComment,'isLiked'=>$isLike]);
           
       
     }
