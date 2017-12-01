@@ -90,8 +90,12 @@ class ProfileController extends Controller
             ->get();
       
       $interest= Interest::find(Auth::user()->id);
+      $user_rate_info=DB:: select('SELECT post_id,p_pic,firstname,lastname,ratings.created_at 
+      FROM users  join ratings 
+      WHERE ratings.user_id= users.id  ');
+
       return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 'jobComment'=>$jobComment, 
-        'useravailableComment'=>$useravailableComment,'isLiked'=>$isLike]);
+        'useravailableComment'=>$useravailableComment,'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
           
       
     }

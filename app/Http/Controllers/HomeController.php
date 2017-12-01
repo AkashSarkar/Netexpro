@@ -209,7 +209,8 @@ class HomeController extends Controller
                             posts.created_at,
                             posts.updated_at
                             HAVING visibilities.post_id 
-                            not in (SELECT post_id FROM visibilities WHERE visibilities_type = :industry)',
+                            not in (SELECT post_id FROM visibilities WHERE visibilities_type = :industry)
+                            ORDER BY posts.created_at desc',
                             ['profession'=>$profession,'industry'=>$ind]);
                 //end of gets 35% values of profession
 
@@ -273,7 +274,8 @@ class HomeController extends Controller
                             visibilities.post_id
                             HAVING visibilities.post_id 
                             not in (SELECT post_id FROM visibilities 
-                            WHERE visibilities_type = :industry OR  visibilities_type = :profession)',
+                            WHERE visibilities_type = :industry OR  visibilities_type = :profession) 
+                            ORDER BY posts.created_at desc',
                             ['education'=>$education,'industry'=>$ind,'profession'=>$profession]);
                 //end of gets 20 % values of education
 
