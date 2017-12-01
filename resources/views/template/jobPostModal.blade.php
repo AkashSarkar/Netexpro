@@ -289,10 +289,6 @@
                             </div>
                           <!-- Location end -->
 
-                     
-
-            
-               
                      </div><!--Hire for job End of modal body-->
                     <!--<div class="modal-footer">-->
                     <!--  <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>-->

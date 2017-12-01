@@ -1,4 +1,5 @@
 <!--job hire post-->
+
 @foreach($jobpost as $jobpost)
 <div class="panel panel-default">
   <div class="panel-body">
@@ -112,19 +113,52 @@
         </div>
 
       </div>
-      <div class="row">
-        <div class="post-footer-comment-wrapper">
+</section>
+
+
+
+
+
+
+<!--Comment Section -->
+<section class="well well-sm">
+  <div class="row">
+       
           <div class="col-md-12 col-sm-12 col-lg-12">
+            
+
+   {{--  <div class="comment-wrap" >
+        <div class="media-left">
+                  <a href="#">
+                    <img class="media-object photo-profile img-circle" src="" width="32" height="32" alt="...">
+                  </a>
+                </div>
+        <div class="comment-block">
+            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto tempore, quaerat explicabo veniam fuga corporis totam reprehenderit quasi
+                sapiente modi tempora at perspiciatis mollitia, dolores voluptate. Cumque, corrupti?</p>
+            <div class="bottom-comment">
+                <div class="comment-date">Aug 24, 2014 @ 2:35 PM</div>
+                <ul class="comment-actions">
+                    <li class="reply">Reply</li>
+                </ul>
+            </div>
+        </div>
+    </div> --}}
+
+
 
             <!--Comment show start -->
             @foreach($jobComment as $comment) @if( $jobpost['jobpost_id']==$comment->commentable_id)
-            <div class="well well-sm">
-              <div class="media">
+           
+              <div class="media" >
                 <div class="media-left">
                   <a href="#">
                     <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment->p_pic}}" width="32" height="32" alt="...">
                   </a>
                 </div>
+                </div>
+
+                <div style=" padding: 7px; border-radius: 5px; margin-top: -40px; margin-left: 40px; margin-bottom: 10px;">
                 <div class="media-body">
                   <a href="#" class="anchor-username">
                     <h4 class="media-heading">{{ $comment->firstname }}</h4>
@@ -134,8 +168,9 @@
                 <div class="commentText">
                   <p class="">{{$comment->body}}</p>
                 </div>
+                <a href="#" class="anchor-time" style="margin-top: -20px;">Reply</a>
               </div>
-            </div>
+            
             @endif @endforeach
             <!--Comment show end-->
 
@@ -157,10 +192,7 @@
                       <input type="hidden" name="commentable_id" value="{{ $jobpost['jobpost_id'] }}">
 
                       <div class="form-group">
-                        <input class="form-control" type="text" name="body" placeholder="Your comments" />
-                      </div>
-                      <div class="form-group">
-                        <button class="btn btn-default">Add</button>
+                        <input class="form-control" style="border-radius: 20px;" type="text" name="body" placeholder="Your comments" />
                       </div>
                     </form>
                   </div>
@@ -170,7 +202,7 @@
             <!--Create Comment end -->
 
           </div>
-        </div>
+       
       </div>
 
     </section>
@@ -179,4 +211,5 @@
   </div>
 </div>
 @endforeach
+
 <!--end job post-->
