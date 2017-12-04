@@ -1,5 +1,6 @@
 <!--job hire post-->
 
+<div class="col-md-7 col-sm-7 col-lg-7" id="h_post" >
 @foreach($jobpost as $jobpost)
 <div class="panel panel-default">
   <div class="panel-body">
@@ -115,66 +116,10 @@
       </div>
 </section>
 
-
-
-
-
-
 <!--Comment Section -->
-<section class="well well-sm">
-  <div class="row">
-       
-          <div class="col-md-12 col-sm-12 col-lg-12">
-            
+<section >
 
-   {{--  <div class="comment-wrap" >
-        <div class="media-left">
-                  <a href="#">
-                    <img class="media-object photo-profile img-circle" src="" width="32" height="32" alt="...">
-                  </a>
-                </div>
-        <div class="comment-block">
-            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto tempore, quaerat explicabo veniam fuga corporis totam reprehenderit quasi
-                sapiente modi tempora at perspiciatis mollitia, dolores voluptate. Cumque, corrupti?</p>
-            <div class="bottom-comment">
-                <div class="comment-date">Aug 24, 2014 @ 2:35 PM</div>
-                <ul class="comment-actions">
-                    <li class="reply">Reply</li>
-                </ul>
-            </div>
-        </div>
-    </div> --}}
-
-
-
-            <!--Comment show start -->
-            @foreach($jobComment as $comment) @if( $jobpost['jobpost_id']==$comment->commentable_id)
-           
-              <div class="media" >
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment->p_pic}}" width="32" height="32" alt="...">
-                  </a>
-                </div>
-                </div>
-
-                <div style=" padding: 7px; border-radius: 5px; margin-top: -40px; margin-left: 40px; margin-bottom: 10px;">
-                <div class="media-body">
-                  <a href="#" class="anchor-username">
-                    <h4 class="media-heading">{{ $comment->firstname }}</h4>
-                  </a>
-                  <a href="#" class="anchor-time">{{$comment->created_at}}</a>
-                </div>
-                <div class="commentText">
-                  <p class="">{{$comment->body}}</p>
-                </div>
-                <a href="#" class="anchor-time" style="margin-top: -20px;">Reply</a>
-              </div>
-            
-            @endif @endforeach
-            <!--Comment show end-->
-
-            <!--Create Comment start -->
+    <!--Create Comment start -->
             <div class="comment-form">
               <div class="comment">
                 <div class="media">
@@ -193,6 +138,7 @@
 
                       <div class="form-group">
                         <input class="form-control" style="border-radius: 20px;" type="text" name="body" placeholder="Your comments" />
+                         <button type="submit" style="float: right; margin: -34px 0px 0 0; height: 33px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">Comment</button>
                       </div>
                     </form>
                   </div>
@@ -201,15 +147,52 @@
             </div>
             <!--Create Comment end -->
 
-          </div>
-       
-      </div>
+     <h3 class="comment-title">Comments</h3>
 
+            <!--Comment show start -->
+            @foreach($jobComment as $comment) @if( $jobpost['jobpost_id']==$comment->commentable_id)
+           <div class="comment-wrapper">
+           
+            <div class="comments-list">
+              <ul class="comments-holder-ul">
+                <li class="comment-holder" id="_1">
+                  <div class="user-img">
+                     <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment->p_pic}}" width="32" height="32" alt="...">
+                  </div>
+
+                  <div class="comment-body">
+                      <h4 class="username-field">
+                      {{ $comment->firstname }}</h4>
+                      <span class="anchor-time">{{$comment->created_at}}</span>
+                     
+                      <div class="comment-text">
+                          {{$comment->body}}
+                      </div>
+                      <a href="#" class="anchor-time" style="margin-left:40px ;">Reply</a>
+                  </div>
+
+                 {{-- <div class="comment-buttons-holder">
+                    <ul>
+                      <li class="delete-btn">X</li>
+                    </ul>
+                  </div> --}} 
+                </li>
+              </ul>
+
+            </div>
+
+
+            </div>
+            
+            @endif @endforeach
+            <!--Comment show end-->
+
+        
     </section>
 
 
   </div>
 </div>
 @endforeach
-
+</div>
 <!--end job post-->

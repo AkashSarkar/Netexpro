@@ -89,7 +89,7 @@
       <!--end post show rating comments-->
 
       <!--availablepostshow-->
-      @include('template.user_available_post_interface')              
+     {{-- @include('template.user_available_post_interface')  --}}            
      
       <!--end of available post show-->
 

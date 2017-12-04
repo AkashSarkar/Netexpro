@@ -1,4 +1,56 @@
+@extends('layouts.app') 
+
+@section('page-title') Activity Log @endsection 
+
+
+@section('content')
+
+<div class="container">
+  <div class="row content">
+
+ <!--side bar content-->
+
+    <div class="col-md-3 col-sm-3 bg-light sidebar">
+      <nav class="nav-sidebar">
+        <div class="collapse navbar-collapse" id="side-navbar-collapse">
+          <ul class="nav">
+            <li>
+              <!--profile button-->
+              <div class="media button_profile button_m " id="bp" style="padding-left: 35px;">
+                <a href="{{ url('profile') }}">
+                  <div class="media-left ">
+                    <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="20"
+                      height="20" alt="...">
+                  </div>
+                  <div class="media-body" data-toggle="tooltip" data-placement="bottom" title="{{$user->firstname }} {{$user->lastname }}">
+                    <h5 class="media-heading"> {{$user->firstname }} {{$user->lastname }}</h5>
+                  </div>
+                </a>
+              </div>
+              <!--end profile button-->
+
+            </li>
+           
+
+             <section>
+              <button type="submit" class="button_connection button_m  btn" data-toggle="tooltip"
+              data-placement="bottom" title= ' All Jobposts'>
+             <a href="{{ url('jobpost') }}" style="color: inherit; text-decoration: inherit; margin-left: 5px; padding-left: 20px;">
+             <i class="fa fa-briefcase" aria-hidden="true"></i>  All Jobposts</a></button>
+            <br>
+            </section>
+
+          </ul>
+
+        </div>
+      </nav>
+    </div>
+
+
+
 <!--user available interface-->
+
+<div class="col-md-7 col-sm-7 col-lg-7" id="h_post">
 @foreach($useravailablepost as $useravailablepost)
       <div class="panel panel-default">
         <div class="panel-body">
@@ -100,79 +152,90 @@
 
             </div>
             </section>
-            
-            <!--Comment section -->
-            <section class="well well-sm">
-            <div class="row">
-             
-                <div class="col-md-12 col-sm-12 col-lg-12">
 
-                  <!--Comment show start -->
-                  @foreach($useravailableComment as $comment)
-                   @if( $useravailablepost['useravailablepost_id']==$comment->commentable_id)
 
-                    <div class="media" >
 
+
+      <!--Comment Section -->
+      <section >
+           <!--Create Comment start -->
+                  <div class="comment-form">
+                    <div class="comment">
+                      <div class="media">
                         <div class="media-left">
                           <a href="#">
-                          <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment->p_pic}}" width="32" height="32" alt="...">
+                             <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="32" height="32" alt="...">
                           </a>
                         </div>
-                     
 
-                        <div style=" padding: 7px; border-radius: 5px; margin-top: -40px; margin-left: 40px; margin-bottom: 10px;">
-                            <div class="media-body">
-                              <a href="#" class="anchor-username">
-                                <h4 class="media-heading">{{ $comment->firstname }}</h4>
-                              </a>
-                              <a href="#" class="anchor-time">{{$comment->created_at}}</a>
-                            </div>
-
-                            <div class="commentText">
-                              <p class="">{{$comment->body}}</p>
-                            </div>
-                            
-                            <a href="#" class="anchor-time" style="margin-top: -20px;">Reply</a>
-                       </div>
-                     </div>
-                     
-                    @endif 
-                  @endforeach
-                  <!--Comment show end-->
-
-                <!--Create Comment start -->
-                  <div class="comment-form">
-                      <div class="comment">
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                             <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="32" height="32" alt="...">
-                            </a>
-                          </div>
-
-                          <div class="media-body">
-                            <form method="POST" action="{{ route('comment.store') }}">
-                              {{ csrf_field() }}
+                        <div class="media-body">
+                          <form method="POST" action="{{ route('comment.store') }}">
+                            {{ csrf_field() }}
 
                              <input type="hidden" name="commentable_type" value="App\AvailableForJob">
-                             <input type="hidden" name="commentable_id" value="{{ $useravailablepost['useravailablepost_id'] }}">
+                                   <input type="hidden" name="commentable_id" value="{{ $useravailablepost['useravailablepost_id'] }}">
 
-                              <div class="form-group">
-                                <input class="form-control" style="border-radius: 20px;" type="text" name="body" placeholder="Your comments" />
-                              </div>
-                            </form>
-                          </div>
+                             <div class="form-group">
+                        <input class="form-control" style="border-radius: 20px;" type="text" name="body" placeholder="Your comments" />
+                         <button type="submit" style="float: right; margin: -34px 0px 0 0; height: 33px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">Comment</button>
+                      </div>
+                          </form>
                         </div>
                       </div>
                     </div>
+                  </div>
                   <!--Create Comment end -->
+              
+           <h3 class="comment-title">Comments</h3>
 
-                </div>
-            </div>
-        </section>
+                  <!--Comment show start -->
+             @foreach($useravailableComment as $comment)
+                         @if( $useravailablepost['useravailablepost_id']==$comment->commentable_id)
+                 <div class="comment-wrapper">
+                 
+                  <div class="comments-list">
+                    <ul class="comments-holder-ul">
+                      <li class="comment-holder" id="_1">
+                        <div class="user-img">
+                           <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="32" height="32" alt="...">
+                        </div>
 
+                        <div class="comment-body">
+                            <h4 class="username-field">
+                            {{ $comment->firstname }}</h4>
+                            <span class="anchor-time">{{$comment->created_at}}</span>
+                           
+                            <div class="comment-text">
+                                {{$comment->body}}
+                            </div>
+                            <a href="#" class="anchor-time" style="margin-left:40px ;">Reply</a>
+                        </div>
+
+                        {{-- <div class="comment-buttons-holder">
+                          <ul>
+                            <li class="delete-btn">X</li>
+                          </ul>
+                        </div> --}}
+                      </li>
+                    </ul>
+
+                  </div>
+
+
+                  </div>
+                  
+                  @endif @endforeach
+                  <!--Comment show end-->
+
+             
+          </section>
 
         </div>
       </div>
       @endforeach
 <!--end available interface-->
+</div>
+</div>
+</div>
+
+@endsection

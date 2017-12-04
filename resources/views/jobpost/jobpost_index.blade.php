@@ -21,7 +21,7 @@
           <ul class="nav">
             <li>
               <!--profile button-->
-              <div class="media button_profile button_m " id="bp">
+              <div class="media button_profile button_m " id="bp" style="padding-left: 35px;">
                 <a href="{{ url('profile') }}">
                   <div class="media-left ">
                     <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="20"
@@ -39,9 +39,9 @@
 
              <section>
               <button type="submit" class="button_connection button_m  btn" data-toggle="tooltip"
-              data-placement="bottom" title= 'All Jobposts'>
-             <a href="{{ url('jobpost') }}" style="color: inherit; text-decoration: inherit;">
-             <i class="fa fa-briefcase" aria-hidden="true"></i> All Jobposts</a></button>
+              data-placement="bottom" title= ' All Jobposts'>
+             <a href="{{ url('jobpost') }}" style="color: inherit; text-decoration: inherit; margin-left: 5px; padding-left: 20px;">
+             <i class="fa fa-briefcase" aria-hidden="true"></i>  All Jobposts</a></button>
             <br>
             </section>
 
@@ -51,10 +51,10 @@
       </nav>
     </div>
 
-     <div class="col-md-7 col-sm-7 col-lg-7 show_home_post" id="h_post">
-      <!--job hiring post show-->
+     <!--job hiring post show-->
       @include('template.jobHirePost_Interface')
-     </div>
+
+
     </div>
     </div>
 @endsection

@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/interests', 'InterestController@update'); 
     Route::get('/jobpost', 'JobpostController@index')->name('jobpost');
+    Route::get('/availableforjob', 'AvailableForJobController@index')->name('availableforjob');
     //Route::delete('profile/{post_id}','PostController@destroy1')->name('post');
 
     //Route::post('/post', 'PostController@store');

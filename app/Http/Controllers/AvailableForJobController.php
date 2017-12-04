@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\AvailableForJob;
+use App\User;
+
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +21,22 @@ class AvailableForJobController extends Controller
     public function index()
     {
         //
+            $user= User::find(Auth::user()->id);  
+            $useravailablepost= DB::table('users')
+              ->join('available_for_jobs', 'users.id', '=', 'available_for_jobs.user_id')
+              ->orderBy('available_for_jobs.created_at','desc')
+              ->get();
+
+            $useravailablepost=json_decode($useravailablepost,true);
+
+
+              $useravailableComment = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('available_for_jobs', 'available_for_jobs.useravailablepost_id', '=', 'comments.commentable_id')
+            ->orderBy('comments.created_at','desc')
+            ->get();
+
+        return view('template.user_available_post_interface',['user'=>$user,'useravailablepost'=>$useravailablepost,'useravailableComment'=>$useravailableComment]);
     }
 
     /**

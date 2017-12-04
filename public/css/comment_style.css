@@ -1,0 +1,166 @@
+*
+{
+	margin: 0px;
+	padding: 0px;
+	font-family: arial;
+}
+
+a img{
+	border: none;
+}
+
+.comment-wrapper
+{
+	margin: 10px;
+	border 1px solid #elelel;
+	height: auto;
+	width: auto;
+	color: #444;
+}
+
+h3.comment-title
+{
+ height: 40px;
+ line-height: 37px;
+ margin: 0 5px 0 5px;
+ color: #555;
+ border-bottom: 1px solid e1e1e1;
+}
+
+.comments-list
+{
+ height: auto;
+ font-size:  13px;
+ margin: 10px 5px 5px 5px;
+ color: #555;
+
+}
+
+ul.comments-holder-ul
+{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	height: auto;
+	overflow: hidden;
+}
+
+ul.comments-holder-ul li.comment-holder
+{
+	list-style-type: none;
+	/*yelloish backgroud 
+	background: #fffff5; */
+	margin: 5px 0 5px 0;
+	width: auto;
+	height: auto;
+	overflow: hidden;
+	padding: 10px;
+	border-radius: 4px;
+	position: relative;
+	/*border: 1px solid #e1e1e1; */
+}
+
+ul.comments-holder-ul li.comment-holder:hover
+{
+	background: #f2f2f2;
+}
+
+ul.comments-holder-ul li.comment-holder .user-img
+{
+	 float:  left;
+	 margin-right: 10px;
+
+}
+
+ul.comments-holder-ul li.comment-holder .user-img:hover
+{
+	border: 2px solid #818181;
+	border-radius: 20px;
+}
+
+.comment-body
+{
+	width: auto;
+}
+
+ul.comments-holder-ul li.comment-holder h4.username-field
+{
+  height: 30px;
+  line-height: 22px;
+  color: #2E5CB8;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0 0 0 10px;
+}
+
+ul.comments-holder-ul li.comment-holder h4.username-field:hover
+{
+   color: #254A93;
+}
+
+ul.comments-holder-ul li.comment-holder .comment-text
+{
+	display: block; 
+	width: auto;
+	font-size: 13px;
+	margin: 0 5px 0 42px;
+}
+
+ul.comments-holder-ul li.comment-holder:hover .comment-buttons-holder
+{
+   display: block;
+}
+
+.comment-buttons-holder
+{
+	display: none;
+	position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100px;
+    height: 20px;
+   
+
+}
+
+.comment-buttons-holder ul
+{
+	
+	list-style-type: none;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+}
+
+.comment-buttons-holder ul li
+{
+	float: right;
+	width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 18px;
+    color: #fff;
+    background: #2E5CB8;
+    cursor: pointer;
+}
+
+.comment-buttons-holder ul li:hover
+{
+	color: #444;
+	background: #6D8DCD;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

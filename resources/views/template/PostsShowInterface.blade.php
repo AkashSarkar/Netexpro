@@ -291,10 +291,12 @@
         </div>
 
       </div>
+        </section>
+        
       <!--comment show-->
       @include('template.Comment_Interface')
       <!--comment end-->
-    </section>
+  
 
 
   </div>
