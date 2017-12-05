@@ -21,28 +21,28 @@
           <ul class="nav">
             <li>
               <!--profile button-->
-              <div class="media button_profile button_m " id="bp" style="padding-left: 35px;">
-                <a href="{{ url('profile') }}">
-                  <div class="media-left ">
-                    <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="20"
-                      height="20" alt="...">
-                  </div>
-                  <div class="media-body" data-toggle="tooltip" data-placement="bottom" title="{{$user->firstname }} {{$user->lastname }}">
-                    <h5 class="media-heading"> {{$user->firstname }} {{$user->lastname }}</h5>
-                  </div>
-                </a>
-              </div>
-              <!--end profile button-->
+              <div class="media button_profile button_m " id="bp">
+              <a href="{{ url('profile') }}">
+                <div class="media-left ">
+                  <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="20"
+                    height="20" alt="...">
+                </div>
+                <div class="media-body" data-toggle="tooltip" data-placement="bottom" title="{{$user->firstname }} {{$user->lastname }}">
+                  <h5 class="media-heading"> {{$user->firstname }} {{$user->lastname }}</h5>
+                </div>
+              </a>
+            </div>
+            <!--end profile button-->
 
             </li>
            
 
              <section>
-              <button type="submit" class="button_connection button_m  btn" data-toggle="tooltip"
-              data-placement="bottom" title= ' All Jobposts'>
-             <a href="{{ url('jobpost') }}" style="color: inherit; text-decoration: inherit; margin-left: 5px; padding-left: 20px;">
-             <i class="fa fa-briefcase" aria-hidden="true"></i>  All Jobposts</a></button>
-            <br>
+             <button type="submit" class="button_connection button_m  btn" data-toggle="tooltip"
+             data-placement="bottom" title= 'All Jobposts'>
+            <a href="{{ url('jobpost') }}" style="color: inherit; text-decoration: inherit;">
+            <i class="fa fa-briefcase" aria-hidden="true"></i>  All Jobposts</a></button>
+           <br>
             </section>
 
           </ul>
@@ -52,6 +52,7 @@
     </div>
 
      <!--job hiring post show-->
+     
       @include('template.jobHirePost_Interface')
 
 

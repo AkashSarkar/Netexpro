@@ -24,12 +24,11 @@
         <span data-toggle="modal" data-target="#rateModal<?php echo  $rating_post_id ;echo $rate_count;?>" style="color:#F39C12;font-weight:400;">
             <i class="active fa fa-star" aria-hidden="true"></i> 
             
-             <span style="font-weight:600; color:#365899"> {{$fname}} {{$lname}}
+             <span style="font-weight:600; color:#365899" id="after_user_rate_modal{{$userpost->post_id}}"> {{$fname}} {{$lname}}</span>
+             <span style="font-weight:600; color:#365899">
              @if($rate_count>1)
-            
-             and  {{$rate_count-1}} others
+              and  {{$rate_count-1}} others
             @endif
-            
             rated this project</span>
         </span>
         <div class="modal fade" id="rateModal<?php echo  $rating_post_id ;echo $rate_count;?>" role="dialog">

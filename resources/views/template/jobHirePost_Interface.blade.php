@@ -1,6 +1,6 @@
 <!--job hire post-->
 
-<div class="col-md-7 col-sm-7 col-lg-7" id="h_post" >
+<div class="col-md-7 col-sm-7 col-lg-7 show_home_post" id="h_post">
 @foreach($jobpost as $jobpost)
 <div class="panel panel-default">
   <div class="panel-body">

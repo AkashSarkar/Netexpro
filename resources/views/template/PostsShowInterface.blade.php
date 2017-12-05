@@ -202,10 +202,25 @@
     </section>
     
     @include('template.rate_info_modal')
+     <!--if user first rated in comment-->
+     <?php $check=0 ;?>
+    @foreach($user_rate_info as $rate_info) 
+        @if($rate_info->post_id==$userpost->post_id)
+          <?php $check=$check+1; ?>
+          @break;
+        @endif
+    @endforeach
+    @if( $check==0)
+    <a  style="font-weight:600; color:#365899" id="after_user_rate{{$userpost->post_id}}"></a>
+    
+    @endif
+    <!--end if user first rated comment-->
     <hr>
+   
     <section class="post-footer">
       <div class="row">
         <div class="col-md-12">
+         
           <ul class="list-unstyled">
             <li>
               <!-- Shows Rate text and icon if post type is Project-->

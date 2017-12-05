@@ -223,6 +223,8 @@
              
             
             $("#after_rate"+post_id).html("Rated ");
+            $("#after_user_rate"+post_id).html('<i class="active fa fa-star" aria-hidden="true" style="color:#F39C12;font-weight:400;"></i>  You rated this project ');
+            $("#after_user_rate_modal"+post_id).html('You ');
             $("#"+post_id).html(response);
             $("#hoverDisable"+post_id).removeClass("HeaderBarThreshold");
           }
@@ -272,22 +274,7 @@
   });
 
 
-  //sidebar button style
-  $(function () {
-    $(window).resize(function () {
-      if (window.innerWidth < 1022) {
-        $("#h_post").removeClass("show_home_post");
-        $(".button_connection").removeClass("button_m");
-        $("#bp").removeClass("button_m");
-        $("#bm").removeClass("button_m");
-        $("#bm1").removeClass("button_m");
-        $("#bm2").removeClass("button_m");
-        // $("#bp").removeClass("button_profile");
 
-      }
-    });
-  });
-  //end sidebar style
 </script>
 
 @endsection
