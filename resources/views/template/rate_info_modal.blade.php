@@ -1,4 +1,4 @@
-<?php $rate_count=0; $fla=0?> 
+<?php $rate_count=0; $fla=0 ;$fname="";$lname="";?> 
     @foreach($user_rate_info as $rate_info) 
         @if($rate_info->post_id==$userpost->post_id)
 
@@ -6,11 +6,9 @@
             <?php $rate_count=$rate_count+1; $rating_post_id=$rate_info->post_id?>
             @if($rate_info->user_id==$user->id)
             <?php ;
-             $fname="You";
-             $lname=" ";
              $fla=$fla+1;
             ?>
-            @elseif($fla==0)
+            @elseif($rate_info->user_id!=$user->id)
             <?php ;
              $fname=$rate_info->firstname;
              $lname=$rate_info->lastname;
@@ -24,10 +22,20 @@
         <span data-toggle="modal" data-target="#rateModal<?php echo  $rating_post_id ;echo $rate_count;?>" style="color:#F39C12;font-weight:400;">
             <i class="active fa fa-star" aria-hidden="true"></i> 
              <span style="font-weight:600; color:#365899" id="after_user_rate_modal{{$userpost->post_id}}"> </span>
-             <span style="font-weight:600; color:#365899" id="after_user_rate_modal{{$userpost->post_id}}"> {{$fname}} {{$lname}}</span>
+             @if($rate_count>1 && $fla>0)
+             <span style="font-weight:600; color:#365899" id="after_user_rate_modal{{$userpost->post_id}}">You , {{$fname}} {{$lname}}</span>
+             @elseif($fla>0)
+
+             <span style="font-weight:600; color:#365899" id="after_user_rate_modal{{$userpost->post_id}}">You </span>
+             @else
+
+             <span style="font-weight:600; color:#365899" id="after_user_rate_modal{{$userpost->post_id}}">{{$fname}} {{$lname}}</span>
+             @endif
              <span style="font-weight:600; color:#365899">
-             @if($rate_count>1)
+             @if($rate_count>1 && $fla==0)
               and  {{$rate_count-1}} others
+             @elseif($rate_count>2 && $fla>0)
+             and  {{$rate_count-2}} others
             @endif
             rated this project</span>
         </span>
