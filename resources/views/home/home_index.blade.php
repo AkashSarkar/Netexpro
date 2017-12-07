@@ -222,11 +222,12 @@
             console.log(response); 
              
             
-            $("#after_rate"+post_id).html("Rated ");
-            $("#after_user_rate"+post_id).html('<i class="active fa fa-star" aria-hidden="true" style="color:#F39C12;font-weight:400;"></i>  You rated this project ');
-            $("#after_user_rate_modal"+post_id).html('You ');
             $("#"+post_id).html(response);
             $("#hoverDisable"+post_id).removeClass("HeaderBarThreshold");
+
+            $("#after_rate"+post_id).html("Rated ");
+            $("#after_user_rate"+post_id).html('<i class="active fa fa-star" aria-hidden="true" style="color:#F39C12;font-weight:400;"></i>  You rated this project ');
+            $("#after_user_rate_modal"+post_id).html('You , ');
           }
         });
         //end avg rating
