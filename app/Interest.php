@@ -12,7 +12,7 @@ class Interest extends Model
         'profession',
         'industry',
         'interest_priority',
-        'user_id',
+        'user_id'
     ];
 
     public function users()

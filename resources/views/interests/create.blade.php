@@ -3,10 +3,18 @@
 @section('page-title')
     Welcome
 @endsection
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 @section('content')
 <?php
   $professions = array(
+    "CSE",
+    "EEE",
+    "BBA",
+    "MBA",
+    "MSCSE"
+);
+
+ $interests = array(
     "CSE",
     "EEE",
     "BBA",
@@ -75,6 +83,27 @@ $industries= array(
                             </div>
                         </div>
 
+                        
+                        <div class="form-group{{ $errors->has('interests') ? ' has-error' : '' }}">
+                            <label for="interests" class="col-md-4 control-label">interests</label>
+
+                            <div class="col-md-6">
+                                 
+                                    <select class="form-control" name="interests[]"  value="{{ old('interests') }}"  multiple="multiple" id="interest">
+                                        <span class="caret"></span>
+                                        @foreach( $interests as $interest)
+                                        <option>{{ $interest }}</option>
+                                        @endforeach
+                                    </select>
+
+                                @if ($errors->has('interests'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('interests') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
@@ -91,3 +120,13 @@ $industries= array(
 
 
  @endsection
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+ <script>
+ $(document).ready(function(){
+   $('#interest').select2({
+       placeholder:"selectinterest",
+       tags:true;
+   });
+ });
+ </script>
