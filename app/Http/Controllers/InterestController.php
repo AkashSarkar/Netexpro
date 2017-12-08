@@ -44,12 +44,25 @@ class InterestController extends Controller
     {
         //
         if(Auth::check()){
+            
             $interest = Interest::create([
                 'profession' => $request['profession'],
                 'industry' =>  $request['industry'],
-                'interest_priority' =>  $request['interest_priority'],
+                'interest_priority' => 10,
                 'user_id'=>Auth::user()->id
             ]);
+
+            if($request['interests']){
+                for($i=0;$i<count($request['interests']);$i++){
+                    $interest = Interest::create([
+                        'profession' => $request['interests'][$i],
+                        'industry' =>  $request['industry'],
+                        'interest_priority' => 0,
+                        'user_id'=>Auth::user()->id
+                    ]);
+                }
+            }
+            
             
             if( $interest){
                 return redirect()->route('users.index');
