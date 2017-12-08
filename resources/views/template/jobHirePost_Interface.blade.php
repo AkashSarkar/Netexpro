@@ -64,6 +64,7 @@
               @endif
               @endif
               <!--End of getting Applicant Value-->
+  
               <a href="#" class="anchor-username">
                 <h4 class="media-heading"> {{$jobpost['firstname']}}</h4>
               </a>
@@ -114,6 +115,12 @@
       </p>
 
     </section>
+    <!--Applicants List-->
+    @if($jobpost['user_id'] == Auth::user()->id )
+    @include('template._applicantsModal')
+    @endif      
+
+    <!--End Applicants list-->
     <hr>
     <section class="post-footer">
       <div class="row">
