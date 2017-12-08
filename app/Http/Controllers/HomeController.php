@@ -110,7 +110,7 @@ class HomeController extends Controller
             //showing Users Posts according to users connection
             $post=null;
             
-            //post indivisual connection
+            //post individual connection
             $connection_type=$request->input('connection');
             
             if($connection_type){
@@ -119,9 +119,12 @@ class HomeController extends Controller
                 ->join('interests', 'users.id', '=', 'interests.user_id')
                 ->join('posts', 'users.id', '=', 'posts.user_id')
                 ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
-                ->where('visibilities_type','=',$connection_type)
+                ->where([
+                    ['visibilities_type','=',$connection_type],
+                    ['posts.created_at','>',DB::raw('(select max(posts.created_at)-interval 1 minute)')]
+                ])
                 ->orderBy('posts.created_at','desc')
-                ->get();
+                ->paginate(4);
                 //dd($post);
                 
                 //adding average ratings with post
@@ -149,7 +152,10 @@ class HomeController extends Controller
                 ->join('interests', 'users.id', '=', 'interests.user_id')
                 ->join('posts', 'users.id', '=', 'posts.user_id')
                 ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
-                ->where('visibilities_type','=',$interest->industry)
+                ->where([
+                    ['visibilities_type','=',$interest->industry],
+                    ['posts.created_at','>',DB::raw('(select max(posts.created_at)-interval 30 minute)')]
+                ])
                 ->orderBy('posts.created_at','desc')
                 ->get();
                 //end of gets 45% values of industry
@@ -190,7 +196,7 @@ class HomeController extends Controller
                             visibilities.visibilities_type,
                             visibilities.post_id 
                             FROM users  JOIN posts JOIN visibilities 
-                            WHERE users.id=posts.user_id 
+                            WHERE users.id=posts.user_id AND posts.created_at > (select max(posts.created_at)-interval 30 minute)
                             AND posts.post_id = visibilities.post_id 
                             AND visibilities_type = :profession
                             GROUP BY visibilities.visibilities_type,
@@ -254,7 +260,7 @@ class HomeController extends Controller
                             visibilities.visibilities_type,
                             visibilities.post_id
                             FROM users  JOIN posts JOIN visibilities 
-                            WHERE users.id=posts.user_id 
+                            WHERE users.id=posts.user_id AND posts.created_at > (select max(posts.created_at)-interval 30 minute)
                             AND posts.post_id = visibilities.post_id 
                             AND visibilities_type = :education
                             GROUP BY visibilities.visibilities_type , 
@@ -305,10 +311,11 @@ class HomeController extends Controller
             $user_rate_info=DB:: select('SELECT user_id,post_id,p_pic,firstname,lastname,ratings.created_at 
                             FROM users  join ratings 
                             WHERE ratings.user_id= users.id  ');
-         
-                
-        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'userComment'=>$userComment, 'jobComment'=>$jobComment, 
-        'useravailableComment'=>$useravailableComment,'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
+       
+        return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,
+        'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'userComment'=>$userComment, 
+        'jobComment'=>$jobComment,'useravailableComment'=>$useravailableComment,
+        'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
         }
         
     }
