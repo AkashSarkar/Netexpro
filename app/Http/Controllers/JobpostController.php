@@ -34,6 +34,7 @@ class JobpostController extends Controller
             $job_applicants=DB::table('applicants')
             ->join('users', 'users.id', '=', 'applicants.user_id')
             ->join('jobposts', 'jobposts.jobpost_id', '=', 'applicants.jobpost_id')
+            ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','applicants.created_at')
             ->orderBy('jobposts.created_at','desc')
             ->get();
             $applicants=DB::table('applicants')

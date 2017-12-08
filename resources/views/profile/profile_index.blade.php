@@ -348,7 +348,7 @@
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   <div class="img-poster clearfix">
                                     <a href="">
-                                      <img class="img-circle" src="/uploads/profile/{{$userpost->p_pic}}" />
+                                      <img class="img-circle" src="/uploads/profile/{{$user->p_pic}}" />
                                     </a>
                                     <strong>
                                       <a href=""> {{$userpost->firstname}} {{$userpost->lastname}}</a>
