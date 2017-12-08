@@ -31,8 +31,19 @@ class JobpostController extends Controller
             ->join('jobposts', 'jobposts.jobpost_id', '=', 'comments.commentable_id')
             ->orderBy('comments.created_at','desc')
             ->get();
-
-        return view('jobpost.jobpost_index',['user'=>$user,'jobpost'=>$jobpost,'jobComment'=>$jobComment]);
+            $job_applicants=DB::table('applicants')
+            ->join('users', 'users.id', '=', 'applicants.user_id')
+            ->join('jobposts', 'jobposts.jobpost_id', '=', 'applicants.jobpost_id')
+            ->orderBy('jobposts.created_at','desc')
+            ->get();
+            $applicants=DB::table('applicants')
+            ->orderBy('created_at','desc')
+            ->get();
+            
+            
+            
+        return view('jobpost.jobpost_index',['user'=>$user,'jobpost'=>$jobpost,
+        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants]);
     }
 
     /**
