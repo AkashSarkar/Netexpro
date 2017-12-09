@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('page-title') Home @endsection @section('content')
 <!--style-->
 <style>
-
+  
 </style>
 <!--script-->
 <!--end script -->
@@ -85,15 +85,16 @@
         </div>
       </div>
       <!--postshow rating comments -->
-      @include('template.PostsShowInterface')
+      <section class="post_class endless-pagination" >
+         @include('template.PostsShowInterface')
+         
+      </section>
       <!--end post show rating comments-->
 
-      <!--availablepostshow-->
-     {{-- @include('template.user_available_post_interface')  --}}            
-     
-      <!--end of available post show-->
-
+     <div class="ajax-loading" style="text-align: center;"><img src="loading.gif" /></div><!-- loading image-->
+    
     </div>
+    
     <!--post body end-->
       
        <!--Post Modal-->
@@ -103,6 +104,8 @@
       <!--modal-->
      
   </div>
+  
+  
   
 </div>
 
@@ -192,9 +195,36 @@
         reader.readAsDataURL(this.files[i]);
       }
     });
+
+    /*//get posts by ajax
+      $(window).scroll(fetchPosts);
+ 
+    function fetchPosts() {
+ 
+        var page = $('.endless-pagination').data('next-page');
+ 
+        if(page !== null) {
+ 
+            clearTimeout( $.data( this, "scrollCheck" ) );
+ 
+            $.data( this, "scrollCheck", setTimeout(function() {
+                var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 100;
+ 
+                if(scroll_position_for_posts_load >= $(document).height()) {
+                    $.get(page, function(data){
+                        $('.post_class').append(data.post);
+                        $('.endless-pagination').data('next-page', data.next_page);
+                    });
+                }
+            }, 350))
+ 
+        }
+    }
+    //end get post by ajax*/
+
   });//end document ready
 
- //ajax post 
+ //ajax rating post 
   function rate(post_id, rating) {
 
     $.ajax({
@@ -234,6 +264,8 @@
         //end avg rating
 
   } //end ajax post
+
+  
 
   //check if user likes a post or not
   /* $(function(){
