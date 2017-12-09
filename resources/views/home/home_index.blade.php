@@ -85,13 +85,12 @@
         </div>
       </div>
       <!--postshow rating comments -->
-      <section class="post_class endless-pagination" >
-         @include('template.PostsShowInterface')
-         
-      </section>
+      <div id="post_view">
+       @include('template.PostsShowInterface')
+
+     </div>
       <!--end post show rating comments-->
 
-     <div class="ajax-loading" style="text-align: center;"><img src="loading.gif" /></div><!-- loading image-->
     
     </div>
     
@@ -160,7 +159,7 @@
         });
         $("#btn_text").html(res + "<span class='caret'></span>");
       } else {
-        $("#btn_text").html(checkedItem.val() + "<span class='caret'></span>");
+        $("#btn_text").html("Select Connection <span class='caret'></span>");
       }
 
 
@@ -195,15 +194,19 @@
         reader.readAsDataURL(this.files[i]);
       }
     });
-
-    /*//get posts by ajax
-      $(window).scroll(fetchPosts);
+    //get posts by ajax
+      $(window).scroll(function(){
+        if ($(window).scrollTop() == $(document).height() - $(window).height()){
+         fetchPosts();
+          }
+      }); 
  
-    function fetchPosts() {
+      function fetchPosts() {
+        
+        var last_p_id= $("#last_post_id").text();
+        //console.log(last_p_id);
  
-        var page = $('.endless-pagination').data('next-page');
- 
-        if(page !== null) {
+       
  
             clearTimeout( $.data( this, "scrollCheck" ) );
  
@@ -211,17 +214,29 @@
                 var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 100;
  
                 if(scroll_position_for_posts_load >= $(document).height()) {
-                    $.get(page, function(data){
+                    /*$.get(page, function(data){
                         $('.post_class').append(data.post);
                         $('.endless-pagination').data('next-page', data.next_page);
-                    });
+                    });*/
+
+                    $.ajax({
+                        url: "{{url('/home/get_post')}}",
+                        type: 'GET',
+                        data: {
+                          'last_p_id': last_p_id
+                        },
+                        success: function (data) {
+                           $('#post_view').append(data.posts);
+                        }
+                        
+                      });
+
                 }
             }, 350))
  
-        }
+        
     }
-    //end get post by ajax*/
-
+    //end get post by ajax
   });//end document ready
 
  //ajax rating post 
@@ -265,7 +280,43 @@
 
   } //end ajax post
 
-  
+  //get posts by ajax
+    var page = 1; //track user scroll as page number, right now page number is 1
+    get_post(page); //initial content load
+    $(window).scroll(function() { //detect page scroll
+      if($(window).scrollTop() + $(window).height() >= $(document).height()) { //if user scrolled from top to bottom of the page
+        page++; //page number increment
+        //get_post(page); //load content
+       
+      }
+    }); 
+
+    function get_post(page) {
+       $.ajax(
+        {
+            url: '?page=' + page,
+            type: "get",
+            datatype: "html",
+            beforeSend: function()
+            {
+                $('.ajax-loading').show();
+            }
+        })
+         .done(function(data)
+	        {
+	            if(data.html == " "){
+	                $('.ajax-loading').html("No more records found");
+	                return;
+	            }
+	            $('.ajax-loading').hide();
+	            $("#post-data").append(data.html);
+	        })
+        .fail(function(jqXHR, ajaxOptions, thrownError)
+        {
+              alert('No response from server');
+        });
+    }   
+  //end get post by ajax
 
   //check if user likes a post or not
   /* $(function(){

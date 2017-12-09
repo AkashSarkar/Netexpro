@@ -1,5 +1,5 @@
-<?php $last_post_id=0; $last_key =count($posts); $post_count=0;?>
-@if($posts!=null) @foreach($posts as $userpost)
+<?php $last_post_id=0; $last_key =count($post); $post_count=0;?>
+@if($post!=null) @foreach($post as $userpost)
 
 <!--variable for count array-->
 <?php $post_count=$post_count+1;?>
@@ -312,7 +312,7 @@
         </section>
         
       <!--comment show-->
-      @include('template.Comment_Interface')
+     {{-- @include('template.Comment_Interface')--}}
       <!--comment end-->
   
 
