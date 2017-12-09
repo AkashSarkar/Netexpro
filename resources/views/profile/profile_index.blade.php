@@ -1,5 +1,13 @@
 @extends('layouts.app') @section('page-title') {{ $user->firstname }} {{ $user->lastname }} @endsection @section('content')
-
+<?php
+ $desires = array(
+    "CSE",
+    "EEE",
+    "BBA",
+    "MBA",
+    "MSCSE"
+);
+?>
 
 <div class="fb-profile">
   <div>
@@ -79,12 +87,6 @@
         <p>Location:
           <strong> {{ $user->location }} </strong>
         </p>
-        <p>Availability:
-          <strong> {{ $user->available_for_job }} </strong>
-        </p>
-
-
-
 
         <!--Modal for user personal information start-->
         <div class="modal fade" id="personalInfoModal" role="dialog" style="margin-top:12%; margin-left: -30%;">
@@ -118,9 +120,6 @@
                 </li>
                 <li>Location:
                   <strong> {{ $user->location }} </strong>
-                </li>
-                <li>Availability:
-                  <strong> {{ $user->available_for_job }} </strong>
                 </li>
               </div>
 
@@ -196,9 +195,86 @@
 
           </div>
         </div>
+        </section>
         <!--Professional information modal end -->
         <!--Professional information end -->
-      </section>
+        
+
+
+        <!--Interest modal start here-->
+ 
+        <section style="background-color: white; border-width:5px;  
+             border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
+        <!--Professional information start -->
+        @if(count($choices)==0)
+         <a>
+          <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#interestInfo" style="margin-top: 10px;cursor:pointer;"
+            aria-hidden="true"></i>
+        </a>
+        @endif
+
+        </br>
+           <p>Interest:
+             @foreach($choices as $choice)
+             <ol><strong>{{ $choice->profession }}</strong></ol>
+             @endforeach
+        </p>
+        </br>
+
+        
+
+      <!--Interest information modal start -->
+        <div class="modal fade" id="interestInfo" role="dialog" style="margin-top:12%; margin-left: -30%;">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3>Interest Information</h3>
+              </div>
+
+              <form class="form-horizontal"  method="POST" action="/desire">
+                        {{ csrf_field() }}
+
+              <div class="modal-body">
+               <div class="form-group{{ $errors->has('desires') ? ' has-error' : '' }}">
+                <label for="desires" class="col-md-4 control-label">interests</label>
+
+                <div class="col-md-6">
+                     
+                        <select class="form-control" name="desire[]"  value="{{ old('desires') }}"  multiple="multiple" id="desire">
+                            <span class="caret"></span>
+                            @foreach( $desires as $desire)
+                            <option>{{ $desire }}</option>
+                            @endforeach
+                        </select>
+
+                    @if ($errors->has('choices'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('choices') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+         </div>
+           <div class="modal-footer">
+              <div class="col-md-6 col-md-offset-4 pull-right">
+                 <button type="submit" class="btn btn-primary">
+                   Done
+                 </button>
+              </div>
+          </div>
+
+           </form>
+            </div>
+
+          </div>
+        </div>
+        </section>
+     
+        <!--Interest modal end here-->
+      
     </div>
 
     <div class="column middle">
@@ -902,6 +978,14 @@
   });
 </script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+ <script>
+ $(document).ready(function(){
+   $('#desire').select2({
+       placeholder:"selectinterest",
+       tags:true,
+   });
+ });
+ </script>
 
 @endsection

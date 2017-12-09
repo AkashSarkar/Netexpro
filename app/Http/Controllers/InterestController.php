@@ -19,6 +19,22 @@ class InterestController extends Controller
 
         return view('interests.create');
     }
+    public function insertdesire(Request $request){
+
+        if($request['desire']){
+            for($i=0;$i<count($request['desire']);$i++){
+                $interest = Interest::create([
+                    'profession' => $request['desire'][$i],
+                    'interest_priority' => 0,
+                    'user_id'=>Auth::user()->id
+                ]);
+            }
+        }
+        if( $interest){
+            return back();
+        }
+
+    }
 
     /**
      * Show the form for creating a new resource.

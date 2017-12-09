@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('jobpost', 'JobpostController');
     Route::resource('availableforjob', 'AvailableForJobController');
 
+    Route::post('/desire','InterestController@insertdesire');
+
     Route::post('/rating', 'RatingController@store');
 
     Route::get('/rating/showlikedPost','RatingController@isLiked');
