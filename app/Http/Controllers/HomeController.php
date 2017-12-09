@@ -72,16 +72,6 @@ class HomeController extends Controller
             
             $jobpost=json_decode($jobpost,true);
           
-     
-            $userpost= DB::table('users')
-            ->join('interests', 'users.id', '=', 'interests.user_id')
-            ->join('posts', 'users.id', '=', 'posts.user_id')
-            ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
-           // ->join('comments', 'users.id','=','comments.user_id')
-            ->orderBy('posts.created_at','desc')
-            ->get();
-          
-            $userpost=json_decode($userpost,true); 
 
             $userComment = DB::table('comments')
             ->join('users', 'users.id', '=', 'comments.user_id')
@@ -121,6 +111,7 @@ class HomeController extends Controller
                 ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
                 ->where([
                     ['visibilities_type','=',$connection_type],
+                    ['interest_priority','=','10'],
                     ['posts.created_at','>',DB::raw('(select max(posts.created_at)-interval 1 minute)')]
                 ])
                 ->orderBy('posts.created_at','desc')
@@ -154,6 +145,7 @@ class HomeController extends Controller
                 ->join('visibilities', 'posts.post_id', '=', 'visibilities.post_id')
                 ->where([
                     ['visibilities_type','=',$interest->industry],
+                    ['interest_priority','=','10'],
                     ['posts.created_at','>',DB::raw('(select max(posts.created_at)-interval 30 minute)')]
                 ])
                 ->orderBy('posts.created_at','desc')
@@ -184,6 +176,7 @@ class HomeController extends Controller
                             users.lastname,
                             users.cover_pic,
                             users.p_pic,
+                            posts.row_no,
                             posts.description,
                             posts.url,
                             posts.post_type,
@@ -205,6 +198,7 @@ class HomeController extends Controller
                             users.lastname,
                             users.cover_pic,
                             users.p_pic,
+                            posts.row_no,
                             posts.description,
                             posts.url,
                             posts.post_type,
@@ -248,6 +242,7 @@ class HomeController extends Controller
                             users.lastname,
                             users.cover_pic,
                             users.p_pic,
+                            posts.row_no,
                             posts.description,
                             posts.url,
                             posts.post_type,
@@ -268,6 +263,7 @@ class HomeController extends Controller
                             users.lastname,
                             users.cover_pic,
                             users.p_pic,
+                            posts.row_no,
                             posts.description,
                             posts.url,
                             posts.post_type,
@@ -305,7 +301,7 @@ class HomeController extends Controller
                 //$post = array_merge( $industry_posts->toArray(), $profession_posts->toArray(),$education_posts->toArray());
                 $collection = $industry_posts->merge($profession_posts);
                 $post=$collection->merge($education_posts);
-               //dd($post);
+              // dd($post);
                 
             }
             $user_rate_info=DB:: select('SELECT user_id,post_id,p_pic,firstname,lastname,ratings.created_at 
@@ -323,9 +319,6 @@ class HomeController extends Controller
     public function store(Request $request)
     {
        
-
-    
-    
     }
 
 

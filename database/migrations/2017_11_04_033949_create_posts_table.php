@@ -28,6 +28,8 @@ class CreatePostsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');            
             $table->timestamps();
         });
+
+        DB::statement('ALTER Table posts add row_no INTEGER NOT NULL UNIQUE AUTO_INCREMENT;');
     }
 
     /**
