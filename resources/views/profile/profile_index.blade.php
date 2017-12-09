@@ -446,12 +446,13 @@ $industries = array(
         <section style="background-color: white; border-width:5px;  
              border-style:outset; padding: 10px; box-shadow: 10px 10px 5px #888888;">
         <!--Professional information start -->
-        @if(count($choices)==0)
+       {{--@if(count($choices)==0)--}} 
          <a>
           <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#interestInfo" style="margin-top: 10px;cursor:pointer;"
             aria-hidden="true"></i>
         </a>
-        @endif
+        
+       {{-- @endif--}}
 
         </br>
            <p>Interest:

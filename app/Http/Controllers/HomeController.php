@@ -95,11 +95,12 @@ class HomeController extends Controller
 
             $images=Imagepost::all();
             
-            $interest=$interest= DB::table('interests')
+            $interest= DB::table('interests')
             ->where([
             ['user_id', '=', Auth::user()->id],
             ['interest_priority','=',10]
-            ])->first();;
+            ])->first();
+            //dd($interest);
             
             //showing Users Posts according to users connection
             $post=null;
@@ -308,7 +309,7 @@ class HomeController extends Controller
                 $collection = $industry_posts->merge($profession_posts);
                 $post=$collection->merge($education_posts);
                 $post=$post->sortByDesc('created_at');
-               //dd($post);
+               //dd();
                 
             }
             $user_rate_info=DB:: select('SELECT user_id,post_id,p_pic,firstname,lastname,ratings.created_at 
