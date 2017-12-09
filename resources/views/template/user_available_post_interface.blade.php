@@ -68,8 +68,8 @@
 
                     @if($useravailablepost['user_id'] == Auth::user()->id)
                     <div class="dropdown ">
-                      <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
-                      </button>
+                    <button class="pull-right dropdown-toggle   btn btn-link" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    </button>
                       <ul class="dropdown-menu pull-right">
                         <li>
 

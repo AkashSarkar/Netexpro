@@ -35,13 +35,17 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('jobpost', 'JobpostController');
     Route::resource('availableforjob', 'AvailableForJobController');
 
+    Route::post('/desire','InterestController@insertdesire');
+
     Route::post('/rating', 'RatingController@store');
+
     Route::get('/rating/showlikedPost','RatingController@isLiked');
     Route::get('/rating/getdata', 'RatingController@getdata');
    // Route::get('profile', 'ProfileController@index');
   //  Route::post('profile', 'ProfileController@update_avatar');
     Route::resource('post', 'PostController');
     Route::resource('comment', 'CommentsController');
+    Route::resource('applicants', 'ApplicantsController');
 });
 
 

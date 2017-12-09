@@ -16,8 +16,9 @@
             </div>
             <div class="media-body">
               @if($jobpost['user_id'] == Auth::user()->id)
+              
               <div class="dropdown ">
-                <button class="glyphicon glyphicon-chevron-down pull-right dropdown-toggle" type="button" data-toggle="dropdown">
+                <button class="pull-right dropdown-toggle   btn btn-link" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                 </button>
                 <ul class="dropdown-menu pull-right">
                   <li>
@@ -42,7 +43,28 @@
                 </ul>
               </div>
               @endif
-
+              <!--Getting Applicant Value-->
+              <?php $checkApplicant=0?>
+              @if($jobpost['user_id'] != Auth::user()->id )
+              @foreach($applicants as $applicant)
+                @if($applicant->jobpost_id == $jobpost['jobpost_id'])
+                    @if($applicant->user_id ==  Auth::user()->id )
+                    <?php $checkApplicant=$checkApplicant+1;?>
+                    <button type="" class="btn btn-success pull-right btn-sm">Applied</button>
+                    @break;
+                    @endif
+                @endif
+              @endforeach
+              @if($checkApplicant==0)
+                    <form method="post" action="{{ route('applicants.store') }}">
+                                {{ csrf_field() }}
+                            <input type="hidden" name="jobpost_id" method="PUT" value="{{$jobpost['jobpost_id']}}">
+                            <button type="" class="btn btn-primary pull-right btn-sm">Apply now</button>
+                    </form>
+              @endif
+              @endif
+              <!--End of getting Applicant Value-->
+  
               <a href="#" class="anchor-username">
                 <h4 class="media-heading"> {{$jobpost['firstname']}}</h4>
               </a>
@@ -93,6 +115,12 @@
       </p>
 
     </section>
+    <!--Applicants List-->
+    @if($jobpost['user_id'] == Auth::user()->id )
+    @include('template._applicantsModal')
+    @endif      
+
+    <!--End Applicants list-->
     <hr>
     <section class="post-footer">
       <div class="row">

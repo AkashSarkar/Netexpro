@@ -89,12 +89,25 @@ class ProfileController extends Controller
             ->orderBy('comments.created_at','desc')
             ->get();
       
-      $interest= Interest::find(Auth::user()->id);
+        $interest= DB::table('interests')
+        ->where([
+        ['user_id', '=', Auth::user()->id],
+        ['interest_priority','=',10]
+        ])->first();
+
+        $choices= DB::table('interests')
+        ->where([
+        ['user_id', '=', Auth::user()->id],
+        ['interest_priority','=',0]
+        ])->get();
+        //dd($choices);
+
+
       $user_rate_info=DB:: select('SELECT user_id,post_id,p_pic,firstname,lastname,ratings.created_at 
       FROM users  join ratings 
       WHERE ratings.user_id= users.id  ');
 
-      return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest, 'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 'jobComment'=>$jobComment, 
+      return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest,'choices'=>$choices ,'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 'jobComment'=>$jobComment, 
         'useravailableComment'=>$useravailableComment,'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
           
       
