@@ -18,7 +18,7 @@ class CreateInterestsTable extends Migration
             $table->increments('id');
             $table->string('interest_type')->nullable();
             $table->string('profession');
-            $table->string('industry');
+            $table->string('industry')->nullable();
             $table->integer('interest_priority')->unsigned()->default(0)->nullable();
             $table->integer('user_id')->unsigned();
 

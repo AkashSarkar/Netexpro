@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Interest;
 use Illuminate\Http\Request;
@@ -22,6 +22,15 @@ class InterestController extends Controller
     public function insertdesire(Request $request){
 
         if($request['desire']){
+
+            $choices= DB::table('interests')
+            ->where([
+            ['user_id', '=', Auth::user()->id],
+            ['interest_priority','=',0]
+            ])->get();
+
+           if(count($choices)==0)
+           {    
             for($i=0;$i<count($request['desire']);$i++){
                 $interest = Interest::create([
                     'profession' => $request['desire'][$i],
@@ -29,6 +38,25 @@ class InterestController extends Controller
                     'user_id'=>Auth::user()->id
                 ]);
             }
+           }
+           else{
+               $delete = DB::table('interests')
+               ->where([
+               ['user_id', '=', Auth::user()->id],
+               ['interest_priority','=',0]
+               ])->delete();
+
+               if($delete){
+                for($i=0;$i<count($request['desire']);$i++){
+                    $interest = Interest::create([
+                        'profession' => $request['desire'][$i],
+                        'interest_priority' => 0,
+                        'user_id'=>Auth::user()->id
+                    ]);
+                }
+               }
+              }
+          
         }
         if( $interest){
             return back();
