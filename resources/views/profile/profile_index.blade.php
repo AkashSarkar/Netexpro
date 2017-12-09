@@ -1,11 +1,36 @@
-@extends('layouts.app') @section('page-title') {{ $user->firstname }} {{ $user->lastname }} @endsection @section('content')
+@extends('layouts.app') 
+
+@section('page-title') {{ $user->firstname }} {{ $user->lastname }} @endsection 
+
+@section('content')
 <?php
- $desires = array(
+$educations=array(
+    "United International University",
+    "Ahsanullah University of Science and technology",
+    "BUET",
+    "DU",
+    "NSU"
+);
+
+$desires = array(
     "CSE",
     "EEE",
     "BBA",
     "MBA",
     "MSCSE"
+);
+
+$professions = array(
+    "CSE",
+    "EEE",
+    "BBA",
+    "MBA",
+    "MSCSE"
+);
+$industries = array(
+    "Software",
+    "IT",
+    "Hardware"
 );
 ?>
 
@@ -60,8 +85,9 @@
 <div class="container">
   <div class="row">
     <div class="column side">
+     <!--Personal information start-->
       <section style="background-color: white; border-width:5px;  
-    border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
+                      border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
 
         <a>
           <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#personalInfoModal" style="margin-top: 10px;cursor:pointer"
@@ -87,10 +113,14 @@
         <p>Location:
           <strong> {{ $user->location }} </strong>
         </p>
-
+       
         <!--Modal for user personal information start-->
-        <div class="modal fade" id="personalInfoModal" role="dialog" style="margin-top:12%; margin-left: -30%;">
-          <div class="modal-dialog" style="width: 400px">
+        <div class="modal fade " id="personalInfoModal" role="dialog">
+          <div class="modal-dialog ">
+       
+         <form class="form-horizontal"  method="post" action="{{ route('profile.update',[Auth::user()->id]) }}">
+            {{ csrf_field() }}
+            <input type="hidden" name="_method" value="put">
 
             <!-- Modal content-->
             <div class="modal-content">
@@ -101,110 +131,320 @@
                 </h3>
               </div>
 
-              <div class="modal-body">
+              <form class="form-horizontal"  method="post" action="{{ route('profile.update',[Auth::user()->id]) }}">
+                {{ csrf_field() }}
 
-                <li>Education:
-                  <strong> {{ $user->education }} </strong>
-                </li>
-                <li>Email:
-                  <strong> {{ $user->email }} </strong>
-                </li>
-                <li>Phone:
-                  <strong> {{ $user->phone_no }} </strong>
-                </li>
-                <li>Sex:
-                  <strong> {{ $user->gender }} </strong>
-                </li>
-                <li>Birth date:
-                  <strong> {{ $user->dob }} </strong>
-                </li>
-                <li>Location:
-                  <strong> {{ $user->location }} </strong>
-                </li>
-              </div>
+              <input type="hidden" name="_method" value="put">
+
+                <div class="modal-body">
+                      <div class="panel-body">
+                  
+                          <!-- First Name -->
+                        <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
+                            <label for="firstname" class="col-md-4 control-label">Firstname</label>
+
+                            <div class="col-md-6">
+                                <input placeholder="firstname" id="firstname" type="text" class="form-control" 
+                                name="firstname" value="{{ $user->firstname }}"  autofocus>
+
+                                @if ($errors->has('firstname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                         <!-- Last Name -->
+                         <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
+                            <label for="lastname" class="col-md-4 control-label">LastName</label>
+
+                            <div class="col-md-6">
+                                <input placeholder="lastname" id="lastname" type="text" class="form-control" 
+                                name="lastname" value="{{ $user->lastname }}"  autofocus>
+
+                                @if ($errors->has('lastname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Education -->
+                        <div class="form-group{{ $errors->has('education') ? ' has-error' : '' }}">
+                            <label for="education" class="col-md-4 control-label">Education</label>
+
+                            <div class="col-md-6">
+                               <!-- <input placeholder="Institution Name" id="education" type="text" class="form-control" name="education" value="{{ $user->education }}" autofocus>-->
+
+                               <select class="form-control" name="education"  value="{{ old('education')}}" >
+                                 <span class="caret"></span>
+                                 <option>{{ $user->education }}</option>
+                                 @foreach( $educations as $education)
+                                 <option>{{ $education }}</option>
+                                 @endforeach
+                                </select>
+
+                                @if ($errors->has('education'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('education') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Email-->
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" >
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Phone number -->
+                        <div class="form-group{{ $errors->has('phone_no') ? ' has-error' : '' }}">
+                            <label for="phone_no" class="col-md-4 control-label">Phone Number</label>
+
+                            <div class="col-md-6">
+                                <input placeholder="Optional" id="phone_no" type="text" class="form-control" 
+                                name="phone_no" value="{{ $user->phone_no }}"  autofocus>
+
+                                @if ($errors->has('phone_no'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone_no') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <!-- Gender -->
+                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                            <label for="gender" class="col-md-4 control-label">Gender<span class="required">*</span></label>
+
+                            <div class="col-md-6">
+                                <select placeholder="Gender" id="gender" type="text" class="form-control" 
+                                name="gender" value="{{ $user->gender }}" autofocus>
+                                @if ($user->gender=="Female")
+                                <option>Female</option>
+                                <option>Male</option>
+                                
+                                @elseif ($user->gender=="Male")
+                                <option>Male</option>
+                                <option>Female</option>
+                               
+                                @else
+                                <option>Select-Gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                @endif
+                               
+
+                                
+                                   
+                                </select>
+
+                                @if ($errors->has('gender'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                       
+                        <!-- Date of birth -->
+                        <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
+                            <label for="dob" class="col-md-4 control-label">Date of Birth <span class="required">*</span> </label>
+
+                            <div class="col-md-6">
+                                <input id="dob" type="date" class="form-control" name="dob" value="{{ $user->dob }}" autofocus>
+
+                                @if ($errors->has('dob'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('dob') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                         
+                         <!-- location -->
+                        <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                            <label for="location" class="col-md-4 control-label">Location <span class="required">*</span> </label>
+
+                            <div class="col-md-6">
+                                <input placeholder="location" id="location" type="text" class="form-control" 
+                                name="location" value="{{ $user->location }}"  autofocus>
+
+                                @if ($errors->has('location'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('location') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        
+                         <!-- Availability-->
+                        <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                            <label for="location" class="col-md-4 control-label">Availability<span class="required">*</span> </label>
+
+                            <div class="col-md-6">
+                                <select placeholder="available for a job??" id="available_for_job" type="text" class="form-control" 
+                                name="available_for_job" value="{{ $user->available_for_job }}" autofocus>
+                                @if ($user->available_for_job=="yes")
+                                <option>Yes</option>
+                                <option>No</option>
+                                
+                                @elseif ($user->available_for_job=="No")
+                                <option>No</option>
+                                <option>Yes</option>
+                               
+                                @else
+                                <option>Select-Availability</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                                @endif
+                                </select>
+
+                                @if ($errors->has('available_for_job'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('available_for_job') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                </div>
 
               <div class="modal-footer">
-                <button type="button" class="btn btn-azure pull-right" data-dismiss="modal">Close</button>
-                <ul class="nav nav-pills pull-left">
-                  <a href="/profile/{{$user->id}}/edit">Update personal Information
-                    <span>
-                      <i class="fa fa-pencil"></i>
-                  </a>
-                  </span>
-                </ul>
+                <div class="col-md-6 col-md-offset-4 pull-right">
+                   <button type="submit" class="btn btn-primary">
+                     Update
+                   </button>
+                </div>
               </div>
-            </div>
 
-          </div>
+            </div>
+          </form>
+         </div>
         </div>
-        <!--end Modal for user personal information-->
-        <!-- User personal information end -->
       </section>
+        <!--end Modal for user personal information-->
+        <!--Personal information end-->
+     
+
       </br>
+
       <section style="background-color: white; border-width:5px;  
-    border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
-        <!--Professional information start -->
+                      border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
+          <!--Professional information start -->
 
-        <a>
-          <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#professionalInfoModal" style="margin-top: 10px;cursor:pointer;"
-            aria-hidden="true"></i>
-        </a>
-        </br>
-        <p>Profession:
-          <strong> {{ $interest->profession }} </strong>
-        </p>
-        <p>Industry:
-          <strong> {{ $interest->industry }} </strong>
-        </p>
-        </br>
+          <a>
+            <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#professionalInfoModal" style="margin-top: 10px;cursor:pointer;"
+              aria-hidden="true"></i>
+          </a>
+          </br>
+          <p>Profession:
+            <strong> {{ $interest->profession }} </strong>
+          </p>
+          <p>Industry:
+            <strong> {{ $interest->industry }} </strong>
+          </p>
+          </br>
 
 
-        <!--Professional information modal start -->
-        <div class="modal fade" id="professionalInfoModal" role="dialog" style="margin-top:12%; margin-left: -30%;">
-          <div class="modal-dialog" style="width: 400px">
+          <!--Professional information modal start -->
+          <div class="modal fade" id="professionalInfoModal" role="dialog">
+            <div class="modal-dialog" >
+             
+            <form class="form-horizontal"  method="post" action="{{ route('interests.update',[Auth::user()->id]) }}">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3>Professional Information</h3>
-              </div>
+            {{ csrf_field() }}
 
-              <div class="modal-body">
+              <input type="hidden" name="_method" value="put">
 
-                <li>Profession:
-                  <strong> {{ $interest->profession }} </strong>
-                </li>
-                <li>Industry:
-                  <strong> {{ $interest->industry }} </strong>
-                </li>
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3>Professional Information</h3>
+                </div>
+                     <div class="modal-body" style=" margin-top: 10px; ">
+                         <div class="form-group{{ $errors->has('profession') ? ' has-error' : '' }}">
+                              <label for="profession" class="col-md-4 control-label">Profession<span class="required">*</span></label>
 
-              </div>
+                              <div class="col-md-6">
 
-              <div class="modal-footer">
-                <button type="button" class="btn btn-azure pull-right" data-dismiss="modal">Close</button>
-                <ul class="nav nav-pills pull-left">
-                  <a href="/interests/{{$interest->id}}/edit">Update professional Information
-                    <span>
-                      <i class="fa fa-pencil"></i>
-                  </a>
-                  </span>
-                </ul>
-              </div>
+                                  <select class="form-control" name="profession"  value="{{ old('profession')}}" >
+                                   <span class="caret"></span>
+                                   <option>{{ $interest->profession }}</option>
+                                   @foreach( $professions as $profession)
+                                   <option>{{ $profession }}</option>
+                                   @endforeach
+                                  </select>
+
+
+                                  @if ($errors->has('profession'))
+                                      <span class="help-block">
+                                          <strong>{{ $errors->first('profession') }}</strong>
+                                      </span>
+                                  @endif
+                              </div>
+                          </div>
+
+
+                          <div class="form-group{{ $errors->has('industry') ? ' has-error' : '' }}">
+                              <label for="industry" class="col-md-4 control-label">Industry<span class="required">*</span></label>
+
+                              <div class="col-md-6">
+                                <!--  <input id="industry" type="text" class="form-control" name="industry" value="{{ $interest->industry }}" required autofocus>-->
+                                 <select class="form-control" name="industry"  value="{{ old('industry')}}" >
+                                   <span class="caret"></span>
+                                   <option>{{ $interest->industry }}</option>
+                                   @foreach( $industries as $industry)
+                                   <option>{{ $industry }}</option>
+                                   @endforeach
+                                  </select>
+
+                                  @if ($errors->has('industry'))
+                                      <span class="help-block">
+                                          <strong>{{ $errors->first('industry') }}</strong>
+                                      </span>
+                                  @endif
+                              </div>
+                          </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="col-md-6 col-md-offset-4 pull-right">
+                           <button type="submit" class="btn btn-primary">
+                            Update
+                           </button>
+                        </div>
+                    </div>
+               </div>
+            </form>
+
             </div>
-
           </div>
-        </div>
+         
         </section>
         <!--Professional information modal end -->
         <!--Professional information end -->
         
-
+        </br>
 
         <!--Interest modal start here-->
  
         <section style="background-color: white; border-width:5px;  
-             border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
+             border-style:outset; padding: 10px; box-shadow: 10px 10px 5px #888888;">
         <!--Professional information start -->
         @if(count($choices)==0)
          <a>
@@ -224,7 +464,7 @@
         
 
       <!--Interest information modal start -->
-        <div class="modal fade" id="interestInfo" role="dialog" style="margin-top:12%; margin-left: -30%;">
+        <div class="modal fade" id="interestInfo" role="dialog">
           <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -237,7 +477,7 @@
               <form class="form-horizontal"  method="POST" action="/desire">
                         {{ csrf_field() }}
 
-              <div class="modal-body">
+              <div class="modal-body" style="margin-top: 10px;">
                <div class="form-group{{ $errors->has('desires') ? ' has-error' : '' }}">
                 <label for="desires" class="col-md-4 control-label">interests</label>
 
@@ -261,7 +501,7 @@
            <div class="modal-footer">
               <div class="col-md-6 col-md-offset-4 pull-right">
                  <button type="submit" class="btn btn-primary">
-                   Done
+                  Update
                  </button>
               </div>
           </div>
