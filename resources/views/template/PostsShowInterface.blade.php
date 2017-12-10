@@ -39,6 +39,7 @@
 
               </div>
               @endif
+              
 
               <a href="#" class="anchor-username">
                 <h4 class="media-heading"> {{$userpost->firstname}}</h4>

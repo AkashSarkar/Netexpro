@@ -22,6 +22,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/home/get_post', 'HomeController@get_post');
     Route::post('/home', 'HomeController@store');
     Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::get('/public_view', 'ProfileController@public_view');
     Route::get('/interests', 'InterestController@update'); 
     Route::get('/jobpost', 'JobpostController@index')->name('jobpost');
     Route::get('/availableforjob', 'AvailableForJobController@index')->name('availableforjob');
@@ -43,10 +44,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/rating/showlikedPost','RatingController@isLiked');
     Route::get('/rating/getdata', 'RatingController@getdata');
    // Route::get('profile', 'ProfileController@index');
-  //  Route::post('profile', 'ProfileController@update_avatar');
+   // Route::post('profile', 'ProfileController@update_avatar');
     Route::resource('post', 'PostController');
     Route::resource('comment', 'CommentsController');
     Route::resource('applicants', 'ApplicantsController');
+    //Route::any('/search', 'JobpostController@search');
 });
 
 

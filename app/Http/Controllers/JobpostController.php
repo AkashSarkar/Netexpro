@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class JobpostController extends Controller
 {
@@ -47,15 +48,22 @@ class JobpostController extends Controller
         'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+   /* public function search(Request $request)
     {
-        //
-    }
+            $q = Input::get ( 'q' );
+
+            $profession = Jobpost::where('profession','LIKE','%'.$q.'%')->get();
+
+            if(count($profession) > 0)
+                return view('search')->withDetails($profession)->withQuery ( $q );
+            else return view ('search')->withMessage('No Details found. Try to search again !');
+    } */
 
     /**
      * Store a newly created resource in storage.

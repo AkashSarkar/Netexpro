@@ -460,6 +460,8 @@ $industries = array(
              <ol><strong>{{ $choice->profession }}</strong></ol>
              @endforeach
         </p>
+
+        
         </br>
 
         

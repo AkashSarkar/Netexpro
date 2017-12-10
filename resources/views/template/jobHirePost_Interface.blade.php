@@ -1,9 +1,29 @@
 <!--job hire post-->
 
+
+
 <div class="col-md-7 col-sm-7 col-lg-7 show_home_post" id="h_post">
+
+<!--Search 
+{{-- 
+<form action="/search" method="POST" role="search">
+    {{ csrf_field() }}
+    <div class="input-group">
+        <input type="text" class="form-control" name="q"
+            placeholder="Search users"> <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
+</form>
+--}} -->
+
 @foreach($jobpost as $jobpost)
 <div class="panel panel-default">
   <div class="panel-body">
+
+
     <section class="post-heading">
       <div class="row">
         <div class="col-md-12">
@@ -224,3 +244,18 @@
 @endforeach
 </div>
 <!--end job post-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
