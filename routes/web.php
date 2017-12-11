@@ -22,11 +22,12 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/home/get_post', 'HomeController@get_post');
     Route::post('/home', 'HomeController@store');
     Route::get('/profile', 'ProfileController@index')->name('profile');
-    Route::get('/public_view', 'ProfileController@public_view');
+    
     Route::get('/interests', 'InterestController@update'); 
     Route::get('/jobpost', 'JobpostController@index')->name('jobpost');
     Route::get('/availableforjob', 'AvailableForJobController@index')->name('availableforjob');
-    //Route::delete('profile/{post_id}','PostController@destroy1')->name('post');
+    
+   
 
     //Route::post('/post', 'PostController@store');
  
@@ -48,6 +49,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('post', 'PostController');
     Route::resource('comment', 'CommentsController');
     Route::resource('applicants', 'ApplicantsController');
+     Route::resource('/public_view/{id?}', 'PublicprofileController');
     //Route::any('/search', 'JobpostController@search');
 });
 

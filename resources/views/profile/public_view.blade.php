@@ -34,16 +34,10 @@ $industries = array(
 );
 ?>
 
-<div class="fb-profile">
-  <div>
-    <img align="left" class="fb-image-lg" src="/uploads/cover/{{ $user->cover_pic }}" alt="Profile image example" style="height:400px;width:100%;"
-    />
-  </div>
-  <!--End of Cover image-->
-
+<div style="margin-top: 80px;">
   <img align="left" class="fb-image-profile thumbnail" src="/uploads/profile/{{ $user->p_pic }}" alt="Profile image example"
   />
-  <div class="fb-profile-text">
+  <div class="fb-profile-text" style="width: auto;">
     <h1 style=" font: italic bold 30px/30px Georgia, serif;">{{ $user->firstname }} {{ $user->lastname }} </h1>
     <p>{{ $interest->profession }}</p>
     <p>Projects done by {{ $user->firstname }} :
@@ -51,15 +45,15 @@ $industries = array(
     </p>
 
   </div>
-
+</div>
 
 
  <!--Hire button will be here -->
-  <div class="row" style="padding-top: 10px;">
+  <div class="row" style="padding-right: 20px;">
     <div class="col-md-4 col-sm-4 col-lg-4 pull-right">
 
       <button type="submit" class="btn btn-primary" style="margin-left: 200px;" data-toggle="tooltip" data-placement="bottom" title=' Job Activity Log'>
-        <a href="{{ url('availableforjob') }}" style="color: inherit; text-decoration: inherit;">
+        <a href="#" style="color: inherit; text-decoration: inherit;">
            Hire </a>
       </button>
 
@@ -157,9 +151,9 @@ $industries = array(
 
     <div class="column middle">
       
-      <div style="font-style: italic; opacity: .6;">
+      <div class="col-md-offset-4" style="font-style: italic; opacity: .6;">
       @if(count($posts)==null)
-        <h3>"Nothing to show"</h3>
+        <h3>"No project to show"</h3>
       @endif
       </div>
       <!-- Post show start -->
@@ -174,7 +168,7 @@ $industries = array(
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="40" height="40" alt="...">
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $user->p_pic }}" width="40" height="40" alt="...">
                     </a>
                   </div>
                   <div class="media-body">
@@ -357,7 +351,8 @@ $industries = array(
                     <!-- Shows Rate text and icon if post type is Project-->
                     @if($userpost->post_type=="project")
                     <!--<a href="#" data-toggle="modal" data-target="#starModal"><i class="glyphicon glyphicon-star"></i>Rate</a>-->
-                    <?php $rate=0;?> @if($isLiked) @foreach($isLiked as $like) @if($like['user_id']== Auth::user()->id && $userpost->post_id==$like['post_id'])
+                    <?php $rate=0;?> @if($isLiked) @foreach($isLiked as $like) 
+                    @if($like['user_id']== Auth::user()->id && $userpost->post_id==$like['post_id'])
                     <a>
                       <i class="active fa fa-star" aria-hidden="true"></i>
                     </a>
@@ -440,7 +435,78 @@ $industries = array(
           </section>
 
           <!--comment show-->
-          @include('template.Comment_Interface')
+         <section>
+             <!--Create Comment start -->
+                  <div class="comment-form">
+                    <div class="comment">
+                      <div class="media">
+                        <div class="media-left">
+                          <a href="#">
+                            <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user->p_pic}}" width="32" height="32" alt="...">
+                          </a>
+                        </div>
+
+                        <div class="media-body">
+                          <form method="POST" action="{{ route('comment.store') }}">
+                            {{ csrf_field() }}
+                              <input type="hidden" name="commentable_type" value="App\Post">
+                              <input type="hidden" name="commentable_id" value="{{ $userpost->post_id }}">
+
+                              <div class="form-group">
+                                <input class="form-control" style="border-radius: 20px;" type="text" name="body" placeholder="Your comments" />
+                                 <button type="submit" style="float: right; margin: -34px 0px 0 0; height: 33px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">Comment</button>
+                              </div>
+                              
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Create Comment end -->
+
+               <h3 class="comment-title">Comments</h3>
+
+                  <!--Comment show start -->
+           @foreach($userComment as $comment) 
+              @if( $userpost->post_id==$comment->commentable_id)
+                 <div class="comment-wrapper">
+                 
+                  <div class="comments-list">
+                    <ul class="comments-holder-ul">
+                      <li class="comment-holder" id="_1">
+                        <div class="user-img">
+                           <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$comment->p_pic}}" width="32" height="32" alt="...">
+                        </div>
+
+                        <div class="comment-body">
+                            <h4 class="username-field">
+                            {{ $comment->firstname }}</h4>
+                            <span class="anchor-time">{{$comment->created_at}}</span>
+                           
+                            <div class="comment-text">
+                                {{$comment->body}}
+                            </div>
+                            <a href="#" class="anchor-time" style="margin-left:40px ;">Reply</a>
+                        </div>
+
+                        {{-- <div class="comment-buttons-holder">
+                          <ul>
+                            <li class="delete-btn">X</li>
+                          </ul>
+                        </div> --}}
+                      </li>
+                    </ul>
+
+                  </div>
+             </div>
+                  
+              @endif
+            @endforeach
+          <!--Comment show end-->
+
+
+         </section> 
+   
           <!--comment end-->
 
 

@@ -8,6 +8,9 @@
                           <a href="#">
                             <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="32" height="32" alt="...">
                           </a>
+       
+
+
                         </div>
 
                         <div class="media-body">

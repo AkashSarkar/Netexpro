@@ -42,7 +42,7 @@
                                             </div>
                                             <div class="comment-text">
                                                 <strong>
-                                                    <a href="">{{$applicant_info->firstname}} {{$applicant_info->lastname}}</a>
+                                                    <a href="/public_view/{{$applicant_info->user_id}}">{{$applicant_info->firstname}} {{$applicant_info->lastname}}</a>
                                                 </strong>
                                                 <p></p>
                                                 <span class="date sub-text">{{$applicant_info->created_at}}</span>

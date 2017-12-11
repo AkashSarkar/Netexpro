@@ -39,11 +39,13 @@
 
               </div>
               @endif
-              
 
-              <a href="#" class="anchor-username">
-                <h4 class="media-heading"> {{$userpost->firstname}}</h4>
-              </a>
+              @if($userpost->user_id == Auth::user()->id)
+               <h4 class="media-heading"><a href="{{ url('profile') }}" class="anchor-username"> {{$userpost->firstname}}  </a></h4>
+              @else
+               <h4 class="media-heading"><a href="/public_view/{{$userpost->user_id}} " class="anchor-username"> {{$userpost->firstname}}  </a></h4>
+              @endif
+              
 
               <a href="#" class="anchor-time">{{ $userpost->created_at }}</a>
             </div>
