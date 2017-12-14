@@ -19,12 +19,32 @@ class JobpostController extends Controller
     public function index()
     {
          $user= User::find(Auth::user()->id);  
-            $jobpost=DB::table('users')
+            $jobposts=DB::table('users')
                          ->join('jobposts', function ($join) {
-                          $join->on('users.id', '=', 'jobposts.user_id');
-                        })->get();
+                          $join->on('users.id', '=', 'jobposts.user_id')
+                          ->where('jobposts.user_id', '!=', Auth::user()->id);
+                        })
+                        ->join('interests',function ($join) {
+                            $join->on('interests.profession', '=', 'jobposts.profession')
+                            ->where('interests.user_id', '=', Auth::user()->id);
+                          })
+                          ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+                          ->groupBy('jobpost_id')
+                          ->orderBy('jobposts.created_at','desc')
+                        ->get();
+            //out of network hireing people
+            $user_job_hire_post=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '=', Auth::user()->id);
+             })
+             ->orderBy('jobposts.created_at','desc')
+             ->get();
             
-           
+             $jobpost=$jobposts->merge($user_job_hire_post);
+             $jobpost=$jobpost->sortByDesc('created_at');
+            
 
 
             $jobComment = DB::table('comments')
