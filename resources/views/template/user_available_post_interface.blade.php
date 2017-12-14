@@ -1,55 +1,5 @@
-@extends('layouts.app') 
-
-@section('page-title') Activity Log @endsection 
-
-
-@section('content')
-
-<div class="container">
-  <div class="row content">
-
- <!--side bar content-->
-
-    <div class="col-md-3 col-sm-3 bg-light sidebar">
-      <nav class="nav-sidebar">
-        <div class="collapse navbar-collapse" id="side-navbar-collapse">
-          <ul class="nav">
-            <li>
-              <!--profile button-->
-              <div class="media button_profile button_m " id="bp" style="padding-left: 35px;">
-                <a href="{{ url('profile') }}">
-                  <div class="media-left ">
-                    <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="20"
-                      height="20" alt="...">
-                  </div>
-                  <div class="media-body" data-toggle="tooltip" data-placement="bottom" title="{{$user->firstname }} {{$user->lastname }}">
-                    <h5 class="media-heading"> {{$user->firstname }} {{$user->lastname }}</h5>
-                  </div>
-                </a>
-              </div>
-              <!--end profile button-->
-
-            </li>
-           
-
-             <section>
-              <button type="submit" class="button_connection button_m  btn" data-toggle="tooltip"
-              data-placement="bottom" title= ' All Jobposts'>
-             <a href="{{ url('jobpost') }}" style="color: inherit; text-decoration: inherit; margin-left: 5px; padding-left: 20px;">
-             <i class="fa fa-briefcase" aria-hidden="true"></i>  All Jobposts</a></button>
-            <br>
-            </section>
-
-          </ul>
-
-        </div>
-      </nav>
-    </div>
-
-
 
 <!--user available interface-->
-
 <div class="col-md-7 col-sm-7 col-lg-7 show_home_post" id="h_post">
 @foreach($useravailablepost as $useravailablepost)
       <div class="panel panel-default">
@@ -60,13 +10,13 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$useravailablepost['p_pic']}}" width="40" height="40"
+                      <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$useravailablepost->p_pic}}" width="40" height="40"
                         alt="...">
                     </a>
                   </div>
                   <div class="media-body">
 
-                    @if($useravailablepost['user_id'] == Auth::user()->id)
+                    @if($useravailablepost->user_id == Auth::user()->id)
                     <div class="dropdown ">
                     <button class="pull-right dropdown-toggle   btn btn-link" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                     </button>
@@ -80,7 +30,7 @@
                                document.getElementById('delete-form1').submit();
                               }"> Delete </a>
 
-                          <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost['useravailablepost_id']) }}" method="POST"
+                          <form id="delete-form1" action="{{ route('availableforjob.destroy', $useravailablepost->useravailablepost_id) }}" method="POST"
                             style="display:none;">
                             <input type="hidden" name="_method" method="PUT" value="delete"> {{ csrf_field() }}
                           </form>
@@ -91,10 +41,10 @@
                     @endif
 
                     <a href="#" class="anchor-username">
-                      <h4 class="media-heading"> {{$useravailablepost['firstname']}}</h4>
+                      <h4 class="media-heading"> {{$useravailablepost->firstname}}</h4>
                     </a>
 
-                    <a href="#" class="anchor-time">{{ $useravailablepost['created_at'] }}</a>
+                    <a href="#" class="anchor-time">{{ $useravailablepost->created_at }}</a>
                   </div>
                 </div>
               </div>
@@ -105,26 +55,26 @@
             <h4 style="font-weight:bold;">******job seeking post******</h4>
             <p>
               <li>Position :
-                <strong>{{ $useravailablepost['position'] }}</strong>
+                <strong>{{ $useravailablepost->position }}</strong>
               </li>
             </p>
             <p>
               <li>Profession :
-                <strong>{{ $useravailablepost['profession'] }}</strong>
+                <strong>{{ $useravailablepost->profession }}</strong>
               </li>
             </p>
             <p>
               <li>Preferred Job Location :
-                <strong>{{ $useravailablepost['location'] }}</strong>
+                <strong>{{ $useravailablepost->location }}</strong>
               </li>
             </p>
             <p>
               <li>Highlights(Any specified course/skills) :
-                <strong>{{ $useravailablepost['highlight'] }}</strong>
+                <strong>{{ $useravailablepost->highlight }}</strong>
               </li>
             </p>
             <li>
-              <a target="_blank" href="/uploads/attachment/{{$useravailablepost['CV']}}">Download CV from here..</a>
+              <a target="_blank" href="/uploads/attachment/{{$useravailablepost->CV}}">Download CV from here..</a>
             </li>
 
 
@@ -173,7 +123,7 @@
                             {{ csrf_field() }}
 
                              <input type="hidden" name="commentable_type" value="App\AvailableForJob">
-                                   <input type="hidden" name="commentable_id" value="{{ $useravailablepost['useravailablepost_id'] }}">
+                                   <input type="hidden" name="commentable_id" value="{{ $useravailablepost->useravailablepost_id }}">
 
                              <div class="form-group">
                         <input class="form-control" style="border-radius: 20px;" type="text" name="body" placeholder="Your comments" />
@@ -190,14 +140,14 @@
 
                   <!--Comment show start -->
              @foreach($useravailableComment as $comment)
-                         @if( $useravailablepost['useravailablepost_id']==$comment->commentable_id)
+                         @if( $useravailablepost->useravailablepost_id==$comment->commentable_id)
                  <div class="comment-wrapper">
                  
                   <div class="comments-list">
                     <ul class="comments-holder-ul">
                       <li class="comment-holder" id="_1">
                         <div class="user-img">
-                           <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user['p_pic']}}" width="32" height="32" alt="...">
+                           <img class="media-object photo-profile img-circle" src="/uploads/profile/{{$user->p_pic}}" width="32" height="32" alt="...">
                         </div>
 
                         <div class="comment-body">
@@ -234,8 +184,3 @@
       </div>
       @endforeach
 <!--end available interface-->
-</div>
-</div>
-</div>
-
-@endsection
