@@ -29,26 +29,33 @@ class PublicprofileController extends Controller
      */
     public function index($id)
     {
-         //$user= User::where(Auth::user()->id);
-           $images=Imagepost::all();
-           $user= DB::table('users')->where( 'id', '=', $id)->first();
+       //$user= User::where(Auth::user()->id);
+       $images=Imagepost::all();
+       $user= DB::table('users')->where( 'id', '=', $id)->first();
+      
+
+       $interest= DB::table('interests')
+          ->where([
+          ['user_id', '=', $id],
+          ['interest_priority','=',10]
+          ])->first();
+
+         //dd($interest->profession);
+       $no_of_project_done_by_user = Post::where('post_type','=','project')->where('user_id','=', $id)->count();
+        
+       $post = Post::where('user_id','=', $id)
+             
+              ->orderBy('created_at','desc')
+              ->get();
+      //dd($post);
+     
+
+       $useravailablepost= DB::table('users')
+            ->join('available_for_jobs', 'users.id', '=', 'available_for_jobs.user_id')
+            ->get();  
 
 
-            $interest= DB::table('interests')
-            ->where([
-            ['user_id', '=', $id],
-            ['interest_priority','=',10]
-            ])->first();
-
-
-          $no_of_project_done_by_user = Post::where('post_type','=','project')->where('user_id','=', $id)->count();
-          
-          $post = Post::where('user_id','=', $id)
-                ->orderBy('created_at','desc')
-                ->get();
-
-            $useravailablepost = AvailableForJob::where('user_id','=', $id)->get();
-      //dd($useravailablepost);
+      
        //avg rating
        $avg_rating = DB::table('ratings')
        ->select( DB::raw('AVG(rating) as avg_rating'),'post_id')
@@ -76,6 +83,9 @@ class PublicprofileController extends Controller
           
        }
         //end of average rating
+
+      
+      
 
       $userComment = DB::table('comments')
             ->join('users', 'users.id', '=', 'comments.user_id')
