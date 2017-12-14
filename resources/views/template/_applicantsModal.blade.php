@@ -1,6 +1,6 @@
 <?php $applicant_count=0; $fla=0 ;$fname="";$lname="";?> 
     @foreach($job_applicants as $applicant_info) 
-        @if($applicant_info->jobpost_id==$jobpost['jobpost_id'])
+        @if($applicant_info->jobpost_id==$jobpost->jobpost_id)
 
 
             <?php $applicant_count=$applicant_count+1; $job_post_id=$applicant_info->jobpost_id?>
@@ -35,7 +35,7 @@
                                 <div class="col-lg-12">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     <ul class="img-comment-list">
-                                        @foreach($job_applicants as $applicant_info) @if($applicant_info->jobpost_id==$jobpost['jobpost_id'])
+                                        @foreach($job_applicants as $applicant_info) @if($applicant_info->jobpost_id==$jobpost->jobpost_id)
                                         <li>
                                             <div class="comment-img">
                                                 <img src="/uploads/profile/{{$applicant_info->p_pic}}" >

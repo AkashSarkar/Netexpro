@@ -30,12 +30,12 @@
           <div class="media">
             <div class="media-left">
               <a href="#">
-                <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $jobpost['p_pic'] }}" width="40" height="40"
+                <img class="media-object photo-profile img-circle" src="/uploads/profile/{{ $jobpost->p_pic}}" width="40" height="40"
                   alt="...">
               </a>
             </div>
             <div class="media-body">
-              @if($jobpost['user_id'] == Auth::user()->id)
+              @if($jobpost->user_id == Auth::user()->id)
               
               <div class="dropdown ">
                 <button class="pull-right dropdown-toggle   btn btn-link" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h" aria-hidden="true"></i>
@@ -55,7 +55,7 @@
 
                     </a>
 
-                    <form id="delete-form2" action="{{ route('jobpost.destroy', $jobpost['jobpost_id']) }}" method="POST" style="display:none;">
+                    <form id="delete-form2" action="{{ route('jobpost.destroy', $jobpost->jobpost_id) }}" method="POST" style="display:none;">
                       <input type="hidden" name="_method" method="PUT" value="delete"> {{ csrf_field() }}
                     </form>
 
@@ -65,9 +65,9 @@
               @endif
               <!--Getting Applicant Value-->
               <?php $checkApplicant=0?>
-              @if($jobpost['user_id'] != Auth::user()->id )
+              @if($jobpost->user_id != Auth::user()->id )
               @foreach($applicants as $applicant)
-                @if($applicant->jobpost_id == $jobpost['jobpost_id'])
+                @if($applicant->jobpost_id == $jobpost->jobpost_id)
                     @if($applicant->user_id ==  Auth::user()->id )
                     <?php $checkApplicant=$checkApplicant+1;?>
                     <button type="" class="btn btn-success pull-right btn-sm">Applied</button>
@@ -78,7 +78,7 @@
               @if($checkApplicant==0)
                     <form method="post" action="{{ route('applicants.store') }}">
                                 {{ csrf_field() }}
-                            <input type="hidden" name="jobpost_id" method="PUT" value="{{$jobpost['jobpost_id']}}">
+                            <input type="hidden" name="jobpost_id" method="PUT" value="{{$jobpost->jobpost_id}}">
                             <button type="" class="btn btn-primary pull-right btn-sm">Apply now</button>
                     </form>
               @endif
@@ -86,10 +86,10 @@
               <!--End of getting Applicant Value-->
   
               <a href="#" class="anchor-username">
-                <h4 class="media-heading"> {{$jobpost['firstname']}}</h4>
+                <h4 class="media-heading"> {{$jobpost->firstname}}</h4>
               </a>
 
-              <a href="#" class="anchor-time">{{ $jobpost['created_at'] }}</a>
+              <a href="#" class="anchor-time">{{ $jobpost->created_at }}</a>
             </div>
           </div>
         </div>
@@ -100,43 +100,43 @@
       <h4 style="font-weight:bold;">******Hiring post******</h4>
       <p>
         <li>Position :
-          <strong>{{ $jobpost['position'] }}</strong>
+          <strong>{{ $jobpost->position }}</strong>
         </li>
       </p>
       <p>
         <li>Profession :
-          <strong>{{ $jobpost['profession'] }}</strong>
+          <strong>{{ $jobpost->profession}}</strong>
         </li>
       </p>
       <p>
         <li>No. of Vacancy :
-          <strong>{{ $jobpost['vacancy_number'] }}</strong>
+          <strong>{{ $jobpost->vacancy_number }}</strong>
         </li>
       </p>
       <p>
         <li>Job Circular:
-          <strong>{{ $jobpost['circular'] }}</strong>
+          <strong>{{ $jobpost->circular }}</strong>
         </li>
       </p>
       <p>
         <li>Company Details:
-          <strong>{{ $jobpost['company_details'] }}</strong>
+          <strong>{{ $jobpost->company_details }}</strong>
         </li>
       </p>
       <p>
         <li>Job Responsibilities:
-          <strong>{{ $jobpost['job_details'] }}</strong>
+          <strong>{{ $jobpost->job_details }}</strong>
         </li>
       </p>
       <p>
         <li>Job Location :
-          <strong>{{ $jobpost['location'] }}</strong>
+          <strong>{{ $jobpost->location }}</strong>
         </li>
       </p>
 
     </section>
     <!--Applicants List-->
-    @if($jobpost['user_id'] == Auth::user()->id )
+    @if($jobpost->user_id == Auth::user()->id )
     @include('template._applicantsModal')
     @endif      
 
@@ -182,7 +182,7 @@
                       {{ csrf_field() }}
 
                       <input type="hidden" name="commentable_type" value="App\Jobpost">
-                      <input type="hidden" name="commentable_id" value="{{ $jobpost['jobpost_id'] }}">
+                      <input type="hidden" name="commentable_id" value="{{ $jobpost->jobpost_id }}">
 
                       <div class="form-group">
                         <input class="form-control" style="border-radius: 20px;" type="text" name="body" placeholder="Your comments" />
@@ -198,7 +198,7 @@
      <h3 class="comment-title">Comments</h3>
 
             <!--Comment show start -->
-            @foreach($jobComment as $comment) @if( $jobpost['jobpost_id']==$comment->commentable_id)
+            @foreach($jobComment as $comment) @if( $jobpost->jobpost_id==$comment->commentable_id)
            <div class="comment-wrapper">
            
             <div class="comments-list">

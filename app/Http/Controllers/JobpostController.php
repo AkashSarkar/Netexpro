@@ -24,7 +24,7 @@ class JobpostController extends Controller
                           $join->on('users.id', '=', 'jobposts.user_id');
                         })->get();
             
-            $jobpost=json_decode($jobpost,true);
+           
 
 
             $jobComment = DB::table('comments')
