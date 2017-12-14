@@ -134,11 +134,8 @@ $industries = array(
              @endforeach
            </p>
 
-            <p>CV:
-             @foreach($useravailablepost as $useravailablepost)
-            
-             
-             @endforeach
+           <p>CV:
+              <a target="_blank" href="/uploads/attachment/{{$useravailablepost->CV}}">View CV here..</a>
            </p>
 
         </br>
@@ -160,6 +157,9 @@ $industries = array(
       @if($posts!=null) 
         
       @foreach($posts as $userpost)
+         @if($userpost->post_type=="project")
+
+       
       <div class="panel panel-default">
         <div class="panel-body">
           <section class="post-heading">
@@ -186,7 +186,8 @@ $industries = array(
             </div>
           </section>
           <section class="post-body well well-sm " style="background-color: #EEEEEE; border-radius: 4px;  ">
-
+            <!--project show-->
+         
             <div class=" row">
               <div class="col-md-12">
                 <div class="well well-sm">
@@ -194,8 +195,8 @@ $industries = array(
                 </div>
               </div>
             </div>
-            <!--project show-->
-            @if($userpost->post_type=="project")
+            
+          
             <h4>URL :</h4>
             <div class=" row">
               <div class="col-md-12">
@@ -204,7 +205,7 @@ $industries = array(
                 </div>
               </div>
             </div>
-            @endif
+            
             <!-- end project show-->
 
             <!--image show-->
@@ -414,9 +415,7 @@ $industries = array(
                       <span id="{{$userpost->post_id}}">{{$userpost->ratting}}</span>
 
                     </div>
-                    @endif @else
-                    <a href="#">
-                      <i class="glyphicon glyphicon-thumbs-up"></i> Like</a>
+                    @endif 
                     @endif
                     <!--End Shows Rate text and icon if post type is Project-->
                   </li>
@@ -509,17 +508,38 @@ $industries = array(
    
           <!--comment end-->
 
-
-
-        </div>
+       </div>
       </div>
+      
+      @endif
       @endforeach @endif
 
       <!--post show end -->
+</div>
 
 
-      
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
 </div>
 

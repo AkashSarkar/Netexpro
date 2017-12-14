@@ -195,44 +195,53 @@
       }
     });
     //get posts by ajax
-      $(window).scroll(function(){
-        if ($(window).scrollTop() == $(document).height() - $(window).height()){
-         fetchPosts();
-          }
-      }); 
- 
-      function fetchPosts() {
-        
-        var last_p_id= $("#last_post_id").text();
+     
+      var last_p_id= $("#last_post_id").text();
+      //console.log(last_p_id);
+      var page=0;
+      $(window).scroll(function() { //detect page scroll
+      if($(window).scrollTop() + $(window).height() >= $(document).height()) { //if user scrolled from top to bottom of the page
+         page++;
+         if(page>0){
+            var page_id=page-1;
+            var ajax_last_p_id=$("#ajax_last_post_id"+page_id).text();
+            //console.log(ajax_last_p_id +"new last id");
+            if(ajax_last_p_id){
+              last_p_id=ajax_last_p_id;
+            }
+       }
         //console.log(last_p_id);
+        fetchPosts(last_p_id,page);
+      }
+    });
+    
  
-       
- 
-            clearTimeout( $.data( this, "scrollCheck" ) );
- 
-            $.data( this, "scrollCheck", setTimeout(function() {
-                var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 100;
- 
-                if(scroll_position_for_posts_load >= $(document).height()) {
-                    /*$.get(page, function(data){
-                        $('.post_class').append(data.post);
-                        $('.endless-pagination').data('next-page', data.next_page);
-                    });*/
+    function fetchPosts(last_p_id,page) {
+      
+      clearTimeout( $.data( this, "scrollCheck" ) );
 
-                    $.ajax({
-                        url: "{{url('/home/get_post')}}",
-                        type: 'GET',
-                        data: {
-                          'last_p_id': last_p_id
-                        },
-                        success: function (data) {
-                           $('#post_view').append(data.posts);
-                        }
-                        
-                      });
+      $.data( this, "scrollCheck", setTimeout(function() {
+        
+        $.ajax({
+            url: "{{url('/home/get_post')}}",
+            type: 'GET',
+            
+            data: {
+              'last_p_id': last_p_id,
+              'page':page
+            },
+            success: function (data) {
+                $('#post_view').append(data.posts);
+                //console.log(data);
+            },
+            error: function(data){
+                console.log(data + "error");
+            }
+            
+        });
 
-                }
-            }, 350))
+      
+      },50))
  
         
     }
@@ -280,7 +289,7 @@
 
   } //end ajax post
 
-  //get posts by ajax
+  /*//get posts by ajax
     var page = 1; //track user scroll as page number, right now page number is 1
     get_post(page); //initial content load
     $(window).scroll(function() { //detect page scroll
@@ -316,7 +325,7 @@
               alert('No response from server');
         });
     }   
-  //end get post by ajax
+  //end get post by ajax*/
 
   //check if user likes a post or not
   /* $(function(){

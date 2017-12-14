@@ -47,7 +47,10 @@
                                                 <p></p>
                                                 <span class="date sub-text">{{$applicant_info->created_at}}</span>
                                             </div>
-                                        </li>
+                                        
+
+                                    <button type="button" class="btn btn-azure pull-right" style="margin-top: -40px;"> <a href="#">Hire </a></button>
+                                             </li>
                                         @endif @endforeach
                                     </ul>
                                 </div>
