@@ -1,4 +1,4 @@
-<?php $last_post_id=0; $last_key =count($post); $post_count=0;?>
+<?php $last_key =count($post); $post_count=0;?>
 @if($post!=null) @foreach($post as $userpost)
 
 <!--variable for count array-->
@@ -54,7 +54,7 @@
     
     <section class="post-body well well-sm " style="background-color: #EEEEEE; border-radius: 4px;  ">
       @if($post_count == $last_key)
-        <span id="last_post_id" style="display:none;">{{ $userpost->row_no }}</span>
+        <span id="ajax_last_post_id{{$page}}">{{ $userpost->row_no }}</span>
       @endif
       <div class=" row">
         <div class="col-md-12">
@@ -312,7 +312,7 @@
         </section>
         
       <!--comment show-->
-     {{-- @include('template.Comment_Interface')--}}
+      @include('template.Comment_Interface')
       <!--comment end-->
   
 
