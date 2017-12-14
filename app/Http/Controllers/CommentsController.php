@@ -6,7 +6,7 @@ use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
-
+use Illuminate\Support\Facades\Redirect;
 
 class CommentsController extends Controller
 {
@@ -39,22 +39,19 @@ class CommentsController extends Controller
     public function store(Request $request)
     {
          if(Auth::check()){
-            
-            $comment = Comment::create([
-                
+                $comment = Comment::create([
                 'body' => $request->input('body'),
                 'commentable_type'=>$request->input('commentable_type'),
                 'commentable_id'=>$request->input('commentable_id'),
-                'user_id'=>Auth::user()->id
-              
+                'user_id'=>Auth::user()->id  
             ]);
            }
 
-        if($comment){
-           return back()->with('success' , 'Comment posted successfully');
-               }
-       
-        return back()->withInput();
+        if($comment)
+        {
+          return  Redirect::back()->with('success', 'Comment posted successfully');
+        }
+            return back()->withInput();
     }
 
     /**

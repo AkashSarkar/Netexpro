@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\jobpost;
 use App\User;
+use App\Interest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Session;
 
 class JobpostController extends Controller
 {
@@ -16,17 +18,16 @@ class JobpostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-         $user= User::find(Auth::user()->id);  
+          
+            $user= User::find(Auth::user()->id);  
+          
             $jobpost=DB::table('users')
-                         ->join('jobposts', function ($join) {
-                          $join->on('users.id', '=', 'jobposts.user_id');
-                        })->get();
-            
-           
-
-
+            ->join('jobposts', function ($join) {
+            $join->on('users.id', '=', 'jobposts.user_id');
+            })->get();
+          
             $jobComment = DB::table('comments')
             ->join('users', 'users.id', '=', 'comments.user_id')
             ->join('jobposts', 'jobposts.jobpost_id', '=', 'comments.commentable_id')
@@ -39,16 +40,15 @@ class JobpostController extends Controller
             ->orderBy('jobposts.created_at','desc')
             ->get();
 
-           
-
             $applicants=DB::table('applicants')
             ->orderBy('created_at','desc')
             ->get();
-            
-            
-            
+
+            $choices= DB::table('interests')
+            ->where('user_id', '=', Auth::user()->id)->get(); 
+
         return view('jobpost.jobpost_index',['user'=>$user,'jobpost'=>$jobpost,
-        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants]);
+        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'choices'=>$choices]);
     }
 
 
@@ -57,16 +57,7 @@ class JobpostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   /* public function search(Request $request)
-    {
-            $q = Input::get ( 'q' );
 
-            $profession = Jobpost::where('profession','LIKE','%'.$q.'%')->get();
-
-            if(count($profession) > 0)
-                return view('search')->withDetails($profession)->withQuery ( $q );
-            else return view ('search')->withMessage('No Details found. Try to search again !');
-    } */
 
     /**
      * Store a newly created resource in storage.

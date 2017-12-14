@@ -10,6 +10,22 @@
 <!--script-->
 <!--end script -->
 <!--End Style-->
+<?php
+$professions = array(
+    "CSE",
+    "EEE",
+    "BBA",
+    "MBA",
+    "MSCSE"
+);
+
+ $locations=array(
+     "Dhaka",
+     "Chittagong",
+     "Comilla",
+     "Sylhet"
+ );
+?>
 <!--Main content-->
 <div class="container">
   <div class="row content">
@@ -51,11 +67,87 @@
       </nav>
     </div>
 
+<div class="col-md-7 col-sm-7 col-lg-7 show_home_post" id="h_post">
+
+ 
+<!--search 2 -->
+     
+            <div class="input-group" id="adv-search">
+                <input type="text" class="form-control" placeholder="Search for snippets" />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                           
+                           
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal"  method="POST" action="/search" role="search">
+                                         {{ csrf_field() }}
+                                 
+                                  <div class="form-group{{ $errors->has('choice') ? ' has-error' : '' }}">
+                                      
+                                        <label for="choice">Profession : </label>
+                                         <select class="form-control" name="choice"  value="{{ old('choice') }}">
+                                              <span class="caret"></span>
+                                              <option value="0">select a profession</option>
+                                              @foreach( $choices as $choice)
+                                              <option>{{ $choice->profession }}</option>
+                                              @endforeach
+                                          </select>
+                                          @if ($errors->has('choice'))
+                                              <span class="help-block">
+                                                  <strong>{{ $errors->first('choice') }}</strong>
+                                              </span>
+                                          @endif
+                                   </div>
+                                   
+                                   <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                                      <label for="location" class="col-sm-2 control-label">Location : </label>
+
+                                      <div class="col-md-4">
+                                            <select class="form-control" name="location"  value="{{ old('location') }}" >
+                                                  <span class="caret"></span>
+                                                  <option value="0">select a location</option>
+                                                  @foreach( $locations as $location)
+                                                  <option>{{ $location }}</option>
+                                                  @endforeach
+                                            </select>
+
+                                          @if ($errors->has('location'))
+                                              <span class="help-block">
+                                                  <strong>{{ $errors->first('location') }}</strong>
+                                              </span>
+                                          @endif
+                                      </div>
+                                  </div>
+
+                                   
+                                    From : <input type="date" name="fromdate" placeholder="From"><br>
+                                    To : <input type="date" name="todate" placeholder="To">
+                            
+                                    <button type="submit" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                    
+
+                                  
+                                 
+                                </form>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+        
+      
+<!--Search 2 end -->
+
      <!--job hiring post show-->
      
       @include('template.jobHirePost_Interface')
 
-
+ </div>
     </div>
     </div>
 @endsection
