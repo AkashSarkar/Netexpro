@@ -68,8 +68,7 @@ class JobpostController extends Controller
             $choices= DB::table('interests')
             ->where('user_id', '=', Auth::user()->id)->get(); 
 
-        return view('jobpost.jobpost_index',['user'=>$user,'jobpost'=>$jobpost,
-        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'choices'=>$choices]);
+      
             $u=Auth::user()->id;
             $qualified_candidate=DB::select('SELECT * FROM available_for_jobs JOIN jobposts 
             WHERE available_for_jobs.profession = jobposts.profession 
@@ -82,7 +81,7 @@ class JobpostController extends Controller
            // dd($qualified_candidate);
             
         return view('jobpost.jobpost_index',['user'=>$user,'jobpost'=>$jobpost,
-        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'qualified_candidate'=>$qualified_candidate]);
+        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'qualified_candidate'=>$qualified_candidate,'choices'=>$choices]);
     }
 
 
