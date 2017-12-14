@@ -36,7 +36,7 @@ class AvailableForJobController extends Controller
             ->orderBy('comments.created_at','desc')
             ->get();
 
-        return view('template.user_available_post_interface',['user'=>$user,'useravailablepost'=>$useravailablepost,'useravailableComment'=>$useravailableComment]);
+        return view('available_for_job.index',['user'=>$user,'useravailablepost'=>$useravailablepost,'useravailableComment'=>$useravailableComment]);
     }
 
     /**
