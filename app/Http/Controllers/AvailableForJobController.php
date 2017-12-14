@@ -27,7 +27,7 @@ class AvailableForJobController extends Controller
               ->orderBy('available_for_jobs.created_at','desc')
               ->get();
 
-            $useravailablepost=json_decode($useravailablepost,true);
+           
 
 
               $useravailableComment = DB::table('comments')
