@@ -64,11 +64,19 @@ class JobpostController extends Controller
             $applicants=DB::table('applicants')
             ->orderBy('created_at','desc')
             ->get();
+            $u=Auth::user()->id;
+            $qualified_candidate=DB::select('SELECT * FROM available_for_jobs JOIN jobposts 
+            WHERE available_for_jobs.profession = jobposts.profession 
+            AND available_for_jobs.position = jobposts.position 
+            AND available_for_jobs.location = jobposts.location
+            ORDER BY jobposts.created_at desc' ,
+            ['u'=>$u]);
             
             
+           // dd($qualified_candidate);
             
         return view('jobpost.jobpost_index',['user'=>$user,'jobpost'=>$jobpost,
-        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants]);
+        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'qualified_candidate'=>$qualified_candidate]);
     }
 
 

@@ -64,7 +64,7 @@
               </div>
               @endif
               <!--Getting Applicant Value-->
-              <?php $checkApplicant=0?>
+              <?php $checkApplicant=0;$valid_candidate=0; ?>
               @if($jobpost->user_id != Auth::user()->id )
               @foreach($applicants as $applicant)
                 @if($applicant->jobpost_id == $jobpost->jobpost_id)
@@ -75,12 +75,24 @@
                     @endif
                 @endif
               @endforeach
-              @if($checkApplicant==0)
+              <!--Active Apply now  for Qualified Candidate-->
+              @foreach($qualified_candidate as $qualified_candidates)
+                  @if($qualified_candidates->jobpost_id == $jobpost->jobpost_id)
+                     <?php $valid_candidate=$valid_candidate+1;?>
+                     @break;
+                  @endif
+              @endforeach
+              <!--End Active Apply now-->
+              @if($checkApplicant == 0 && $valid_candidate > 0)
                     <form method="post" action="{{ route('applicants.store') }}">
                                 {{ csrf_field() }}
                             <input type="hidden" name="jobpost_id" method="PUT" value="{{$jobpost->jobpost_id}}">
                             <button type="" class="btn btn-primary pull-right btn-sm">Apply now</button>
                     </form>
+              @elseif($checkApplicant == 0  && $valid_candidate == 0)
+              
+                <button type="button" data-toggle="modal" data-target="#available_job_modal" class="btn btn-primary pull-right btn-sm">Apply for job</button>
+              
               @endif
               @endif
               <!--End of getting Applicant Value-->
