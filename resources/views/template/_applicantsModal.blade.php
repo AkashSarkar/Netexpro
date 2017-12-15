@@ -48,8 +48,15 @@
                                                 <span class="date sub-text">{{$applicant_info->created_at}}</span>
                                             </div>
                                         
-
-                                    <button type="button" class="btn btn-azure pull-right" style="margin-top: -40px;"> <a href="#">Hire </a></button>
+                                    <form method="post"  action="{{ url('/hire_employee')}}">
+                                         {{ csrf_field() }}
+                                        <input type="hidden" name="_method" value="post">
+                                        <input type="hidden" name="employer" value="{{$jobpost->user_id}}">
+                                        <input type="hidden" name="employee" value="{{$applicant_info->user_id}}">
+                                        <input type="hidden" name="hire_post_id" value="{{$jobpost->jobpost_id}}">
+                                        <button type="submit" class="btn btn-azure pull-right" style="margin-top: -40px;">Hire</button>
+                                    </form> 
+                                   
                                              </li>
                                         @endif @endforeach
                                     </ul>

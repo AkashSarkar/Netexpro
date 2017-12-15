@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/home/get_post', 'HomeController@get_post');
     Route::post('/home', 'HomeController@store');
+    Route::post('/hire_employee','Hire_infoController@store');
     Route::get('/profile', 'ProfileController@index')->name('profile');
     
     Route::get('/interests', 'InterestController@update'); 
@@ -36,7 +37,10 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('home', 'HomeController');
     Route::resource('profile', 'ProfileController');
     Route::resource('jobpost', 'JobpostController');
-   Route::post('search', 'SearchController@search');
+    Route::resource('hire_employee', 'Hire_infoController');
+
+
+    Route::post('search', 'SearchController@search');
     Route::get('search', 'SearchController@index');
 
    // Route::post('search', 'JobpostController@index');

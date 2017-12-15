@@ -194,6 +194,10 @@
         reader.readAsDataURL(this.files[i]);
       }
     });
+    
+   
+     
+
     //get posts by ajax
      
       var last_p_id= $("#last_post_id").text();

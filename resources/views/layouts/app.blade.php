@@ -22,6 +22,7 @@
     <!--profile_style-->
     <link href="{{ asset('css/post_style.css') }}" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/select2.min.css">
@@ -288,6 +289,24 @@
                         <li>
                             <a href="" data-toggle="modal" data-target="#jobModal">Jobs</a>
                         </li>
+                        {{--notification dropdown--}}
+                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <i class="fas fa-bell fa-lg"></i>
+                                <span style="cursor:pointer;"> Job Offers </span> 
+                                <span class="badge">{{count(auth()->User()->unreadNotifications)}}</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                                <li class="dropdown-header">
+                                    @foreach(auth()->User()->unreadNotifications as $notification)
+                                        <a href="#">{{$notification->type}}</a>
+                                    @endforeach
+                                </li>
+                            </ul>
+                        </li>
+                        {{--end notification dropdown--}}
+
                         <li>
                             <a href="{{ url('profile') }}">{{ Auth::user()->firstname }}</a>
                         </li>
@@ -295,8 +314,7 @@
                         <li class="dropdown">
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                <i class="fa fa-cogs" aria-hidden="true"></i>
-                                <span class="caret"></span>
+                               <i class="fas fa-sign-out-alt fa-lg"></i>
                             </a>
 
                             <ul class="dropdown-menu">
