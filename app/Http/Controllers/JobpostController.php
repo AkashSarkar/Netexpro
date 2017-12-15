@@ -74,6 +74,7 @@ class JobpostController extends Controller
             WHERE available_for_jobs.profession = jobposts.profession 
             AND available_for_jobs.position = jobposts.position 
             AND available_for_jobs.location = jobposts.location
+            AND available_for_jobs.user_id=:u
             ORDER BY jobposts.created_at desc' ,
             ['u'=>$u]);
             

@@ -100,6 +100,7 @@
                         </ul>
                     </div>
                     @endif
+
                     <!--Getting Applicant Value-->
                     <?php $checkApplicant=0?>
                     @if($jobpost->user_id != Auth::user()->id )
@@ -121,6 +122,8 @@
                     @endif
                     @endif
                     <!--End of getting Applicant Value-->
+
+          
         
                     <a href="#" class="anchor-username">
                         <h4 class="media-heading"> {{$jobpost->firstname}}</h4>
@@ -172,6 +175,7 @@
             </p>
 
             </section>
+
             <!--Applicants List-->
             @if($jobpost->user_id == Auth::user()->id )
             @include('template._applicantsModal')
@@ -269,7 +273,9 @@
 
                     </div>
                     
-                    @endif @endforeach
+                    @endif 
+
+                    @endforeach
                     <!--Comment show end-->
 
                 
@@ -282,25 +288,9 @@
 
 <!--end job post-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
      </div>
-
-    </div>
-    </div>
+   </div>
+ </div>
 @endsection
 
 
