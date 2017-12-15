@@ -66,8 +66,13 @@ $professions = array(
  
 <!--search using profession, location, date range start -->
      
+<<<<<<< HEAD
   <div class="row">
     <div class="col-md-12 col-lg-12">
+=======
+            <div class="row">
+    <div class="col-md-12 col-lg-12" style="text-align:justify;">
+>>>>>>> 9d0a95f558533641f45f676c8dbcff623af14d6f
             <div class="input-group" id="adv-search">
                 <input type="text" class="form-control" placeholder="Search here.." />
                 <div class="input-group-btn">
@@ -126,9 +131,13 @@ $professions = array(
                                      <label for="choice">To : </label>
                                      <input class="form-control" type="date" name="todate" placeholder="To"  >
                                     </div>
+<<<<<<< HEAD
                                     <!--Search by date range end-->
 
                                     <button type="submit" class="btn btn-primary">
+=======
+                                    <button type="submit" class="btn btn-primary" style="margin-left:-15px;">
+>>>>>>> 9d0a95f558533641f45f676c8dbcff623af14d6f
                                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                     </button>
                                     
