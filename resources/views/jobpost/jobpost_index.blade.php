@@ -88,8 +88,8 @@ $professions = array(
                                  
                                   <div class="form-group {{ $errors->has('choice') ? ' has-error' : '' }}">
                                       
-                                        <label for="choice">Profession : </label>
-                                         <select class="form-control" name="choice"  value="{{ old('choice') }}">
+                                        <label for="choice">Profession : </label><br>
+                                         <select class="form-control" name="choice"  value="{{ old('choice') }} "style="width:100%">
                                               <span class="caret"></span>
                                               <option value="0">select a profession</option>
                                               @foreach( $choices as $choice)
@@ -104,10 +104,10 @@ $professions = array(
                                    </div>
                                    
                                    <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
-                                      <label for="location">Location : </label>
+                                      <label for="location">Location : </label><br>
 
                                       
-                                            <select class="form-control" name="location"  value="{{ old('location') }}" >
+                                            <select class="form-control" name="location"  value="{{ old('location') }}" style="width:100%" >
                                                   <span class="caret"></span>
                                                   <option value="0">select a location</option>
                                                   @foreach( $locations as $location)
