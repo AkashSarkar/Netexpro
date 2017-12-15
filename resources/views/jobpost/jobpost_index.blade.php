@@ -3,13 +3,7 @@
 @section('page-title') All Jobpost @endsection 
 
 @section('content')
-<!--style-->
-<style>
 
-</style>
-<!--script-->
-<!--end script -->
-<!--End Style-->
 <?php
 $professions = array(
     "CSE",
@@ -70,12 +64,12 @@ $professions = array(
 <div class="col-md-7 col-sm-7 col-lg-7 show_home_post" id="h_post">
 
  
-<!--search 2 -->
+<!--search using profession, location, date range start -->
      
-            <div class="row">
+  <div class="row">
     <div class="col-md-12 col-lg-12">
             <div class="input-group" id="adv-search">
-                <input type="text" class="form-control" placeholder="Search for snippets" />
+                <input type="text" class="form-control" placeholder="Search here.." />
                 <div class="input-group-btn">
                     <div class="btn-group" role="group">
                         <div class="dropdown dropdown-lg">
@@ -86,10 +80,10 @@ $professions = array(
                                 <form class="form-horizontal"  method="POST" action="/search" role="search">
                                          {{ csrf_field() }}
                                  
+                                  <!--Search by profession start-->
                                   <div class="form-group {{ $errors->has('choice') ? ' has-error' : '' }}">
-                                      
-                                        <label for="choice">Profession : </label><br>
-                                         <select class="form-control" name="choice"  value="{{ old('choice') }} "style="width:100%">
+                                      <label for="choice">Profession : </label><br>
+                                         <select class="form-control" name="choice" value="{{ old('choice') }}"style="width:100%">
                                               <span class="caret"></span>
                                               <option value="0">select a profession</option>
                                               @foreach( $choices as $choice)
@@ -101,12 +95,12 @@ $professions = array(
                                                   <strong>{{ $errors->first('choice') }}</strong>
                                               </span>
                                           @endif
-                                   </div>
+                                  </div>
+                                  <!--Search by profession end-->
                                    
-                                   <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                                  <!--Search by location start-->
+                                  <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
                                       <label for="location">Location : </label><br>
-
-                                      
                                             <select class="form-control" name="location"  value="{{ old('location') }}" style="width:100%" >
                                                   <span class="caret"></span>
                                                   <option value="0">select a location</option>
@@ -120,9 +114,10 @@ $professions = array(
                                                   <strong>{{ $errors->first('location') }}</strong>
                                               </span>
                                           @endif
-                                      
                                   </div>
+                                   <!--Search by location end-->
 
+                                   <!--Search by date range start-->
                                    <div class="form-group">
                                      <label for="choice">From : </label>
                                      <input class="form-control" type="date" name="fromdate" placeholder="From">
@@ -131,13 +126,12 @@ $professions = array(
                                      <label for="choice">To : </label>
                                      <input class="form-control" type="date" name="todate" placeholder="To"  >
                                     </div>
+                                    <!--Search by date range end-->
+
                                     <button type="submit" class="btn btn-primary">
                                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                     </button>
                                     
-
-                                  
-                                 
                                 </form>
                             </div>
                         </div>
@@ -148,11 +142,13 @@ $professions = array(
         </div>
       </div>
       
-<!--Search 2 end -->
+<!--search using profession, location, date range end -->
 
-     <!--job hiring post show-->
+     <!--job hiring post show start-->
      
       @include('template.jobHirePost_Interface')
+
+     <!--job hiring post show end -->
 
  </div>
     </div>

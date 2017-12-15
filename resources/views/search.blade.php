@@ -100,10 +100,13 @@
                         </ul>
                     </div>
                     @endif
-                    <!--Getting Applicant Value-->
-                    <?php $checkApplicant=0?>
-                    @if($jobpost->user_id != Auth::user()->id )
-                    @foreach($applicants as $applicant)
+
+                   
+
+                      <!--Getting Applicant Value-->
+                      <?php $checkApplicant=0;$valid_candidate=0; ?>
+                      @if($jobpost->user_id != Auth::user()->id )
+                      @foreach($applicants as $applicant)
                         @if($applicant->jobpost_id == $jobpost->jobpost_id)
                             @if($applicant->user_id ==  Auth::user()->id )
                             <?php $checkApplicant=$checkApplicant+1;?>
@@ -111,17 +114,31 @@
                             @break;
                             @endif
                         @endif
-                    @endforeach
-                    @if($checkApplicant==0)
+                      @endforeach
+                      <!--Active Apply now  for Qualified Candidate-->
+                      @foreach($qualified_candidate as $qualified_candidates)
+                          @if($qualified_candidates->jobpost_id == $jobpost->jobpost_id)
+                             <?php $valid_candidate=$valid_candidate+1;?>
+                             @break;
+                          @endif
+                      @endforeach
+                      <!--End Active Apply now-->
+                      @if($checkApplicant == 0 && $valid_candidate > 0)
                             <form method="post" action="{{ route('applicants.store') }}">
                                         {{ csrf_field() }}
                                     <input type="hidden" name="jobpost_id" method="PUT" value="{{$jobpost->jobpost_id}}">
                                     <button type="" class="btn btn-primary pull-right btn-sm">Apply now</button>
                             </form>
-                    @endif
-                    @endif
-                    <!--End of getting Applicant Value-->
-        
+                      @elseif($checkApplicant == 0  && $valid_candidate == 0)
+                      
+                        <button type="button" data-toggle="modal" data-target="#available_job_modal" class="btn btn-primary pull-right btn-sm">Apply for job</button>
+                      
+                      @endif
+                      @endif
+                      <!--End of getting Applicant Value-->
+
+
+
                     <a href="#" class="anchor-username">
                         <h4 class="media-heading"> {{$jobpost->firstname}}</h4>
                     </a>
@@ -172,6 +189,7 @@
             </p>
 
             </section>
+
             <!--Applicants List-->
             @if($jobpost->user_id == Auth::user()->id )
             @include('template._applicantsModal')
@@ -269,7 +287,9 @@
 
                     </div>
                     
-                    @endif @endforeach
+                    @endif 
+
+                    @endforeach
                     <!--Comment show end-->
 
                 
@@ -282,25 +302,9 @@
 
 <!--end job post-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
      </div>
-
-    </div>
-    </div>
+   </div>
+ </div>
 @endsection
 
 
