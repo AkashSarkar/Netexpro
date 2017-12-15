@@ -100,7 +100,7 @@ class ProfileController extends Controller
         ['user_id', '=', Auth::user()->id],
         ['interest_priority','=',0]
         ])->get();
-        //dd($choices);
+       // dd($choices);
 
 
       $user_rate_info=DB:: select('SELECT user_id,post_id,p_pic,firstname,lastname,ratings.created_at 
