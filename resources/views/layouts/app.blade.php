@@ -299,8 +299,10 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
                                 <li class="dropdown-header">
+                                    
                                     @foreach(auth()->User()->unreadNotifications as $notification)
-                                        <a href="#">{{$notification->type}}</a>
+                                       @include('partials.notification')
+                                       
                                     @endforeach
                                 </li>
                             </ul>
