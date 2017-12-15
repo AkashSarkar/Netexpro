@@ -1,7 +1,6 @@
-
 .dropdown.dropdown-lg .dropdown-menu {
-    margin-top: 1px;
-    padding: 6px 20px ;
+    margin-top: -1px;
+    padding: 6px 20px;
 }
 .input-group-btn .btn-group {
     display: flex !important;
@@ -29,13 +28,13 @@
 
 @media screen and (min-width: 768px) {
     #adv-search {
-        width: auto;
+        width: 100%;
         margin: 0 auto;
     }
     .dropdown.dropdown-lg {
         position: static !important;
     }
     .dropdown.dropdown-lg .dropdown-menu {
-        min-width: auto;
+        min-width: 500px;
     }
 }

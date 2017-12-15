@@ -72,6 +72,8 @@ $professions = array(
  
 <!--search 2 -->
      
+            <div class="row">
+    <div class="col-md-12 col-lg-12">
             <div class="input-group" id="adv-search">
                 <input type="text" class="form-control" placeholder="Search for snippets" />
                 <div class="input-group-btn">
@@ -84,7 +86,7 @@ $professions = array(
                                 <form class="form-horizontal"  method="POST" action="/search" role="search">
                                          {{ csrf_field() }}
                                  
-                                  <div class="form-group{{ $errors->has('choice') ? ' has-error' : '' }}">
+                                  <div class="form-group {{ $errors->has('choice') ? ' has-error' : '' }}">
                                       
                                         <label for="choice">Profession : </label>
                                          <select class="form-control" name="choice"  value="{{ old('choice') }}">
@@ -102,9 +104,9 @@ $professions = array(
                                    </div>
                                    
                                    <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
-                                      <label for="location" class="col-sm-2 control-label">Location : </label>
+                                      <label for="location">Location : </label>
 
-                                      <div class="col-md-4">
+                                      
                                             <select class="form-control" name="location"  value="{{ old('location') }}" >
                                                   <span class="caret"></span>
                                                   <option value="0">select a location</option>
@@ -118,13 +120,17 @@ $professions = array(
                                                   <strong>{{ $errors->first('location') }}</strong>
                                               </span>
                                           @endif
-                                      </div>
+                                      
                                   </div>
 
-                                   
-                                    From : <input type="date" name="fromdate" placeholder="From"><br>
-                                    To : <input type="date" name="todate" placeholder="To">
-                            
+                                   <div class="form-group">
+                                     <label for="choice">From : </label>
+                                     <input class="form-control" type="date" name="fromdate" placeholder="From">
+                                    </div>
+                                    <div class="form-group">
+                                     <label for="choice">To : </label>
+                                     <input class="form-control" type="date" name="todate" placeholder="To"  >
+                                    </div>
                                     <button type="submit" class="btn btn-primary">
                                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                     </button>
@@ -139,7 +145,8 @@ $professions = array(
                     </div>
                 </div>
             </div>
-        
+        </div>
+      </div>
       
 <!--Search 2 end -->
 
