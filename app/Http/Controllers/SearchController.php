@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\jobpost;
+use App\AvailableForJob;
 use App\User;
 use App\Interest;
 
@@ -65,19 +66,19 @@ class SearchController extends Controller
          ->get();
 
 
-            $u=Auth::user()->id;
+           /* $u=Auth::user()->id;
             $qualified_candidate=DB::select('SELECT * FROM available_for_jobs JOIN jobposts 
             WHERE available_for_jobs.profession = jobposts.profession 
             AND available_for_jobs.position = jobposts.position 
             AND available_for_jobs.location = jobposts.location
             AND available_for_jobs.user_id=:u
             ORDER BY jobposts.created_at desc' ,
-            ['u'=>$u]);
+            ['u'=>$u]); */
             
          
 
          return view('search',['user'=>$user,'jobpost'=>$jobpost,
-         'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'qualified_candidate'=>$qualified_candidate,]);
+         'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants]);
 
 
     }
