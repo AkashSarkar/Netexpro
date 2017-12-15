@@ -54,7 +54,7 @@
     
     <section class="post-body well well-sm " style="background-color: #EEEEEE; border-radius: 4px;  ">
       @if($post_count == $last_key)
-        <span id="ajax_last_post_id{{$page}}">{{ $userpost->row_no }}</span>
+        <span id="ajax_last_post_id{{$page}}" style="display:none;">{{ $userpost->row_no }}</span>
       @endif
       <div class=" row">
         <div class="col-md-12">
