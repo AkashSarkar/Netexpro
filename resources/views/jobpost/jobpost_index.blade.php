@@ -73,7 +73,7 @@ $professions = array(
 <!--search 2 -->
      
             <div class="row">
-    <div class="col-md-12 col-lg-12">
+    <div class="col-md-12 col-lg-12" style="text-align:justify;">
             <div class="input-group" id="adv-search">
                 <input type="text" class="form-control" placeholder="Search for snippets" />
                 <div class="input-group-btn">
@@ -131,7 +131,7 @@ $professions = array(
                                      <label for="choice">To : </label>
                                      <input class="form-control" type="date" name="todate" placeholder="To"  >
                                     </div>
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" style="margin-left:-15px;">
                                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                     </button>
                                     
