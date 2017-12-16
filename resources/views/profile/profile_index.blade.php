@@ -62,9 +62,9 @@ $industries = array(
   <div class="row" style="padding-top: 10px;">
     <div class="col-md-4 col-sm-4 col-lg-4 pull-right">
 
-      <button type="submit" class="btn btn-primary" style="margin-left: 200px;" data-toggle="tooltip" data-placement="bottom" title=' Job Activity Log'>
+      <button type="submit" class="btn btn-primary" style="margin-left: 200px;" data-toggle="tooltip" data-placement="bottom" title=' Show Activity Log'>
         <a href="{{ url('availableforjob') }}" style="color: inherit; text-decoration: inherit;">
-          <i class="fa fa-briefcase" aria-hidden="true"></i> Job Activity Log</a>
+          <i class="fa fa-bar-chart" aria-hidden="true"></i> Activity Log</a>
       </button>
 
     </div>

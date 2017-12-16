@@ -144,11 +144,8 @@
                 </div>
 
                 <div class="links box-with-text">
-                    <a class="text" href="https://laravel.com/docs">Documentation</a>
-                    <a class="text" href="https://laracasts.com">Laracasts</a>
-                    <a class="text" href="https://laravel-news.com">News</a>
-                    <a class="text" href="https://forge.laravel.com">Forge</a>
-                    <a class="text"href="https://github.com/laravel/laravel">GitHub</a>
+                    <a class="text" >Network Express of Professionals</a>
+                    
                 </div>
             </div>
         </div>
