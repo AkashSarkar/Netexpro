@@ -549,7 +549,7 @@ class HomeController extends Controller
            // return Response::json($post); 
        
         return [
-                'posts' => view('ajax.index')->with(compact('user','post','images','avg_rating','isLiked',
+                'posts' => view('Ajax.index')->with(compact('user','post','images','avg_rating','isLiked',
                 'user_rate_info','page','userComment'))->render()
                 
             ];
