@@ -222,7 +222,13 @@ color: #f2b600
    /*end sidebar button*/
 }
 
-
-
-
-/*post style disable*/
+/*Application modal style */
+.Appmodal, .close {
+    background-color: #0FBB22  ;
+    color:white !important;
+    text-align: center;
+    font-size: 20px;
+}
+.Appmodalfoot {
+    background-color: #0FBB22;
+}
