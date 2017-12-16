@@ -25,26 +25,84 @@ class SearchController extends Controller
         //
 
     
-        $user= User::find(Auth::user()->id);  
-        $r = session('choice');
-        $l = session('location');
+        $user= User::find(Auth::user()->id);
         
-       // $profession = Jobpost::where('profession','LIKE','%'.$r.'%')->get();
-          
+        
+        $profession = session('choice');
+        $location = session('location');
+        $formdate = session('formdate');
+        $todate = session('todate');
+       // dd($profession,$location,$formdate,$todate);
 
-        if($r) 
-        {     
-            $jobpost=DB::table('users')
+        if($profession!=null && $location!=null && $formdate!=null && $todate!=null)
+        {
+            $jobpost = DB::table('users')
             ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.profession','=',$r)
+            ->where([
+                ['jobposts.profession', '=', $profession],
+                ['jobposts.location', '=', $location]
+            ])
+            ->whereBetween('jobposts.created_at', [$formdate, $todate])
             ->get();
+
+         //   dd($jobpost);
         }
-        elseif($l) 
+
+        else if($profession!=null && $location!=null)
+        {
+            $jobpost = DB::table('users')
+            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            ->where([
+                ['jobposts.profession', '=', $profession],
+                ['jobposts.location', '=', $location]
+            ])
+            ->get();
+            dd($jobpost);
+        }
+        else if($profession!=null && $formdate!=null && $todate!=null)
+        {
+            $jobpost = DB::table('users')
+            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            ->where('jobposts.profession', '=', $profession)
+            ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->get();
+
+            dd($jobpost);
+
+        }
+        else if($location!=null && $formdate!=null && $todate!=null)
+        {           
+            $jobpost = DB::table('users')
+            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            ->where('jobposts.location', '=', $location)
+            ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->get();
+            dd($jobpost);
+        }
+       else if($profession!=null) 
         {     
             $jobpost=DB::table('users')
             ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.location','=',$l)
+            ->where('jobposts.profession','=',$profession)
             ->get();
+            dd($jobpost);
+        }
+        else if($location!=null) 
+        {     
+            $jobpost=DB::table('users')
+            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            ->where('jobposts.location','=',$location)
+            ->get();
+            dd($jobpost);
+        }
+        else if($formdate!=null&&$todate!=null)
+        {
+
+            $jobpost=DB::table('users')
+            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->get();
+            dd($jobpost);
         }
         // dd($jobpost);
 
@@ -65,17 +123,6 @@ class SearchController extends Controller
          ->orderBy('created_at','desc')
          ->get();
 
-
-           /* $u=Auth::user()->id;
-            $qualified_candidate=DB::select('SELECT * FROM available_for_jobs JOIN jobposts 
-            WHERE available_for_jobs.profession = jobposts.profession 
-            AND available_for_jobs.position = jobposts.position 
-            AND available_for_jobs.location = jobposts.location
-            AND available_for_jobs.user_id=:u
-            ORDER BY jobposts.created_at desc' ,
-            ['u'=>$u]); */
-            
-         
 
          return view('search',['user'=>$user,'jobpost'=>$jobpost,
          'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants]);
@@ -109,25 +156,105 @@ class SearchController extends Controller
         //
         $user= User::find(Auth::user()->id);  
 
-        $r=$request->input('choice');
-        Session::put('choice', $r);
+        $profession=$request->input('choice');
+        Session::put('choice', $profession);
 
-        $l= $request->input('location');
-        Session::put('location', $l);
-      
-        if($r)
+        $location= $request->input('location');
+        Session::put('location', $location);
+
+        $formdate=$request->input('fromdate');
+       // dd($formdate);
+        Session::put('formdate', $formdate);
+        
+        $todate=$request->input('todate');
+        Session::put('todate', $todate);
+
+
+
+        if($profession!="0" && $location!="0" && $formdate!=null && $todate!=null)
         {
+            $jobpost = DB::table('users')
+            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            ->where([
+                ['jobposts.profession', '=', $profession],
+                ['jobposts.location', '=', $location]
+            ])
+            ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->get();
+        }
+
+        else if($profession!="0" && $location!="0")
+        {
+            session()->forget('formdate');
+            session()->forget('todate');
+
+            $jobpost = DB::table('users')
+            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            ->where([
+                ['jobposts.profession', '=', $profession],
+                ['jobposts.location', '=', $location]
+            ])
+            ->get();
+        }
+        else if($profession!="0" && $formdate!=null && $todate!=null)
+        {
+            session()->forget('location');
+            
+            $jobpost = DB::table('users')
+            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            ->where('jobposts.profession', '=', $profession)
+            ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->get();
+
+        }
+        else if($location!="0" && $formdate!=null && $todate!=null)
+        {
+            session()->forget('choice');
+            
+            $jobpost = DB::table('users')
+            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            ->where('jobposts.location', '=', $location)
+            ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->get();
+
+        }
+        else if($profession!="0")
+        {
+            session()->forget('location');
+            session()->forget('formdate');
+            session()->forget('todate');
+
             $jobpost=DB::table('users')
             ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.profession','=',$r)
+            ->where('jobposts.profession','=',$profession)
             ->get();
          }
-         elseif ($l) {
+         else if ($location!="0") {
+
+            session()->forget('choice');
+            session()->forget('formdate');
+            session()->forget('todate');
+
              $jobpost=DB::table('users')
             ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.location','=',$l)
+            ->where('jobposts.location','=',$location)
             ->get();
          }
+         else if($formdate!=null&&$todate!=null)
+         {
+
+             session()->forget('choice');
+             session()->forget('location');
+
+             $jobpost=DB::table('users')
+             ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+             ->whereBetween('jobposts.created_at', [$formdate, $todate])
+             ->get();
+
+             //dd($jobpost);
+         }
+         
+         
      
 
 
