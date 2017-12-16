@@ -409,22 +409,9 @@
             });
 
         });
-          //sidebar button style
-            $(function () {
-                $(window).resize(function () {
-                if (window.innerWidth < 1022) {
-                    $("#h_post").removeClass("show_home_post");
-                    $(".button_connection").removeClass("button_m");
-                    $("#bp").removeClass("button_m");
-                    $("#bm").removeClass("button_m");
-                    $("#bm1").removeClass("button_m");
-                    $("#bm2").removeClass("button_m");
-                    // $("#bp").removeClass("button_profile");
-
-                }
-                });
-            });
-            //end sidebar style
+          
+         
+            //end sidebar style */
     </script>
 
     <!-- Scripts -->

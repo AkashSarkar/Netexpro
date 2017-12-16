@@ -119,9 +119,7 @@ body{
     
     
    }
-   .button_m{
-    margin-left: -25%;
-   }
+   
    .button_profile a
    {
     text-decoration: none !important;
@@ -144,9 +142,7 @@ body{
    }
 /* end side nav buttons */
 /* home post */
-.show_home_post{
-    margin-left: -9%;
-}
+
 /*end home post*/
 /*rating style*/
 .HeaderBarThreshold:hover input[name="rating"]
@@ -196,4 +192,37 @@ color: #f2b600
     cursor: pointer;
 
 }
+
+@media screen and (min-width: 998px) {
+    /*sidebar button style*/
+    .show_home_post{
+        margin-left: -9%;
+    }
+    .button_m{
+        margin-left: -25%;
+       }
+   /*end sidebar button*/
+}
+@media screen and (max-width: 997px) and (min-width: 992px) {
+    /*sidebar button style*/
+    .show_home_post{
+        margin-left: -5%;
+    }
+   
+   /*end sidebar button*/
+}
+@media screen and (max-width: 992px) and (min-width: 880px) {
+    /*sidebar button style*/
+    .show_home_post{
+        margin-left: -5%;
+    }
+    .button_m{
+        margin-left: -35%;
+       }
+   /*end sidebar button*/
+}
+
+
+
+
 /*post style disable*/
