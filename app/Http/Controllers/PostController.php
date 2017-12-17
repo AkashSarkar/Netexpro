@@ -37,18 +37,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-
-     
-
-
-    
        $id=time();
        
         if(Auth::check()){
             
 
             $request->validate([
-                "type"=> 'required'
+                "type"=> 'required',
+                "post_images[]" =>'mimes:jpg,jpeg,bmp,png',
             ]);
             $post = Post::create([
                 'post_id'=>$id,

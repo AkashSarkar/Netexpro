@@ -1085,7 +1085,20 @@ $industries = array(
   //image show while select
 
   $(document).ready(function () {
+
     $('input[type="file"]').change(function (e) {
+      if(this.files.length>5)
+      {
+         $("#error").html('Maximum 5 image');
+         $(':input[type="submit"]').prop('disabled', true);
+      }
+      else if(this.files.length<5)
+      {
+        $("#error").empty();
+        $(':input[type="submit"]').prop('disabled', false);
+      }
+      $('#image_preview').empty();
+
       for (var i = 0; i < this.files.length; i++) {
         var file = this.files[i];
         var reader = new FileReader();
