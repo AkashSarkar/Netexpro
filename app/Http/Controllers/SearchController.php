@@ -36,96 +36,267 @@ class SearchController extends Controller
 
         if($profession!=null && $location!=null && $formdate!=null && $todate!=null)
         {
-            $jobpost = DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where([
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->where([
                 ['jobposts.profession', '=', $profession],
                 ['jobposts.location', '=', $location]
-            ])
-            ->whereBetween('jobposts.created_at', [$formdate, $todate])
+               ])
+             ->whereBetween('jobposts.created_at', [$formdate, $todate]) 
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+             ->get();
+
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where([
+               ['jobposts.profession', '=', $profession],
+               ['jobposts.location', '=', $location],
+               ['jobposts.user_id', '=', Auth::user()->id]
+              ])
+            ->orderBy('jobposts.created_at','desc')
             ->get();
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
 
          //   dd($jobpost);
         }
 
         else if($profession!=null && $location!=null)
         {
-            $jobpost = DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where([
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->where([
                 ['jobposts.profession', '=', $profession],
                 ['jobposts.location', '=', $location]
-            ])
+               ])
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+           ->get();
+
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where([
+               ['jobposts.profession', '=', $profession],
+               ['jobposts.location', '=', $location],
+               ['jobposts.user_id', '=', Auth::user()->id]
+              ])
+            ->orderBy('jobposts.created_at','desc')
             ->get();
-            dd($jobpost);
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
+           // dd($jobpost);
         }
         else if($profession!=null && $formdate!=null && $todate!=null)
         {
-            $jobpost = DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.profession', '=', $profession)
-            ->whereBetween('jobposts.created_at', [$formdate, $todate])
-            ->get();
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->where('jobposts.profession','=',$profession)
+             ->whereBetween('jobposts.created_at', [$formdate, $todate])
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+           ->get();
 
-            dd($jobpost);
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where([
+               ['jobposts.profession', '=', $profession],
+               ['jobposts.user_id', '=', Auth::user()->id]
+              ])
+            ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->orderBy('jobposts.created_at','desc')
+            ->get();
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
+
+           // dd($jobpost);
 
         }
         else if($location!=null && $formdate!=null && $todate!=null)
         {           
-            $jobpost = DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.location', '=', $location)
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->where('jobposts.location','=',$location)
+             ->whereBetween('jobposts.created_at', [$formdate, $todate])
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+           ->get();
+
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where([
+               ['jobposts.location', '=', $location],
+               ['jobposts.user_id', '=', Auth::user()->id]
+              ])
             ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->orderBy('jobposts.created_at','desc')
             ->get();
-            dd($jobpost);
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
+           // dd($jobpost);
         }
        else if($profession!=null) 
         {     
-            $jobpost=DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.profession','=',$profession)
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->where('jobposts.profession','=',$profession)
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+           ->get();
+
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where([
+               ['jobposts.profession', '=', $profession],
+               ['jobposts.user_id', '=', Auth::user()->id]
+              ])
+            ->orderBy('jobposts.created_at','desc')
             ->get();
-            dd($jobpost);
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
+          //  dd($jobpost);
         }
         else if($location!=null) 
         {     
-            $jobpost=DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.location','=',$location)
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->where('jobposts.location','=',$location)
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+           ->get();
+
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where([
+               ['jobposts.location', '=', $location],
+               ['jobposts.user_id', '=', Auth::user()->id]
+              ])
+            ->orderBy('jobposts.created_at','desc')
             ->get();
-            dd($jobpost);
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
+            //dd($jobpost);
         }
         else if($formdate!=null&&$todate!=null)
         {
 
-            $jobpost=DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->whereBetween('jobposts.created_at', [$formdate, $todate])
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+           ->get();
+
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where('jobposts.user_id', '=', Auth::user()->id)
             ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->orderBy('jobposts.created_at','desc')
             ->get();
-            dd($jobpost);
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
         }
         // dd($jobpost);
 
 
-         $jobComment = DB::table('comments')
-         ->join('users', 'users.id', '=', 'comments.user_id')
-         ->join('jobposts', 'jobposts.jobpost_id', '=', 'comments.commentable_id')
-         ->orderBy('comments.created_at','desc')
-         ->get();
-         $job_applicants=DB::table('applicants')
-         ->join('users', 'users.id', '=', 'applicants.user_id')
-         ->join('jobposts', 'jobposts.jobpost_id', '=', 'applicants.jobpost_id')
-         ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','applicants.created_at','applicants.user_id')
-         ->orderBy('jobposts.created_at','desc')
-         ->get();
+        $jobComment = DB::table('comments')
+        ->join('users', 'users.id', '=', 'comments.user_id')
+        ->join('jobposts', 'jobposts.jobpost_id', '=', 'comments.commentable_id')
+        ->orderBy('comments.created_at','desc')
+        ->get();
+        $job_applicants=DB::table('applicants')
+        ->join('users', 'users.id', '=', 'applicants.user_id')
+        ->join('jobposts', 'jobposts.jobpost_id', '=', 'applicants.jobpost_id')
+        ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','applicants.created_at','applicants.user_id')
+        ->orderBy('jobposts.created_at','desc')
+        ->get();
 
-         $applicants=DB::table('applicants')
-         ->orderBy('created_at','desc')
-         ->get();
+        $applicants=DB::table('applicants')
+        ->orderBy('created_at','desc')
+        ->get();
 
+        $u=Auth::user()->id;
+        $qualified_candidate=DB::select('SELECT * FROM available_for_jobs JOIN jobposts 
+        WHERE available_for_jobs.profession = jobposts.profession 
+        AND available_for_jobs.position = jobposts.position 
+        AND available_for_jobs.location = jobposts.location
+        AND available_for_jobs.user_id=:u
+        ORDER BY jobposts.created_at desc' ,
+        ['u'=>$u]);
+        
 
-         return view('search',['user'=>$user,'jobpost'=>$jobpost,
-         'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants]);
+       return view('search',['user'=>$user,'jobpost'=>$jobpost,
+       'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'qualified_candidate'=>$qualified_candidate]);
 
 
     }
@@ -168,19 +339,46 @@ class SearchController extends Controller
         
         $todate=$request->input('todate');
         Session::put('todate', $todate);
+       
 
 
-
-        if($profession!="0" && $location!="0" && $formdate!=null && $todate!=null)
+        if($profession!="0"&& $location!="0" && $formdate!=null && $todate!=null)
         {
-            $jobpost = DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where([
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->where([
                 ['jobposts.profession', '=', $profession],
                 ['jobposts.location', '=', $location]
-            ])
-            ->whereBetween('jobposts.created_at', [$formdate, $todate])
+               ])
+             ->whereBetween('jobposts.created_at', [$formdate, $todate]) 
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+             ->get();
+
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where([
+               ['jobposts.profession', '=', $profession],
+               ['jobposts.location', '=', $location],
+               ['jobposts.user_id', '=', Auth::user()->id]
+              ])
+            ->whereBetween('jobposts.created_at', [$formdate, $todate]) 
+            ->orderBy('jobposts.created_at','desc')
             ->get();
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
+
+         //   dd($jobpost);
         }
 
         else if($profession!="0" && $location!="0")
@@ -188,35 +386,110 @@ class SearchController extends Controller
             session()->forget('formdate');
             session()->forget('todate');
 
-            $jobpost = DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where([
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->where([
                 ['jobposts.profession', '=', $profession],
                 ['jobposts.location', '=', $location]
-            ])
+               ])
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+             ->get();
+
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where([
+               ['jobposts.profession', '=', $profession],
+               ['jobposts.location', '=', $location],
+               ['jobposts.user_id', '=', Auth::user()->id]
+              ])
+            ->orderBy('jobposts.created_at','desc')
             ->get();
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
+            //dd($jobpost);
         }
         else if($profession!="0" && $formdate!=null && $todate!=null)
         {
             session()->forget('location');
-            
-            $jobpost = DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.profession', '=', $profession)
+
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->where('jobposts.profession','=',$profession)
+             ->whereBetween('jobposts.created_at', [$formdate, $todate])
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+             ->get();
+
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where([
+               ['jobposts.profession', '=', $profession],
+               ['jobposts.user_id', '=', Auth::user()->id]
+              ])
             ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->orderBy('jobposts.created_at','desc')
             ->get();
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
+
+           // dd($jobpost);
 
         }
         else if($location!="0" && $formdate!=null && $todate!=null)
-        {
+        {  
             session()->forget('choice');
-            
-            $jobpost = DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.location', '=', $location)
-            ->whereBetween('jobposts.created_at', [$formdate, $todate])
-            ->get();
 
+            $jobposts=DB::table('users')
+            ->join('jobposts', function ($join) {
+             $join->on('users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '!=', Auth::user()->id);
+           })
+           ->join('interests',function ($join) {
+               $join->on('interests.profession', '=', 'jobposts.profession')
+               ->where('interests.user_id', '=', Auth::user()->id);
+             })
+             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+             ->where('jobposts.location','=',$location)
+             ->whereBetween('jobposts.created_at', [$formdate, $todate])
+             ->groupBy('jobpost_id')
+             ->orderBy('jobposts.created_at','desc')
+             ->get();
+
+           $user_job_hire_post=DB::table('users')
+           ->join('jobposts','users.id', '=', 'jobposts.user_id')
+            ->where([
+               ['jobposts.location', '=', $location],
+               ['jobposts.user_id', '=', Auth::user()->id]
+              ])
+            ->whereBetween('jobposts.created_at', [$formdate, $todate])
+            ->orderBy('jobposts.created_at','desc')
+            ->get();
+           
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
+           // dd($jobpost);
         }
         else if($profession!="0")
         {
@@ -224,40 +497,105 @@ class SearchController extends Controller
             session()->forget('formdate');
             session()->forget('todate');
 
-            $jobpost=DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.profession','=',$profession)
-            ->get();
-         }
-         else if ($location!="0") {
+            $jobposts=DB::table('users')
+                         ->join('jobposts', function ($join) {
+                          $join->on('users.id', '=', 'jobposts.user_id')
+                          ->where('jobposts.user_id', '!=', Auth::user()->id);
+                        })
+                        ->join('interests',function ($join) {
+                            $join->on('interests.profession', '=', 'jobposts.profession')
+                            ->where('interests.user_id', '=', Auth::user()->id);
+                          })
+                          ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+                          ->where('jobposts.profession','=',$profession)
+                          ->groupBy('jobpost_id')
+                          ->orderBy('jobposts.created_at','desc')
+                        ->get();
 
+                        $user_job_hire_post=DB::table('users')
+                        ->join('jobposts','users.id', '=', 'jobposts.user_id')
+                         ->where([
+                            ['jobposts.profession', '=', $profession],
+                            ['jobposts.user_id', '=', Auth::user()->id]
+                           ])
+                         ->orderBy('jobposts.created_at','desc')
+                         ->get();
+                        
+                 $jobpost=$jobposts->merge($user_job_hire_post);
+                 $jobpost=$jobpost->sortByDesc('created_at');
+
+                // dd($jobpost);
+         }
+         else if($location!="0") 
+         {  
+             
             session()->forget('choice');
             session()->forget('formdate');
             session()->forget('todate');
 
-             $jobpost=DB::table('users')
-            ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
-            ->where('jobposts.location','=',$location)
+             $jobposts=DB::table('users')
+             ->join('jobposts', function ($join) {
+              $join->on('users.id', '=', 'jobposts.user_id')
+              ->where('jobposts.user_id', '!=', Auth::user()->id);
+            })
+            ->join('interests',function ($join) {
+                $join->on('interests.profession', '=', 'jobposts.profession')
+                ->where('interests.user_id', '=', Auth::user()->id);
+              })
+              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+              ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+              ->where('jobposts.location','=',$location)
+              ->groupBy('jobpost_id')
+              ->orderBy('jobposts.created_at','desc')
             ->get();
+ 
+            $user_job_hire_post=DB::table('users')
+            ->join('jobposts','users.id', '=', 'jobposts.user_id')
+             ->where([
+                ['jobposts.location', '=', $location],
+                ['jobposts.user_id', '=', Auth::user()->id]
+               ])
+             ->orderBy('jobposts.created_at','desc')
+             ->get();
+            
+             $jobpost=$jobposts->merge($user_job_hire_post);
+             $jobpost=$jobpost->sortByDesc('created_at');
+             //dd($jobpost);
          }
          else if($formdate!=null&&$todate!=null)
          {
-
-             session()->forget('choice');
-             session()->forget('location');
-
-             $jobpost=DB::table('users')
-             ->join('jobposts', 'jobposts.user_id', '=', 'users.id')
+            session()->forget('choice');
+            session()->forget('location');
+ 
+             $jobposts=DB::table('users')
+             ->join('jobposts', function ($join) {
+              $join->on('users.id', '=', 'jobposts.user_id')
+              ->where('jobposts.user_id', '!=', Auth::user()->id);
+            })
+            ->join('interests',function ($join) {
+                $join->on('interests.profession', '=', 'jobposts.profession')
+                ->where('interests.user_id', '=', Auth::user()->id);
+              })
+              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+              ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+              ->whereBetween('jobposts.created_at', [$formdate, $todate])
+              ->groupBy('jobpost_id')
+              ->orderBy('jobposts.created_at','desc')
+              ->get();
+ 
+            $user_job_hire_post=DB::table('users')
+            ->join('jobposts','users.id', '=', 'jobposts.user_id')
+             ->where('jobposts.user_id', '=', Auth::user()->id)
              ->whereBetween('jobposts.created_at', [$formdate, $todate])
+             ->orderBy('jobposts.created_at','desc')
              ->get();
-
-             //dd($jobpost);
+            
+             $jobpost=$jobposts->merge($user_job_hire_post);
+             $jobpost=$jobpost->sortByDesc('created_at');
          }
          
-         
-     
-
-
+ 
          $jobComment = DB::table('comments')
          ->join('users', 'users.id', '=', 'comments.user_id')
          ->join('jobposts', 'jobposts.jobpost_id', '=', 'comments.commentable_id')
@@ -273,10 +611,19 @@ class SearchController extends Controller
          $applicants=DB::table('applicants')
          ->orderBy('created_at','desc')
          ->get();
+
+         $u=Auth::user()->id;
+         $qualified_candidate=DB::select('SELECT * FROM available_for_jobs JOIN jobposts 
+         WHERE available_for_jobs.profession = jobposts.profession 
+         AND available_for_jobs.position = jobposts.position 
+         AND available_for_jobs.location = jobposts.location
+         AND available_for_jobs.user_id=:u
+         ORDER BY jobposts.created_at desc' ,
+         ['u'=>$u]);
          
 
-         return view('search',['user'=>$user,'jobpost'=>$jobpost,
-         'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants]);
+        return view('search',['user'=>$user,'jobpost'=>$jobpost,
+        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'qualified_candidate'=>$qualified_candidate]);
     }
 
     /**
