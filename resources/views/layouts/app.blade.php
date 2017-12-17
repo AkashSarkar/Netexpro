@@ -284,18 +284,17 @@
                     <!--Start navbar right list elements -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{ url('home') }}">Home</a>
+                            <a href="{{ url('home') }}" data-toggle="tooltip" data-placement="bottom" title='Home'><i class="fa fa-home" aria-hidden="true"></i></a>
                         </li>
                         <li>
-                            <a href="" data-toggle="modal" data-target="#jobModal">Jobs</a>
+                            <a href="" data-toggle="modal" data-target="#jobModal"  data-toggle="tooltip" data-placement="bottom" title='Jobs'><i class="fa fa-briefcase" aria-hidden="true"></i></a>
                         </li>
                         {{--notification dropdown--}}
                         
                         <li class="dropdown">
-                            <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <i class="fas fa-bell fa-lg"></i>
-                                <span style="cursor:pointer;"> Job Offers </span> 
-                                <span class="badge">{{count(auth()->User()->unreadNotifications)}}</span>
+                            <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  data-toggle="tooltip" data-placement="bottom" title='See Notification'>
+                              <i class="fas fa-bell fa-lg"></i>
+                              <span class="badge" style="cursor:pointer;" data-toggle="tooltip" data-placement="bottom" title='{{count(auth()->User()->unreadNotifications)}} Notification'>{{count(auth()->User()->unreadNotifications)}}</span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
                                 <li class="dropdown-header">
@@ -310,7 +309,10 @@
                         {{--end notification dropdown--}}
 
                         <li>
-                            <a href="{{ url('profile') }}">{{ Auth::user()->firstname }}</a>
+                        
+                        
+                          <a href="{{ url('profile') }}">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</a>
+                           
                         </li>
 
                         <li class="dropdown">
@@ -409,22 +411,9 @@
             });
 
         });
-          //sidebar button style
-            $(function () {
-                $(window).resize(function () {
-                if (window.innerWidth < 1022) {
-                    $("#h_post").removeClass("show_home_post");
-                    $(".button_connection").removeClass("button_m");
-                    $("#bp").removeClass("button_m");
-                    $("#bm").removeClass("button_m");
-                    $("#bm1").removeClass("button_m");
-                    $("#bm2").removeClass("button_m");
-                    // $("#bp").removeClass("button_profile");
-
-                }
-                });
-            });
-            //end sidebar style
+          
+         
+            //end sidebar style */
     </script>
 
     <!-- Scripts -->

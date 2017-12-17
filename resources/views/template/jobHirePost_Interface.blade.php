@@ -1,5 +1,4 @@
 <!--job hire post-->
-
 @foreach($jobpost as $jobpost)
 <div class="panel panel-default">
   <div class="panel-body">
@@ -45,7 +44,7 @@
               </div>
               @endif
               <!--Getting Applicant Value-->
-              <?php $checkApplicant=0;$valid_candidate=0; ?>
+              <?php $checkApplicant=0;$valid_candidate=0;$id=$jobpost->jobpost_id ;?>
               @if($jobpost->user_id != Auth::user()->id )
               @foreach($applicants as $applicant)
                 @if($applicant->jobpost_id == $jobpost->jobpost_id)
@@ -71,9 +70,17 @@
                             <button type="" class="btn btn-primary pull-right btn-sm">Apply now</button>
                     </form>
               @elseif($checkApplicant == 0  && $valid_candidate == 0)
-              
-                <button type="button" data-toggle="modal" data-target="#available_job_modal" class="btn btn-primary pull-right btn-sm">Apply for job</button>
-              
+              <button type="button" data-toggle="modal" data-target="#applicationForm<?php echo $jobpost->jobpost_id?>" class="btn btn-primary pull-right btn-sm">Apply for job</button>
+ 
+                <!--Application Form-->
+                 
+                <div class="modal fade" id="applicationForm<?php echo $jobpost->jobpost_id?>" role="dialog">
+    <div class="modal-dialog">
+    
+                <!-- Modal content-->
+                  
+                  @include('template._applicationForm')
+                 <!--End Application form-->
               @endif
               @endif
               <!--End of getting Applicant Value-->
