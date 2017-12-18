@@ -334,7 +334,6 @@ class SearchController extends Controller
         Session::put('location', $location);
 
         $formdate=$request->input('fromdate');
-       // dd($formdate);
         Session::put('formdate', $formdate);
         
         $todate=$request->input('todate');
