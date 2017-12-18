@@ -17,7 +17,8 @@ $professions = array(
      "Dhaka",
      "Chittagong",
      "Comilla",
-     "Sylhet"
+     "Sylhet",
+     "Rangpur"
  );
 ?>
 <!--Main content-->
@@ -85,7 +86,8 @@ $professions = array(
                                   <!--Search by profession start-->
                                   <div class="form-group {{ $errors->has('choice') ? ' has-error' : '' }}">
                                       <label for="choice">Profession : </label><br>
-                                         <select class="form-control" name="choice" value="{{ old('choice') }}"style="width:100%">
+                                         <select class="form-control" name="choice" value="{{ old('choice') }}" 
+                                         style="width:100%">
                                               <span class="caret"></span>
                                               <option value="0">select a profession</option>
                                               @foreach( $choices as $choice)
@@ -106,8 +108,8 @@ $professions = array(
                                             <select class="form-control" name="location"  value="{{ old('location') }}" style="width:100%" >
                                                   <span class="caret"></span>
                                                   <option value="0">select a location</option>
-                                                  @foreach( $locations as $location)
-                                                  <option>{{ $location }}</option>
+                                                  @foreach( $location_choices as $location)
+                                                  <option>{{ $location->location }}</option>
                                                   @endforeach
                                             </select>
 

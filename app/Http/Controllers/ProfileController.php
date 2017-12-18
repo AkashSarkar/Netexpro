@@ -29,7 +29,8 @@ class ProfileController extends Controller
 
       $user= User::find(Auth::user()->id);
       //$post = Post::where('user_id', Auth::user()->id)->get();
-      $no_of_project_done_by_user = Post::where('post_type','=','project')->where('user_id', Auth::user()->id)->count();
+      $no_of_project_done_by_user = Post::where('post_type','=','project')
+      ->where('user_id', Auth::user()->id)->count();
       
       $jobpost = jobpost::where('user_id', Auth::user()->id)->get();
       $useravailablepost = AvailableForJob::where('user_id', Auth::user()->id)->get();
@@ -40,14 +41,12 @@ class ProfileController extends Controller
       ->get();
 
 
-       //avg rating
-       $avg_rating = DB::table('ratings')
-       ->select( DB::raw('AVG(rating) as avg_rating'),'post_id')
-       ->groupBy('post_id')
-       ->get();
-
-       //dd($avg_rating);
-       //end avg rating
+      //avg rating
+      $avg_rating = DB::table('ratings')
+      ->select( DB::raw('AVG(rating) as avg_rating'),'post_id')
+      ->groupBy('post_id')
+      ->get();
+      //end avg rating
 
        //check if user rated post or not
        $isLike=Rating::where('user_id',Auth::user()->id)->get();

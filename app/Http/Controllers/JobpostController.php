@@ -20,7 +20,7 @@ class JobpostController extends Controller
      */
     public function index(Request $request)
     {
-         $user= User::find(Auth::user()->id);  
+            $user= User::find(Auth::user()->id);  
             $jobposts=DB::table('users')
                          ->join('jobposts', function ($join) {
                           $join->on('users.id', '=', 'jobposts.user_id')
@@ -35,17 +35,18 @@ class JobpostController extends Controller
                           ->groupBy('jobpost_id')
                           ->orderBy('jobposts.created_at','desc')
                         ->get();
+
             //out of network hireing people
             $user_job_hire_post=DB::table('users')
-            ->join('jobposts', function ($join) {
+             ->join('jobposts', function ($join) {
              $join->on('users.id', '=', 'jobposts.user_id')
              ->where('jobposts.user_id', '=', Auth::user()->id);
              })
              ->orderBy('jobposts.created_at','desc')
              ->get();
             
-             $jobpost=$jobposts->merge($user_job_hire_post);
-             $jobpost=$jobpost->sortByDesc('created_at');
+            $jobpost=$jobposts->merge($user_job_hire_post);
+            $jobpost=$jobpost->sortByDesc('created_at');
             
 
 
@@ -65,10 +66,18 @@ class JobpostController extends Controller
             ->orderBy('created_at','desc')
             ->get();
 
+            //Profession search options come from users interests
             $choices= DB::table('interests')
             ->where('user_id', '=', Auth::user()->id)->get(); 
 
-      
+            //Location search options come from users location and available_for_jobs location
+            $location_choices1= DB::table('users')
+            ->where('id', '=', Auth::user()->id)->get(); 
+            $location_choices2= DB::table('available_for_jobs')
+            ->where('user_id', '=', Auth::user()->id)->get();
+            $location_choices = $location_choices1->merge($location_choices2);
+
+           
             $u=Auth::user()->id;
             $qualified_candidate=DB::select('SELECT * FROM available_for_jobs JOIN jobposts 
             WHERE available_for_jobs.profession = jobposts.profession 
@@ -78,11 +87,8 @@ class JobpostController extends Controller
             ORDER BY jobposts.created_at desc' ,
             ['u'=>$u]);
             
-            
-           // dd($qualified_candidate);
-            
         return view('jobpost.jobpost_index',['user'=>$user,'jobpost'=>$jobpost,
-        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'qualified_candidate'=>$qualified_candidate,'choices'=>$choices]);
+        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'qualified_candidate'=>$qualified_candidate,'choices'=>$choices, 'location_choices'=>$location_choices]);
     }
 
 
@@ -134,19 +140,12 @@ class JobpostController extends Controller
      */
     public function show(jobpost $jobpost)
     {
-        //
+
         if( Auth::check() )
          {
-            //dump is used to see the id of the authenticated user that is currently logged in
-           // dump(Auth::user()->id);
-        //basically we are saying here is find the company where the user who created it is the same user currently logged in 
-        //use get() to get the companies of that specific id 
-            
-           // $post = Post::where('user_id', Auth::user()->id)->get();
+            // $post = Post::where('user_id', Auth::user()->id)->get();
            
-        
-       
-        }
+         }
     }
  
 

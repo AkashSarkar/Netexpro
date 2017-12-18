@@ -378,7 +378,7 @@ class SearchController extends Controller
             $jobpost=$jobposts->merge($user_job_hire_post);
             $jobpost=$jobpost->sortByDesc('created_at');
 
-         //   dd($jobpost);
+     
         }
 
         else if($profession!="0" && $location!="0")
@@ -417,7 +417,7 @@ class SearchController extends Controller
            
             $jobpost=$jobposts->merge($user_job_hire_post);
             $jobpost=$jobpost->sortByDesc('created_at');
-            //dd($jobpost);
+           
         }
         else if($profession!="0" && $formdate!=null && $todate!=null)
         {
@@ -453,7 +453,6 @@ class SearchController extends Controller
             $jobpost=$jobposts->merge($user_job_hire_post);
             $jobpost=$jobpost->sortByDesc('created_at');
 
-           // dd($jobpost);
 
         }
         else if($location!="0" && $formdate!=null && $todate!=null)
@@ -489,7 +488,7 @@ class SearchController extends Controller
            
             $jobpost=$jobposts->merge($user_job_hire_post);
             $jobpost=$jobpost->sortByDesc('created_at');
-           // dd($jobpost);
+           
         }
         else if($profession!="0")
         {
