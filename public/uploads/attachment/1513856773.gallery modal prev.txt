@@ -1,0 +1,134 @@
+ <!--image show-->
+            <?php $i=0; ?> 
+            <?php $a=array();?>
+            @foreach($images as $imgpost) @if( $userpost['post_id']==$imgpost->post_id)
+            <h4>Project Images : </h4>
+            <div class=" row">
+              <div class="col-md-12 col-lg-12">
+                <div class="well well-sm">
+                 
+
+                  @foreach($images as $imagepost)
+                   @if( $userpost['post_id']==$imagepost->post_id)
+                  <?php 
+                   $a[$imagepost->post_id][$i] = $imagepost->post_image;
+                   
+                   ?>
+                   {{$i}}{{$a[$imagepost->post_id][$i]}}
+                   <?php $i++; ?>
+
+                <img class="fb-image-lg" src="/uploads/postimages/{{$imagepost->post_image}}" alt="Project image " style="height:100px;width:20%;"
+                    data-toggle="modal" data-target="#gallery_modal<?php echo $imagepost->post_id ; echo $i;?>" />
+
+                   
+                   
+                    
+                  <!--Modal Gallery-->
+                  <div class="modal fade" id="gallery_modal<?php echo $imagepost->post_id ; echo $i;?>" role="dialog">
+                    <div class="modal img-modal">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-md-8 modal-image">
+                                    <!--A variable for Gallery modal as flag-->
+                                    <?php $f=0; ?> 
+                                    @foreach($images as $gallery) 
+                                      @if( $gallery->post_id == $imagepost->post_id )
+                                        @if( $gallery->post_image==$imagepost->post_image)
+                                                <img class="img-responsive" src="/uploads/postimages/{{$gallery->post_image}}">
+                                        
+                                                
+                                        
+
+                                        @else
+                                                <img class="img-responsive hidden" src="/uploads/postimages/{{$gallery->post_image}}">
+                                                
+                                        @endif
+                                        
+                                      @endif
+                                      @endforeach
+
+                                
+                                  
+                                
+                               
+
+                                <a href="" class="img-modal-btn left">
+                                  <i class="glyphicon glyphicon-chevron-left"></i>
+                                </a>
+                                <a href="" class="img-modal-btn right">
+                                  <i class="glyphicon glyphicon-chevron-right"></i>
+                                </a>
+                              </div>
+                              <div class="col-md-4 modal-meta">
+                                <div class="modal-meta-top">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <div class="img-poster clearfix">
+                                    <a href="">
+                                      <img class="img-circle" src="/uploads/profile/{{$userpost['p_pic']}}" />
+                                    </a>
+                                    <strong>
+                                      <a href="">John Doe</a>
+                                    </strong>
+                                    <span>12 minutes ago</span>
+                                  </div>
+
+                                  <ul class="img-comment-list">
+                                    <li>
+                                      <div class="comment-img">
+                                        <img src="http://lorempixel.com/50/50/people/6">
+                                      </div>
+                                      <div class="comment-text">
+                                        <strong>
+                                          <a href="">Jane Doe</a>
+                                        </strong>
+                                        <p>this is here</p>
+                                        <?php echo $imagepost->post_id;?>
+                                        <span class="date sub-text">on December 5th, 2016</span>
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <div class="comment-img">
+                                        <img src="http://lorempixel.com/50/50/people/7">
+                                      </div>
+                                      <div class="comment-text">
+                                        <strong>
+                                          <a href="">Jane Doe</a>
+                                        </strong>
+                                        <p>Hello this is a test comment and this comment is particularly very long and it goes
+                                          on and on and on.</p>
+                                          {{$f}}
+                                        <span>on December 5th, 2016</span>
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <div class="comment-img">
+                                        <img src="http://lorempixel.com/50/50/people/9">
+                                      </div>
+                                      <div class="comment-text">
+                                        <strong>
+                                          <a href="">Jane Doe</a>
+                                        </strong>
+                                        <p class="">Hello this is a test comment.</p>
+                                        <span class="date sub-text">on December 5th, 2016</span>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                                <div class="modal-meta-bottom">
+                                  <input type="text" class="form-control" placeholder="Leave a commment.." />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                    </div>
+
+
+                  </div>
+                  <!--End modal gallery-->
+

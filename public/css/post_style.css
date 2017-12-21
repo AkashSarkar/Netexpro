@@ -223,7 +223,7 @@ color: #f2b600
 }
 
 /*Application modal style */
-.Appmodal, .close {
+.Appmodal {
     background-color: #0FBB22  ;
     color:white !important;
     text-align: center;
@@ -232,3 +232,7 @@ color: #f2b600
 .Appmodalfoot {
     background-color: #0FBB22;
 }
+.close{
+    color: #6C77A3; 
+
+ }
