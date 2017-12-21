@@ -36,7 +36,7 @@ class jobOffers extends Notification
 
     public function toDatabase($notifiable)
     {
-        dd($this->employer);
+        
         return [
             "employer"=>$this->employer
             

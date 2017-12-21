@@ -8,6 +8,7 @@ use Illuminate\Support\facades\Auth;
 use App\Notifications\jobOffers;
 use DB;
 use App\User;
+use App\jobpost;
 
 class Hire_infoController extends Controller
 {
@@ -49,14 +50,14 @@ class Hire_infoController extends Controller
 
             if($hire_info){
                 $employer=DB::table("users")
-                ->select('firstname','lastname','p_pic','position','profession','company_details','job_details',
+                ->select('id','firstname','lastname','p_pic','position','profession','company_details','job_details',
                 'jobposts.location','jobpost_id')
                 ->join('jobposts','users.id','=','jobposts.user_id')
                 ->where('jobpost_id','=',$hire_info->hire_post_id)->get();
-                //dd($employer);
+                
                 $employee=User::where('id','=',$hire_info->employee_id)->first();
                 //$employee=json_decode($employee,true);
-                //dd($employee);
+                
                 Notification::send($employee, new jobOffers($employer));
                 //$employee->notify(new jobOffers($employer));
                 return back()->with('success' , 'Hired successfully');
@@ -72,9 +73,23 @@ class Hire_infoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($post_id,$employer_id)
     {
-        //
+        //dd($employer_id);
+        $jobpost=DB::table('users')
+        ->join('jobposts','users.id', '=', 'jobposts.user_id')
+       ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
+         ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+         ->where([
+             ['jobpost_id','=',$post_id],
+             ['users.id','=',$employer_id]
+         ])
+         ->groupBy('jobpost_id')
+         ->orderBy('jobposts.created_at','desc')
+         ->get();
+        //dd($jobpost);
+        return view('template.notification_jobpost',['jobposts'=>$jobpost]);
+        
     }
 
     /**

@@ -15,6 +15,7 @@ class jobpost extends Model
         'circular',
         'company_details',
         'job_details',
+        'salary_range',
         'location',
         'jobpost_id',
         'user_id',

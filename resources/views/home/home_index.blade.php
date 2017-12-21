@@ -184,7 +184,7 @@
          $("#error").html('Maximum 5 image');
          $(':input[type="submit"]').prop('disabled', true);
       }
-      else if(this.files.length<5)
+      else if(this.files.length<=5)
       {
         $("#error").empty();
         $(':input[type="submit"]').prop('disabled', false);

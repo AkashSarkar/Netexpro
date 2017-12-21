@@ -21,8 +21,10 @@
     <link href="{{ asset('css/search_style.css') }}" rel='stylesheet' type='text/css'>
     <!--profile_style-->
     <link href="{{ asset('css/post_style.css') }}" rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    
     <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/select2.min.css">
@@ -258,9 +260,9 @@
 
                     <!-- Authentication Links -->
                     @guest
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right"> 
                         <li>
-                            <a href="{{ route('login') }}">Login</a>
+                            <a href="{{ route('login') }}" >Login</a>
                         </li>
                         <li>
                             <a href="{{ route('register') }}">Register</a>
@@ -284,19 +286,20 @@
                     <!--Start navbar right list elements -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{ url('home') }}" data-toggle="tooltip" data-placement="bottom" title='Home'><i class="fa fa-home" aria-hidden="true"></i></a>
+                            <a href="{{ url('home') }}" ><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         </li>
                         <li>
-                            <a href="" data-toggle="modal" data-target="#jobModal"  data-toggle="tooltip" data-placement="bottom" title='Jobs'><i class="fa fa-briefcase" aria-hidden="true"></i></a>
+                            <a href="" data-toggle="modal" data-target="#jobModal"><i class="fa fa-briefcase" aria-hidden="true"></i> Job</a>
                         </li>
                         {{--notification dropdown--}}
                         
                         <li class="dropdown">
                             <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  data-toggle="tooltip" data-placement="bottom" title='See Notification'>
                               <i class="fas fa-bell fa-lg"></i>
-                              <span class="badge" style="cursor:pointer;" data-toggle="tooltip" data-placement="bottom" title='{{count(auth()->User()->unreadNotifications)}} Notification'>{{count(auth()->User()->unreadNotifications)}}</span>
+                              <span class="badge" style="cursor:pointer;" data-toggle="tooltip" data-placement="bottom" title='Notification'>{{count(auth()->User()->unreadNotifications)}}</span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                              @if(count(auth()->User()->unreadNotifications)>0)
                                 <li class="dropdown-header">
                                     
                                     @foreach(auth()->User()->unreadNotifications as $notification)
@@ -304,6 +307,11 @@
                                        
                                     @endforeach
                                 </li>
+                                @else
+                                <li>
+                                    <a>No Notification</a>
+                                </li>
+                                @endif
                             </ul>
                         </li>
                         {{--end notification dropdown--}}

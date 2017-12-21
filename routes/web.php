@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
+
+  
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/home/get_post', 'HomeController@get_post');
     Route::post('/home', 'HomeController@store');
@@ -26,8 +28,9 @@ Route::middleware(['auth'])->group(function(){
     
     Route::get('/interests', 'InterestController@update'); 
     
-  //  Route::get('/availableforjob', 'AvailableForJobController@index')->name('availableforjob');
-    
+    Route::get('/availableforjob', 'AvailableForJobController@index')->name('availableforjob');
+    Route::get('/jobpost/{post_id}/user/{employer_id}', 'Hire_infoController@show')->name('getJobpost');
+    Route::get('/public_view/{id}/jobposts/{jobpost_id}/employer/{employer_id}', 'PublicprofileController@index')->name('public_view');
    
 
     //Route::post('/post', 'PostController@store');
@@ -39,6 +42,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('jobpost', 'JobpostController');
     Route::resource('hire_employee', 'Hire_infoController');
     Route::resource('availableforjob', 'AvailableForJobController');
+
 
     Route::post('search', 'SearchController@search');
     Route::get('search', 'SearchController@index');
@@ -60,7 +64,11 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('comment', 'CommentsController');
     Route::resource('applicants', 'ApplicantsController');
   //  Route::any('/search', 'JobpostController@search');
-     Route::resource('/public_view/{id?}', 'PublicprofileController');
+     
+
+     
+     
+     
     //Route::any('/search', 'JobpostController@search');
     
 });

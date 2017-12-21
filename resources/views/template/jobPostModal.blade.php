@@ -273,8 +273,18 @@
                                 </div>
                           </div>
                           <!-- job details end -->
+
+                          <!-- Salary Range start -->
+                          <div class="form-group">
+                                <label for="salary_range" class="col-md-4 control-label">Salary Range</label>
+
+                                <div class="col-md-6">
+                                    <input placeholder="" id="salary_range" type="text" class="form-control" 
+                                    name="salary_range" value=""  autofocus  style="width:110px;">
+                                </div>
+                          </div>
+                          <!-- Salary Range end -->
                             
-                          
                           <!-- Location start -->
                           <div class="form-group">
                           <label for="location" class="col-md-4 control-label">Prefered Location<span class="required">*</span></label>

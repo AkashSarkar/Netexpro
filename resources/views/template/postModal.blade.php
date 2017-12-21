@@ -93,17 +93,17 @@
               <ul class="nav nav-pills pull-left">
                 <li id="tooltip">
                   <a href="#">
-                    <i class="fa fa-map-marker">
+                   <i class="fas fa-map-marker-alt"></i>
                       <span id="tooltiptext">Check-in</span>
-                    </i>
+                    
                   </a>
                 </li>
                 <li id="tooltip">
                   <a href="#">
                     <span onclick="upload_image()">
-                      <i class="fa fa-camera">
+                      <i class="fas fa-camera-retro"></i>
                         <span id="tooltiptext">Upload image</span>
-                      </i>
+                      
                     </span>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input id="my_images" type="file" name="post_images[]" multiple="true" style="display: none;">
@@ -111,16 +111,16 @@
                 </li>
                 <li id="tooltip">
                   <a href="#">
-                    <i class="fa fa-film">
+                    <i class="fas fa-film"></i>
                       <span id="tooltiptext">Upload video</span>
-                    </i>
+                    
                   </a>
                 </li>
                 <li id="tooltip">
                   <a href="#">
-                    <i class="fa fa-microphone">
+                    <i class="fas fa-microphone"></i>
                       <span id="tooltiptext">Record voice</span>
-                    </i>
+                    
                   </a>
                 </li>
               </ul>

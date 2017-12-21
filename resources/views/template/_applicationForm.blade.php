@@ -21,7 +21,7 @@
       </div>
       <div class="form-group">
         <label for="location">
-          <i class="fa fa-map-marker" style=""></i> Location : {{$jobpost->location}}</label>
+          <i class="fas fa-map-marker-alt"></i> Location : {{$jobpost->location}}</label>
         <input type="hidden" class="form-control" name="location" value="{{$jobpost->location}}">
       </div>
       @if($checkApplicant == 0 && $valid_candidate > 0)
@@ -29,7 +29,7 @@
         <div class="row">
           <div class="col-md-12 col-sm-12">
             <label for="CV">
-              <i class="fa fa-file-pdf-o" aria-hidden="true"></i> CV
+              <i class="fas fa-file-pdf"></i> CV
               <span class="required">* </span> : {{$cv}} </label>
           </div>
           <div class="col-md-12 col-sm-12 ">
@@ -47,7 +47,7 @@
         <div class="row">
           <div class="col-md-3 col-sm-3">
             <label for="CV">
-              <i class="fa fa-file-pdf-o" aria-hidden="true"></i> CV
+              <i class="fas fa-file-pdf"></i>  CV
               <span class="required">* </span> : </label>
           </div>
           <div class="col-md-9 col-sm-9">
@@ -66,7 +66,7 @@
         <div class="row">
           <div class="col-md-4 col-sm-4 col-lg-4">
             <label for="psw">
-              <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Heighlights : </label>
+              <i class="fas fa-lightbulb" aria-hidden="true"></i> Heighlights : </label>
           </div>
           <div class="col-md-8 col-sm-8 col-lg-8">
             <input type="text" class="form-control" id="highlight" name="highlight" placeholder="Heighlights">
