@@ -15,14 +15,14 @@
     </div>
     <div class="form-group">
       <label for="psw">
-<i class="fa fa-map-marker" style=""></i> Location :  {{$jobpost->location}}</label>
+        <i class="fas fa-map-marker-alt"></i> Location :  {{$jobpost->location}}</label>
       <input type="hidden" class="form-control" id="psw" placeholder="Enter password">
     </div>
     
     <div class="form-group">
         <div class="row">
     <div class="col-md-3 col-sm-3">  
-    <label for="psw"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> CV <span class="required">* </span> : </label>
+    <label for="psw"><i class="fas fa-file-pdf"></i> CV <span class="required">* </span> : </label>
 </div>
     <div class="col-md-8 col-sm-9">   
     <input type="file" name="attachment" required>
@@ -35,7 +35,7 @@
     <div class="form-group">
     <div class="row">
     <div class="col-md-3 col-sm-3">  
-      <label for="psw"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Heilights : </label>
+      <label for="psw"><i class="fas fa-lightbulb"></i> Heilights : </label>
 </div>
 <div class="col-md-9 col-sm-9">  
       <input type="text" class="form-control" id="psw" placeholder="Enter password">

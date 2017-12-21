@@ -21,7 +21,7 @@
     <link href="{{ asset('css/search_style.css') }}" rel='stylesheet' type='text/css'>
     <!--profile_style-->
     <link href="{{ asset('css/post_style.css') }}" rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    
     <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
 
     <link rel="stylesheet" href="css/bootstrap.css">
