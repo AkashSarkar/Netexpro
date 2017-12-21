@@ -39,9 +39,15 @@ $industries = array(
   />
   <div class="fb-profile-text" style="width: auto;">
     <h1 style=" font: italic bold 30px/30px Georgia, serif;">{{ $user->firstname }} {{ $user->lastname }} </h1>
+    
     <p>{{ $interest->profession }}</p>
+    
     <p>Projects done by {{ $user->firstname }} :
       <strong> {{ $projects }} </strong>
+    </p>
+    
+    <p>Average Profile Rating:
+        <strong> {{$total_avg_rating}} </strong>
     </p>
 
   </div>
@@ -144,6 +150,8 @@ $industries = array(
            <p>CV:
               <a target="_blank" href="/uploads/attachment/{{$useravailablepost->CV}}">View CV here..</a>
            </p>
+          
+          
 
         </br>
 
