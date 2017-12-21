@@ -133,7 +133,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="post">
                 <input type="hidden" name="employer" value="{{$jobpost->user_id}}">
-                <input type="hidden" name="employee" value="{{Auth::user()->id}}">
+                
                 <button class="btn btn-sm btn-primary" 
                  style="float:right; margin-top:25px; margin-right:5px;">Accept Invitation</button>
             </form>

@@ -111,7 +111,7 @@ class PublicprofileController extends Controller
 
     
 
-
+      $total_avg_rating=0.00;
       $no_of_projects_id__by_user=DB::table('posts')
        ->where([
           ['posts.post_type', '=', 'project'],
@@ -122,7 +122,7 @@ class PublicprofileController extends Controller
      // dd($no_of_projects_id__by_user[0]->post_id);
        if(count($no_of_projects_id__by_user)>0){
 
-        $total_avg_rating=0.00;
+        
         for($i=0;$i<count($no_of_projects_id__by_user);$i++)
         {
            $per_project_rating = DB::table('ratings')

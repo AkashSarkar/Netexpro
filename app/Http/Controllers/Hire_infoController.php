@@ -115,7 +115,7 @@ class Hire_infoController extends Controller
     {
         //dd($id);
         $employer_id=$request->employer;
-        $employee_id=$request->employee;
+        $employee_id=Auth::user()->id;
         //dd($employee_id);
        $accept=Hire_info::where([
             ['employer_id','=', $employer_id],
