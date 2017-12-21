@@ -64,10 +64,8 @@ $professions = array(
 
 <div class="col-md-7 col-sm-7 col-lg-7 show_home_post" id="h_post">
 
- 
 <!--search using profession, location, date range start -->
-     
-
+   
   <div class="row">
     <div class="col-md-12 col-lg-12" style="text-align:justify;">
 

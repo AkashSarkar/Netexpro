@@ -29,7 +29,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/interests', 'InterestController@update'); 
     
     Route::get('/availableforjob', 'AvailableForJobController@index')->name('availableforjob');
-    
+    Route::get('/jobpost/{post_id}/user/{employer_id}', 'Hire_infoController@show')->name('getJobpost');
+    Route::get('/public_view/{id}/jobposts/{jobpost_id}/employer/{employer_id}', 'PublicprofileController@index')->name('public_view');
    
 
     //Route::post('/post', 'PostController@store');
@@ -40,6 +41,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('profile', 'ProfileController');
     Route::resource('jobpost', 'JobpostController');
     Route::resource('hire_employee', 'Hire_infoController');
+
 
 
     Route::post('search', 'SearchController@search');
@@ -62,7 +64,11 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('comment', 'CommentsController');
     Route::resource('applicants', 'ApplicantsController');
   //  Route::any('/search', 'JobpostController@search');
-     Route::resource('/public_view/{id?}', 'PublicprofileController');
+     
+
+     
+     
+     
     //Route::any('/search', 'JobpostController@search');
     
 });

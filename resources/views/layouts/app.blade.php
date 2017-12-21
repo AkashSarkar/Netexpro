@@ -296,9 +296,10 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  data-toggle="tooltip" data-placement="bottom" title='See Notification'>
                               <i class="fas fa-bell fa-lg"></i>
-                              <span class="badge" style="cursor:pointer;" data-toggle="tooltip" data-placement="bottom" title='{{count(auth()->User()->unreadNotifications)}} Notification'>{{count(auth()->User()->unreadNotifications)}}</span>
+                              <span class="badge" style="cursor:pointer;" data-toggle="tooltip" data-placement="bottom" title='Notification'>{{count(auth()->User()->unreadNotifications)}}</span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                              @if(count(auth()->User()->unreadNotifications)>0)
                                 <li class="dropdown-header">
                                     
                                     @foreach(auth()->User()->unreadNotifications as $notification)
@@ -306,6 +307,11 @@
                                        
                                     @endforeach
                                 </li>
+                                @else
+                                <li>
+                                    <a>No Notification</a>
+                                </li>
+                                @endif
                             </ul>
                         </li>
                         {{--end notification dropdown--}}

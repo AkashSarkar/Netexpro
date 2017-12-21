@@ -35,10 +35,10 @@
     <div class="form-group">
     <div class="row">
     <div class="col-md-3 col-sm-3">  
-      <label for="psw"><i class="fas fa-lightbulb"></i> Heilights : </label>
+      <label for="psw"><i class="fas fa-lightbulb"></i> Highlights : </label>
 </div>
 <div class="col-md-9 col-sm-9">  
-      <input type="text" class="form-control" id="psw" placeholder="Enter password">
+      <input type="text" class="form-control" id="psw" placeholder="">
 </div>
     </div>
     </div>

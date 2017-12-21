@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use App\Hire_info;
 use Session;
 
 class JobpostController extends Controller
@@ -31,7 +32,8 @@ class JobpostController extends Controller
                             ->where('interests.user_id', '=', Auth::user()->id);
                           })
                           ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+                          'salary_range')
                           ->groupBy('jobpost_id')
                           ->orderBy('jobposts.created_at','desc')
                         ->get();
@@ -86,9 +88,13 @@ class JobpostController extends Controller
             AND available_for_jobs.user_id=:u
             ORDER BY jobposts.created_at desc' ,
             ['u'=>$u]);
+
+            $is_hired=Hire_info::all();
             
         return view('jobpost.jobpost_index',['user'=>$user,'jobpost'=>$jobpost,
-        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,'qualified_candidate'=>$qualified_candidate,'choices'=>$choices, 'location_choices'=>$location_choices]);
+        'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,
+        'qualified_candidate'=>$qualified_candidate,'choices'=>$choices, 
+        'location_choices'=>$location_choices,'is_hired'=>$is_hired]);
     }
 
 
