@@ -64,7 +64,7 @@ $industries = array(
 
       <button type="submit" class="btn btn-primary" style="margin-left: 200px;" data-toggle="tooltip" data-placement="bottom" title=' Show Activity Log'>
         <a href="{{ url('availableforjob') }}" style="color: inherit; text-decoration: inherit;">
-          <i class="fa fa-bar-chart" aria-hidden="true"></i> Activity Log</a>
+          <i class="fas fa-chart-area" aria-hidden="true"></i> Activity Log</a>
       </button>
 
     </div>
@@ -90,7 +90,7 @@ $industries = array(
                       border-style:outset; padding: 10px;  box-shadow: 10px 10px 5px #888888;">
 
         <a>
-          <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#personalInfoModal" style="margin-top: 10px;cursor:pointer"
+          <i class="fas fa-pencil-alt pull-right" data-toggle="modal" data-target="#personalInfoModal" style="margin-top: 10px;cursor:pointer"
             aria-hidden="true"></i>
         </a>
 
@@ -347,7 +347,7 @@ $industries = array(
           <!--Professional information start -->
 
           <a>
-            <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#professionalInfoModal" style="margin-top: 10px;cursor:pointer;"
+            <i class="fas fa-pencil-alt pull-right" data-toggle="modal" data-target="#professionalInfoModal" style="margin-top: 10px;cursor:pointer;"
               aria-hidden="true"></i>
           </a>
           </br>
@@ -448,7 +448,7 @@ $industries = array(
         <!--Professional information start -->
        {{--@if(count($choices)==0)--}} 
          <a>
-          <i class="fa fa-pencil pull-right" data-toggle="modal" data-target="#interestInfo" style="margin-top: 10px;cursor:pointer;"
+          <i class="fas fa-pencil-alt pull-right" data-toggle="modal" data-target="#interestInfo" style="margin-top: 10px;cursor:pointer;"
             aria-hidden="true"></i>
         </a>
         
@@ -1092,7 +1092,7 @@ $industries = array(
          $("#error").html('Maximum 5 image');
          $(':input[type="submit"]').prop('disabled', true);
       }
-      else if(this.files.length<5)
+      else if(this.files.length<=5)
       {
         $("#error").empty();
         $(':input[type="submit"]').prop('disabled', false);

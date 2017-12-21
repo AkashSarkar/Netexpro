@@ -122,6 +122,7 @@ class JobpostController extends Controller
                 'circular' => $request->input('circular'),
                 'company_details' => $request->input('company_details'),
                 'job_details' => $request->input('job_details'),
+                'salary_range' => $request->input('salary_range'),
                 'location' => $request->input('location'),
                 'jobpost_id'=>$id,
                 'user_id' => Auth::user()->id

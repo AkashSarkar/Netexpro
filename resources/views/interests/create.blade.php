@@ -19,7 +19,8 @@
     "EEE",
     "BBA",
     "MBA",
-    "MSCSE"
+    "MSCSE",
+    "Marketing"
 );
 $industries= array(
     "Software",
@@ -42,7 +43,7 @@ $industries= array(
               <div class="row">
                   <div class="col-xs-12">
                       <div class="well">
-                          <form id="loginForm" method="POST" action="{{ route('interests.store')}}" >
+                          <form id="loginForm" onsubmit="return validateForm()" method="POST" action="{{ route('interests.store')}}" >
                               {{ csrf_field() }}
 
                               <!--Profession field start -->
@@ -68,7 +69,7 @@ $industries= array(
                                        <select class="form-control" name="industry"  value="{{ old('industry') }}">
                                             <span class="caret"></span>
                                             @foreach( $industries as $industry)
-                                            <option>{{ $industry }}</option>
+                                              <option>{{ $industry }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('industry'))
@@ -94,6 +95,7 @@ $industries= array(
                                             </span>
                                         @endif
                                 </div>
+                                <div id="error"></div>
                                <!--Interest field end -->      
 
                                 <div class="form-group">
@@ -124,4 +126,19 @@ $industries= array(
        tags:true;
    });
  });
+ </script>
+ <script>
+  function validateForm() {
+  var options = document.getElementById('interest').options, count = 0;
+    for (var i=0; i < options.length; i++) {
+     if (options[i].selected) count++;
+    }
+     if(count>5)
+     {
+         var message=document.getElementById('error');
+         message.innerHTML="maximum 5 interset can be selected";
+         return false;
+     }
+    
+   }
  </script>
