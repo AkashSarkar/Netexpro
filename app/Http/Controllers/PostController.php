@@ -7,7 +7,7 @@ use Illuminate\Support\facades\Auth;
 use App\Visibility;
 use App\Imagepost;
 use Image;
-
+use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
 
@@ -42,10 +42,23 @@ class PostController extends Controller
         if(Auth::check()){
             
 
-            $request->validate([
+           /* $request->validate([
                 "type"=> 'required',
                 "post_images[]" =>'mimes:jpg,jpeg,bmp,png',
-            ]);
+            ]);*/
+
+            $fileArray = array('image' => $request->input('post_images[]'));
+            $rules = array(
+            'image' => 'mimes:jpeg,jpg,png,gif|max:10000' // max 10000kb
+            );
+            $validator = Validator::make($fileArray, $rules);
+            if ($validator->fails())
+            {
+            return redirect()->back()->withErrors($validator->errors()->getMessages())->withInput();
+            }
+
+
+
             $post = Post::create([
                 'post_id'=>$id,
                 'description' => $request->input('description'),
