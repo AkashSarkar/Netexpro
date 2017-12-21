@@ -260,9 +260,9 @@
 
                     <!-- Authentication Links -->
                     @guest
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right"> 
                         <li>
-                            <a href="{{ route('login') }}">Login</a>
+                            <a href="{{ route('login') }}" >Login</a>
                         </li>
                         <li>
                             <a href="{{ route('register') }}">Register</a>
@@ -286,10 +286,10 @@
                     <!--Start navbar right list elements -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{ url('home') }}" data-toggle="tooltip" data-placement="bottom" title='Home'><i class="fa fa-home" aria-hidden="true"></i></a>
+                            <a href="{{ url('home') }}" ><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         </li>
                         <li>
-                            <a href="" data-toggle="modal" data-target="#jobModal"  data-toggle="tooltip" data-placement="bottom" title='Jobs'><i class="fa fa-briefcase" aria-hidden="true"></i></a>
+                            <a href="" data-toggle="modal" data-target="#jobModal"><i class="fa fa-briefcase" aria-hidden="true"></i> Job</a>
                         </li>
                         {{--notification dropdown--}}
                         

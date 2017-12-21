@@ -21,6 +21,7 @@ class CreateJobpostsTable extends Migration
             $table->string('circular');
             $table->string('company_details');
             $table->string('job_details');
+            $table->string('salary_range');
             $table->string('location');
             $table->string('jobpost_id');
             $table->primary('jobpost_id');

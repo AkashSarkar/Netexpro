@@ -129,6 +129,11 @@
         </li>
       </p>
       <p>
+        <li>Salary Range:
+          <strong>{{ $jobpost->salary_range }}</strong>
+        </li>
+      </p>
+      <p>
         <li>Job Location :
           <strong>{{ $jobpost->location }}</strong>
         </li>

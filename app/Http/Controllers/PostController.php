@@ -42,22 +42,7 @@ class PostController extends Controller
         if(Auth::check()){
             
 
-           /* $request->validate([
-                "type"=> 'required',
-                "post_images[]" =>'mimes:jpg,jpeg,bmp,png',
-            ]);*/
-
-            $fileArray = array('image' => $request->input('post_images[]'));
-            $rules = array(
-            'image' => 'mimes:jpeg,jpg,png,gif|max:10000' // max 10000kb
-            );
-            $validator = Validator::make($fileArray, $rules);
-            if ($validator->fails())
-            {
-            return redirect()->back()->withErrors($validator->errors()->getMessages())->withInput();
-            }
-
-
+           $this->validate($request,['post_images.*' => 'mimes:jpeg,jpg,png|dimensions:min_width=200, min_height=200|max:3000']);
 
             $post = Post::create([
                 'post_id'=>$id,
