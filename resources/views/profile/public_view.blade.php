@@ -51,11 +51,18 @@ $industries = array(
  <!--Hire button will be here -->
   <div class="row" style="padding-right: 20px;">
     <div class="col-md-4 col-sm-4 col-lg-4 pull-right">
-
-      <button type="submit" class="btn btn-primary" style="margin-left: 200px;" data-toggle="tooltip" data-placement="bottom" title=' Job Activity Log'>
-        <a href="#" style="color: inherit; text-decoration: inherit;">
-           Hire </a>
-      </button>
+      @if($is_hired!=null)
+        <button type="submit" class="btn btn-info pull-right disabled " style="margin-top: -40px;cursor:pointer;">Invitation Sent</button>
+      @else
+       <form method="post"  action="{{ url('/hire_employee')}}">
+        {{ csrf_field() }}
+        <input type="hidden" name="_method" value="post">
+        <input type="hidden" name="employer" value="{{$employer_id}}">
+        <input type="hidden" name="employee" value="{{$employee_id}}">
+        <input type="hidden" name="hire_post_id" value="{{$jobpost_id}}">
+        <button type="submit" class="btn btn-primary pull-right" style="margin-top: -40px;">Hire</button>
+    </form>
+    @endif 
 
     </div>
   </div>

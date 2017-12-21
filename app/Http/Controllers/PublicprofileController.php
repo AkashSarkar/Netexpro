@@ -27,8 +27,9 @@ class PublicprofileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($id,$jobpost_id,$employer_id)
     {
+        //dd($jobpost_id);
        //$user= User::where(Auth::user()->id);
        $images=Imagepost::all();
        $user= DB::table('users')->where( 'id', '=', $id)->first();
@@ -104,8 +105,15 @@ class PublicprofileController extends Controller
       FROM users  join ratings 
       WHERE ratings.user_id= users.id  ');
 
+      $is_hired=DB::table('hire_info')->where('employee_id','=',$id)->first();
+      //dd($is_hired);
 
-     return view('profile.public_view',['user'=>$user,'images'=>$images ,'interest'=>$interest,'choices'=>$choices ,'posts'=>$post,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
+
+     return view('profile.public_view',['user'=>$user,'images'=>$images ,
+     'interest'=>$interest,'choices'=>$choices ,'posts'=>$post,'useravailablepost'=>$useravailablepost, 
+     'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 
+     'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info,'jobpost_id'=>$jobpost_id,'employer_id'=>$employer_id,
+     'employee_id'=>$id,'is_hired'=>$is_hired]);
 
       
     }
@@ -140,7 +148,7 @@ class PublicprofileController extends Controller
     public function show(User $user)
     {
         
-         return view('profile.public_view');
+         //return view('profile.public_view');
     }
 
     /**
