@@ -301,10 +301,20 @@
                             <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
                               @if(count(auth()->User()->unreadNotifications)>0)
                                 <li class="dropdown-header">
-                                    
+                                   
                                     @foreach(auth()->User()->unreadNotifications as $notification)
+                                     @if($notification->type=='App\Notifications\jobOffers')
                                        @include('partials.notification')
-                                       
+                                    @else
+                                         <p class="panel-heading" style="" >
+                                            {{$notification->data['employee']['firstname']}} 
+                                            {{$notification->data['employee']['lastname']}} has
+                                            accepted your job offer as a <br>
+                                            {{$notification->data['value'][0]['position']}},
+                                            {{$notification->data['value'][0]['profession']}}.
+                                        </p>
+                                    @endif
+
                                     @endforeach
                                 </li>
                                 @else

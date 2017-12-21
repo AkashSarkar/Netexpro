@@ -128,8 +128,15 @@
         <div class="col-md-12">
           <ul class="list-unstyled">
             <li>
-              <a href="#">
-                <button class="btn btn-md btn-primary">Accept Invitation</button></a>
+              <form method="post"  
+                action="{{ route('acceptInvite',['id'=>$jobpost->jobpost_id])}}">
+                {{ csrf_field() }}
+                <input type="hidden" name="_method" value="post">
+                <input type="hidden" name="employer" value="{{$jobpost->user_id}}">
+                <input type="hidden" name="employee" value="{{Auth::user()->id}}">
+                <button class="btn btn-sm btn-primary" 
+                 style="float:right; margin-top:25px; margin-right:5px;">Accept Invitation</button>
+            </form>
             </li>
            
           </ul>

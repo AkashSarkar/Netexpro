@@ -24,13 +24,14 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/home/get_post', 'HomeController@get_post');
     Route::post('/home', 'HomeController@store');
     Route::post('/hire_employee','Hire_infoController@store');
+    Route::post('/hire_employee/{id}','Hire_infoController@update')->name('acceptInvite');
     Route::get('/profile', 'ProfileController@index')->name('profile');
     
     Route::get('/interests', 'InterestController@update'); 
     
     Route::get('/availableforjob', 'AvailableForJobController@index')->name('availableforjob');
     Route::get('/jobpost/{post_id}/user/{employer_id}', 'Hire_infoController@show')->name('getJobpost');
-    Route::get('/public_view/{id}/jobposts/{jobpost_id}/employer/{employer_id}', 'PublicprofileController@index')->name('public_view');
+    Route::get('/public_view/{id}/jobposts/{jobpost_id?}/employer/{employer_id?}', 'PublicprofileController@index')->name('public_view');
    
 
     //Route::post('/post', 'PostController@store');
