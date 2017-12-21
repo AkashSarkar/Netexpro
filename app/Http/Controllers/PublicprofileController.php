@@ -109,11 +109,46 @@ class PublicprofileController extends Controller
       //dd($is_hired);
 
 
+    
+
+
+      $no_of_projects_id__by_user=DB::table('posts')
+       ->where([
+          ['posts.post_type', '=', 'project'],
+          ['posts.user_id', '=', $id]
+         ])
+        ->select('posts.post_id')
+        ->get();
+     // dd($no_of_projects_id__by_user[0]->post_id);
+       if(count($no_of_projects_id__by_user)>0){
+
+        $total_avg_rating=0.00;
+        for($i=0;$i<count($no_of_projects_id__by_user);$i++)
+        {
+           $per_project_rating = DB::table('ratings')
+          ->select( DB::raw('AVG(rating) as avg_rating'),'post_id')
+          ->where('ratings.post_id','=',$no_of_projects_id__by_user[$i]->post_id)
+          ->groupBy('post_id')
+          ->get(); 
+        //  dd($per_project_rating);
+          if(count($per_project_rating)>0)
+          {
+             // dd(count($per_project_rating));
+            $int = (double)$per_project_rating[0]->avg_rating;
+            $total_avg_rating=$total_avg_rating+$int;
+          }
+          
+        }
+       $total_avg_rating=(double)($total_avg_rating/count($no_of_projects_id__by_user));
+       //dd($total_avg_rating);
+
+     }
+
      return view('profile.public_view',['user'=>$user,'images'=>$images ,
      'interest'=>$interest,'choices'=>$choices ,'posts'=>$post,'useravailablepost'=>$useravailablepost, 
      'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 
      'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info,'jobpost_id'=>$jobpost_id,'employer_id'=>$employer_id,
-     'employee_id'=>$id,'is_hired'=>$is_hired]);
+     'employee_id'=>$id,'is_hired'=>$is_hired,'total_avg_rating'=>$total_avg_rating]);
 
       
     }
