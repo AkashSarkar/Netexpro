@@ -208,7 +208,9 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+              $this->validate($request,['post_images.*' => 'mimes:jpeg,jpg,png|dimensions:min_width=200, min_height=200|max:3000']);
+              
               $check=0;
          
               if($request->hasFile('cover'))
