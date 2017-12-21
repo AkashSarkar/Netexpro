@@ -17,7 +17,11 @@ $desires = array(
     "EEE",
     "BBA",
     "MBA",
-    "MSCSE"
+    "MSCSE",
+    "Marketing",
+    "Accounting",
+    "Cooking",
+    "Information Technology"
 );
 
 $professions = array(
@@ -477,7 +481,7 @@ $industries = array(
                 <h3>Interest Information</h3>
               </div>
 
-              <form class="form-horizontal"  method="POST" action="/desire">
+              <form id="loginForm" onsubmit="return validateForm()" class="form-horizontal"  method="POST" action="/desire">
                         {{ csrf_field() }}
 
               <div class="modal-body" style="margin-top: 10px;">
@@ -498,7 +502,11 @@ $industries = array(
                             <strong>{{ $errors->first('choices') }}</strong>
                         </span>
                     @endif
+                
+                 <div id="error" style="color: red;"></div>
                 </div>
+
+
             </div>
          </div>
            <div class="modal-footer">
@@ -1242,6 +1250,21 @@ $industries = array(
        tags:true,
    });
  });
+ </script>
+ <script>
+  function validateForm() {
+  var options = document.getElementById('desire').options, count = 0;
+    for (var i=0; i < options.length; i++) {
+     if (options[i].selected) count++;
+    }
+     if(count>5)
+     {
+         var message=document.getElementById('error');
+         message.innerHTML="Maximum 5 interset can be selected";
+         return false;
+     }
+    
+   }
  </script>
 
 @endsection
