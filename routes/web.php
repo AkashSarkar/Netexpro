@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('profile', 'ProfileController');
     Route::resource('jobpost', 'JobpostController');
     Route::resource('hire_employee', 'Hire_infoController');
-
+    Route::resource('availableforjob', 'AvailableForJobController');
 
 
     Route::post('search', 'SearchController@search');
@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function(){
    // Route::post('search', 'JobpostController@index');
   //  Route::get('search', 'JobpostController@index');
    // Route::post('/search', 'JobpostController@search');
-    Route::resource('availableforjob', 'AvailableForJobController');
+   
 
     Route::post('/desire','InterestController@insertdesire');
 

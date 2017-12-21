@@ -40,6 +40,7 @@
     <!--gallery modal -->
     <!--gallery modal online script-->
     <style>
+  
         .img-modal {
             display: block;
         }
