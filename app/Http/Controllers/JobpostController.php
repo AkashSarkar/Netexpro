@@ -32,7 +32,8 @@ class JobpostController extends Controller
                             ->where('interests.user_id', '=', Auth::user()->id);
                           })
                           ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details')
+                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+                          'salary_range')
                           ->groupBy('jobpost_id')
                           ->orderBy('jobposts.created_at','desc')
                         ->get();
