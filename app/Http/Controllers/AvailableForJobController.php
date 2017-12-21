@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\AvailableForJob;
 use App\User;
+use App\Applicants;
 
 use Illuminate\Support\Facades\DB;
 
@@ -57,8 +58,103 @@ class AvailableForJobController extends Controller
      */
     public function store(Request $request)
     {
+        $c="";
          $id=time();
+         $apply=$request->input('jobpost_id');
+         $previous_cv=$request->input('prev_cv');
+         $updated_cv=$request->file('attachment');
+         $available_post_id=$request->input('available_post_id');
+         
+      
+         if($apply!=null){
+            
+           if($previous_cv==null){
+            
+            //dd("apply for job");
+            $file = time() . '.'.$request->file('attachment')->getClientOriginalName();
+            $destination = base_path() . '/public/uploads/attachment';
+            $request->file('attachment')->move($destination, $file);
+    
+                   if(Auth::check()){
+                     $availableforjob = AvailableForJob::create([
+                    'position' => $request->input('position'),
+                    'profession' => $request->input('profession'),
+                    'CV' => $file, 
+                    'highlight' => $request->input('highlight'),
+                    'location' => $request->input('location'),
+                    'useravailablepost_id'=>$id,
+                    'user_id' => Auth::user()->id,
+                ]);
+               if($availableforjob)
+               {
+                //dd("apply for job applicant");
+                   
+                $applicant = Applicants::create([
+                    'user_id'=>Auth::user()->id,
+                    'jobpost_id'=>$request->input('jobpost_id')
+                    
+                  
+                ]);
+                if($applicant){
+                    return back()->with('success' , 'Apply For Job successfully');
+                        }
+               }
+           }
 
+
+
+           }
+           else if($previous_cv!=null && $updated_cv==null)
+           {
+               //dd($uc);
+            $applicant = Applicants::create([
+                'user_id'=>Auth::user()->id,
+                'jobpost_id'=>$request->input('jobpost_id')
+                
+              
+            ]);
+            if($applicant){
+                return back()->with('success' , 'Apply For Job successfully');
+                    }
+
+
+           }
+           else if($previous_cv!=null && $updated_cv!=null) {
+            //dd($c);
+            $file = time() . '.'.$request->file('attachment')->getClientOriginalName();
+            $destination = base_path() . '/public/uploads/attachment';
+            $request->file('attachment')->move($destination, $file);
+                   //dd($apply);
+                   if(Auth::check()){
+                    
+
+                    $availableforjob = DB::table('available_for_jobs')
+                    ->where('useravailablepost_id', '=', $available_post_id)
+                    ->update([
+                        'CV'=> $file
+                    ]);
+
+                     
+               if($availableforjob)
+               {
+                $applicant = Applicants::create([
+                    'user_id'=>Auth::user()->id,
+                    'jobpost_id'=>$request->input('jobpost_id')
+                    
+                  
+                ]);
+                if($applicant){
+                    return back()->with('success' , 'Apply For Job successfully');
+                        }
+               }
+           }
+
+
+           }
+
+         }
+         else {
+         //   dd("avvailable for job");
         $file = time() . '.'.$request->file('attachment')->getClientOriginalName();
         $destination = base_path() . '/public/uploads/attachment';
         $request->file('attachment')->move($destination, $file);
@@ -73,7 +169,8 @@ class AvailableForJobController extends Controller
                 'useravailablepost_id'=>$id,
                 'user_id' => Auth::user()->id,
             ]);
-
+       }
+    
 
             if($availableforjob){
                 return back()->with('success' , 'available for job posted successfully');
