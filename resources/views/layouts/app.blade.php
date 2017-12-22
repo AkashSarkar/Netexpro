@@ -40,6 +40,16 @@
     <!--gallery modal -->
     <!--gallery modal online script-->
     <style>
+     
+      .wrap{
+         
+          overflow-wrap: break-word;
+  
+         /* notification style for word break; */
+            word-break: break-word;
+            white-space:normal;
+          
+        }
   
         .img-modal {
             display: block;
