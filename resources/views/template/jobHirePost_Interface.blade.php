@@ -143,34 +143,34 @@
     </section>
 
     <hr>
-@if($jobpost->user_id == Auth::user()->id )
-      
+
+    <?php $applicant_count=0; $fla=0 ;?> 
+    @foreach($job_applicants as $applicant_info) 
+        @if($applicant_info->jobpost_id==$jobpost->jobpost_id)
+            <?php $applicant_count=$applicant_count+1; $job_post_id=$applicant_info->jobpost_id?>
+            
+        @endif 
+    @endforeach 
+    
+    @if($jobpost->user_id == Auth::user()->id )
+     @if($applicant_count!=0) 
     <section class="post-footer">
       <div class="row">
         <div class="col-md-12">
           <ul class="list-unstyled">
+            <span data-toggle="modal" data-target="#applicantModal<?php echo  $job_post_id ;echo $applicant_count;?>">
+                <li>
+                  <a><i class="fas fa-users"></i> Applicants</a>
+                </li>
+            </span>
+           </ul>
 
-          <?php $applicant_count=0;?> 
-            @foreach($job_applicants as $applicant_info) 
-                @if($applicant_info->jobpost_id==$jobpost->jobpost_id)
-                  <?php $applicant_count=$applicant_count+1; $job_post_id=$applicant_info->jobpost_id?>
-                   
-                @endif 
-            @endforeach
-            
-          <li data-toggle="modal" data-target="#applicantModal<?php echo  $job_post_id ;echo $applicant_count;?>">
-            <a> 
-              <i class="fas fa-users"></i> Applicants</a>
-          </li>
-            
-          </ul>
-
-         </div>
+        </div>
  
        </div>
 
  </section>
- 
+      @endif
     <!--Applicants List-->
     <section>
       
@@ -178,7 +178,7 @@
         
     </section>
     <!--End Applicants list-->
-  
+        
     @endif 
 
   </div>
