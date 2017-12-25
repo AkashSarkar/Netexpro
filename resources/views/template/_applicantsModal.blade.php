@@ -15,7 +15,10 @@
         @endif 
     @endforeach 
 @if($applicant_count!=0)
-        <span data-toggle="modal" data-target="#applicantModal<?php echo  $job_post_id ;echo $applicant_count;?>"
+        <!--<span data-toggle="modal" data-target="#applicantModal<?php echo  $job_post_id ;echo $applicant_count;?>"
+         style="color:#F39C12;font-weight:400;">-->
+
+        <span data-toggle="modal" data-target=""
          style="color:#F39C12;font-weight:400;">
             
         <span style="font-weight:800; font-size:18px; color:#F37C12" ><i class="fa fa-user-circle" aria-hidden="true"></i></span>
@@ -51,11 +54,13 @@
                                                 <span class="date sub-text">{{$applicant_info->created_at}}</span>
                                             </div>
                                             <?php $hireflag=0 ;?>
-                                            @foreach($is_hired as $is_hired)
+                                            @foreach($is_hired as $is_hire)
                                            
-                                            @if($is_hired->employee_id==$applicant_info->user_id)
-                                                <button type="submit" class="btn btn-info btn-sm pull-right disabled " style="margin-top: -40px;cursor:pointer;">Invitation Sent</button>
+                                            @if($is_hire->employee_id==$applicant_info->user_id)
+                                                <button type="submit" class="btn btn-info btn-sm pull-right disabled " 
+                                                style="margin-top: -40px;cursor:pointer;">Invitation Sent</button>
                                             <?php $hireflag++; ?>
+                                            @break;
                                             @endif 
                                             @endforeach
                                             @if($hireflag==0)                

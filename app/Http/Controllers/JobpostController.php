@@ -63,6 +63,7 @@ class JobpostController extends Controller
             ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','applicants.created_at','applicants.user_id')
             ->orderBy('jobposts.created_at','desc')
             ->get();
+            //dd($job_applicants);
 
             $applicants=DB::table('applicants')
             ->orderBy('created_at','desc')
@@ -89,8 +90,8 @@ class JobpostController extends Controller
             ORDER BY jobposts.created_at desc' ,
             ['u'=>$u]);
 
-            $is_hired=Hire_info::all();
-            
+            $is_hired=DB::select('SELECT * FROM hire_info');
+            // dd($is_hired);
         return view('jobpost.jobpost_index',['user'=>$user,'jobpost'=>$jobpost,
         'jobComment'=>$jobComment,'job_applicants'=>$job_applicants,'applicants'=>$applicants,
         'qualified_candidate'=>$qualified_candidate,'choices'=>$choices, 
