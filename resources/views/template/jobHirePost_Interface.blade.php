@@ -44,7 +44,7 @@
               </div>
               @endif
               <!--Getting Applicant Value-->
-              <?php $checkApplicant=0;$valid_candidate=0;$id=$jobpost->jobpost_id ;$cv=""?> @if($jobpost->user_id != Auth::user()->id ) @foreach($applicants as $applicant) @if($applicant->jobpost_id
+              <?php $checkApplicant=0;$valid_candidate=0;$id=$jobpost->jobpost_id ;$cv="";$previous_highlights=""?> @if($jobpost->user_id != Auth::user()->id ) @foreach($applicants as $applicant) @if($applicant->jobpost_id
               == $jobpost->jobpost_id) @if($applicant->user_id == Auth::user()->id )
               <?php $checkApplicant=$checkApplicant+1;?>
               <button type="" class="btn btn-success pull-right btn-sm">Applied</button>
@@ -53,10 +53,11 @@
               @foreach($qualified_candidate as $qualified_candidates) @if($qualified_candidates->jobpost_id == $jobpost->jobpost_id)
               <?php $valid_candidate=$valid_candidate+1;
                      $cv= $qualified_candidates->CV;
+                     $previous_highlights=$qualified_candidates->highlight;
                      $available_post_id=$qualified_candidates->useravailablepost_id?> @break; @endif @endforeach
               <!--End Active Apply now-->
               @if($checkApplicant == 0 && $valid_candidate > 0)
-                {{ csrf_field() }}
+                
                 <!--<input type="hidden" name="jobpost_id" method="PUT" value="{{$jobpost->jobpost_id}}">-->
                 <button type="button" data-toggle="modal" data-target="#applicationForm<?php echo $jobpost->jobpost_id?>" class="btn btn-primary pull-right btn-sm">Apply now</button>
                     <div class="modal fade" id="applicationForm<?php echo $jobpost->jobpost_id?>" role="dialog">
@@ -161,7 +162,7 @@
     <!--End Applicants list-->   
     @endif 
 <hr>
-    @if($applicant_count!=0) 
+    @if($applicant_count!=0 && $jobpost->user_id == Auth::user()->id) 
     <section class="post-footer">
       <div class="row">
         <div class="col-md-12">

@@ -41,6 +41,23 @@
           </div>
         </div>
       </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-lg-12">
+            <label for="psw">
+              <i class="fas fa-lightbulb" aria-hidden="true"></i> Heighlights : {{$previous_highlights}}</label>
+          </div>
+           <div class="col-md-4 col-sm-4 col-lg-4">
+          <span style="color:green;">Edit Highlights:</span></div>
+          <div class="col-md-8 col-sm-8 col-lg-8">
+
+          <input type="hidden" name="previous_highlight" value="{{$previous_highlights}}">
+          <input type="text" class="form-control" id="highlight" name="highlight" placeholder="Heighlights">
+          </div>
+        </div>
+      </div>
+      <input type="hidden" name="jobpost_id" value="{{$jobpost->jobpost_id}}">
+    </div>
 
       @else
       <div class="form-group">
@@ -56,11 +73,6 @@
           </div>
         </div>
       </div>
-      @endif
-
-      
-
-
 
       <div class="form-group">
         <div class="row">
@@ -75,6 +87,13 @@
       </div>
       <input type="hidden" name="jobpost_id" value="{{$jobpost->jobpost_id}}">
     </div>
+      @endif
+
+      
+
+
+
+      
     <div class="modal-footer Appmodalfoot">
       <div class="col-md-4 col-md-offset-4 pull-right">
         <button type="submit" class="btn btn-success">

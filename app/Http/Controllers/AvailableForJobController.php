@@ -64,8 +64,9 @@ class AvailableForJobController extends Controller
          $previous_cv=$request->input('prev_cv');
          $updated_cv=$request->file('attachment');
          $available_post_id=$request->input('available_post_id');
-         
-      
+         $previous_highlights=$request->input('previous_highlight');
+         $new_highlight=$request->input('highlight');
+         //dd($previous_highlights);
          if($apply!=null){
             
            if($previous_cv==null){
@@ -104,7 +105,8 @@ class AvailableForJobController extends Controller
 
 
            }
-           else if($previous_cv!=null && $updated_cv==null)
+           //previous data not change
+           else if($previous_cv!=null && $updated_cv==null && $new_highlight==null)
            {
                //dd($uc);
             $applicant = Applicants::create([
@@ -119,7 +121,8 @@ class AvailableForJobController extends Controller
 
 
            }
-           else if($previous_cv!=null && $updated_cv!=null) {
+           //updated  cv upload  highlights remain same
+           else if($previous_cv!=null && $updated_cv!=null && $new_highlight==null) {
             //dd($c);
             $file = time() . '.'.$request->file('attachment')->getClientOriginalName();
             $destination = base_path() . '/public/uploads/attachment';
@@ -132,6 +135,74 @@ class AvailableForJobController extends Controller
                     ->where('useravailablepost_id', '=', $available_post_id)
                     ->update([
                         'CV'=> $file
+                    ]);
+
+                     
+               if($availableforjob)
+               {
+                $applicant = Applicants::create([
+                    'user_id'=>Auth::user()->id,
+                    'jobpost_id'=>$request->input('jobpost_id')
+                    
+                  
+                ]);
+                if($applicant){
+                    return back()->with('success' , 'Apply For Job successfully');
+                        }
+               }
+           }
+
+
+           }
+           //updated Cv and highlights
+           else if($previous_cv!=null && $updated_cv!=null && $new_highlight!=null) {
+            //dd($previous_highlights);
+            $file = time() . '.'.$request->file('attachment')->getClientOriginalName();
+            $destination = base_path() . '/public/uploads/attachment';
+            $request->file('attachment')->move($destination, $file);
+                   //dd($apply);
+                   if(Auth::check()){
+                    
+
+                    $availableforjob = DB::table('available_for_jobs')
+                    ->where('useravailablepost_id', '=', $available_post_id)
+                    ->update([
+                        'CV'=> $file,
+                        'highlight'=> $new_highlight
+
+                    ]);
+
+                     
+               if($availableforjob)
+               {
+                $applicant = Applicants::create([
+                    'user_id'=>Auth::user()->id,
+                    'jobpost_id'=>$request->input('jobpost_id')
+                    
+                  
+                ]);
+                if($applicant){
+                    return back()->with('success' , 'Apply For Job successfully');
+                        }
+               }
+           }
+
+
+           }
+           //update highlights 
+
+           else if($previous_cv!=null && $updated_cv==null && $new_highlight!=null) {
+           // dd($previous_highlights);
+                   //dd($apply);
+                   if(Auth::check()){
+                    
+
+                    $availableforjob = DB::table('available_for_jobs')
+                    ->where('useravailablepost_id', '=', $available_post_id)
+                    ->update([
+                        
+                        'highlight'=> $new_highlight
+
                     ]);
 
                      
