@@ -45,14 +45,14 @@
         <div class="row">
           <div class="col-md-12 col-sm-12 col-lg-12">
             <label for="psw">
-              <i class="fas fa-lightbulb" aria-hidden="true"></i> Heighlights : {{$previous_highlights}}</label>
+              <i class="fas fa-lightbulb" aria-hidden="true"></i> Highlights : {{$previous_highlights}}</label>
           </div>
            <div class="col-md-4 col-sm-4 col-lg-4">
           <span style="color:green;">Edit Highlights:</span></div>
           <div class="col-md-8 col-sm-8 col-lg-8">
 
           <input type="hidden" name="previous_highlight" value="{{$previous_highlights}}">
-          <input type="text" class="form-control" id="highlight" name="highlight" placeholder="Heighlights">
+          <input type="text" class="form-control" id="highlight" name="highlight" placeholder="Highlights">
           </div>
         </div>
       </div>
@@ -78,10 +78,10 @@
         <div class="row">
           <div class="col-md-4 col-sm-4 col-lg-4">
             <label for="psw">
-              <i class="fas fa-lightbulb" aria-hidden="true"></i> Heighlights : </label>
+              <i class="fas fa-lightbulb" aria-hidden="true"></i> Highlights : </label>
           </div>
           <div class="col-md-8 col-sm-8 col-lg-8">
-            <input type="text" class="form-control" id="highlight" name="highlight" placeholder="Heighlights">
+            <input type="text" class="form-control" id="highlight" name="highlight" placeholder="Highlights">
           </div>
         </div>
       </div>
