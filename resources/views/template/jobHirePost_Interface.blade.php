@@ -28,12 +28,7 @@
                        if( result){
                          event.preventDefault();
                          document.getElementById('delete-form2').submit();
-                        }
-                              ">
-
-                      Delete
-
-                    </a>
+                        }"> Delete</a>
 
                     <form id="delete-form2" action="{{ route('jobpost.destroy', $jobpost->jobpost_id) }}" method="POST" style="display:none;">
                       <input type="hidden" name="_method" method="PUT" value="delete"> {{ csrf_field() }}
@@ -71,11 +66,13 @@
                 </div>
               
               @elseif($checkApplicant == 0 && $valid_candidate == 0)
-              <button type="button" data-toggle="modal" data-target="#applicationForm<?php echo $jobpost->jobpost_id?>" class="btn btn-primary pull-right btn-sm">Apply for job</button>
+              <button type="button" data-toggle="modal" data-target="#applicationForm<?php echo $jobpost->jobpost_id?>" 
+                class="btn btn-primary pull-right btn-sm">Apply for job</button>
 
               <!--Application Form-->
 
-              <div class="modal fade" id="applicationForm<?php echo $jobpost->jobpost_id?>" role="dialog">
+              <div class="modal fade" id="applicationForm<?php echo $jobpost->jobpost_id?>" 
+                role="dialog">
                 <div class="modal-dialog">
 
                   <!-- Modal content-->
@@ -166,7 +163,7 @@
     <section class="post-footer">
       <div class="row">
         <div class="col-md-12">
-          <ul class="list-unstyled" style="color:green; font-weight:600; font-size:16">
+          <ul class="list-unstyled" style="color:green; font-weight:600; font-size:16;cursor:pointer; ">
             <span data-toggle="modal" data-target="#applicantModal<?php echo  $job_post_id ;echo $applicant_count;?>">
                 <li>
                   <i class="fas fa-users"></i> Applicants
