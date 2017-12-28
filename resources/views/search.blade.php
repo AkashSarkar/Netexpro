@@ -3,15 +3,6 @@
 @section('page-title') Search @endsection 
 
 @section('content')
-
-<?php
- $locations=array(
-     "Dhaka",
-     "Chittagong",
-     "Comilla",
-     "Sylhet"
- );
-?>
 <!--Main content-->
 <div class="container">
   <div class="row content">
@@ -40,11 +31,12 @@
            
 
              <section>
-             <button type="submit" class="button_connection button_m  btn" data-toggle="tooltip"
-             data-placement="bottom" title= 'All Jobposts'>
-            <a href="{{ url('jobpost') }}" style="color: inherit; text-decoration: inherit;">
-            <i class="fa fa-briefcase" aria-hidden="true"></i>  All Jobposts</a></button>
-           <br>
+               <a href="{{ url('jobpost') }}" class="button_connection button_m  btn" 
+                 data-placement="bottom" title= 'All Jobposts' data-toggle="tooltip"
+                 style="color: inherit; text-decoration: inherit;">
+                 
+               <i class="fa fa-briefcase" aria-hidden="true"></i>  All Jobposts</a>
+              <br>
             </section>
 
           </ul>
@@ -55,11 +47,7 @@
 
 <div class="col-md-7 col-sm-7 col-lg-7 show_home_post" id="h_post">
 
- 
-<!--search using profession, location, date range start -->
-    
-      
-<!--search using profession, location, date range end -->
+
 
      <!--job hiring post show start-->
      
