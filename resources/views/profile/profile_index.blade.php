@@ -492,7 +492,7 @@ $industries = array(
 
                 <div class="col-md-6">
                      
-                        <select class="form-control" name="desire[]"  value="{{ old('desires') }}"  multiple="multiple" id="desire" style="width:100%;">
+                        <select class="form-control" name="desire[]" id="interest_id"  value="{{ old('desires') }}"  multiple="multiple" id="desire" style="width:100%;">
                             <span class="caret"></span>
                            @foreach( $desires as $desire)
                               <?php $check_flag=0;?>

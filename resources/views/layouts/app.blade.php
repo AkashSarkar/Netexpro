@@ -27,7 +27,8 @@
 
 
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/select2.min.css">
+    <link rel="stylesheet" href="css/css/select2.css">
+    <link rel="stylesheet" href="css/css/select2.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
@@ -449,10 +450,14 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- End of import Scripts -->
 
-    <script src="js/select2.min.js"></script>
+    <script src="js/js/select2.full.js"></script>
+    <script src="js/js/select2.full.min.js"></script>
+    <script src="js/js/select2.js"></script>
+    <script src="js/js/select2.min.js"></script>
     <script>
         $(function () {
-            $('select').select2();
+            
+            $("#interest_id").select2({ maximumSelectionLength: 5 });
         })
     </script>
 </body>
