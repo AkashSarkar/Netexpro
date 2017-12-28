@@ -28,13 +28,11 @@ class ProfileController extends Controller
       $images=Imagepost::all();
 
       $user= User::find(Auth::user()->id);
-      //$post = Post::where('user_id', Auth::user()->id)->get();
+     
       $no_of_project_done_by_user = Post::where('post_type','=','project')
       ->where('user_id', Auth::user()->id)->count();
       
-      $jobpost = jobpost::where('user_id', Auth::user()->id)->get();
       $useravailablepost = AvailableForJob::where('user_id', Auth::user()->id)->get();
-      //dd( $useravailablepost);
       
       $post = Post::where('user_id', Auth::user()->id)
       ->orderBy('created_at','desc')
@@ -48,13 +46,13 @@ class ProfileController extends Controller
       ->get();
       //end avg rating
 
-       //check if user rated post or not
-       $isLike=Rating::where('user_id',Auth::user()->id)->get();
-       $isLike=json_decode( $isLike,true);
-       //end of check rated post
+      //check if user rated post or not
+      $isLike=Rating::where('user_id',Auth::user()->id)->get();
+      $isLike=json_decode( $isLike,true);
+      //end of check rated post
 
-       //adding average ratings with post
-       for($i=0;$i<count($post);$i++)
+      //adding average ratings with post
+      for($i=0;$i<count($post);$i++)
        {
            
            if($post[$i]->post_type=="project"){
@@ -68,7 +66,7 @@ class ProfileController extends Controller
            }
           
        }
-        //end of average rating
+      //end of average rating
 
       $userComment = DB::table('comments')
             ->join('users', 'users.id', '=', 'comments.user_id')
@@ -76,26 +74,14 @@ class ProfileController extends Controller
             ->orderBy('comments.created_at','desc')
             ->get();
 
-      $jobComment = DB::table('comments')
-            ->join('users', 'users.id', '=', 'comments.user_id')
-            ->join('jobposts', 'jobposts.jobpost_id', '=', 'comments.commentable_id')
-            ->orderBy('comments.created_at','desc')
-            ->get();
-
-      $useravailableComment = DB::table('comments')
-            ->join('users', 'users.id', '=', 'comments.user_id')
-            ->join('available_for_jobs', 'available_for_jobs.useravailablepost_id', '=', 'comments.commentable_id')
-            ->orderBy('comments.created_at','desc')
-            ->get();
-      
-        $interest= DB::table('interests')
-        ->where([
+      $interest= DB::table('interests')
+      ->where([
         ['user_id', '=', Auth::user()->id],
         ['interest_priority','=',10]
         ])->first();
 
-        $choices= DB::table('interests')
-        ->where([
+      $choices= DB::table('interests')
+      ->where([
         ['user_id', '=', Auth::user()->id],
         ['interest_priority','=',0]
         ])->get();
@@ -106,8 +92,8 @@ class ProfileController extends Controller
       FROM users  join ratings 
       WHERE ratings.user_id= users.id  ');
 
-      return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest,'choices'=>$choices ,'posts'=>$post,'jobpost'=>$jobpost,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 'jobComment'=>$jobComment, 
-        'useravailableComment'=>$useravailableComment,'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
+      return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest,'choices'=>$choices ,'posts'=>$post,'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 
+        'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
           
       
     }
