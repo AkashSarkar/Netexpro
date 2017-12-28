@@ -42,7 +42,7 @@
 
                     <a id="image_preview"></a>
 
-                    <div id="error"></div>
+                    <div style="color: red;" id="error"></div>
 
                   </div>
                 </div>

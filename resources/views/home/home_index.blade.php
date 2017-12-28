@@ -182,7 +182,7 @@
     $('input[type="file"]').change(function (e) {
       if(this.files.length>5)
       {
-         $("#error").html('Maximum 5 image');
+         $("#error").html('*Maximum 5 images can be selected');
          $(':input[type="submit"]').prop('disabled', true);
       }
       else if(this.files.length<=5)
