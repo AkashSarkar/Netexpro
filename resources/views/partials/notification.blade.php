@@ -16,7 +16,7 @@
 
         </div>
 
-        <div class="col-md-3 col-sm-3 col-lg-3" style="">
+        {{--<div class="col-md-3 col-sm-3 col-lg-3" style="">
             
              <form method="post"  
              action="{{ route('acceptInvite',['id'=>$notification->data['employer'][0]['jobpost_id']])}}">
@@ -31,7 +31,7 @@
             </form>
            
             
-        </div>
+        </div>--}}
 
 
     </div>
