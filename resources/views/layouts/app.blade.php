@@ -310,29 +310,41 @@
                               <span class="badge" style="cursor:pointer;" data-toggle="tooltip" data-placement="bottom" title='Notification'>{{count(auth()->User()->unreadNotifications)}}</span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
-                              @if(count(auth()->User()->unreadNotifications)>0)
-                                <li class="dropdown-header">
-                                   
-                                    @foreach(auth()->User()->unreadNotifications as $notification)
+                              
+                                <li class="dropdown-header" style="">
+                                   @foreach(auth()->User()->unreadNotifications as $notification)
                                      @if($notification->type=='App\Notifications\jobOffers')
-                                       @include('partials.notification')
+                                         <div class="panel panel-default" style="text-align:justify; width:550px; word-wrap:break-word;overflow-wrap: break-word; background-color:lightgrey; ">
+                                            @include('partials.notification')
+                                          </div>
                                     @else
-                                         <p class="panel-heading" style="" >
-                                            {{$notification->data['employee']['firstname']}} 
-                                            {{$notification->data['employee']['lastname']}} has
-                                            accepted your job offer as a <br>
-                                            {{$notification->data['value'][0]['position']}},
-                                            {{$notification->data['value'][0]['profession']}}.
-                                        </p>
+                                       <div class="panel panel-default" style="text-align:justify;width:550px; word-wrap:break-word;overflow-wrap: break-word;background-color:lightgrey;  ">
+                                         @include('partials.offerAcceptence_notification') 
+                                        </div>
                                     @endif
 
                                     @endforeach
+
                                 </li>
-                                @else
-                                <li>
+                               
+                                <li class="dropdown-header" >
+                                @foreach(auth()->User()->readNotifications as $notification)
+                                     @if($notification->type=='App\Notifications\jobOffers')
+                                         <div class="panel panel-default" style="text-align:justify;width:550px; word-wrap:break-word;overflow-wrap: break-word; ">
+                                             @include('partials.notification')
+                                       </div>
+                                    @else
+                                        <div class="panel panel-default" style="text-align:justify;width:550px; word-wrap:break-word;overflow-wrap: break-word; ">
+                                            @include('partials.offerAcceptence_notification') 
+                                        </div>
+                                    @endif
+
+                                    @endforeach
+                                @if(count(auth()->User()->readNotifications)==0 && count(auth()->User()->unreadNotifications)==0)
                                     <a>No Notification</a>
+                                 @endif
                                 </li>
-                                @endif
+                                
                             </ul>
                         </li>
                         {{--end notification dropdown--}}

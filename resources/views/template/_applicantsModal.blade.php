@@ -56,7 +56,7 @@
                                             <?php $hireflag=0 ;?>
                                             @foreach($is_hired as $is_hire)
                                            
-                                            @if($is_hire->employee_id==$applicant_info->user_id)
+                                            @if($is_hire->employee_id==$applicant_info->user_id && $is_hire->hire_post_id==$applicant_info->jobpost_id)
                                                 <button type="submit" class="btn btn-info btn-sm pull-right disabled " 
                                                 style="margin-top: -40px;cursor:pointer;">Invitation Sent</button>
                                             <?php $hireflag++; ?>

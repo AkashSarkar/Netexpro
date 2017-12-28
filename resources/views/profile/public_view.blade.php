@@ -47,7 +47,7 @@ $industries = array(
     </p>
     
     <p>Average Profile Rating:
-        <strong> {{$total_avg_rating}} </strong>
+        <strong>{{$total_avg_rating}} </strong>
     </p>
 
   </div>

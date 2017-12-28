@@ -105,7 +105,12 @@ class PublicprofileController extends Controller
       FROM users  join ratings 
       WHERE ratings.user_id= users.id  ');
 
-      $is_hired=DB::table('hire_info')->where('employee_id','=',$id)->first();
+      $is_hired=DB::table('hire_info')->where(
+          [
+              ['employee_id','=',$id],
+              ['hire_post_id','=',$jobpost_id]
+          ]
+         )->first();
       //dd($is_hired);
 
 

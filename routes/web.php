@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/interests', 'InterestController@update'); 
     
     Route::get('/availableforjob', 'AvailableForJobController@index')->name('availableforjob');
-    Route::get('/jobpost/{post_id}/user/{employer_id}', 'Hire_infoController@show')->name('getJobpost');
+    Route::get('/jobpost/{post_id}/user/{employer_id}/type/{notification_type}/id/{id}', 'Hire_infoController@show')->name('getJobpost');
     Route::get('/public_view/{id}/jobposts/{jobpost_id?}/employer/{employer_id?}', 'PublicprofileController@index')->name('public_view');
    
 

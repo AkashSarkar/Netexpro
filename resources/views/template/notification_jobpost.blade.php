@@ -110,6 +110,11 @@
         </li>
       </p>
       <p>
+        <li>Salary Range:
+          <strong>{{ $jobpost->salary_range }}</strong>
+        </li>
+      </p>
+      <p>
         <li>Job Location :
           <strong>{{ $jobpost->location }}</strong>
         </li>
@@ -117,16 +122,55 @@
 
     </section>
     <!--Applicants List-->
+     <?php $applicant_count=0; $fla=0 ;?> 
+    @foreach($job_applicants as $applicant_info) 
+        @if($applicant_info->jobpost_id==$jobpost->jobpost_id)
+            <?php $applicant_count=$applicant_count+1; $job_post_id=$applicant_info->jobpost_id?>
+            
+        @endif 
+    @endforeach 
     @if($jobpost->user_id == Auth::user()->id )
-    @include('template._applicantsModal')
+      @include('template._applicantsModal')
     @endif      
 
     <!--End Applicants list-->
     <hr>
+    @if($applicant_count!=0 && $jobpost->user_id == Auth::user()->id) 
+    <section class="post-footer">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="list-unstyled" style="color:green; font-weight:600; font-size:16;cursor:pointer; ">
+            <span data-toggle="modal" data-target="#applicantModal<?php echo  $job_post_id ;echo $applicant_count;?>">
+                <li>
+                  <i class="fas fa-users"></i> Applicants
+                </li>
+            </span>
+           </ul>
+
+        </div>
+ 
+       </div>
+ </section>
+      @endif
+
+    <hr>
+    @if($type=="App\Notifications\jobOffers")
     <section class="post-footer">
       <div class="row">
         <div class="col-md-12">
           <ul class="list-unstyled">
+          <?php $hireflag=0 ;?>
+          @foreach($is_hired as $is_hire)
+            @if($jobpost->jobpost_id==$is_hire->hire_post_id && $is_hire->is_invitaion_accepted==1)
+            <li>
+               <button class="btn btn-sm btn-success" 
+                 style="float:right; margin-top:25px; margin-right:5px;" disable>Accepted</button>
+            </li>
+             <?php $hireflag++; ?>
+            @break
+            @endif
+          @endforeach 
+          @if($hireflag==0)
             <li>
               <form method="post"  
                 action="{{ route('acceptInvite',['id'=>$jobpost->jobpost_id])}}">
@@ -138,13 +182,14 @@
                  style="float:right; margin-top:25px; margin-right:5px;">Accept Invitation</button>
             </form>
             </li>
-           
+            @endif
+         
           </ul>
         </div>
 
       </div>
-</section>
-
+    </section>
+    @endif
   </div>
 </div>
 @endforeach
