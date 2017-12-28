@@ -494,6 +494,9 @@ $industries = array(
                      
                         <select class="form-control" name="desire[]"  value="{{ old('desires') }}"  multiple="multiple" id="desire">
                             <span class="caret"></span>
+                            @foreach($choices as $choice)
+                            <option selected>{{ $choice->profession }}</option>
+                            @endforeach
                             @foreach( $desires as $desire)
                             <option>{{ $desire }}</option>
                             @endforeach
