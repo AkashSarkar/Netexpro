@@ -488,11 +488,11 @@ $industries = array(
 
               <div class="modal-body" style="margin-top: 10px;">
                <div class="form-group{{ $errors->has('desires') ? ' has-error' : '' }}">
-                <label for="desires" class="col-md-4 control-label">interests</label>
+                <label for="desires" class="col-md-4 control-label">Interests : </label>
 
                 <div class="col-md-6">
                      
-                        <select class="form-control" name="desire[]"  value="{{ old('desires') }}"  multiple="multiple" id="desire" style="width:80%;">
+                        <select class="form-control" name="desire[]"  value="{{ old('desires') }}"  multiple="multiple" id="desire" style="width:100%;">
                             <span class="caret"></span>
                            @foreach( $desires as $desire)
                               <?php $check_flag=0;?>
