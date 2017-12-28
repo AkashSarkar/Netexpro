@@ -52,10 +52,10 @@
             </form>
             <br>
             <section>
-              
-               <a href="{{ url('jobpost') }}"class="button_connection button_m  btn" 
-                data-placement="bottom" title= 'All Jobposts' data-toggle="tooltip"
-               style="color: inherit; text-decoration: inherit;">
+              <a href="{{ url('jobpost') }}" class="button_connection button_m  btn" 
+                 data-placement="bottom" title= 'All Jobposts' data-toggle="tooltip"
+                 style="color: inherit; text-decoration: inherit;">
+                 
                <i class="fa fa-briefcase" aria-hidden="true"></i>  All Jobposts</a>
               <br>
             </section>
@@ -182,7 +182,7 @@
     $('input[type="file"]').change(function (e) {
       if(this.files.length>5)
       {
-         $("#error").html('Maximum 5 image');
+         $("#error").html('*Maximum 5 images can be selected');
          $(':input[type="submit"]').prop('disabled', true);
       }
       else if(this.files.length<=5)

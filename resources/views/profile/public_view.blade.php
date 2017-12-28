@@ -141,15 +141,14 @@ $industries = array(
              @endforeach
            </p>
            
-           <p>Highlight:
-             @foreach($useravailablepost as $useravailablepost)
-             <ol><strong>{{ $useravailablepost->highlight }}</strong></ol>
-             @endforeach
+           <p>CV:
+             @foreach($useravailablepost as $useravailableposts)
+               <a target="_blank" href="/uploads/attachment/{{$useravailableposts->CV}}">View CV here..</a>
+               @break;
+           @endforeach
            </p>
 
-           <p>CV:
-              <a target="_blank" href="/uploads/attachment/{{$useravailablepost->CV}}">View CV here..</a>
-           </p>
+           
           
           
 

@@ -49,11 +49,12 @@ $professions = array(
            
 
              <section>
-             <button type="submit" class="button_connection button_m  btn" data-toggle="tooltip"
-             data-placement="bottom" title= 'All Jobposts'>
-            <a href="{{ url('jobpost') }}" style="color: inherit; text-decoration: inherit;">
-            <i class="fa fa-briefcase" aria-hidden="true"></i>  All Jobposts</a></button>
-           <br>
+               <a href="{{ url('jobpost') }}" class="button_connection button_m  btn" 
+                 data-placement="bottom" title= 'All Jobposts' data-toggle="tooltip"
+                 style="color: inherit; text-decoration: inherit;">
+                 
+               <i class="fa fa-briefcase" aria-hidden="true"></i>  All Jobposts</a>
+              <br>
             </section>
 
           </ul>

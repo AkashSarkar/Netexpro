@@ -25,6 +25,7 @@ class AvailableForJobController extends Controller
             $user= User::find(Auth::user()->id);  
             $useravailablepost= DB::table('users')
               ->join('available_for_jobs', 'users.id', '=', 'available_for_jobs.user_id')
+              ->where('user_id', Auth::user()->id)
               ->orderBy('available_for_jobs.created_at','desc')
               ->get();
 
