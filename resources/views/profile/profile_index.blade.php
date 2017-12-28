@@ -492,13 +492,22 @@ $industries = array(
 
                 <div class="col-md-6">
                      
-                        <select class="form-control" name="desire[]"  value="{{ old('desires') }}"  multiple="multiple" id="desire">
+                        <select class="form-control" name="desire[]"  value="{{ old('desires') }}"  multiple="multiple" id="desire" style="width:80%;">
                             <span class="caret"></span>
-                            @foreach($choices as $choice)
-                            <option selected>{{ $choice->profession }}</option>
-                            @endforeach
-                            @foreach( $desires as $desire)
-                            <option>{{ $desire }}</option>
+                           @foreach( $desires as $desire)
+                              <?php $check_flag=0;?>
+                                 @foreach($choices as $choice)
+                                    @if($choice->profession == $desire)
+                                       <!--<ol><strong>{{ $choice->profession }}</strong></ol>-->
+                                     <?php $check_flag=1;?>
+                                     <option selected="selected">{{ $choice->profession }}</option>
+                                       @break;    
+                                    @endif
+                                 @endforeach
+                                 @if($check_flag==0)
+                                   <option >{{ $desire }}</option>
+                                 @endif
+                            
                             @endforeach
                         </select>
 
