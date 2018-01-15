@@ -15,14 +15,21 @@ class CreateJobpostsTable extends Migration
     {
         Schema::create('jobposts', function (Blueprint $table) {
            // $table->increments('id');
+            $table->string('job_type');
             $table->string('position');
             $table->string('profession');
-            $table->integer('vacancy_number');
-            $table->string('circular');
-            $table->string('company_details');
-            $table->string('job_details');
-            $table->string('salary_range');
+            $table->string('department')->nullable();
+            $table->integer('vacancy_number')->nullable();
+            $table->string('job_level')->nullable();
+            $table->string('circular')->nullable();
+            $table->string('company_details')->nullable();
+            $table->string('job_details')->nullable();
+            $table->string('salary_range')->nullable();
             $table->string('location');
+            $table->string('under_grad')->nullable();;
+            $table->string('post_grad')->nullable();;
+            $table->string('experience')->nullable();
+            $table->string('industry')->nullable();
             $table->string('jobpost_id');
             $table->primary('jobpost_id');
             $table->integer('user_id')->unsigned();

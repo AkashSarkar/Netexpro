@@ -108,15 +108,19 @@
                     <div class="modal-body">
                       <div class="row">
                         <div class="col-md-8 modal-image">
+
                           <!--A variable for Gallery modal as flag-->
-                          <?php $f=0; ?> @foreach($images as $gallery) @if( $gallery->post_id == $imagepost->post_id ) @if( $gallery->post_image==$imagepost->post_image)
-                          <img class="img-responsive" src="/uploads/postimages/{{$gallery->post_image}}"> @else
-                          <img class="img-responsive hidden" src="/uploads/postimages/{{$gallery->post_image}}"> @endif @endif @endforeach
-
-
-
-
-
+                          <?php $f=0; ?> 
+                          @foreach($images as $gallery) 
+                            @if( $gallery->post_id == $imagepost->post_id ) 
+                                @if( $gallery->post_image==$imagepost->post_image)
+                                <img class="img-responsive" src="/uploads/postimages/{{$gallery->post_image}}">
+                                
+                                @else
+                                <img class="img-responsive hidden" src="/uploads/postimages/{{$gallery->post_image}}">
+                                @endif 
+                            @endif
+                          @endforeach
 
                           <a href="" class="img-modal-btn left">
                             <i class="glyphicon glyphicon-chevron-left"></i>
@@ -124,6 +128,7 @@
                           <a href="" class="img-modal-btn right">
                             <i class="glyphicon glyphicon-chevron-right"></i>
                           </a>
+
                         </div>
                         <div class="col-md-4 modal-meta">
                           <div class="modal-meta-top">

@@ -117,15 +117,24 @@ class JobpostController extends Controller
         $id=time();
 
         if(Auth::check()){
+
+           
+
+
             $jobpost = jobpost::create([
+                'job_type' => $request->input('job_type'),
                 'position' => $request->input('position'),
                 'profession' => $request->input('profession'),
-                'vacancy_number' => $request->input('vacancy_number'), 
+                'vacancy_number' => $request->input('vacancy_number'),
+                'job_level' => $request->input('job_level'), 
                 'circular' => $request->input('circular'),
                 'company_details' => $request->input('company_details'),
                 'job_details' => $request->input('job_details'),
                 'salary_range' => $request->input('salary_range'),
                 'location' => $request->input('location'),
+                'under_grad' => $request->input('under_grad'), 
+                'post_grad' => $request->input('post_grad'),
+                'experience' => $request->input('experience'), 
                 'jobpost_id'=>$id,
                 'user_id' => Auth::user()->id
             ]);

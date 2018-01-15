@@ -97,6 +97,12 @@
     </section>
     <section class="post-body well well-lg" style="background-color: #CFD8DC; border-radius: 4px;">
       <h4 style="font-weight:bold;">******Hiring post******</h4>
+      
+      <p>
+        <li>Job Type :
+          <strong>{{ $jobpost->job_type }}</strong>
+        </li>
+      </p>
       <p>
         <li>Position :
           <strong>{{ $jobpost->position }}</strong>
@@ -107,31 +113,84 @@
           <strong>{{ $jobpost->profession}}</strong>
         </li>
       </p>
+      
+      @if( $jobpost->vacancy_number !=null)
       <p>
         <li>No. of Vacancy :
           <strong>{{ $jobpost->vacancy_number }}</strong>
         </li>
       </p>
+      @endif
+
+      <p>
+        <li>Job Level:
+          <strong>{{ $jobpost->job_level }}</strong>
+        </li>
+      </p>
+
+      @if( $jobpost->circular !=null)
       <p>
         <li>Job Circular:
           <strong>{{ $jobpost->circular }}</strong>
         </li>
       </p>
+      @endif
+
+       @if( $jobpost->company_details !=null)
       <p>
         <li>Company Details:
           <strong>{{ $jobpost->company_details }}</strong>
         </li>
       </p>
+      @endif
+
+      @if( $jobpost->job_details !=null)
       <p>
         <li>Job Responsibilities:
           <strong>{{ $jobpost->job_details }}</strong>
         </li>
       </p>
+      @endif
+      
       <p>
         <li>Salary Range:
           <strong>{{ $jobpost->salary_range }}</strong>
         </li>
       </p>
+
+
+
+      @if($jobpost->under_grad !=null)
+      <p>
+        <li>BSc/equivalent:
+          <strong>{{ $jobpost->under_grad }}</strong>
+        </li>
+      </p>
+      @endif
+
+      @if($jobpost->post_grad !=null)
+      <p>
+        <li>MSc/equivalent:
+          <strong>{{ $jobpost->post_grad }}</strong>
+        </li>
+      </p>
+      @endif
+
+      @if($jobpost->experience != null)
+      <p>
+        <li>Experience:
+          <strong>{{ $jobpost->experience }}</strong>
+        </li>
+      </p>
+      @endif
+
+      @if($jobpost->industry != null)
+      <p>
+        <li>MSc/equivalent:
+          <strong>{{ $jobpost->industry }}</strong>
+        </li>
+      </p>
+      @endif
       <p>
         <li>Job Location :
           <strong>{{ $jobpost->location }}</strong>

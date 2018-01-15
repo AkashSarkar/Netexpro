@@ -74,9 +74,9 @@
               </li>
             </p>
             <li>
-              <a target="_blank" href="/uploads/attachment/{{$useravailablepost->CV}}">Download CV from here..</a>
+              <a target="_blank" href="/uploads/attachment/{{$useravailablepost->CV}}">Preview CV ..</a>
             </li>
-
+         
 
           </section>
           <hr>

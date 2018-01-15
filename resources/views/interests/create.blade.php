@@ -3,6 +3,7 @@
 @section('page-title')
     Welcome
 @endsection
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 @section('content')
 <?php

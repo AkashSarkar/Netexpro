@@ -79,20 +79,7 @@ class HomeController extends Controller
             ->join('posts', 'posts.post_id', '=', 'comments.commentable_id')
             ->orderBy('comments.created_at','desc')
             ->get();
-            /*
-            $jobComment = DB::table('comments')
-            ->join('users', 'users.id', '=', 'comments.user_id')
-            ->join('jobposts', 'jobposts.jobpost_id', '=', 'comments.commentable_id')
-            ->orderBy('comments.created_at','desc')
-            ->get();
-
-            $useravailableComment = DB::table('comments')
-            ->join('users', 'users.id', '=', 'comments.user_id')
-            ->join('available_for_jobs', 'available_for_jobs.useravailablepost_id', '=', 'comments.commentable_id')
-            ->orderBy('comments.created_at','desc')
-            ->get();
-
-           */
+            
 
             $images=Imagepost::all();
             
