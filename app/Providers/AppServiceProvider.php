@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-
+use DB;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,6 +16,12 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191); 
+
+        $is_hired=DB::select('SELECT * FROM hire_info');
+        
+        
+        view()->share('*', ['is_hired'=>$is_hired]);
+        
     }
 
     /**

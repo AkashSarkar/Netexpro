@@ -16,8 +16,23 @@
 
         </div>
 
-        {{--<div class="col-md-3 col-sm-3 col-lg-3" style="">
+        <div class="col-md-3 col-sm-3 col-lg-3" style="">
             
+            <?php $hireflag=0 ;?>
+        
+          @foreach($is_hired as $is_hire)
+            @if($notification->data['employer'][0]['jobpost_id']==$is_hire->hire_post_id 
+            && $is_hire->is_invitaion_accepted==1)
+            
+               <button class="btn btn-sm btn-success" 
+                 style="float:right; margin-top:25px; margin-right:5px;" disable>Accepted</button>
+            
+             <?php $hireflag++; ?>
+            @break
+            @endif
+          @endforeach
+       
+          @if($hireflag==0)
              <form method="post"  
              action="{{ route('acceptInvite',['id'=>$notification->data['employer'][0]['jobpost_id']])}}">
                 {{ csrf_field() }}
@@ -29,9 +44,9 @@
                  style="float:right;">Accept Invitation</button>
                 </div>
             </form>
-           
+            @endif
             
-        </div>--}}
+        </div>
 
 
     </div>
