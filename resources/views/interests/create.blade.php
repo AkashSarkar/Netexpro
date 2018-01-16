@@ -4,7 +4,6 @@
     Welcome
 @endsection
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 @section('content')
 <?php
   $professions = array(
@@ -67,7 +66,7 @@ $industries= array(
                               <!--Industry field start -->
                               <div class="form-group{{ $errors->has('industry') ? ' has-error' : '' }}">
                                     <label for="industry" class="control-label">Industry<span class="required">*</span></label>
-                                       <select class="form-control" name="industry"  value="{{ old('industry') }}">
+                                       <select class="form-control" name="industry"  value="{{ old('industry') }}" >
                                             <span class="caret"></span>
                                             @foreach( $industries as $industry)
                                               <option>{{ $industry }}</option>
@@ -83,7 +82,7 @@ $industries= array(
 
                               <!--Interest field start -->
                                 <div class="form-group{{ $errors->has('interests') ? ' has-error' : '' }}">
-                                    <label for="interests" class="control-label">interests</label>
+                                    <label for="interests" class="control-label">Interests</label>
                                         <select class="form-control" name="interests[]"  value="{{ old('interests') }}"  multiple="multiple" id="interest">
                                             <span class="caret"></span>
                                             @foreach( $interests as $interest)
@@ -119,7 +118,7 @@ $industries= array(
 
  @endsection
 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+ <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
  <script>
  $(document).ready(function(){
    $('#interest').select2({
@@ -143,3 +142,4 @@ $industries= array(
     
    }
  </script>
+-->
