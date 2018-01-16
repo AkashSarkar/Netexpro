@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Reply;
 use App\Comment;
 use App\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class CommentsController extends Controller
+class ReplyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +18,7 @@ class CommentsController extends Controller
      */
     public function index()
     {
-      
+        //
     }
 
     /**
@@ -40,18 +39,19 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-         if(Auth::check()){
-                $comment = Comment::create([
+        if(Auth::check()){
+                $reply = Reply::create([
                 'body' => $request->input('body'),
                 'commentable_type'=>$request->input('commentable_type'),
                 'commentable_id'=>$request->input('commentable_id'),
+                'comment_id'=>$request->input('comment_id'),
                 'user_id'=>Auth::user()->id  
             ]);
            }
 
-        if($comment)
+        if($reply)
         {
-          return  Redirect::back()->with('success', 'Comment posted successfully');
+          return  Redirect::back()->with('success', 'reply posted successfully');
         }
             return back()->withInput();
     }
@@ -59,21 +59,21 @@ class CommentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(Reply $reply)
     {
-        //
+          
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(Reply $reply)
     {
         //
     }
@@ -82,10 +82,10 @@ class CommentsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
+     * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Reply $reply)
     {
         //
     }
@@ -93,10 +93,10 @@ class CommentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Reply $reply)
     {
         //
     }

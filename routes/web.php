@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function(){
    // Route::post('profile', 'ProfileController@update_avatar');
     Route::resource('post', 'PostController');
     Route::resource('comment', 'CommentsController');
+    Route::resource('reply', 'ReplyController');
     Route::resource('applicants', 'ApplicantsController');
   //  Route::any('/search', 'JobpostController@search');
      

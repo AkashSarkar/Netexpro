@@ -77,8 +77,20 @@ class HomeController extends Controller
             $userComment = DB::table('comments')
             ->join('users', 'users.id', '=', 'comments.user_id')
             ->join('posts', 'posts.post_id', '=', 'comments.commentable_id')
+            ->select('comments.id','comments.created_at','firstname','p_pic','body','commentable_id')
             ->orderBy('comments.created_at','desc')
             ->get();
+
+
+            $userCommentReply = DB::table('replies')
+            ->join('comments','comments.id','=','replies.comment_id')
+            ->join('users', 'users.id', '=', 'replies.user_id')
+            ->join('posts', 'posts.post_id', '=', 'replies.commentable_id')
+             ->select('replies.id','replies.created_at','firstname','p_pic','replies.body','replies.commentable_id','comment_id')
+            ->orderBy('replies.created_at','asc')
+            ->get();
+
+            //dd($userCommentReply);
             
 
             $images=Imagepost::all();
@@ -304,7 +316,7 @@ class HomeController extends Controller
        
         return view('home.home_index',['user'=>$user ,'posts'=>$post,'images'=>$images,'interest'=>$interest,
         'useravailablepost'=>$useravailablepost, 'jobpost'=>$jobpost,'userComment'=>$userComment, 
-        'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
+        'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info, 'userCommentReply'=>$userCommentReply]);
         }
         
     }
@@ -332,11 +344,21 @@ class HomeController extends Controller
     
             //return Response::json($interest); 
             
-            $userComment = DB::table('comments')
+           $userComment = DB::table('comments')
             ->join('users', 'users.id', '=', 'comments.user_id')
             ->join('posts', 'posts.post_id', '=', 'comments.commentable_id')
+            ->select('comments.id','comments.created_at','firstname','p_pic','body','commentable_id')
             ->orderBy('comments.created_at','desc')
             ->get();
+
+            $userCommentReply = DB::table('replies')
+            ->join('comments','comments.id','=','replies.comment_id')
+            ->join('users', 'users.id', '=', 'replies.user_id')
+            ->join('posts', 'posts.post_id', '=', 'replies.commentable_id')
+             ->select('replies.id','replies.created_at','firstname','p_pic','replies.body','replies.commentable_id','comment_id')
+            ->orderBy('replies.created_at','asc')
+            ->get();
+
     
             $user_rate_info=DB::select('SELECT user_id,post_id,p_pic,firstname,lastname,ratings.created_at 
             FROM users  join ratings 
@@ -537,7 +559,7 @@ class HomeController extends Controller
        
         return [
                 'posts' => view('Ajax.index')->with(compact('user','post','images','avg_rating','isLiked',
-                'user_rate_info','page','userComment'))->render()
+                'user_rate_info','page','userComment', 'userCommentReply'))->render()
                 
             ];
 

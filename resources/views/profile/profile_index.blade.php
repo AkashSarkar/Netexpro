@@ -858,7 +858,7 @@ $industries = array(
                     <!--End Shows Rate text and icon if post type is Project-->
                   </li>
                   <li>
-                    <a href="#">
+                    <a onclick="comment()">
                       <i class="glyphicon glyphicon-comment"></i> Comment</a>
                   </li>
                   <li>
@@ -1081,6 +1081,16 @@ $industries = array(
      }
     
    }
+
+    function reply(id)
+      {
+        var str1="reply";
+        var str2=id;
+        var res = str1.concat(str2);
+        var reply = document.getElementById(res);
+        reply.style.display = "block";
+      }
+
  </script>
 
 @endsection
