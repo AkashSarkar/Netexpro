@@ -495,31 +495,28 @@ $industries = array(
                         <select class="form-control" name="desire[]" id="interest_id"  value="{{ old('desires') }}"  multiple="multiple" id="desire" style="width:100%;">
                             <span class="caret"></span>
                            @foreach( $desires as $desire)
-                              <?php $check_flag=0;$check_flag2=0;?>
                                  @foreach($choices as $choice)
                                     @if($choice->profession == $desire)
                                        <!--<ol><strong>{{ $choice->profession }}</strong></ol>-->
                                      <?php $check_flag=1;?>
                                      <option selected="selected">{{ $choice->profession }}</option>
-                                       @break;    
+                                        <?php continue 2; ?>   
                                     @endif
                                  @endforeach
-                                 @if($check_flag==0)
+                                 
                                    <option >{{ $desire }}</option>
-                                 @endif
+                                 
                             @endforeach
-                             @foreach($choices as $choice)
-                              @foreach( $desires as $desire)
-                              <?php $check_flag=0;$check_flag2=0;?>
-                                  @if($choice->profession == $desire)
-                                   <?php $check_flag2=1;?>
-                                   @break;
-                                  @endif
-                                 @endforeach
+                             
+                                @foreach($choices as $choice)
+                                 <?php if (in_array($choice->profession, $desires)){}
+                                  else { ?>
+                                  <option selected="selected"> 
+                                    {{ $choice->profession }}
+                                </option>
+                                <?php }?>
                               @endforeach
-                                  @if($check_flag2==0)
-                                   <option selected="selected">{{ $choice->profession }}</option>
-                                 @endif
+                                 
                         </select>
 
                     @if ($errors->has('choices'))
