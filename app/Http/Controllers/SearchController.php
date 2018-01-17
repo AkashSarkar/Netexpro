@@ -46,7 +46,8 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+             'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
              ->where([
                 ['jobposts.profession', '=', $profession],
                 ['jobposts.location', '=', $location]
@@ -84,7 +85,8 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+                          'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
              ->where([
                 ['jobposts.profession', '=', $profession],
                 ['jobposts.location', '=', $location]
@@ -119,7 +121,8 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+             'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
              ->where('jobposts.profession','=',$profession)
              ->whereBetween('jobposts.created_at', [$formdate, $todate])
              ->groupBy('jobpost_id')
@@ -154,7 +157,8 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+             'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
              ->where('jobposts.location','=',$location)
              ->whereBetween('jobposts.created_at', [$formdate, $todate])
              ->groupBy('jobpost_id')
@@ -187,7 +191,8 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+                          'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
              ->where('jobposts.profession','=',$profession)
              ->groupBy('jobpost_id')
              ->orderBy('jobposts.created_at','desc')
@@ -218,7 +223,8 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+             'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
              ->where('jobposts.location','=',$location)
              ->groupBy('jobpost_id')
              ->orderBy('jobposts.created_at','desc')
@@ -250,7 +256,8 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+                          'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
              ->whereBetween('jobposts.created_at', [$formdate, $todate])
              ->groupBy('jobpost_id')
              ->orderBy('jobposts.created_at','desc')
@@ -352,7 +359,9 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+             'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
+
              ->where([
                 ['jobposts.profession', '=', $profession],
                 ['jobposts.location', '=', $location]
@@ -394,7 +403,9 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+             'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
+
              ->where([
                 ['jobposts.profession', '=', $profession],
                 ['jobposts.location', '=', $location]
@@ -431,7 +442,9 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+             'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
+
              ->where('jobposts.profession','=',$profession)
              ->whereBetween('jobposts.created_at', [$formdate, $todate])
              ->groupBy('jobpost_id')
@@ -467,7 +480,9 @@ class SearchController extends Controller
                ->where('interests.user_id', '=', Auth::user()->id);
              })
              ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+             ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+             'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
+
              ->where('jobposts.location','=',$location)
              ->whereBetween('jobposts.created_at', [$formdate, $todate])
              ->groupBy('jobpost_id')
@@ -504,7 +519,9 @@ class SearchController extends Controller
                             ->where('interests.user_id', '=', Auth::user()->id);
                           })
                           ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+                          ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+                          'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
+             
                           ->where('jobposts.profession','=',$profession)
                           ->groupBy('jobpost_id')
                           ->orderBy('jobposts.created_at','desc')
@@ -541,7 +558,9 @@ class SearchController extends Controller
                 ->where('interests.user_id', '=', Auth::user()->id);
               })
               ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-              ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+              ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+              'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
+ 
               ->where('jobposts.location','=',$location)
               ->groupBy('jobpost_id')
               ->orderBy('jobposts.created_at','desc')
@@ -575,7 +594,9 @@ class SearchController extends Controller
                 ->where('interests.user_id', '=', Auth::user()->id);
               })
               ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
-              ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details','salary_range')
+              ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
+              'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
+ 
               ->whereBetween('jobposts.created_at', [$formdate, $todate])
               ->groupBy('jobpost_id')
               ->orderBy('jobposts.created_at','desc')

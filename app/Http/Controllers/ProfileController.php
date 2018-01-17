@@ -74,6 +74,14 @@ class ProfileController extends Controller
             ->orderBy('comments.created_at','desc')
             ->get();
 
+      $userCommentReply = DB::table('replies')
+      ->join('comments','comments.id','=','replies.comment_id')
+      ->join('users', 'users.id', '=', 'replies.user_id')
+      ->join('posts', 'posts.post_id', '=', 'replies.commentable_id')
+      ->select('replies.id','replies.created_at','firstname','p_pic','replies.body','replies.commentable_id','comment_id')
+      ->orderBy('replies.created_at','asc')
+      ->get();      
+
       $interest= DB::table('interests')
       ->where([
         ['user_id', '=', Auth::user()->id],
@@ -93,7 +101,7 @@ class ProfileController extends Controller
       WHERE ratings.user_id= users.id  ');
 
       return view('profile.profile_index',['user'=>$user,'images'=>$images ,'interest'=>$interest,'choices'=>$choices ,'posts'=>$post,'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 
-        'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
+        'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info,'userCommentReply'=>$userCommentReply]);
           
       
     }
@@ -150,6 +158,14 @@ class ProfileController extends Controller
             ->orderBy('comments.created_at','desc')
             ->get();
 
+            $userCommentReply = DB::table('replies')
+            ->join('comments','comments.id','=','replies.comment_id')
+            ->join('users', 'users.id', '=', 'replies.user_id')
+            ->join('posts', 'posts.post_id', '=', 'replies.commentable_id')
+            ->select('replies.id','replies.created_at','firstname','p_pic','replies.body','replies.commentable_id','comment_id')
+            ->orderBy('replies.created_at','asc')
+            ->get();
+
      
       
         $interest= DB::table('interests')
@@ -170,7 +186,7 @@ class ProfileController extends Controller
       FROM users  join ratings 
       WHERE ratings.user_id= users.id  ');
 
-      return view('profile.public_view',['user'=>$user,'images'=>$images ,'interest'=>$interest,'choices'=>$choices ,'posts'=>$post,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info]);
+      return view('profile.public_view',['user'=>$user,'images'=>$images ,'interest'=>$interest,'choices'=>$choices ,'posts'=>$post,'useravailablepost'=>$useravailablepost, 'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info,'userCommentReply'=>$userCommentReply]);
           
       
     }

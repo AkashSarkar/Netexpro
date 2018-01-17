@@ -320,3 +320,18 @@
   </div>
 </div>
 @endforeach @endif
+
+
+ <script type="text/javascript">
+     
+      function reply(id)
+      {
+        var str1="reply";
+        var str2=id;
+        var res = str1.concat(str2);
+        var reply = document.getElementById(res);
+        reply.style.display = "block";
+      }
+
+      
+   </script>
