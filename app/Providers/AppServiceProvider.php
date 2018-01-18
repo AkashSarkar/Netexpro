@@ -17,9 +17,8 @@ class AppServiceProvider extends ServiceProvider
         //
         Schema::defaultStringLength(191); 
 
+        //if you want to migrate the whole database then comment these 2 lines and uncomment after migrating
         $is_hired=DB::select('SELECT * FROM hire_info');
-        
-        
         view()->share('*', ['is_hired'=>$is_hired]);
         
     }

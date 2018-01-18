@@ -385,7 +385,8 @@
 
         <div class="container">
 
-            @include('partials.errors') @include('partials.success')
+            @include('partials.errors') 
+            @include('partials.success')
 
             <div class="row">
                 @yield('content')
