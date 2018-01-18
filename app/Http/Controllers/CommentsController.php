@@ -9,7 +9,8 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-
+use DB;
+use App\User;
 class CommentsController extends Controller
 {
     /**
@@ -31,6 +32,48 @@ class CommentsController extends Controller
     {
         //
     }
+    public function postComment(Request $request)
+    {
+
+        if(Auth::check()){
+            $comment = Comment::create([
+            'body' => $request->body,
+            'commentable_type'=>$request->type,
+            'commentable_id'=>$request->post_id,
+            'user_id'=>Auth::user()->id  
+        ]);
+       }
+       if($comment){
+           return "success";
+       }else{
+        return "error";
+       }
+    }
+    public function getComment(Request $request)
+    {
+        //return $request->all();
+        $user= User::find(Auth::user()->id); 
+        $id=$request->post_id;
+        //return $id;
+        $userComment = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('posts', 'posts.post_id', '=', 'comments.commentable_id')
+            ->select('comments.id','comments.created_at','firstname','p_pic','body','commentable_id')
+            ->where([
+                ['commentable_id','=',$id],
+                ['comments.id','>',$request->last_comment_id]
+            ])
+            ->orderBy('comments.created_at','desc')
+            ->get();
+            
+        
+            return [
+             view('Ajax.getComments')->with(compact('user','userComment', 'userCommentReply'))->render()
+                
+            ];
+      
+       
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -40,20 +83,7 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-         if(Auth::check()){
-                $comment = Comment::create([
-                'body' => $request->input('body'),
-                'commentable_type'=>$request->input('commentable_type'),
-                'commentable_id'=>$request->input('commentable_id'),
-                'user_id'=>Auth::user()->id  
-            ]);
-           }
-
-        if($comment)
-        {
-          return  Redirect::back()->with('success', 'Comment posted successfully');
-        }
-            return back()->withInput();
+        
     }
 
     /**

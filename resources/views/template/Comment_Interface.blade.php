@@ -12,17 +12,17 @@
                         </div>
 
                         <div class="media-body">
-                          <form method="POST" action="{{ route('comment.store') }}">
-                            {{ csrf_field() }}
-                              <input type="hidden" name="commentable_type" value="App\Post">
-                              <input type="hidden" name="commentable_id" value="{{ $userpost->post_id }}">
+                         
+                              <input type="hidden" id="post_type" name="commentable_type" value="App\Post">
+                              <input type="hidden" id="post_id" name="commentable_id" value="{{ $userpost->post_id }}">
 
                               <div class="form-group">
-                                <input class="form-control" style="border-radius: 20px;" type="text" name="body" placeholder="Your comments" />
-                                 <button type="submit" style="float: right; margin: -34px 0px 0 0; height: 33px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">Comment</button>
+                                <input class="form-control" id="commentPost" style="border-radius: 20px;" type="text" 
+                                  onchange="comment(this.value)"  name="body" placeholder="Your comments"/>
+                                
                               </div>
                               
-                          </form>
+                          
                         </div>
                       </div>
                     </div>
@@ -32,6 +32,9 @@
                <h3 class="comment-title">Comments</h3>
 
                   <!--Comment show start -->
+                <div id="commentShow">
+
+                </div>
            @foreach($userComment as $comment) 
               @if( $userpost->post_id==$comment->commentable_id)
                  <div class="comment-wrapper">
@@ -49,7 +52,8 @@
                             <span class="anchor-time">{{$comment->created_at}}</span>
                            
                             <div class="comment-text">
-                                {{$comment->body}} <p>{{$comment->id}}</p>
+                                {{$comment->body}} 
+                                <p id="{{$userpost->post_id}}">{{$comment->id}}</p>
                             </div>
 
                             <!-- Reply -->
@@ -78,8 +82,9 @@
 
 
                                             <div class="form-group">
-                                              <input class="form-control" style="border-radius: 20px;" type="text" name="body" placeholder="Your comments" />
-                                               <button type="submit" style="float: right; margin: -34px 0px 0 0; height: 33px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">Comment</button>
+                                              <input class="form-control" style="border-radius: 20px;" type="text" id="commentBody"  name="body" placeholder="Your comments" />
+                                              <button type="submit" style="float: right; margin: -34px 0px 0 0; height: 33px; border-top-right-radius: 15px; 
+                                              border-bottom-right-radius: 15px;"  >Comment</button>
                                             </div>
                                             
                                         </form>
@@ -123,12 +128,6 @@
 
 
                         </div>
-
-                        {{-- <div class="comment-buttons-holder">
-                          <ul>
-                            <li class="delete-btn">X</li>
-                          </ul>
-                        </div> --}}
                       </li>
                     </ul>
 
@@ -142,5 +141,46 @@
 
          </section> 
    
-  
+  <script type="text/javascript">
+    function comment(commentBody){
+      var type=$('#post_type').val();
+      var post_id=$('#post_id').val();
+      var last_comment_id=$("#"+post_id).text();
+      
+      var data={
+        'body':commentBody,
+        'type':type,
+        'post_id':post_id,
+        'last_comment_id':last_comment_id
+      };
+      var html='';
+      //console.log(data);
+      if(commentBody!=" "){
+        axios.post('/comment/postComment',data).then((response)=> 
+                
+                  console.log(response),
+                  $("#commentPost").val("")
+                )
+                .catch((error)=>
+                    console.log(error)
+                );
+               
+               
+        axios.post('/comment/getComment',data).then((response)=> 
+               
+                
+                $('#commentShow').append(response.data[0])
+              )
+              .catch((error)=>
+                  console.log(error)
+              );
+      }
+      
+      //
+
+       
+     
+      
+    };
+  </script>
 

@@ -61,6 +61,10 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/rating/getdata', 'RatingController@getdata');
    // Route::get('profile', 'ProfileController@index');
    // Route::post('profile', 'ProfileController@update_avatar');
+   Route::post('/comment/postComment', 'CommentsController@postComment');
+   Route::post('/comment/getComment', 'CommentsController@getComment');
+
+
     Route::resource('post', 'PostController');
     Route::resource('comment', 'CommentsController');
     Route::resource('reply', 'ReplyController');
