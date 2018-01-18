@@ -495,20 +495,28 @@ $industries = array(
                         <select class="form-control" name="desire[]" id="interest_id"  value="{{ old('desires') }}"  multiple="multiple" id="desire" style="width:100%;">
                             <span class="caret"></span>
                            @foreach( $desires as $desire)
-                              <?php $check_flag=0;?>
                                  @foreach($choices as $choice)
                                     @if($choice->profession == $desire)
                                        <!--<ol><strong>{{ $choice->profession }}</strong></ol>-->
                                      <?php $check_flag=1;?>
                                      <option selected="selected">{{ $choice->profession }}</option>
-                                       @break;    
+                                        <?php continue 2; ?>   
                                     @endif
                                  @endforeach
-                                 @if($check_flag==0)
+                                 
                                    <option >{{ $desire }}</option>
-                                 @endif
-                            
+                                 
                             @endforeach
+                             
+                                @foreach($choices as $choice)
+                                 <?php if (in_array($choice->profession, $desires)){}
+                                  else { ?>
+                                  <option selected="selected"> 
+                                    {{ $choice->profession }}
+                                </option>
+                                <?php }?>
+                              @endforeach
+                                 
                         </select>
 
                     @if ($errors->has('choices'))
@@ -858,7 +866,7 @@ $industries = array(
                     <!--End Shows Rate text and icon if post type is Project-->
                   </li>
                   <li>
-                    <a href="#">
+                    <a onclick="comment()">
                       <i class="glyphicon glyphicon-comment"></i> Comment</a>
                   </li>
                   <li>
@@ -1081,6 +1089,16 @@ $industries = array(
      }
     
    }
+
+    function reply(id)
+      {
+        var str1="reply";
+        var str2=id;
+        var res = str1.concat(str2);
+        var reply = document.getElementById(res);
+        reply.style.display = "block";
+      }
+
  </script>
 
 @endsection

@@ -4,6 +4,7 @@
     Registration
 @endsection
 
+
 @section('content')
 <?php
 $educations = array(
@@ -11,7 +12,8 @@ $educations = array(
     "Ahsanullah University of Science and technology",
     "BUET",
     "DU",
-    "NSU"
+    "NSU",
+    "ULAB"
 );
 ?>
 
@@ -82,7 +84,8 @@ $educations = array(
 
                                 <div class="form-group{{ $errors->has('education') ? ' has-error' : '' }}">
                                     <label for="education" class="control-label">Education</label>
-                                            <select class="form-control" name="education" title="Please select Institution"  value="{{ old('education') }}" >
+                                     <select class="form-control" name="education"  value="{{ old('educations') }}"  multiple="multiple" id="education">
+                                            
                                                 <span class="caret"></span>
                                                 @foreach( $educations as $education)
                                                 <option>{{ $education }}</option>
@@ -95,6 +98,7 @@ $educations = array(
                                             </span>
                                         @endif
                                 </div>
+                                
 
                                 
                                   <div class="form-group">
@@ -110,6 +114,6 @@ $educations = array(
           </div>
       </div>
   </div>
-
-
+    
 @endsection
+

@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Reply extends Model
 {
     protected $fillable = [
 
         'body',
+        'comment_id',
         'commentable_id',
         'commentable_type',
         'user_id',
-        'reply_id'
         
     ];
 
@@ -28,9 +28,8 @@ class Comment extends Model
     {
         return $this->hasone('\App\Post', 'id', 'post_id');
     }
-
-    public function replies()
+    public function comment()
     {
-        return $this->morphMany('App\Reply', 'reply_id');
+        return $this->hasone('\App\Comment', 'id', 'comment_id');
     }
 }

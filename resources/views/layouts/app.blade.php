@@ -37,9 +37,81 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
    
-    <!-- End of Styles -->
+    <script type="text/javascript">
+          //select2 js call
+          $(document).ready(function () {
+                $("#interest_id").select2({ maximumSelectionLength: 5,tags:true, placeholder: "Select Interest" });
+                $("#interest").select2({ maximumSelectionLength: 5,tags:true, placeholder: "Select Interest" });
+                $("#education").select2({
+                    maximumSelectionLength: 1,
+                    placeholder: "Select Education",
+                    tags:true
+                });
+          //end select2 js call
+            $("input[name='job_post_option']").click(function () {
+                var radioValue = $("input[name='job_post_option']:checked").val();
+                if (radioValue == 1) {
+                    //setTimeout($('#jobModal').modal('hide'), 10000000);
+                    $('#jobModal').modal('hide');
+                    $('#available_job_modal').modal('show');
+                }
+
+
+                if (radioValue == 2) {
+                    //setTimeout($('#jobModal').modal('hide'), 10000000);
+                    $('#jobModal').modal('hide');
+                    $('#want_to_hire_modal').modal('show');
+
+                }
+            });
+
+            $(function () {
+            $(".img-modal-btn.right").on('click', function (e) {
+                e.preventDefault();
+                cur = $(this).parent().find('img:visible()');
+                next = cur.next('img');
+                par = cur.parent();
+                if (!next.length) {
+                    next = $(cur.parent().find("img").get(0))
+                }
+                cur.addClass('hidden');
+                next.removeClass('hidden');
+
+                return false;
+            })
+
+            $(".img-modal-btn.left").on('click', function (e) {
+                e.preventDefault();
+                cur = $(this).parent().find('img:visible()');
+                next = cur.prev('img');
+                par = cur.parent();
+                children = cur.parent().find("img");
+                if (!next.length) {
+                    next = $(children.get(children.length - 1))
+                }
+                cur.addClass('hidden');
+                next.removeClass('hidden');
+
+                return false;
+            })
+
+        });
+
+        });
+          
+         
+            //end sidebar style */
+    </script>
+     <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- End of import Scripts -->
+
+    <script src="js/js/select2.full.min.js"></script>
+    <script src="js/js/select2.min.js"></script>
+
     <!--gallery modal -->
     <!--gallery modal online script-->
+    
     <style>
      
       .wrap{
@@ -394,85 +466,7 @@
         </div>
     </div>
     <!-- Job Modal -->
-    @include('template.jobPostModal')
-
-
-
-
-
-
-
-
-    <script type="text/javascript">
-        $(function () {
-            $(".img-modal-btn.right").on('click', function (e) {
-                e.preventDefault();
-                cur = $(this).parent().find('img:visible()');
-                next = cur.next('img');
-                par = cur.parent();
-                if (!next.length) {
-                    next = $(cur.parent().find("img").get(0))
-                }
-                cur.addClass('hidden');
-                next.removeClass('hidden');
-
-                return false;
-            })
-
-            $(".img-modal-btn.left").on('click', function (e) {
-                e.preventDefault();
-                cur = $(this).parent().find('img:visible()');
-                next = cur.prev('img');
-                par = cur.parent();
-                children = cur.parent().find("img");
-                if (!next.length) {
-                    next = $(children.get(children.length - 1))
-                }
-                cur.addClass('hidden');
-                next.removeClass('hidden');
-
-                return false;
-            })
-
-        });
-        $(document).ready(function () {
-            $("input[name='job_post_option']").click(function () {
-                var radioValue = $("input[name='job_post_option']:checked").val();
-                if (radioValue == 1) {
-                    //setTimeout($('#jobModal').modal('hide'), 10000000);
-                    $('#jobModal').modal('hide');
-                    $('#available_job_modal').modal('show');
-                }
-
-
-                if (radioValue == 2) {
-                    //setTimeout($('#jobModal').modal('hide'), 10000000);
-                    $('#jobModal').modal('hide');
-                    $('#want_to_hire_modal').modal('show');
-
-                }
-            });
-
-        });
-          
-         
-            //end sidebar style */
-    </script>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <!-- End of import Scripts -->
-
-    <script src="js/js/select2.full.js"></script>
-    <script src="js/js/select2.full.min.js"></script>
-    <script src="js/js/select2.js"></script>
-    <script src="js/js/select2.min.js"></script>
-    <script>
-        $(function () {
-            
-            $("#interest_id").select2({ maximumSelectionLength: 5 });
-        })
-    </script>
+    @include('template.jobPostModal')   
 </body>
 
 </html>

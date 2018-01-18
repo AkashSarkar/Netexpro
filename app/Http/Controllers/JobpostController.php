@@ -33,7 +33,7 @@ class JobpostController extends Controller
                           })
                           ->select('users.firstname','users.lastname','users.p_pic','jobposts.jobpost_id','jobposts.user_id','jobposts.location','jobposts.profession'
                           ,'jobposts.position','jobposts.vacancy_number','jobposts.circular','jobposts.company_details','jobposts.created_at','jobposts.jobpost_id','jobposts.job_details',
-                          'salary_range')
+                          'salary_range','jobposts.job_type','jobposts.job_level','jobposts.under_grad','jobposts.post_grad','jobposts.experience','jobposts.industry')
                           ->groupBy('jobpost_id')
                           ->orderBy('jobposts.created_at','desc')
                         ->get();

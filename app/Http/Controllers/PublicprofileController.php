@@ -88,6 +88,15 @@ class PublicprofileController extends Controller
             ->orderBy('comments.created_at','desc')
             ->get();
 
+            
+    $userCommentReply = DB::table('replies')
+    ->join('comments','comments.id','=','replies.comment_id')
+    ->join('users', 'users.id', '=', 'replies.user_id')
+    ->join('posts', 'posts.post_id', '=', 'replies.commentable_id')
+    ->select('replies.id','replies.created_at','firstname','p_pic','replies.body','replies.commentable_id','comment_id')
+    ->orderBy('replies.created_at','asc')
+    ->get();
+
 
       $choices= DB::table('interests')
         ->where([
@@ -147,7 +156,7 @@ class PublicprofileController extends Controller
      'interest'=>$interest,'choices'=>$choices ,'posts'=>$post,'useravailablepost'=>$useravailablepost, 
      'projects'=>$no_of_project_done_by_user, 'userComment'=>$userComment, 
      'isLiked'=>$isLike,'user_rate_info'=>$user_rate_info,'jobpost_id'=>$jobpost_id,'employer_id'=>$employer_id,
-     'employee_id'=>$id,'is_hired'=>$is_hired,'total_avg_rating'=>$total_avg_rating]);
+     'employee_id'=>$id,'is_hired'=>$is_hired,'total_avg_rating'=>$total_avg_rating,'userCommentReply'=> $userCommentReply]);
 
       
     }
